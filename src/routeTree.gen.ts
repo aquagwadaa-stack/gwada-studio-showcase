@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VitrineRouteImport } from './routes/vitrine'
 import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as FonctionnalitesRouteImport } from './routes/fonctionnalites'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +26,16 @@ const VitrineRoute = VitrineRouteImport.update({
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
   path: '/reservation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FonctionnalitesRoute = FonctionnalitesRouteImport.update({
+  id: '/fonctionnalites',
+  path: '/fonctionnalites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogueRoute = CatalogueRouteImport.update({
@@ -51,6 +63,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
   '/catalogue/$id': typeof CatalogueIdRoute
@@ -59,6 +73,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
   '/catalogue/$id': typeof CatalogueIdRoute
@@ -68,6 +84,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
   '/catalogue/$id': typeof CatalogueIdRoute
@@ -78,6 +96,8 @@ export interface FileRouteTypes {
     | '/'
     | '/boutique'
     | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
     | '/reservation'
     | '/vitrine'
     | '/catalogue/$id'
@@ -86,6 +106,8 @@ export interface FileRouteTypes {
     | '/'
     | '/boutique'
     | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
     | '/reservation'
     | '/vitrine'
     | '/catalogue/$id'
@@ -94,6 +116,8 @@ export interface FileRouteTypes {
     | '/'
     | '/boutique'
     | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
     | '/reservation'
     | '/vitrine'
     | '/catalogue/$id'
@@ -103,6 +127,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BoutiqueRoute: typeof BoutiqueRoute
   CatalogueRoute: typeof CatalogueRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  FonctionnalitesRoute: typeof FonctionnalitesRoute
   ReservationRoute: typeof ReservationRoute
   VitrineRoute: typeof VitrineRoute
 }
@@ -121,6 +147,20 @@ declare module '@tanstack/react-router' {
       path: '/reservation'
       fullPath: '/reservation'
       preLoaderRoute: typeof ReservationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fonctionnalites': {
+      id: '/fonctionnalites'
+      path: '/fonctionnalites'
+      fullPath: '/fonctionnalites'
+      preLoaderRoute: typeof FonctionnalitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogue': {
@@ -170,6 +210,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BoutiqueRoute: BoutiqueRoute,
   CatalogueRoute: CatalogueRouteWithChildren,
+  ContactRoute: ContactRoute,
+  FonctionnalitesRoute: FonctionnalitesRoute,
   ReservationRoute: ReservationRoute,
   VitrineRoute: VitrineRoute,
 }

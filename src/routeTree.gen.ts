@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VitrineRouteImport } from './routes/vitrine'
+import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as FonctionnalitesRouteImport } from './routes/fonctionnalites'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CatalogueRouteImport } from './routes/catalogue'
+import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CatalogueIdRouteImport } from './routes/catalogue.$id'
 
+const VitrineRoute = VitrineRouteImport.update({
+  id: '/vitrine',
+  path: '/vitrine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservationRoute = ReservationRouteImport.update({
+  id: '/reservation',
+  path: '/reservation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FonctionnalitesRoute = FonctionnalitesRouteImport.update({
+  id: '/fonctionnalites',
+  path: '/fonctionnalites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogueRoute = CatalogueRouteImport.update({
+  id: '/catalogue',
+  path: '/catalogue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoutiqueRoute = BoutiqueRouteImport.update({
+  id: '/boutique',
+  path: '/boutique',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogueIdRoute = CatalogueIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => CatalogueRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
+  '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
+  '/reservation': typeof ReservationRoute
+  '/vitrine': typeof VitrineRoute
+  '/catalogue/$id': typeof CatalogueIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
+  '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
+  '/reservation': typeof ReservationRoute
+  '/vitrine': typeof VitrineRoute
+  '/catalogue/$id': typeof CatalogueIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
+  '/catalogue': typeof CatalogueRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/fonctionnalites': typeof FonctionnalitesRoute
+  '/reservation': typeof ReservationRoute
+  '/vitrine': typeof VitrineRoute
+  '/catalogue/$id': typeof CatalogueIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/boutique'
+    | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
+    | '/reservation'
+    | '/vitrine'
+    | '/catalogue/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/boutique'
+    | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
+    | '/reservation'
+    | '/vitrine'
+    | '/catalogue/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/boutique'
+    | '/catalogue'
+    | '/contact'
+    | '/fonctionnalites'
+    | '/reservation'
+    | '/vitrine'
+    | '/catalogue/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BoutiqueRoute: typeof BoutiqueRoute
+  CatalogueRoute: typeof CatalogueRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  FonctionnalitesRoute: typeof FonctionnalitesRoute
+  ReservationRoute: typeof ReservationRoute
+  VitrineRoute: typeof VitrineRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vitrine': {
+      id: '/vitrine'
+      path: '/vitrine'
+      fullPath: '/vitrine'
+      preLoaderRoute: typeof VitrineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservation': {
+      id: '/reservation'
+      path: '/reservation'
+      fullPath: '/reservation'
+      preLoaderRoute: typeof ReservationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fonctionnalites': {
+      id: '/fonctionnalites'
+      path: '/fonctionnalites'
+      fullPath: '/fonctionnalites'
+      preLoaderRoute: typeof FonctionnalitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogue': {
+      id: '/catalogue'
+      path: '/catalogue'
+      fullPath: '/catalogue'
+      preLoaderRoute: typeof CatalogueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boutique': {
+      id: '/boutique'
+      path: '/boutique'
+      fullPath: '/boutique'
+      preLoaderRoute: typeof BoutiqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogue/$id': {
+      id: '/catalogue/$id'
+      path: '/$id'
+      fullPath: '/catalogue/$id'
+      preLoaderRoute: typeof CatalogueIdRouteImport
+      parentRoute: typeof CatalogueRoute
+    }
   }
 }
 
+interface CatalogueRouteChildren {
+  CatalogueIdRoute: typeof CatalogueIdRoute
+}
+
+const CatalogueRouteChildren: CatalogueRouteChildren = {
+  CatalogueIdRoute: CatalogueIdRoute,
+}
+
+const CatalogueRouteWithChildren = CatalogueRoute._addFileChildren(
+  CatalogueRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BoutiqueRoute: BoutiqueRoute,
+  CatalogueRoute: CatalogueRouteWithChildren,
+  ContactRoute: ContactRoute,
+  FonctionnalitesRoute: FonctionnalitesRoute,
+  ReservationRoute: ReservationRoute,
+  VitrineRoute: VitrineRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

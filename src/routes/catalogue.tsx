@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { DemoBanner } from "@/components/showroom/DemoBanner";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   Select,
@@ -10,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, SlidersHorizontal, MessageCircle, ArrowRight } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CATALOGUE, CATEGORIES } from "@/components/demos/catalogue/data";
 
@@ -35,10 +34,26 @@ function CataloguePage() {
         (cat === "Tous" || x.category === cat) &&
         (query === "" || x.title.toLowerCase().includes(query.toLowerCase())),
     );
+    const priceValue = (price: string) => {
+      const value = Number(price.replace(/\D/g, ""));
+      return value || null;
+    };
     if (sort === "asc")
-      list = [...list].sort((a, b) => parseInt(a.price) - parseInt(b.price));
+      list = [...list].sort((a, b) => {
+        const aPrice = priceValue(a.price);
+        const bPrice = priceValue(b.price);
+        if (aPrice === null) return 1;
+        if (bPrice === null) return -1;
+        return aPrice - bPrice;
+      });
     if (sort === "desc")
-      list = [...list].sort((a, b) => parseInt(b.price) - parseInt(a.price));
+      list = [...list].sort((a, b) => {
+        const aPrice = priceValue(a.price);
+        const bPrice = priceValue(b.price);
+        if (aPrice === null) return 1;
+        if (bPrice === null) return -1;
+        return bPrice - aPrice;
+      });
     return list;
   }, [query, cat, sort]);
 
@@ -50,21 +65,23 @@ function CataloguePage() {
           Notre catalogue
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {filtered.length} articles disponibles. Adaptable à tout secteur d'activité.
+          {filtered.length} exemples pour montrer différents usages d'un catalogue.
         </p>
 
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Rechercher un article..."
+              placeholder="Rechercher dans le catalogue..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="pl-9"
             />
           </div>
           <Select value={sort} onValueChange={setSort}>
-            <SelectTrigger className="w-full sm:w-44"><SelectValue placeholder="Tri" /></SelectTrigger>
+            <SelectTrigger className="w-full sm:w-44">
+              <SelectValue placeholder="Tri" />
+            </SelectTrigger>
             <SelectContent>
               <SelectItem value="default">Pertinence</SelectItem>
               <SelectItem value="asc">Prix croissant</SelectItem>
@@ -91,12 +108,7 @@ function CataloguePage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filtered.map((item) => (
-            <Link
-              key={item.id}
-              to="/catalogue/$id"
-              params={{ id: item.id }}
-              className="group"
-            >
+            <Link key={item.id} to="/catalogue/$id" params={{ id: item.id }} className="group">
               <Card className="overflow-hidden hover:-translate-y-1 hover:gws-accent-border transition gws-themed p-0">
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <Thumb seed={item.seed} />
@@ -121,7 +133,7 @@ function CataloguePage() {
 
         {filtered.length === 0 && (
           <div className="mt-12 text-center text-muted-foreground">
-            Aucun article ne correspond à votre recherche.
+            Aucun élément ne correspond à votre recherche.
           </div>
         )}
       </section>

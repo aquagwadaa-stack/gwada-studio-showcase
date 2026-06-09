@@ -6,11 +6,9 @@ import { useState } from "react";
 
 const NAV = [
   { to: "/", label: "Accueil" },
-  { to: "/vitrine", label: "Vitrine" },
   { to: "/reservation", label: "Réservation" },
   { to: "/catalogue", label: "Catalogue" },
   { to: "/boutique", label: "Boutique" },
-  { to: "/fonctionnalites", label: "Fonctionnalités" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -37,13 +35,13 @@ export function SiteNav() {
                 key={n.to}
                 to={n.to}
                 className={`px-3 py-2 rounded-md text-sm transition ${
-                  active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+                  active
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {n.label}
-                {active && (
-                  <span className="block h-0.5 mt-0.5 gws-accent-bg rounded-full" />
-                )}
+                {active && <span className="block h-0.5 mt-0.5 gws-accent-bg rounded-full" />}
               </Link>
             );
           })}
@@ -54,7 +52,7 @@ export function SiteNav() {
             onClick={openConfig}
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium gws-accent-bg hover:opacity-90 transition"
           >
-            Créer mon site
+            Composer une démo
           </button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -94,7 +92,7 @@ export function SiteNav() {
                 }}
                 className="mt-6 w-full px-4 py-3 rounded-full text-sm font-medium gws-accent-bg"
               >
-                Créer mon site
+                Composer une démo
               </button>
             </SheetContent>
           </Sheet>

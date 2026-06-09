@@ -1,88 +1,133 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import {
   useShowroom,
   ACCENT_PRESETS,
   SITE_TYPES,
   STYLE_OPTIONS,
+  PROFILE_OPTIONS,
   type StyleKey,
   type SiteType,
+  type ProfileKey,
 } from "@/context/showroom-context";
 import { Link } from "@tanstack/react-router";
-import { Check, Sparkles, ArrowRight } from "lucide-react";
+import { Check, Sparkles, ArrowRight, Layers3 } from "lucide-react";
 
 export function Configurator() {
-  const { configOpen, closeConfig, siteType, setSiteType, style, setStyle, accent, setAccent } =
-    useShowroom();
-
-  const currentDemo = SITE_TYPES.find((s) => s.key === siteType)!;
+  const {
+    configOpen,
+    closeConfig,
+    modules,
+    toggleModule,
+    profile,
+    setProfile,
+    style,
+    setStyle,
+    accent,
+    setAccent,
+  } = useShowroom();
 
   return (
     <Sheet open={configOpen} onOpenChange={(o) => !o && closeConfig()}>
-      <SheetContent
-        side="right"
-        className="w-full sm:max-w-md overflow-y-auto p-0 flex flex-col"
-      >
+      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto p-0 flex flex-col">
         <SheetHeader className="px-6 pt-6 pb-3 border-b">
           <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
             <Sparkles className="h-3.5 w-3.5" /> Configurateur
           </div>
           <SheetTitle className="text-2xl font-display">Composez votre site</SheetTitle>
           <SheetDescription>
-            Choisissez un type, un style et une couleur. L'aperçu se met à jour partout.
+            Combinez vos besoins, puis choisissez l'univers et la direction artistique.
           </SheetDescription>
         </SheetHeader>
 
         <div className="flex-1 px-6 py-5 space-y-7">
-          {/* Type */}
           <section>
-            <h3 className="text-sm font-semibold mb-3">Type de site</h3>
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <h3 className="text-sm font-semibold">Fonctionnalités</h3>
+              <span className="text-xs text-muted-foreground">
+                {modules.length} sélectionnée{modules.length > 1 ? "s" : ""}
+              </span>
+            </div>
             <div className="grid grid-cols-2 gap-2">
               {SITE_TYPES.map((s) => (
                 <button
                   key={s.key}
                   type="button"
-                  onClick={() => setSiteType(s.key as SiteType)}
+                  onClick={() => toggleModule(s.key as SiteType)}
                   className={`text-left rounded-lg border p-3 text-sm transition gws-themed ${
-                    siteType === s.key
+                    modules.includes(s.key)
                       ? "gws-accent-border ring-2 ring-[var(--gws-accent)]/30 bg-[var(--gws-accent)]/5"
                       : "border-border hover:border-foreground/30"
                   }`}
                 >
-                  <div className="font-medium">{s.label}</div>
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="font-medium">{s.label}</div>
+                    {modules.includes(s.key) && <Check className="h-4 w-4 gws-accent-text" />}
+                  </div>
                   <div className="text-xs text-muted-foreground mt-0.5">{s.short}</div>
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Exemple : présentation + réservation, ou catalogue + vente en ligne.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-sm font-semibold mb-3">Univers de contenu</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {PROFILE_OPTIONS.map((option) => (
+                <button
+                  key={option.key}
+                  type="button"
+                  onClick={() => setProfile(option.key as ProfileKey)}
+                  className={`text-left rounded-lg border p-3 transition ${
+                    profile === option.key
+                      ? "gws-accent-border ring-2 ring-[var(--gws-accent)]/30 bg-[var(--gws-accent)]/5"
+                      : "border-border hover:border-foreground/30"
+                  }`}
+                >
+                  <div className="text-sm font-medium">{option.label}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{option.short}</div>
                 </button>
               ))}
             </div>
           </section>
 
-          {/* Style */}
           <section>
             <h3 className="text-sm font-semibold mb-3">Style visuel</h3>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
               {STYLE_OPTIONS.map((s) => (
                 <button
                   key={s.key}
                   type="button"
                   onClick={() => setStyle(s.key as StyleKey)}
-                  className={`w-full text-left rounded-lg border p-3 transition flex items-start gap-3 ${
+                  className={`w-full text-left rounded-lg border p-3 transition ${
                     style === s.key
                       ? "gws-accent-border ring-2 ring-[var(--gws-accent)]/30 bg-[var(--gws-accent)]/5"
                       : "border-border hover:border-foreground/30"
                   }`}
                 >
-                  <StyleSwatch styleKey={s.key} />
-                  <div className="flex-1">
-                    <div className="text-sm font-medium">{s.label}</div>
-                    <div className="text-xs text-muted-foreground">{s.description}</div>
+                  <div className="flex items-start gap-2.5">
+                    <StyleSwatch styleKey={s.key} />
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium leading-tight">{s.label}</div>
+                      <div className="text-xs text-muted-foreground mt-1 leading-snug">
+                        {s.description}
+                      </div>
+                    </div>
                   </div>
-                  {style === s.key && <Check className="h-4 w-4 gws-accent-text mt-0.5" />}
                 </button>
               ))}
             </div>
           </section>
 
-          {/* Accent */}
           <section>
             <h3 className="text-sm font-semibold mb-3">Couleur d'accent</h3>
             <div className="flex flex-wrap gap-2.5">
@@ -121,8 +166,9 @@ export function Configurator() {
 
         <div className="border-t p-4 space-y-2 bg-card sticky bottom-0">
           <Button asChild className="w-full gws-accent-bg hover:opacity-90" onClick={closeConfig}>
-            <Link to={currentDemo.href}>
-              Voir la démo : {currentDemo.label}
+            <Link to="/" hash="apercu">
+              <Layers3 className="mr-2 h-4 w-4" />
+              Voir ma composition
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
@@ -138,17 +184,24 @@ export function Configurator() {
 function StyleSwatch({ styleKey }: { styleKey: StyleKey }) {
   const styles: Record<StyleKey, React.CSSProperties> = {
     minimal: { background: "linear-gradient(135deg, #ffffff, #f1f5f9)", color: "#0f172a" },
-    dynamic: { background: "linear-gradient(135deg, #ec4899, #f59e0b, #3b82f6)" },
-    premium: { background: "linear-gradient(135deg, #1a1611, #2d2418)" },
+    tropical: { background: "linear-gradient(135deg, #f97316, #facc15 50%, #0d9488)" },
+    editorial: { background: "linear-gradient(135deg, #f2eadf, #c8b69e)" },
+    bold: { background: "linear-gradient(135deg, #111111 50%, #f4ff54 50%)" },
+    organic: { background: "linear-gradient(135deg, #efe5d3, #9fb38f)" },
+    night: { background: "linear-gradient(135deg, #07111f, #142c4c 60%, #26d9c7)" },
   };
   return (
     <div
       className="h-10 w-10 rounded-md border border-border flex-shrink-0 grid place-items-center text-[10px] font-semibold"
       style={styles[styleKey]}
     >
-      {styleKey === "premium" && <span style={{ color: "#d4af37" }}>Aa</span>}
-      {styleKey === "minimal" && <span style={{ color: "#0f172a" }}>Aa</span>}
-      {styleKey === "dynamic" && <span style={{ color: "#fff" }}>Aa</span>}
+      <span
+        style={{
+          color: styleKey === "bold" ? "#ffffff" : styleKey === "night" ? "#8ff8ef" : "#172033",
+        }}
+      >
+        Aa
+      </span>
     </div>
   );
 }

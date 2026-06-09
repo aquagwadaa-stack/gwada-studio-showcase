@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 export type SiteType = "vitrine" | "reservation" | "catalogue" | "boutique";
-export type StyleKey = "minimal" | "dynamic" | "premium";
+export type StyleKey = "minimal" | "tropical" | "editorial" | "bold" | "organic" | "night";
+export type ProfileKey = "services" | "commerce" | "food" | "mobility" | "wellness";
 export type AccentPreset = {
   key: string;
   label: string;
@@ -19,20 +20,73 @@ export const ACCENT_PRESETS: AccentPreset[] = [
 ];
 
 export const SITE_TYPES: { key: SiteType; label: string; short: string; href: string }[] = [
-  { key: "vitrine", label: "Site vitrine", short: "Présenter mon activité", href: "/vitrine" },
-  { key: "reservation", label: "Réservation en ligne", short: "Prendre des réservations", href: "/reservation" },
-  { key: "catalogue", label: "Catalogue", short: "Afficher un catalogue", href: "/catalogue" },
-  { key: "boutique", label: "Boutique en ligne", short: "Vendre en ligne", href: "/boutique" },
+  {
+    key: "vitrine",
+    label: "Présentation",
+    short: "Expliquer l'activité et rassurer",
+    href: "/vitrine",
+  },
+  {
+    key: "reservation",
+    label: "Réservation",
+    short: "Proposer des créneaux en ligne",
+    href: "/reservation",
+  },
+  {
+    key: "catalogue",
+    label: "Catalogue",
+    short: "Présenter une offre avec des filtres",
+    href: "/catalogue",
+  },
+  {
+    key: "boutique",
+    label: "Vente en ligne",
+    short: "Vendre, encaisser et organiser le retrait",
+    href: "/boutique",
+  },
 ];
 
 export const STYLE_OPTIONS: { key: StyleKey; label: string; description: string }[] = [
-  { key: "minimal", label: "Moderne & minimaliste", description: "Fond clair, typographie nette, beaucoup d'espace." },
-  { key: "dynamic", label: "Dynamique & coloré", description: "Dégradés vifs, formes arrondies, énergie." },
-  { key: "premium", label: "Élégant & premium", description: "Sombre, typographie éditoriale, touches dorées." },
+  { key: "minimal", label: "Clair & précis", description: "Sobre, lisible et très professionnel." },
+  {
+    key: "tropical",
+    label: "Solaire & tropical",
+    description: "Chaleureux, vivant et ancré dans les Antilles.",
+  },
+  {
+    key: "editorial",
+    label: "Éditorial & premium",
+    description: "Raffiné, spacieux et haut de gamme.",
+  },
+  {
+    key: "bold",
+    label: "Audacieux & graphique",
+    description: "Contrastes francs et forte personnalité.",
+  },
+  {
+    key: "organic",
+    label: "Doux & naturel",
+    description: "Tons chauds, formes souples et accueil humain.",
+  },
+  {
+    key: "night",
+    label: "Tech & nocturne",
+    description: "Sombre, lumineux et résolument contemporain.",
+  },
+];
+
+export const PROFILE_OPTIONS: { key: ProfileKey; label: string; short: string }[] = [
+  { key: "services", label: "Services", short: "Artisan, agence, indépendant" },
+  { key: "commerce", label: "Commerce", short: "Magasin, marque, concept store" },
+  { key: "food", label: "Restauration", short: "Restaurant, fast-food, traiteur" },
+  { key: "mobility", label: "Auto & nautisme", short: "Véhicules, location, yachts" },
+  { key: "wellness", label: "Bien-être & sport", short: "Salon, coach, salle, soins" },
 ];
 
 type State = {
   siteType: SiteType;
+  modules: SiteType[];
+  profile: ProfileKey;
   style: StyleKey;
   accent: string;
   accentFg: string;
@@ -41,6 +95,8 @@ type State = {
 
 type Ctx = State & {
   setSiteType: (v: SiteType) => void;
+  toggleModule: (v: SiteType) => void;
+  setProfile: (v: ProfileKey) => void;
   setStyle: (v: StyleKey) => void;
   setAccent: (value: string, fg?: string) => void;
   openConfig: () => void;
@@ -55,6 +111,8 @@ const STORAGE_KEY = "gws-showroom-v1";
 export function ShowroomProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<State>({
     siteType: "vitrine",
+    modules: ["vitrine", "reservation"],
+    profile: "services",
     style: "minimal",
     accent: ACCENT_PRESETS[0].value,
     accentFg: ACCENT_PRESETS[0].fg,
@@ -67,9 +125,24 @@ export function ShowroomProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        setState((s) => ({ ...s, ...parsed, configOpen: false }));
+        const validStyles = STYLE_OPTIONS.map((option) => option.key);
+        const validProfiles = PROFILE_OPTIONS.map((option) => option.key);
+        const validModules = SITE_TYPES.map((option) => option.key);
+        const modules = Array.isArray(parsed.modules)
+          ? parsed.modules.filter((module: SiteType) => validModules.includes(module))
+          : [parsed.siteType ?? "vitrine"];
+        setState((s) => ({
+          ...s,
+          ...parsed,
+          modules: modules.length ? modules : s.modules,
+          profile: validProfiles.includes(parsed.profile) ? parsed.profile : s.profile,
+          style: validStyles.includes(parsed.style) ? parsed.style : s.style,
+          configOpen: false,
+        }));
       }
-    } catch {}
+    } catch {
+      // The showroom still works when browser storage is unavailable.
+    }
   }, []);
 
   // Persist + apply data-style + accent CSS var
@@ -77,7 +150,9 @@ export function ShowroomProvider({ children }: { children: ReactNode }) {
     try {
       const { configOpen, ...persist } = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(persist));
-    } catch {}
+    } catch {
+      // Persisting preferences is optional.
+    }
     if (typeof document !== "undefined") {
       document.documentElement.setAttribute("data-style", state.style);
       document.documentElement.style.setProperty("--gws-accent", state.accent);
@@ -88,7 +163,26 @@ export function ShowroomProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Ctx>(
     () => ({
       ...state,
-      setSiteType: (v) => setState((s) => ({ ...s, siteType: v })),
+      setSiteType: (v) =>
+        setState((s) => ({
+          ...s,
+          siteType: v,
+          modules: s.modules.includes(v) ? s.modules : [...s.modules, v],
+        })),
+      toggleModule: (v) =>
+        setState((s) => {
+          if (s.modules.includes(v)) {
+            if (s.modules.length === 1) return s;
+            const modules = s.modules.filter((module) => module !== v);
+            return {
+              ...s,
+              modules,
+              siteType: s.siteType === v ? modules[0] : s.siteType,
+            };
+          }
+          return { ...s, modules: [...s.modules, v], siteType: v };
+        }),
+      setProfile: (v) => setState((s) => ({ ...s, profile: v })),
       setStyle: (v) => setState((s) => ({ ...s, style: v })),
       setAccent: (value, fg) =>
         setState((s) => ({ ...s, accent: value, accentFg: fg ?? s.accentFg })),

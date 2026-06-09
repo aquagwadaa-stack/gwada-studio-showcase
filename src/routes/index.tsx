@@ -1,356 +1,220 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
-  Calendar,
-  ShoppingBag,
-  LayoutGrid,
-  Store,
-  MessageCircle,
-  Mail,
-  Image as ImageIcon,
-  Star,
-  MapPin,
-  CreditCard,
-  Boxes,
-  Truck,
-  FileText,
-  UserCircle,
-  Smartphone,
-  Search,
-  Sparkles,
+  Check,
+  Layers3,
+  MousePointer2,
   Palette,
+  Smartphone,
+  Sparkles,
 } from "lucide-react";
-import { useShowroom, SITE_TYPES, STYLE_OPTIONS, type StyleKey } from "@/context/showroom-context";
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { LiveShowcase } from "@/components/showroom/LiveShowcase";
+import { useShowroom } from "@/context/showroom-context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gwada Web Studio — Imaginez votre entreprise en ligne" },
+      { title: "Gwada Web Studio — Imaginez votre futur site" },
       {
         name: "description",
         content:
-          "Showroom interactif pour explorer plusieurs types de sites et styles graphiques. Vitrine, réservation, catalogue, boutique.",
+          "Composez un site vitrine, une réservation, un catalogue ou une boutique et visualisez le résultat instantanément.",
       },
     ],
   }),
   component: HomePage,
 });
 
-const SITE_ICONS: Record<string, any> = {
-  vitrine: Store,
-  reservation: Calendar,
-  catalogue: LayoutGrid,
-  boutique: ShoppingBag,
-};
-
-const FEATURES = [
-  { icon: MessageCircle, label: "Contact WhatsApp" },
-  { icon: Mail, label: "Formulaire de contact" },
-  { icon: ImageIcon, label: "Galerie" },
-  { icon: Star, label: "Avis clients" },
-  { icon: MapPin, label: "Carte & horaires" },
-  { icon: Calendar, label: "Réservation" },
-  { icon: LayoutGrid, label: "Catalogue avec filtres" },
-  { icon: CreditCard, label: "Paiement en ligne" },
-  { icon: Boxes, label: "Gestion des stocks" },
-  { icon: Truck, label: "Commande & retrait" },
-  { icon: FileText, label: "Demande de devis" },
-  { icon: UserCircle, label: "Espace client" },
-  { icon: Smartphone, label: "Site responsive" },
-  { icon: Search, label: "Référencement naturel" },
-];
-
 function HomePage() {
-  const { openConfig, setSiteType } = useShowroom();
+  const { openConfig } = useShowroom();
 
   return (
     <div>
-      <Hero onCta={openConfig} />
-      <TypesSection onPick={(k) => setSiteType(k)} />
-      <PersonalisationSection />
-      <FeaturesSection />
-      <FinalCta onCta={openConfig} />
+      <Hero onConfigure={openConfig} />
+      <LiveShowcase />
+      <ProofSection />
+      <FinalCta onConfigure={openConfig} />
     </div>
   );
 }
 
-/* ============= Hero ============= */
-function Hero({ onCta }: { onCta: () => void }) {
+function Hero({ onConfigure }: { onConfigure: () => void }) {
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 gws-surface" />
+    <section className="relative isolate overflow-hidden border-b border-border/60 bg-[#080b12]">
       <div
-        className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl -z-10"
-        style={{ background: "var(--gws-accent)" }}
+        className="absolute inset-0 z-0 opacity-80"
+        style={{
+          background:
+            "radial-gradient(circle at 15% 15%, color-mix(in srgb, var(--gws-accent) 42%, transparent), transparent 32%), radial-gradient(circle at 85% 80%, #4438ca55, transparent 35%)",
+        }}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-20 sm:pt-24 sm:pb-28 grid lg:grid-cols-2 gap-10 items-center">
+      <div className="absolute inset-0 z-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:54px_54px]" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 text-white sm:px-6 sm:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
         <div>
-          <div className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border border-border bg-card mb-6">
-            <Sparkles className="h-3.5 w-3.5 gws-accent-text" />
-            Showroom interactif — Gwada Web Studio
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs text-white/75 backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5 text-[var(--gws-accent)]" />
+            Showroom interactif · Gwada Web Studio
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.05] tracking-tight">
-            Imaginez votre <span className="gws-display-grad gws-accent-text">entreprise</span> en ligne.
+          <h1 className="max-w-4xl font-display text-5xl font-bold leading-[0.96] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+            Ne choisissez pas un modèle.
+            <span className="mt-2 block text-[var(--gws-accent)]">Composez votre site.</span>
           </h1>
-          <p className="mt-5 text-lg text-muted-foreground max-w-xl">
-            Explorez différents types de sites, testez plusieurs styles et découvrez les fonctionnalités
-            adaptées à votre activité — depuis votre téléphone.
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
+            Présentation, réservation, catalogue et vente en ligne peuvent vivre dans un seul site.
+            Combinez vos besoins, changez l'univers et comparez plusieurs directions visuelles en
+            direct.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button size="lg" onClick={onCta} className="gws-accent-bg hover:opacity-90">
-              Explorer les démonstrations <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link to="/contact">Discuter de mon projet</Link>
-            </Button>
-          </div>
-          <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
-            <span>4 types de sites</span>
-            <span className="h-3 w-px bg-border" />
-            <span>3 styles visuels</span>
-            <span className="h-3 w-px bg-border" />
-            <span>14 fonctionnalités</span>
-          </div>
-        </div>
-
-        <AnimatedPreviewStack />
-      </div>
-    </section>
-  );
-}
-
-function AnimatedPreviewStack() {
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setActive((a) => (a + 1) % 3), 2800);
-    return () => clearInterval(t);
-  }, []);
-  const screens = [
-    { title: "Restaurant", subtitle: "Réservation en ligne", color: "#f97316" },
-    { title: "Boutique mode", subtitle: "Vente en ligne", color: "#ec4899" },
-    { title: "Concession auto", subtitle: "Catalogue véhicules", color: "#3b82f6" },
-  ];
-  return (
-    <div className="relative h-[420px] sm:h-[480px]">
-      {screens.map((s, i) => {
-        const offset = (i - active + 3) % 3;
-        return (
-          <div
-            key={i}
-            className="absolute inset-x-0 mx-auto w-[88%] max-w-md rounded-2xl border border-border bg-card gws-shadow overflow-hidden transition-all duration-700 ease-out gws-themed"
-            style={{
-              top: `${offset * 30}px`,
-              transform: `scale(${1 - offset * 0.06}) translateY(${offset * 8}px)`,
-              zIndex: 10 - offset,
-              opacity: offset === 2 ? 0.5 : 1,
-            }}
-          >
-            <div className="h-32 sm:h-40 relative" style={{ background: `linear-gradient(135deg, ${s.color}, ${s.color}aa)` }}>
-              <div className="absolute bottom-3 left-4 text-white">
-                <div className="text-xs opacity-80">Aperçu</div>
-                <div className="font-display font-semibold text-lg">{s.title}</div>
-              </div>
-            </div>
-            <div className="p-4 space-y-3">
-              <div className="text-xs text-muted-foreground">{s.subtitle}</div>
-              <div className="h-3 rounded bg-muted w-full" />
-              <div className="h-3 rounded bg-muted w-4/5" />
-              <div className="grid grid-cols-3 gap-2 pt-2">
-                <div className="h-12 rounded-md bg-muted" />
-                <div className="h-12 rounded-md bg-muted" />
-                <div className="h-12 rounded-md bg-muted" />
-              </div>
-              <div className="flex gap-2 pt-2">
-                <div className="h-8 rounded-full gws-accent-bg w-24" />
-                <div className="h-8 rounded-full border border-border w-20" />
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-/* ============= Types ============= */
-function TypesSection({ onPick }: { onPick: (k: any) => void }) {
-  return (
-    <section className="py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader
-          kicker="Étape 1"
-          title="Quel site correspond à votre besoin ?"
-          subtitle="Quatre points de départ pour quatre types d'activité. Cliquez pour voir la démo."
-        />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {SITE_TYPES.map((s) => {
-            const Icon = SITE_ICONS[s.key];
-            return (
-              <Link
-                key={s.key}
-                to={s.href}
-                onClick={() => onPick(s.key)}
-                className="group rounded-2xl border border-border bg-card p-6 hover:gws-accent-border hover:-translate-y-1 transition-all duration-300 gws-themed"
-              >
-                <div className="h-12 w-12 rounded-xl gws-accent-bg grid place-items-center mb-5">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div className="text-xs text-muted-foreground mb-1">{s.label}</div>
-                <h3 className="font-display text-xl font-semibold leading-tight">{s.short}</h3>
-                <div className="mt-6 inline-flex items-center text-sm gws-accent-text">
-                  Voir la démo <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============= Personnalisation ============= */
-function PersonalisationSection() {
-  return (
-    <section className="py-20 sm:py-28 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader
-          kicker="Étape 2"
-          title="Un même site, plusieurs identités."
-          subtitle="Le même contenu peut adopter une ambiance minimaliste, dynamique ou premium. Choisissez celle qui vous ressemble."
-        />
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {STYLE_OPTIONS.map((s) => (
-            <StyleMockup key={s.key} styleKey={s.key} label={s.label} description={s.description} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function StyleMockup({
-  styleKey,
-  label,
-  description,
-}: {
-  styleKey: StyleKey;
-  label: string;
-  description: string;
-}) {
-  const { setStyle, openConfig } = useShowroom();
-  const presets: Record<StyleKey, { bg: string; fg: string; accent: string; radius: string; font: string }> = {
-    minimal: { bg: "#fafbfc", fg: "#0f172a", accent: "#0ea5e9", radius: "8px", font: "Inter, sans-serif" },
-    dynamic: {
-      bg: "linear-gradient(135deg, #fff1f9 0%, #fef3c7 50%, #dbeafe 100%)",
-      fg: "#1a1a2e",
-      accent: "#ec4899",
-      radius: "20px",
-      font: "Sora, sans-serif",
-    },
-    premium: { bg: "#161310", fg: "#f0e6d2", accent: "#d4af37", radius: "4px", font: "Cormorant Garamond, serif" },
-  };
-  const p = presets[styleKey];
-  return (
-    <button
-      onClick={() => {
-        setStyle(styleKey);
-        openConfig();
-      }}
-      className="text-left rounded-2xl border border-border overflow-hidden hover:-translate-y-1 transition-all duration-300 group"
-    >
-      <div
-        className="p-6 h-72 flex flex-col gap-4"
-        style={{ background: p.bg, color: p.fg, fontFamily: p.font, borderRadius: p.radius }}
-      >
-        <div className="text-[10px] uppercase tracking-widest opacity-60">Votre entreprise</div>
-        <div className="text-2xl font-semibold leading-tight" style={{ letterSpacing: styleKey === "dynamic" ? "-0.03em" : "-0.01em" }}>
-          Bienvenue chez nous
-        </div>
-        <div className="text-xs opacity-70 leading-relaxed">
-          Découvrez nos services pensés pour vous offrir une expérience unique.
-        </div>
-        <div className="mt-auto flex items-center gap-2">
-          <span
-            className="px-3 py-2 text-xs font-medium"
-            style={{ background: p.accent, color: styleKey === "premium" ? "#161310" : "#fff", borderRadius: p.radius }}
-          >
-            Découvrir
-          </span>
-          <span
-            className="px-3 py-2 text-xs"
-            style={{ border: `1px solid ${p.fg}33`, borderRadius: p.radius }}
-          >
-            En savoir plus
-          </span>
-        </div>
-      </div>
-      <div className="p-4 bg-card">
-        <div className="font-semibold">{label}</div>
-        <div className="text-xs text-muted-foreground mt-1">{description}</div>
-        <div className="text-xs gws-accent-text mt-2 inline-flex items-center gap-1">
-          <Palette className="h-3 w-3" /> Appliquer ce style
-        </div>
-      </div>
-    </button>
-  );
-}
-
-/* ============= Features ============= */
-function FeaturesSection() {
-  return (
-    <section className="py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader
-          kicker="Étape 3"
-          title="Toutes les fonctionnalités essentielles."
-          subtitle="Activez seulement celles dont vous avez besoin. Tout est combinable."
-        />
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {FEATURES.map((f) => (
-            <div
-              key={f.label}
-              className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:gws-accent-border transition gws-themed"
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              onClick={() =>
+                document.getElementById("apercu")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="rounded-full gws-accent-bg px-6 hover:opacity-90"
             >
-              <div className="h-9 w-9 rounded-lg gws-accent-bg grid place-items-center flex-shrink-0">
-                <f.icon className="h-4 w-4" />
-              </div>
-              <span className="text-sm font-medium">{f.label}</span>
-            </div>
-          ))}
+              Composer ma démonstration <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={onConfigure}
+              className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+            >
+              Configuration rapide
+            </Button>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-xs text-white/55">
+            {["Combinaisons libres", "6 directions graphiques", "Pensé pour le mobile"].map(
+              (item) => (
+                <span key={item} className="flex items-center gap-1.5">
+                  <Check className="h-3.5 w-3.5 text-[var(--gws-accent)]" /> {item}
+                </span>
+              ),
+            )}
+          </div>
         </div>
-        <div className="mt-8 text-center">
-          <Button variant="outline" asChild>
-            <Link to="/fonctionnalites">Voir toutes les fonctionnalités <ArrowRight className="ml-2 h-4 w-4" /></Link>
-          </Button>
-        </div>
+
+        <HeroVisual />
       </div>
     </section>
   );
 }
 
-/* ============= CTA ============= */
-function FinalCta({ onCta }: { onCta: () => void }) {
+function HeroVisual() {
+  const cards = [
+    {
+      icon: Layers3,
+      title: "Fonctions",
+      value: "Vitrine + réservation",
+      className: "left-0 top-8",
+    },
+    {
+      icon: Palette,
+      title: "Direction",
+      value: "Éditorial & premium",
+      className: "right-0 top-36",
+    },
+    {
+      icon: Smartphone,
+      title: "Expérience",
+      value: "Mobile en priorité",
+      className: "left-8 bottom-2",
+    },
+  ];
+
   return (
-    <section className="py-20 sm:py-28">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl p-8 sm:p-14 text-center gws-shadow border border-border bg-card">
-          <div className="absolute inset-0 -z-10 opacity-20" style={{ background: "var(--gws-accent)" }} />
-          <h2 className="text-3xl sm:text-5xl font-display font-bold tracking-tight">
-            Votre entreprise mérite un site qui lui ressemble.
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Parlons de votre projet. On vous propose une maquette adaptée à votre activité, votre budget et votre style.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Button size="lg" asChild className="gws-accent-bg hover:opacity-90">
-              <Link to="/contact">Parler de mon projet</Link>
-            </Button>
-            <Button size="lg" variant="outline" onClick={onCta}>
-              Continuer à explorer
-            </Button>
+    <div className="relative mx-auto h-[430px] w-full max-w-[520px]">
+      <div className="absolute left-1/2 top-1/2 h-[360px] w-[245px] -translate-x-1/2 -translate-y-1/2 rotate-3 overflow-hidden rounded-[2.4rem] border-[7px] border-white/10 bg-white shadow-2xl">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=85"
+          alt=""
+          className="h-52 w-full object-cover"
+        />
+        <div className="p-5 text-[#17191f]">
+          <div className="text-[9px] font-semibold uppercase tracking-widest text-orange-600">
+            Casa Manguier
+          </div>
+          <div className="mt-2 text-2xl font-bold leading-none">Le goût des îles.</div>
+          <div className="mt-3 h-2 w-full rounded-full bg-slate-100" />
+          <div className="mt-2 h-2 w-3/4 rounded-full bg-slate-100" />
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            <div className="h-16 rounded-xl bg-orange-100" />
+            <div className="h-16 rounded-xl bg-teal-100" />
+          </div>
+          <div className="mt-4 rounded-full bg-orange-500 py-2 text-center text-[9px] font-bold text-white">
+            Réserver une table
+          </div>
+        </div>
+      </div>
+      {cards.map((card) => (
+        <div
+          key={card.title}
+          className={`absolute ${card.className} z-10 w-[190px] rounded-2xl border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-xl`}
+        >
+          <card.icon className="h-4 w-4 text-[var(--gws-accent)]" />
+          <div className="mt-4 text-[10px] uppercase tracking-wider text-white/45">
+            {card.title}
+          </div>
+          <div className="mt-1 text-xs font-semibold text-white">{card.value}</div>
+        </div>
+      ))}
+      <MousePointer2 className="absolute bottom-16 right-20 z-20 h-7 w-7 -rotate-12 fill-white text-white drop-shadow-xl" />
+    </div>
+  );
+}
+
+function ProofSection() {
+  const points = [
+    {
+      number: "01",
+      title: "On part de votre objectif",
+      text: "Être trouvé, recevoir des demandes, réserver, présenter une gamme ou vendre : la structure suit votre activité.",
+    },
+    {
+      number: "02",
+      title: "On construit une vraie identité",
+      text: "Les couleurs ne suffisent pas. Typographies, rythme, images, formes et ton changent réellement d'un univers à l'autre.",
+    },
+    {
+      number: "03",
+      title: "On soigne le parcours",
+      text: "Chaque écran guide le visiteur vers une action utile, avec une expérience rapide et claire sur téléphone.",
+    },
+  ];
+
+  return (
+    <section className="border-y border-border/60 bg-muted/30 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] gws-accent-text">
+              Au-delà de la démonstration
+            </div>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-5xl">
+              Le bon site n'est jamais générique.
+            </h2>
+            <p className="mt-5 max-w-lg text-muted-foreground">
+              Ce showroom montre les possibilités. Votre site final, lui, sera construit autour de
+              votre entreprise, de vos clients et de vos objectifs.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {points.map((point) => (
+              <article
+                key={point.number}
+                className="grid gap-4 rounded-2xl border border-border bg-card p-5 sm:grid-cols-[54px_1fr]"
+              >
+                <div className="font-display text-2xl font-bold gws-accent-text">
+                  {point.number}
+                </div>
+                <div>
+                  <h3 className="font-display text-xl font-bold">{point.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{point.text}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
@@ -358,24 +222,45 @@ function FinalCta({ onCta }: { onCta: () => void }) {
   );
 }
 
-function SectionHeader({
-  kicker,
-  title,
-  subtitle,
-}: {
-  kicker?: string;
-  title: string;
-  subtitle?: string;
-}) {
+function FinalCta({ onConfigure }: { onConfigure: () => void }) {
   return (
-    <div className="max-w-3xl">
-      {kicker && (
-        <div className="text-xs uppercase tracking-widest gws-accent-text mb-3 font-semibold">
-          {kicker}
+    <section className="px-4 py-20 sm:px-6 sm:py-28">
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-[#0a0d14] px-6 py-14 text-center text-white sm:px-12 sm:py-20">
+        <div
+          className="absolute inset-0 opacity-35"
+          style={{
+            background:
+              "radial-gradient(circle at 20% 10%, var(--gws-accent), transparent 34%), radial-gradient(circle at 85% 90%, #4338ca, transparent 32%)",
+          }}
+        />
+        <div className="relative">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+            Votre projet
+          </div>
+          <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            Maintenant, imaginez cette qualité avec votre nom, vos images et votre offre.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
+            Gwada Web Studio transforme cette base en une expérience unique, adaptée à votre
+            activité et à vos clients.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg" className="rounded-full gws-accent-bg px-6 hover:opacity-90">
+              <Link to="/contact">
+                Discuter de mon projet <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={onConfigure}
+              className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+            >
+              Modifier la composition
+            </Button>
+          </div>
         </div>
-      )}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight">{title}</h2>
-      {subtitle && <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>}
-    </div>
+      </div>
+    </section>
   );
 }

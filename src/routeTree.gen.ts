@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VitrineRouteImport } from './routes/vitrine'
 import { Route as ReservationRouteImport } from './routes/reservation'
 import { Route as CatalogueRouteImport } from './routes/catalogue'
+import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogueIdRouteImport } from './routes/catalogue.$id'
 
@@ -30,6 +31,11 @@ const CatalogueRoute = CatalogueRouteImport.update({
   path: '/catalogue',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BoutiqueRoute = BoutiqueRouteImport.update({
+  id: '/boutique',
+  path: '/boutique',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const CatalogueIdRoute = CatalogueIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/boutique': typeof BoutiqueRoute
   '/catalogue': typeof CatalogueRouteWithChildren
   '/reservation': typeof ReservationRoute
   '/vitrine': typeof VitrineRoute
@@ -65,12 +74,25 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalogue' | '/reservation' | '/vitrine' | '/catalogue/$id'
+  fullPaths:
+    | '/'
+    | '/boutique'
+    | '/catalogue'
+    | '/reservation'
+    | '/vitrine'
+    | '/catalogue/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/catalogue' | '/reservation' | '/vitrine' | '/catalogue/$id'
+  to:
+    | '/'
+    | '/boutique'
+    | '/catalogue'
+    | '/reservation'
+    | '/vitrine'
+    | '/catalogue/$id'
   id:
     | '__root__'
     | '/'
+    | '/boutique'
     | '/catalogue'
     | '/reservation'
     | '/vitrine'
@@ -79,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BoutiqueRoute: typeof BoutiqueRoute
   CatalogueRoute: typeof CatalogueRouteWithChildren
   ReservationRoute: typeof ReservationRoute
   VitrineRoute: typeof VitrineRoute
@@ -105,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogue'
       fullPath: '/catalogue'
       preLoaderRoute: typeof CatalogueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boutique': {
+      id: '/boutique'
+      path: '/boutique'
+      fullPath: '/boutique'
+      preLoaderRoute: typeof BoutiqueRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -138,6 +168,7 @@ const CatalogueRouteWithChildren = CatalogueRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BoutiqueRoute: BoutiqueRoute,
   CatalogueRoute: CatalogueRouteWithChildren,
   ReservationRoute: ReservationRoute,
   VitrineRoute: VitrineRoute,

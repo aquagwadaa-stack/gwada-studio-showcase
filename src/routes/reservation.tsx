@@ -6,7 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
-import { Check, ArrowLeft, ArrowRight, Scissors, Sparkles, Heart, CalendarCheck } from "lucide-react";
+import {
+  Check,
+  ArrowLeft,
+  ArrowRight,
+  Compass,
+  Sparkles,
+  Crown,
+  CalendarCheck,
+} from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/reservation")({
@@ -20,16 +28,28 @@ export const Route = createFileRoute("/reservation")({
 });
 
 const SERVICES = [
-  { id: "s1", icon: Scissors, name: "Prestation A", duration: "30 min", price: "35 €" },
-  { id: "s2", icon: Sparkles, name: "Prestation B", duration: "45 min", price: "55 €" },
-  { id: "s3", icon: Heart, name: "Prestation C", duration: "1h15", price: "80 €" },
+  { id: "s1", icon: Compass, name: "Rendez-vous découverte", duration: "30 min", price: "Gratuit" },
+  { id: "s2", icon: Sparkles, name: "Prestation personnalisée", duration: "45 min", price: "55 €" },
+  { id: "s3", icon: Crown, name: "Expérience signature", duration: "1h15", price: "90 €" },
 ];
 const PROS = [
-  { id: "p1", name: "Camille", role: "Senior" },
-  { id: "p2", name: "Alex", role: "Confirmé" },
+  { id: "p1", name: "Camille", role: "Spécialiste" },
+  { id: "p2", name: "Alex", role: "Conseiller" },
   { id: "p3", name: "Sans préférence", role: "Premier disponible" },
 ];
-const SLOTS = ["09:00", "09:30", "10:00", "10:30", "11:00", "14:00", "14:30", "15:00", "16:00", "16:30", "17:00"];
+const SLOTS = [
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "14:00",
+  "14:30",
+  "15:00",
+  "16:00",
+  "16:30",
+  "17:00",
+];
 
 function ReservationPage() {
   const [step, setStep] = useState(0);
@@ -39,7 +59,7 @@ function ReservationPage() {
   const [slot, setSlot] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
 
-  const steps = ["Prestation", "Praticien", "Date", "Créneau", "Vos infos"];
+  const steps = ["Prestation", "Intervenant", "Date", "Créneau", "Vos informations"];
   const canNext =
     (step === 0 && service) ||
     (step === 1 && pro) ||
@@ -58,7 +78,9 @@ function ReservationPage() {
           Prendre rendez-vous
         </h1>
         <p className="mt-2 text-muted-foreground">
-          {confirmed ? "Votre rendez-vous est confirmé." : `Étape ${step + 1} sur ${steps.length} — ${steps[step]}`}
+          {confirmed
+            ? "Votre rendez-vous est confirmé."
+            : `Étape ${step + 1} sur ${steps.length} — ${steps[step]}`}
         </p>
         <Progress value={progress} className="mt-4 h-1.5" />
 
@@ -66,18 +88,16 @@ function ReservationPage() {
           {step === 0 && (
             <StepGrid>
               {SERVICES.map((s) => (
-                <Selectable
-                  key={s.id}
-                  active={service === s.id}
-                  onClick={() => setService(s.id)}
-                >
+                <Selectable key={s.id} active={service === s.id} onClick={() => setService(s.id)}>
                   <div className="flex items-start gap-3">
                     <div className="h-10 w-10 rounded-lg gws-accent-bg grid place-items-center">
                       <s.icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <div className="font-medium">{s.name}</div>
-                      <div className="text-xs text-muted-foreground">{s.duration} · {s.price}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {s.duration} · {s.price}
+                      </div>
                     </div>
                   </div>
                 </Selectable>
@@ -120,15 +140,32 @@ function ReservationPage() {
             <div className="space-y-3">
               <div>
                 <Label htmlFor="rn">Nom complet</Label>
-                <Input id="rn" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+                <Input
+                  id="rn"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  required
+                />
               </div>
               <div>
                 <Label htmlFor="re">E-mail</Label>
-                <Input id="re" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
+                <Input
+                  id="re"
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  required
+                />
               </div>
               <div>
                 <Label htmlFor="rp">Téléphone</Label>
-                <Input id="rp" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required />
+                <Input
+                  id="rp"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  required
+                />
               </div>
             </div>
           )}
@@ -140,13 +177,15 @@ function ReservationPage() {
               </div>
               <h2 className="text-2xl font-display font-bold">Rendez-vous confirmé !</h2>
               <p className="mt-2 text-muted-foreground">
-                {SERVICES.find((s) => s.id === service)?.name} · {PROS.find((p) => p.id === pro)?.name}
+                {SERVICES.find((s) => s.id === service)?.name} ·{" "}
+                {PROS.find((p) => p.id === pro)?.name}
               </p>
               <p className="text-muted-foreground">
-                Le {day} {nextMonthLabel()} à {slot}
+                Le {day} {currentMonthLabel()} à {slot}
               </p>
               <p className="text-sm text-muted-foreground mt-4">
-                Un e-mail de confirmation vous a été envoyé à <strong>{form.email}</strong>.
+                Dans un projet réel, une confirmation serait envoyée à <strong>{form.email}</strong>
+                .
               </p>
               <Button
                 onClick={() => {
@@ -213,15 +252,19 @@ function Selectable({
           : "border-border hover:border-foreground/30"
       }`}
     >
-      {active && (
-        <Check className="absolute top-3 right-3 h-4 w-4 gws-accent-text" />
-      )}
+      {active && <Check className="absolute top-3 right-3 h-4 w-4 gws-accent-text" />}
       {children}
     </button>
   );
 }
 
-function CalendarGrid({ value, onChange }: { value: number | null; onChange: (d: number) => void }) {
+function CalendarGrid({
+  value,
+  onChange,
+}: {
+  value: number | null;
+  onChange: (d: number) => void;
+}) {
   const today = new Date();
   const month = today.getMonth() + 1;
   const year = today.getFullYear();
@@ -234,9 +277,13 @@ function CalendarGrid({ value, onChange }: { value: number | null; onChange: (d:
 
   return (
     <div>
-      <div className="text-center font-medium mb-4">{nextMonthLabel()} {year}</div>
+      <div className="text-center font-medium mb-4">
+        {currentMonthLabel()} {year}
+      </div>
       <div className="grid grid-cols-7 gap-1 text-xs text-muted-foreground text-center mb-2">
-        {["L", "M", "M", "J", "V", "S", "D"].map((d, i) => <div key={i}>{d}</div>)}
+        {["L", "M", "M", "J", "V", "S", "D"].map((d, i) => (
+          <div key={i}>{d}</div>
+        ))}
       </div>
       <div className="grid grid-cols-7 gap-1">
         {days.map((d, i) => {
@@ -265,6 +312,6 @@ function CalendarGrid({ value, onChange }: { value: number | null; onChange: (d:
   );
 }
 
-function nextMonthLabel() {
+function currentMonthLabel() {
   return new Date().toLocaleDateString("fr-FR", { month: "long" });
 }

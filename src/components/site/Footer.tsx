@@ -1,62 +1,28 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border/60 bg-card">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid gap-8 md:grid-cols-[1.5fr_0.7fr_0.8fr]">
+    <footer className="border-t border-white/10 bg-[#0d1715] text-[#f7f7ef]">
+      <div className="mx-auto flex max-w-[1380px] flex-col gap-8 px-5 py-10 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-12">
         <div>
-          <div className="flex items-center gap-2 font-display font-semibold text-lg">
-            <span className="h-8 w-8 rounded-lg gws-accent-bg grid place-items-center">
-              <Sparkles className="h-4 w-4" />
-            </span>
+          <Link to="/" className="font-display text-lg font-black uppercase tracking-[0.08em]">
             Gwada Web Studio
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground max-w-md">
-            Je conçois des sites web clairs, modernes et adaptés aux objectifs réels de chaque
-            entreprise en Guadeloupe.
-          </p>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold mb-3">Explorer</h4>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>
-              <Link to="/" hash="apercu" className="hover:text-foreground">
-                Composer un site
-              </Link>
-            </li>
-            <li>
-              <Link to="/reservation" className="hover:text-foreground">
-                Réservation
-              </Link>
-            </li>
-            <li>
-              <Link to="/catalogue" className="hover:text-foreground">
-                Catalogue
-              </Link>
-            </li>
-            <li>
-              <Link to="/boutique" className="hover:text-foreground">
-                Boutique
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold mb-3">Un projet en tête ?</h4>
-          <p className="text-sm text-muted-foreground">
-            Parlons de votre activité et voyons ce qu'un site peut concrètement vous apporter.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold gws-accent-text"
-          >
-            Me contacter <ArrowUpRight className="h-4 w-4" />
           </Link>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-white/45">
+            Sites web et outils métier sur mesure pour les entreprises en Guadeloupe.
+          </p>
+          <p className="mt-6 text-xs text-white/30">
+            © {new Date().getFullYear()} Gwada Web Studio · Louis Aubry
+          </p>
         </div>
-      </div>
-      <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Gwada Web Studio · Création de sites web en Guadeloupe.
+        <a
+          href="#top"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/65 transition hover:border-white/35 hover:text-white"
+          aria-label="Revenir en haut"
+        >
+          <ArrowUp className="h-4 w-4" />
+        </a>
       </div>
     </footer>
   );

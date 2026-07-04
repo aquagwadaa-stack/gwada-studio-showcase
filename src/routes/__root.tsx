@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
+import { SocialSidebar } from "../components/site/SocialSidebar";
 
 function NotFoundComponent() {
   return (

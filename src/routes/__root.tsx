@@ -70,20 +70,26 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gwada Web Studio — Sites web utiles en Guadeloupe" },
+      { title: "Gwada Web Studio — Création de sites web en Guadeloupe" },
       {
         name: "description",
         content:
           "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue et administration.",
       },
       { name: "author", content: "Gwada Web Studio" },
-      { property: "og:title", content: "Gwada Web Studio — Des sites qui travaillent avec vous" },
+      { property: "og:title", content: "Gwada Web Studio — Création de sites web en Guadeloupe" },
       {
         property: "og:description",
         content: "Sites modernes, outils métier et accompagnement direct en Guadeloupe.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Gwada Web Studio — Création de sites web en Guadeloupe" },
+      { name: "description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
+      { property: "og:description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
+      { name: "twitter:description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

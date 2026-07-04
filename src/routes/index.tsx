@@ -613,7 +613,7 @@ function About() {
 }
 
 function Contact() {
-  const mailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent("Mon projet — Gwada Web Studio")}&body=${encodeURIComponent("Bonjour Louis,\n\nMon activité :\n\nCe que j’aimerais améliorer :\n\nLe meilleur moyen de me recontacter :\n")}`;
+  const mailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent("Demande de création de site web — Gwada Web Studio")}&body=${encodeURIComponent("Bonjour,\n\nJe souhaite discuter de la création d'un site web pour mon activité. Voici quelques éléments sur mon projet :\n\n• Nature de l'activité :\n• Objectifs principaux :\n• Fonctionnalités envisagées :\n• Budget et échéance approximatifs :\n\nMerci de me recontacter à cette adresse ou par téléphone au :\n\nCordialement,\n")}`;
 
   return (
     <section

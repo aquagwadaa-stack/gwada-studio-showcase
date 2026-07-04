@@ -126,6 +126,7 @@ function RootComponent() {
   return (
     <div className="min-h-screen bg-[#0d1715]">
       <SiteNav />
+      <SocialSidebar />
       <main>
         <Outlet />
       </main>

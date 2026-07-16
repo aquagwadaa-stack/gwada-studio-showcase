@@ -20,7 +20,7 @@ export function SiteFooter() {
             <Mail className="h-3.5 w-3.5 text-[#54d7c8]" /> {contactInfo.email}
           </a>
           <p className="mt-6 text-xs text-white/30">
-            © {new Date().getFullYear()} Gwada Web Studio · Louis Aubry
+            © {new Date().getFullYear()} Gwada Web Studio · Louis
           </p>
         </div>
         <a

@@ -1,6 +1,7 @@
 export const contactInfo = {
   brand: "Gwada Web Studio",
-  tagline: "Création de sites web en Guadeloupe",
+  tagline: "Sites et outils web utiles",
   email: "gwada.web.studio@gmail.com",
-  address: "Guadeloupe",
+  location: "Guadeloupe",
+  serviceArea: "Guadeloupe, France et projets à distance",
 } as const;

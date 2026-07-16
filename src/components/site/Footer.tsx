@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
+import { contactInfo } from "@/lib/contact-info";
 
 export function SiteFooter() {
   return (
@@ -10,8 +11,14 @@ export function SiteFooter() {
             Gwada Web Studio
           </Link>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-white/45">
-            Sites web et outils métier sur mesure pour les entreprises en Guadeloupe.
+            Sites web et outils métier utiles. Basé en Guadeloupe, projets en France et à distance.
           </p>
+          <a
+            href={`mailto:${contactInfo.email}`}
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white/55 transition hover:text-white"
+          >
+            <Mail className="h-3.5 w-3.5 text-[#54d7c8]" /> {contactInfo.email}
+          </a>
           <p className="mt-6 text-xs text-white/30">
             © {new Date().getFullYear()} Gwada Web Studio · Louis Aubry
           </p>

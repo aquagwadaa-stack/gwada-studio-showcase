@@ -13,6 +13,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
 import { SocialSidebar } from "../components/site/SocialSidebar";
+import { contactInfo } from "../lib/contact-info";
 
 function NotFoundComponent() {
   return (
@@ -71,26 +72,43 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gwada Web Studio — Création de sites web en Guadeloupe" },
+      { title: "Gwada Web Studio — Sites web qui génèrent des demandes" },
       {
         name: "description",
         content:
-          "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue et administration.",
+          "Sites web et outils métier utiles : demandes de devis, réservation, paiement, catalogue et administration. Basé en Guadeloupe, projets à distance.",
       },
       { name: "author", content: "Gwada Web Studio" },
-      { property: "og:title", content: "Gwada Web Studio — Création de sites web en Guadeloupe" },
+      {
+        property: "og:title",
+        content: "Gwada Web Studio — Sites web qui génèrent des demandes",
+      },
       {
         property: "og:description",
-        content: "Sites modernes, outils métier et accompagnement direct en Guadeloupe.",
+        content:
+          "Transformez vos visites en demandes claires grâce à un site pensé autour de votre activité.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Gwada Web Studio — Création de sites web en Guadeloupe" },
-      { name: "description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
-      { property: "og:description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
-      { name: "twitter:description", content: "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:title",
+        content: "Gwada Web Studio — Sites web qui génèrent des demandes",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Transformez vos visites en demandes claires grâce à un site pensé autour de votre activité.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -109,10 +127,24 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: contactInfo.brand,
+    description:
+      "Conception de sites et outils web utiles : demandes de devis, réservations, paiements, catalogues et espaces d'administration.",
+    email: contactInfo.email,
+    areaServed: ["Guadeloupe", "France"],
+  };
+
   return (
     <html lang="fr" id="top">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body>
         {children}

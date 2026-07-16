@@ -3,10 +3,10 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const links = [
+  { href: "/#impact", label: "Résultats" },
   { href: "/#services", label: "Services" },
   { href: "/#exemples", label: "Exemples" },
   { href: "/#methode", label: "Méthode" },
-  { href: "/#a-propos", label: "À propos" },
 ];
 
 export function SiteNav() {
@@ -37,8 +37,9 @@ export function SiteNav() {
         <a
           href="/#contact"
           className="hidden items-center gap-2 rounded-full bg-[#f7f7ef] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-[#0d1715] transition hover:bg-[#54d7c8] sm:inline-flex"
+          data-cta="nav-project"
         >
-          Discuter du projet <ArrowUpRight className="h-3.5 w-3.5" />
+          Décrire mon projet <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
 
         <button
@@ -69,8 +70,9 @@ export function SiteNav() {
               href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#54d7c8] px-5 text-sm font-black text-[#0d1715]"
+              data-cta="nav-mobile-project"
             >
-              Parler de mon projet <ArrowUpRight className="h-4 w-4" />
+              Décrire mon projet <ArrowUpRight className="h-4 w-4" />
             </a>
           </nav>
         </div>

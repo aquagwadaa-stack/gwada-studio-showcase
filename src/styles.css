@@ -55,6 +55,64 @@ body {
   box-shadow: 0 18px 44px rgba(84, 215, 200, 0.2);
 }
 
+.gws-input {
+  width: 100%;
+  min-height: 3.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.85rem 1rem;
+  color: #f7f7ef;
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.gws-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.gws-input:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.gws-input:focus {
+  border-color: var(--gws-turquoise);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(84, 215, 200, 0.12);
+}
+
+select.gws-input {
+  color-scheme: dark;
+}
+
+.gws-proof-line {
+  position: relative;
+}
+
+.gws-proof-line::before {
+  position: absolute;
+  top: 0.55rem;
+  bottom: -1rem;
+  left: 0.45rem;
+  width: 1px;
+  content: "";
+  background: rgba(84, 215, 200, 0.22);
+}
+
+.gws-proof-line:last-child::before {
+  display: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
 @keyframes gws-float {
   0%,
   100% {

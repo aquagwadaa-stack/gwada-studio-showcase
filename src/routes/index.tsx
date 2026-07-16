@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
@@ -8,33 +9,43 @@ import {
   Clock3,
   CreditCard,
   FileText,
+  Globe2,
+  Inbox,
   LayoutDashboard,
   Mail,
   MapPin,
   MessageSquareText,
+  MousePointerClick,
   PanelsTopLeft,
+  Plus,
   Search,
   Settings2,
+  ShieldCheck,
   ShoppingBag,
   Smartphone,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import { contactInfo } from "@/lib/contact-info";
+import { ProjectBriefForm } from "@/components/site/ProjectBriefForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gwada Web Studio — Sites web utiles en Guadeloupe" },
+      { title: "Gwada Web Studio — Sites web qui génèrent des demandes" },
       {
         name: "description",
         content:
-          "Sites web et outils métier sur mesure en Guadeloupe : réservation, paiement, catalogue, espace client et administration.",
+          "Sites web et outils métier conçus en Guadeloupe pour générer des demandes, simplifier les réservations, les paiements et l'administration. Projets en France et à distance.",
       },
-      { property: "og:title", content: "Gwada Web Studio — Des sites qui travaillent avec vous" },
+      {
+        property: "og:title",
+        content: "Gwada Web Studio — Transformez les visites en demandes claires",
+      },
       {
         property: "og:description",
         content:
-          "Je conçois des sites modernes et des outils utiles pour les entreprises en Guadeloupe.",
+          "Sites sur mesure, réservations, paiements, catalogues et espaces d'administration. Basé en Guadeloupe, disponible à distance.",
       },
     ],
   }),
@@ -82,14 +93,17 @@ const solutions = [
 
 function HomePage() {
   return (
-    <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
+    <div className="overflow-hidden bg-[#0d1715] pb-20 text-[#f7f7ef] sm:pb-0">
       <Hero />
       <SocialProofStrip />
+      <Impact />
       <Solutions />
       <ConcreteShowcase />
       <Approach />
       <About />
+      <Faq />
       <Contact />
+      <MobileLeadBar />
     </div>
   );
 }
@@ -104,18 +118,18 @@ function Hero() {
       <div className="mx-auto grid min-h-[calc(100svh-72px)] max-w-[1380px] items-center gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[1.03fr_0.97fr] lg:px-12 lg:py-20">
         <div className="max-w-3xl">
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white/80">
-            <MapPin className="h-3.5 w-3.5 text-[#54d7c8]" />
-            Création web en Guadeloupe
+            <Globe2 className="h-3.5 w-3.5 text-[#54d7c8]" />
+            Guadeloupe · France · À distance
           </div>
 
           <h1 className="font-display text-[clamp(3.15rem,7vw,6.8rem)] font-black leading-[0.91] tracking-[-0.065em]">
-            Votre site peut faire
-            <span className="block text-[#54d7c8]">plus qu’être joli.</span>
+            Transformez vos visites
+            <span className="block text-[#54d7c8]">en demandes claires.</span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/68 sm:text-xl">
-            Je conçois des sites et des outils web qui facilitent vraiment votre activité :
-            réserver, encaisser, présenter, organiser et gagner du temps.
+            Je conçois des sites et des outils web qui guident vos clients vers l’action : demander
+            un devis, réserver, verser un acompte ou trouver la bonne offre.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -123,7 +137,7 @@ function Hero() {
               href="#contact"
               className="gws-button-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-black uppercase tracking-[0.08em]"
             >
-              Parler de mon projet <ArrowRight className="h-4 w-4" />
+              Décrire mon projet <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#exemples"
@@ -134,7 +148,7 @@ function Hero() {
           </div>
 
           <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/55">
-            {["Sur mesure", "Pensé mobile", "Sans jargon"].map((item) => (
+            {["Échange direct avec Louis", "Sur mesure", "Pensé mobile"].map((item) => (
               <span key={item} className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[#54d7c8]" /> {item}
               </span>
@@ -268,17 +282,83 @@ function SocialProofStrip() {
     <section className="border-b border-white/10 bg-[#111d1a]">
       <div className="mx-auto flex max-w-[1380px] flex-col gap-4 px-5 py-7 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
         <p className="max-w-xl text-sm font-semibold leading-relaxed text-white/65">
-          Pas de promesse magique. Un site clair, une vraie logique métier et un outil que vous
-          pouvez utiliser au quotidien.
+          Un site clair, une vraie logique métier et un parcours pensé pour faire avancer vos
+          visiteurs au lieu de les laisser repartir.
         </p>
         <div className="flex flex-wrap gap-2">
-          {["Entreprises locales", "Indépendants", "Commerces", "Services"].map((item) => (
+          {["Commerces", "Services", "Indépendants", "Projets à distance"].map((item) => (
             <span
               key={item}
               className="rounded-full border border-white/12 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/45"
             >
               {item}
             </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Impact() {
+  const outcomes = [
+    {
+      icon: MousePointerClick,
+      title: "Vos visiteurs savent quoi faire",
+      text: "Chaque page conduit vers une action utile : demander, réserver, payer ou prendre contact.",
+      color: "#54d7c8",
+    },
+    {
+      icon: Inbox,
+      title: "Vos demandes arrivent mieux cadrées",
+      text: "Les bonnes questions sont posées avant le premier échange. Vous gagnez du temps dès le départ.",
+      color: "#ff7c6c",
+    },
+    {
+      icon: Workflow,
+      title: "Votre quotidien devient plus simple",
+      text: "Moins de copier-coller et d’allers-retours : les tâches répétitives passent dans un parcours clair.",
+      color: "#5b7cfa",
+    },
+  ];
+
+  return (
+    <section id="impact" className="px-5 py-24 sm:px-8 sm:py-28 lg:px-12">
+      <div className="mx-auto max-w-[1380px]">
+        <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-end">
+          <SectionHeading
+            eyebrow="Ce que le site change"
+            title={
+              <>
+                Moins de friction. <span className="text-[#f2cb5d]">Plus d’actions utiles.</span>
+              </>
+            }
+            text="Le design attire l’œil. Le parcours, lui, transforme cet intérêt en quelque chose de concret pour votre entreprise."
+          />
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-sm font-black text-[#54d7c8] lg:ml-auto"
+            data-cta="impact-project"
+          >
+            Voir ce que mon projet peut automatiser <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+
+        <div className="mt-12 grid gap-3 lg:grid-cols-3">
+          {outcomes.map((outcome) => (
+            <article
+              key={outcome.title}
+              className="rounded-[1.6rem] border border-white/10 bg-[#13211e] p-6 sm:p-7"
+            >
+              <span
+                className="grid h-11 w-11 place-items-center rounded-2xl text-[#0d1715]"
+                style={{ backgroundColor: outcome.color }}
+              >
+                <outcome.icon className="h-5 w-5" />
+              </span>
+              <h3 className="mt-8 text-xl font-black tracking-tight">{outcome.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/55">{outcome.text}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -548,6 +628,11 @@ function Approach() {
       title: "On ajuste",
       text: "Vous testez, on affine, puis je vous montre comment garder la main.",
     },
+    {
+      number: "04",
+      title: "On met en ligne",
+      text: "Je vérifie les parcours sur ordinateur et mobile, puis votre site commence à travailler.",
+    },
   ];
 
   return (
@@ -592,19 +677,19 @@ function About() {
             Derrière Gwada Web Studio
           </div>
           <h2 className="mt-5 max-w-4xl font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
-            Je m’appelle Louis. Je crée ici, pour les entreprises d’ici.
+            Je m’appelle Louis. Votre projet reste humain, du premier échange à la mise en ligne.
           </h2>
         </div>
         <div>
           <p className="text-base font-semibold leading-relaxed sm:text-lg">
-            Mon travail, ce n’est pas d’ajouter un site de plus sur internet. C’est de comprendre
-            votre quotidien et de construire l’outil qui vous aidera vraiment.
+            Vous échangez directement avec la personne qui comprend, conçoit et construit votre
+            site. Pas de jargon inutile ni de projet qui se perd entre plusieurs interlocuteurs.
           </p>
           <div className="mt-6 flex items-center gap-3 text-sm font-black">
             <span className="grid h-10 w-10 place-items-center rounded-full bg-[#101a18] text-white">
               <MapPin className="h-4 w-4" />
             </span>
-            Guadeloupe · accompagnement direct
+            Basé en Guadeloupe · projets en France et à distance
           </div>
         </div>
       </div>
@@ -612,36 +697,159 @@ function About() {
   );
 }
 
-function Contact() {
-  const mailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent("Demande de création de site web — Gwada Web Studio")}&body=${encodeURIComponent("Bonjour,\n\nJe souhaite discuter de la création d'un site web pour mon activité. Voici quelques éléments sur mon projet :\n\n• Nature de l'activité :\n• Objectifs principaux :\n• Fonctionnalités envisagées :\n• Budget et échéance approximatifs :\n\nMerci de me recontacter à cette adresse ou par téléphone au :\n\nCordialement,\n")}`;
+function Faq() {
+  const questions = [
+    {
+      question: "Travaillez-vous seulement en Guadeloupe ?",
+      answer:
+        "Non. Gwada Web Studio est basé en Guadeloupe, mais le cadrage, les validations et le suivi peuvent se faire à distance pour des projets en France ou ailleurs.",
+    },
+    {
+      question: "Dois-je déjà savoir exactement ce qu’il me faut ?",
+      answer:
+        "Non. Vous connaissez votre activité et vos difficultés. Mon rôle est de transformer cela en parcours, fonctionnalités et priorités compréhensibles.",
+    },
+    {
+      question: "Pourrai-je modifier mon site moi-même ?",
+      answer:
+        "Oui lorsque le projet le nécessite. Je peux prévoir une administration pour gérer les contenus, photos, horaires, réservations ou demandes sans toucher au code.",
+    },
+    {
+      question: "Combien coûte un projet ?",
+      answer:
+        "Le prix dépend surtout des parcours et fonctions à construire. Après le premier échange, le périmètre, les livrables et le prix sont posés clairement dans un devis avant de commencer.",
+    },
+    {
+      question: "Pouvez-vous reprendre un site qui existe déjà ?",
+      answer:
+        "Oui. Je commence par vérifier ce qui peut être conservé, ce qui freine les visiteurs et ce qu’il faut réellement reconstruire.",
+    },
+  ];
 
   return (
     <section
-      id="contact"
-      className="relative border-t border-white/10 px-5 py-24 sm:px-8 sm:py-32 lg:px-12"
+      id="questions"
+      className="border-b border-white/10 px-5 py-24 sm:px-8 sm:py-32 lg:px-12"
     >
-      <div className="absolute inset-x-0 bottom-0 h-80 bg-[radial-gradient(circle_at_50%_100%,rgba(84,215,200,.16),transparent_65%)]" />
-      <div className="relative mx-auto max-w-5xl text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#54d7c8] text-[#0d1715]">
-          <Mail className="h-6 w-6" />
+      <div className="mx-auto grid max-w-[1380px] gap-12 lg:grid-cols-[.78fr_1.22fr]">
+        <div>
+          <SectionHeading
+            eyebrow="Avant de démarrer"
+            title={
+              <>
+                Les questions qui <span className="text-[#54d7c8]">reviennent souvent.</span>
+              </>
+            }
+            text="Le but du premier échange est justement de rendre le projet plus simple et plus clair."
+          />
+          <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-xs font-bold text-white/55">
+            <ShieldCheck className="h-4 w-4 text-[#54d7c8]" /> Premier échange sans engagement
+          </div>
         </div>
-        <h2 className="mt-7 font-display text-5xl font-black leading-[0.95] tracking-[-0.055em] sm:text-7xl">
-          Une idée ?<br />
-          Parlons-en simplement.
-        </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg">
-          Expliquez-moi votre activité et ce que vous aimeriez améliorer. Je vous répondrai avec une
-          première orientation claire.
-        </p>
-        <a
-          href={mailto}
-          className="gws-button-primary mt-9 inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-8 text-sm font-black uppercase tracking-[0.08em]"
-        >
-          Écrire à Louis <ArrowRight className="h-4 w-4" />
-        </a>
-        <div className="mt-5 text-sm font-semibold text-white/45">{contactInfo.email}</div>
+
+        <div className="space-y-3">
+          {questions.map((item) => (
+            <details
+              key={item.question}
+              className="group rounded-[1.35rem] border border-white/10 bg-white/[0.025] p-5 open:border-white/20 open:bg-white/[0.045] sm:p-6"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-base font-black sm:text-lg">
+                {item.question}
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/15 text-white/55 transition group-open:rotate-45 group-open:bg-[#54d7c8] group-open:text-[#0d1715]">
+                  <Plus className="h-4 w-4" />
+                </span>
+              </summary>
+              <p className="mt-4 max-w-2xl pr-10 text-sm leading-relaxed text-white/55">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="relative px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
+      <div className="absolute inset-x-0 bottom-0 h-[42rem] bg-[radial-gradient(circle_at_35%_100%,rgba(84,215,200,.15),transparent_62%)]" />
+      <div className="relative mx-auto grid max-w-[1380px] gap-12 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
+        <div className="lg:sticky lg:top-28">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#54d7c8] text-[#0d1715]">
+            <Mail className="h-6 w-6" />
+          </div>
+          <h2 className="mt-7 max-w-2xl font-display text-5xl font-black leading-[0.95] tracking-[-0.055em] sm:text-7xl">
+            Faisons avancer votre projet.
+          </h2>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+            En quelques lignes, expliquez-moi votre activité et votre objectif. Je vous réponds
+            personnellement avec une première direction utile.
+          </p>
+
+          <div className="mt-9 max-w-lg space-y-6">
+            {[
+              [
+                "01",
+                "Vous décrivez le besoin",
+                "Le formulaire pose uniquement les questions utiles.",
+              ],
+              ["02", "Je regarde votre situation", "Votre demande est lue directement par Louis."],
+              [
+                "03",
+                "On choisit la suite",
+                "Orientation, échange ou démonstration selon le projet.",
+              ],
+            ].map(([number, title, text]) => (
+              <div key={number} className="gws-proof-line grid grid-cols-[34px_1fr] gap-4">
+                <span className="relative z-10 grid h-9 w-9 place-items-center rounded-full bg-[#172b27] text-[10px] font-black text-[#54d7c8]">
+                  {number}
+                </span>
+                <div>
+                  <h3 className="text-sm font-black">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/45">{text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={`mailto:${contactInfo.email}`}
+            className="mt-9 inline-flex items-center gap-2 text-sm font-bold text-white/55 transition hover:text-white"
+          >
+            <Mail className="h-4 w-4 text-[#54d7c8]" /> {contactInfo.email}
+          </a>
+        </div>
+
+        <ProjectBriefForm />
+      </div>
+    </section>
+  );
+}
+
+function MobileLeadBar() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => setVisible(window.scrollY > 620);
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", updateVisibility);
+  }, []);
+
+  return (
+    <div
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#0d1715]/95 p-3 backdrop-blur-xl transition-transform duration-300 sm:hidden ${visible ? "translate-y-0" : "pointer-events-none translate-y-full"}`}
+      aria-hidden={!visible}
+    >
+      <a
+        href="#contact"
+        className="gws-button-primary flex min-h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-black"
+        data-cta="mobile-sticky-project"
+      >
+        Décrire mon projet <ArrowRight className="h-4 w-4" />
+      </a>
+    </div>
   );
 }
 

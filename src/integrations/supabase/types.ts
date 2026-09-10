@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      nfc_cards: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          id: string
+          merchant_name: string | null
+          notes: string | null
+          target_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          id?: string
+          merchant_name?: string | null
+          notes?: string | null
+          target_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          id?: string
+          merchant_name?: string | null
+          notes?: string | null
+          target_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

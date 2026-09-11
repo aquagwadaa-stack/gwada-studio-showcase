@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
+import { Route as ACodeRouteImport } from './routes/a.$code'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNfcRoute = AdminNfcRouteImport.update({
+  id: '/admin/nfc',
+  path: '/admin/nfc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ACodeRoute = ACodeRouteImport.update({
+  id: '/a/$code',
+  path: '/a/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a/$code': typeof ACodeRoute
+  '/admin/nfc': typeof AdminNfcRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a/$code': typeof ACodeRoute
+  '/admin/nfc': typeof AdminNfcRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a/$code': typeof ACodeRoute
+  '/admin/nfc': typeof AdminNfcRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/a/$code' | '/admin/nfc'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/a/$code' | '/admin/nfc'
+  id: '__root__' | '/' | '/a/$code' | '/admin/nfc'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ACodeRoute: typeof ACodeRoute
+  AdminNfcRoute: typeof AdminNfcRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/nfc': {
+      id: '/admin/nfc'
+      path: '/admin/nfc'
+      fullPath: '/admin/nfc'
+      preLoaderRoute: typeof AdminNfcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a/$code': {
+      id: '/a/$code'
+      path: '/a/$code'
+      fullPath: '/a/$code'
+      preLoaderRoute: typeof ACodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ACodeRoute: ACodeRoute,
+  AdminNfcRoute: AdminNfcRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

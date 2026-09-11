@@ -155,6 +155,13 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isolated = pathname.startsWith("/admin") || pathname.startsWith("/a/");
+
+  if (isolated) {
+    return <Outlet />;
+  }
+
   return (
     <div className="min-h-screen bg-[#0d1715]">
       <SiteNav />

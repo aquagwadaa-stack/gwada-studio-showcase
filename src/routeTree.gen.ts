@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
 import { Route as ACodeRouteImport } from './routes/a.$code'
+import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const ACodeRoute = ACodeRouteImport.update({
   path: '/a/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
+  id: '/api/places/search',
+  path: '/api/places/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
+  '/api/places/search': typeof ApiPlacesSearchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
+  '/api/places/search': typeof ApiPlacesSearchRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
+  '/api/places/search': typeof ApiPlacesSearchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/a/$code' | '/admin/nfc'
+  fullPaths: '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a/$code' | '/admin/nfc'
-  id: '__root__' | '/' | '/a/$code' | '/admin/nfc'
+  to: '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
+  id: '__root__' | '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ACodeRoute: typeof ACodeRoute
   AdminNfcRoute: typeof AdminNfcRoute
+  ApiPlacesSearchRoute: typeof ApiPlacesSearchRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ACodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/places/search': {
+      id: '/api/places/search'
+      path: '/api/places/search'
+      fullPath: '/api/places/search'
+      preLoaderRoute: typeof ApiPlacesSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ACodeRoute: ACodeRoute,
   AdminNfcRoute: AdminNfcRoute,
+  ApiPlacesSearchRoute: ApiPlacesSearchRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

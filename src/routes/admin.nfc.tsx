@@ -516,6 +516,119 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
+/* ------------------------- Recherche Google Places ------------------------ */
+
+type PlaceResult = {
+  id: string;
+  name: string;
+  address: string;
+  writeAReviewUri: string | null;
+};
+
+function PlaceSearch({
+  initialQuery,
+  onPick,
+}: {
+  initialQuery: string;
+  onPick: (name: string, uri: string) => void;
+}) {
+  const [q, setQ] = useState(initialQuery);
+  const [busy, setBusy] = useState(false);
+  const [results, setResults] = useState<PlaceResult[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const search = async () => {
+    const query = q.trim();
+    if (query.length < 2) {
+      setError("Saisissez au moins 2 caractères.");
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    setResults(null);
+    try {
+      const { data } = await supabase.auth.getSession();
+      const res = await fetch("/api/places/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${data.session?.access_token ?? ""}`,
+        },
+        body: JSON.stringify({ query }),
+      });
+      const body = (await res.json()) as { results?: PlaceResult[]; message?: string };
+      if (!res.ok) {
+        setError(body.message ?? "Recherche impossible.");
+        return;
+      }
+      setResults(body.results ?? []);
+    } catch {
+      setError("Recherche impossible pour le moment.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="rounded-xl bg-white/5 p-3 ring-1 ring-white/10">
+      <div className="text-[11px] font-bold uppercase tracking-wide text-white/40">
+        Rechercher un commerce sur Google
+      </div>
+      <input
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            void search();
+          }
+        }}
+        placeholder="Ex. Kafé Céramik"
+        className="mt-2 w-full rounded-xl bg-white/5 px-4 py-3 text-base outline-none ring-1 ring-white/10 focus:ring-[#54d7c8]"
+      />
+      <button
+        type="button"
+        disabled={busy}
+        onClick={() => void search()}
+        className="mt-2 w-full rounded-xl bg-[#54d7c8] py-3 font-black text-[#0d1715] disabled:opacity-60"
+      >
+        {busy ? "Recherche…" : "Rechercher"}
+      </button>
+
+      {error && (
+        <p className="mt-3 rounded-lg bg-amber-400/10 p-3 text-xs font-bold text-amber-300">
+          {error}
+        </p>
+      )}
+
+      {results && results.length === 0 && !error && (
+        <p className="mt-3 text-xs text-white/50">Aucun résultat pour cette recherche.</p>
+      )}
+
+      {results && results.length > 0 && (
+        <ul className="mt-3 space-y-2">
+          {results.map((r) => (
+            <li key={r.id} className="rounded-lg bg-white/5 p-3 ring-1 ring-white/10">
+              <div className="text-sm font-black">{r.name}</div>
+              <div className="mt-0.5 text-xs text-white/50">{r.address}</div>
+              <button
+                type="button"
+                disabled={!r.writeAReviewUri}
+                onClick={() => r.writeAReviewUri && onPick(r.name, r.writeAReviewUri)}
+                className="mt-2 w-full rounded-lg bg-white/10 py-2 text-xs font-bold disabled:opacity-40"
+              >
+                {r.writeAReviewUri ? "Utiliser ce commerce" : "Lien d’avis indisponible"}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+
+
 /* ----------------------------------- QR ----------------------------------- */
 
 function QrBlock({ code }: { code: string }) {

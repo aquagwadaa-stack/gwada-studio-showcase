@@ -408,6 +408,15 @@ function CardSheet({
           />
         </Field>
 
+        <PlaceSearch
+          initialQuery={merchant}
+          onPick={(name, uri) => {
+            setMerchant(name);
+            setTarget(uri);
+            toast.success("Lien d’avis récupéré");
+          }}
+        />
+
         <Field label="Lien Google Reviews (destination)">
           <input
             value={target}
@@ -417,6 +426,16 @@ function CardSheet({
             placeholder="https://g.page/r/..."
             className="w-full rounded-xl bg-white/5 px-4 py-3 text-base outline-none ring-1 ring-white/10 focus:ring-[#54d7c8]"
           />
+          {isValidHttpUrl(target.trim()) && (
+            <a
+              href={target.trim()}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-block rounded-lg bg-white/10 px-3 py-2 text-xs font-bold"
+            >
+              Ouvrir le lien d’avis
+            </a>
+          )}
         </Field>
 
         <Field label="Notes internes">

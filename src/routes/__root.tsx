@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       {
         name: "description",
         content:
-          "Sites web et outils métier utiles : demandes de devis, réservation, paiement, catalogue et administration. Basé en Guadeloupe, projets à distance.",
+          "Sites web, outils métier et cartes NFC pour avis Google. Réservation, paiement, catalogue et solutions sur mesure depuis la Guadeloupe.",
       },
       { name: "author", content: "Gwada Web Studio" },
       {
@@ -133,8 +133,9 @@ function RootShell({ children }: { children: ReactNode }) {
     "@type": "ProfessionalService",
     name: contactInfo.brand,
     description:
-      "Conception de sites et outils web utiles : demandes de devis, réservations, paiements, catalogues et espaces d'administration.",
+      "Conception de sites, outils web utiles et cartes NFC pour avis Google en Guadeloupe.",
     email: contactInfo.email,
+    telephone: contactInfo.phoneHref,
     areaServed: ["Guadeloupe", "France"],
   };
 

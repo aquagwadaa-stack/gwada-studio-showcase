@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUp, Mail } from "lucide-react";
+import { ArrowUp, Mail, Phone } from "lucide-react";
 import { contactInfo } from "@/lib/contact-info";
 
 export function SiteFooter() {
@@ -13,12 +13,20 @@ export function SiteFooter() {
           <p className="mt-2 max-w-md text-sm leading-relaxed text-white/45">
             Sites web et outils métier utiles. Basé en Guadeloupe, projets en France et à distance.
           </p>
-          <a
-            href={`mailto:${contactInfo.email}`}
-            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white/55 transition hover:text-white"
-          >
-            <Mail className="h-3.5 w-3.5 text-[#54d7c8]" /> {contactInfo.email}
-          </a>
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-5">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white/55 transition hover:text-white"
+            >
+              <Mail className="h-3.5 w-3.5 text-[#54d7c8]" /> {contactInfo.email}
+            </a>
+            <a
+              href={`tel:${contactInfo.phoneHref}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white/55 transition hover:text-white"
+            >
+              <Phone className="h-3.5 w-3.5 text-[#54d7c8]" /> {contactInfo.phone}
+            </a>
+          </div>
           <p className="mt-6 text-xs text-white/30">
             © {new Date().getFullYear()} Gwada Web Studio · Louis
           </p>

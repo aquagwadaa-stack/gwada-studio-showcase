@@ -430,7 +430,6 @@ function NfcCards() {
         "Carte NFC + QR code",
         "Accès direct à votre page d’avis Google",
         "Programmation et configuration incluses",
-        "Aucun abonnement",
       ],
     },
     {
@@ -442,7 +441,6 @@ function NfcCards() {
         "Tout ce qui est inclus dans l’offre Standard",
         "Design personnalisé",
         "Logo et couleurs de votre entreprise",
-        "Aucun abonnement",
       ],
     },
   ];
@@ -450,7 +448,7 @@ function NfcCards() {
   return (
     <section
       id="cartes-nfc"
-      className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-24 text-[#101a18] sm:px-8 sm:py-32 lg:px-12"
+      className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-20 text-[#101a18] sm:px-8 sm:py-28 lg:px-12"
     >
       <div className="mx-auto max-w-[1380px]">
         <div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
@@ -546,7 +544,7 @@ function NfcCards() {
             {offers.map((offer) => (
               <article
                 key={offer.name}
-                className="relative overflow-hidden rounded-[2rem] border border-[#d2dad5] bg-white p-6 shadow-[0_18px_50px_rgba(27,46,40,.07)] sm:p-8"
+                className={`relative overflow-hidden rounded-[2rem] border p-6 shadow-[0_18px_50px_rgba(27,46,40,.07)] sm:p-8 ${offer.name === "Personnalisée" ? "border-[#f0bbb5] bg-[#fff9f7]" : "border-[#d2dad5] bg-white"}`}
               >
                 <div
                   className="absolute inset-x-0 top-0 h-1.5"
@@ -559,8 +557,13 @@ function NfcCards() {
                         <Palette className="h-4 w-4 text-[#ef6f61]" />
                       )}
                       <h4 className="text-xl font-black">{offer.name}</h4>
+                      {offer.name === "Personnalisée" && (
+                        <span className="rounded-full bg-[#ff7c6c]/12 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#b94f45]">
+                          Design à votre image
+                        </span>
+                      )}
                     </div>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-[#65716d]">
+                    <p className="mt-2 max-w-md text-[15px] leading-relaxed text-[#65716d]">
                       {offer.description}
                     </p>
                   </div>
@@ -581,7 +584,7 @@ function NfcCards() {
                   {offer.features.map((feature) => (
                     <div
                       key={feature}
-                      className="flex items-start gap-3 text-sm font-semibold text-[#3d4b47]"
+                      className="flex items-start gap-3 text-[15px] font-semibold text-[#3d4b47]"
                     >
                       <span
                         className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full"
@@ -1068,18 +1071,35 @@ function Contact() {
 
 function MobileLeadBar() {
   const [visible, setVisible] = useState(false);
+  const [nfcVisible, setNfcVisible] = useState(false);
 
   useEffect(() => {
     const updateVisibility = () => setVisible(window.scrollY > 620);
     updateVisibility();
     window.addEventListener("scroll", updateVisibility, { passive: true });
-    return () => window.removeEventListener("scroll", updateVisibility);
+
+    const nfcSection = document.getElementById("cartes-nfc");
+    const observer = nfcSection
+      ? new IntersectionObserver(
+          ([entry]) => setNfcVisible(entry?.isIntersecting ?? false),
+          { threshold: 0.08 },
+        )
+      : null;
+
+    if (nfcSection && observer) observer.observe(nfcSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      observer?.disconnect();
+    };
   }, []);
+
+  const showBar = visible && !nfcVisible;
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#0d1715]/95 p-3 backdrop-blur-xl transition-transform duration-300 sm:hidden ${visible ? "translate-y-0" : "pointer-events-none translate-y-full"}`}
-      aria-hidden={!visible}
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#0d1715]/95 p-3 backdrop-blur-xl transition-transform duration-300 sm:hidden ${showBar ? "translate-y-0" : "pointer-events-none translate-y-full"}`}
+      aria-hidden={!showBar}
     >
       <a
         href="#contact"

@@ -27,6 +27,7 @@ import {
   ShoppingBag,
   Smartphone,
   Sparkles,
+  Star,
   Wifi,
   Workflow,
 } from "lucide-react";
@@ -40,7 +41,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sites web et outils métier conçus en Guadeloupe pour générer des demandes, simplifier les réservations, les paiements et l'administration. Projets en France et à distance.",
+          "Sites web, outils métier et cartes NFC pour avis Google conçus en Guadeloupe. Réservations, paiements, automatisations et solutions sur mesure.",
       },
       {
         property: "og:title",
@@ -416,6 +417,7 @@ function NfcCards() {
     { icon: Wifi, label: "NFC" },
     { icon: QrCode, label: "QR code" },
     { icon: ShieldCheck, label: "Garantie 1 an" },
+    { icon: Check, label: "Sans abonnement" },
   ];
 
   const offers = [
@@ -423,11 +425,11 @@ function NfcCards() {
       name: "Standard",
       price: "29,90 €",
       accent: "#54d7c8",
-      description: "Une carte prête à être utilisée dans votre commerce.",
+      description: "Une carte prête à être posée dans votre commerce.",
       features: [
-        "NFC + QR code sur la même carte",
+        "Carte NFC + QR code",
         "Accès direct à votre page d’avis Google",
-        "Installation et configuration incluses",
+        "Programmation et configuration incluses",
         "Aucun abonnement",
       ],
     },
@@ -435,10 +437,10 @@ function NfcCards() {
       name: "Personnalisée",
       price: "39,90 €",
       accent: "#ff7c6c",
-      description: "Le même fonctionnement, avec une carte adaptée à votre identité visuelle.",
+      description: "La même simplicité, avec une carte adaptée à votre image.",
       features: [
         "Tout ce qui est inclus dans l’offre Standard",
-        "Personnalisation visuelle de la carte",
+        "Design personnalisé",
         "Logo et couleurs de votre entreprise",
         "Aucun abonnement",
       ],
@@ -448,134 +450,182 @@ function NfcCards() {
   return (
     <section
       id="cartes-nfc"
-      className="border-y border-[#d2dad5] bg-[#edf1eb] px-5 py-24 text-[#101a18] sm:px-8 sm:py-32 lg:px-12"
+      className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-24 text-[#101a18] sm:px-8 sm:py-32 lg:px-12"
     >
       <div className="mx-auto max-w-[1380px]">
-        <div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#101a18] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white">
               <Wifi className="h-3.5 w-3.5 text-[#54d7c8]" />
               Cartes NFC pour avis Google
             </div>
+
             <h2 className="mt-6 max-w-3xl font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
-              Un geste. Un scan. <span className="text-[#ef6f61]">Votre page d’avis s’ouvre.</span>
+              Plus simple de demander un avis.
+              <span className="block text-[#ef6f61]">Plus simple d’en laisser un.</span>
             </h2>
+
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#5a6763] sm:text-lg">
-              Posez la carte à votre comptoir : vos clients approchent leur téléphone ou scannent le
-              QR code et arrivent directement sur votre page pour laisser un avis Google.
+              Vos clients approchent leur téléphone de la carte ou scannent le QR code. Leur page
+              d’avis Google s’ouvre directement, sans recherche ni manipulation compliquée.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2">
               {benefits.map((benefit) => (
                 <span
                   key={benefit.label}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#cbd5cf] bg-white px-4 py-2 text-xs font-black"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#d1d9d4] bg-white px-4 py-2 text-xs font-black shadow-sm"
                 >
                   <benefit.icon className="h-4 w-4 text-[#167f74]" />
                   {benefit.label}
                 </span>
               ))}
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#cbd5cf] bg-white px-4 py-2 text-xs font-black">
-                <Check className="h-4 w-4 text-[#167f74]" />
-                Sans abonnement
-              </span>
             </div>
           </div>
 
-          <div className="rounded-[2rem] bg-[#101a18] p-5 text-white shadow-[0_24px_70px_rgba(27,46,40,.16)] sm:p-7">
-            <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-              <div className="rounded-2xl bg-white/[0.06] p-5">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#54d7c8] text-[#101a18]">
-                  <Smartphone className="h-5 w-5" />
+          <div className="relative mx-auto w-full max-w-[640px] lg:ml-auto">
+            <div className="absolute -left-5 top-10 h-32 w-32 rounded-full bg-[#54d7c8]/20 blur-3xl" />
+            <div className="absolute -right-5 bottom-6 h-36 w-36 rounded-full bg-[#ff7c6c]/20 blur-3xl" />
+
+            <div className="relative rotate-[-1.5deg] rounded-[2rem] border border-[#cbd4cf] bg-white p-4 shadow-[0_26px_70px_rgba(16,26,24,.16)] sm:p-6">
+              <div className="overflow-hidden rounded-[1.6rem] bg-[#101a18] p-6 text-white sm:p-8">
+                <div className="flex items-start justify-between gap-5">
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#54d7c8]">
+                      Votre commerce
+                    </div>
+                    <div className="mt-4 max-w-sm font-display text-3xl font-black leading-[0.95] tracking-[-0.04em] sm:text-4xl">
+                      VOTRE AVIS EST IMPORTANT !
+                    </div>
+                  </div>
+                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.06]">
+                    <Wifi className="h-5 w-5 text-[#54d7c8]" />
+                  </div>
                 </div>
-                <div className="mt-5 text-xs font-black uppercase tracking-[0.15em] text-white/45">
-                  1. Approchez
+
+                <div className="mt-8 grid gap-5 sm:grid-cols-[1fr_auto] sm:items-end">
+                  <div>
+                    <div className="flex gap-1 text-[#f2cb5d]" aria-label="5 étoiles">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-current" />
+                      ))}
+                    </div>
+                    <p className="mt-4 max-w-xs text-sm font-semibold leading-relaxed text-white/60">
+                      Approchez votre téléphone ou scannez le QR code pour laisser votre avis.
+                    </p>
+                  </div>
+
+                  <div className="grid h-28 w-28 place-items-center rounded-2xl bg-white text-[#101a18] shadow-xl sm:h-32 sm:w-32">
+                    <QrCode className="h-20 w-20 sm:h-24 sm:w-24" strokeWidth={1.4} />
+                  </div>
                 </div>
-                <p className="mt-2 text-sm font-bold">Le client approche son téléphone de la carte.</p>
               </div>
-              <ArrowRight className="mx-auto h-5 w-5 rotate-90 text-white/25 sm:rotate-0" />
-              <div className="rounded-2xl bg-white/[0.06] p-5">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#f2cb5d] text-[#101a18]">
-                  <QrCode className="h-5 w-5" />
+
+              <div className="mt-4 grid grid-cols-2 gap-3 text-center text-xs font-black sm:grid-cols-3">
+                <div className="rounded-xl bg-[#e5f7f4] px-3 py-3 text-[#167f74]">1. Approchez</div>
+                <div className="rounded-xl bg-[#fff1ee] px-3 py-3 text-[#b94f45]">2. Google s’ouvre</div>
+                <div className="col-span-2 rounded-xl bg-[#f6efcf] px-3 py-3 text-[#806b1d] sm:col-span-1">
+                  3. Laissez l’avis
                 </div>
-                <div className="mt-5 text-xs font-black uppercase tracking-[0.15em] text-white/45">
-                  2. Laissez un avis
-                </div>
-                <p className="mt-2 text-sm font-bold">La page Google s’ouvre directement, prête à recevoir l’avis.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-2">
-          {offers.map((offer) => (
-            <article
-              key={offer.name}
-              className="relative overflow-hidden rounded-[2rem] border border-[#cfd8d2] bg-white p-6 shadow-[0_18px_50px_rgba(27,46,40,.07)] sm:p-8"
-            >
-              <div
-                className="absolute inset-x-0 top-0 h-1.5"
-                style={{ backgroundColor: offer.accent }}
-              />
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <div className="flex items-center gap-2">
-                    {offer.name === "Personnalisée" && (
-                      <Palette className="h-4 w-4 text-[#ef6f61]" />
-                    )}
-                    <h3 className="text-xl font-black">{offer.name}</h3>
-                  </div>
-                  <p className="mt-2 max-w-md text-sm leading-relaxed text-[#65716d]">
-                    {offer.description}
-                  </p>
-                </div>
-                <div className="shrink-0 text-left sm:text-right">
-                  <div className="text-3xl font-black tracking-[-0.04em]" style={{ color: offer.accent }}>
-                    {offer.price}
-                  </div>
-                  <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-[#7b8783]">
-                    paiement unique
-                  </div>
-                </div>
-              </div>
+        <div className="mt-16">
+          <div className="mb-7">
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-[#687570]">
+              Deux versions, un seul fonctionnement
+            </div>
+            <h3 className="mt-2 font-display text-3xl font-black tracking-[-0.04em] sm:text-4xl">
+              Choisissez simplement le niveau de personnalisation.
+            </h3>
+          </div>
 
-              <div className="mt-7 space-y-3 border-t border-[#e2e7e4] pt-6">
-                {offer.features.map((feature) => (
-                  <div key={feature} className="flex items-start gap-3 text-sm font-semibold text-[#3d4b47]">
-                    <span
-                      className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full"
-                      style={{ backgroundColor: `${offer.accent}22`, color: offer.accent }}
+          <div className="grid gap-5 lg:grid-cols-2">
+            {offers.map((offer) => (
+              <article
+                key={offer.name}
+                className="relative overflow-hidden rounded-[2rem] border border-[#d2dad5] bg-white p-6 shadow-[0_18px_50px_rgba(27,46,40,.07)] sm:p-8"
+              >
+                <div
+                  className="absolute inset-x-0 top-0 h-1.5"
+                  style={{ backgroundColor: offer.accent }}
+                />
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      {offer.name === "Personnalisée" && (
+                        <Palette className="h-4 w-4 text-[#ef6f61]" />
+                      )}
+                      <h4 className="text-xl font-black">{offer.name}</h4>
+                    </div>
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-[#65716d]">
+                      {offer.description}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-left sm:text-right">
+                    <div
+                      className="text-4xl font-black tracking-[-0.05em]"
+                      style={{ color: offer.accent }}
                     >
-                      <Check className="h-3 w-3" />
-                    </span>
-                    {feature}
+                      {offer.price}
+                    </div>
+                    <div className="mt-1 text-[10px] font-bold uppercase tracking-wider text-[#7b8783]">
+                      paiement unique
+                    </div>
                   </div>
-                ))}
-              </div>
-            </article>
-          ))}
+                </div>
+
+                <div className="mt-7 space-y-3 border-t border-[#e2e7e4] pt-6">
+                  {offer.features.map((feature) => (
+                    <div
+                      key={feature}
+                      className="flex items-start gap-3 text-sm font-semibold text-[#3d4b47]"
+                    >
+                      <span
+                        className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full"
+                        style={{ backgroundColor: `${offer.accent}22`, color: offer.accent }}
+                      >
+                        <Check className="h-3 w-3" />
+                      </span>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-5 rounded-[1.6rem] bg-[#101a18] p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div className="mt-8 flex flex-col gap-6 rounded-[1.7rem] bg-[#101a18] p-6 text-white sm:p-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="text-xs font-black uppercase tracking-[0.15em] text-[#54d7c8]">
-              Intéressé par une carte ?
+              Une carte pour votre commerce ?
             </div>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60">
               Contactez-moi directement pour vérifier votre fiche Google et choisir la version qui
               vous convient.
             </p>
-            <div className="mt-4 flex flex-col gap-2 text-sm font-bold text-white/75 sm:flex-row sm:gap-5">
-              <a href={`mailto:${contactInfo.email}`} className="transition hover:text-white">
+            <div className="mt-4 flex flex-col gap-2 text-sm font-bold sm:flex-row sm:gap-5">
+              <a
+                href={`mailto:${contactInfo.email}?subject=Carte%20NFC%20avis%20Google`}
+                className="inline-flex items-center gap-2 text-white/75 transition hover:text-white"
+              >
+                <Mail className="h-4 w-4 text-[#54d7c8]" />
                 {contactInfo.email}
               </a>
-              <a href={`tel:${contactInfo.phoneHref}`} className="transition hover:text-white">
+              <a
+                href={`tel:${contactInfo.phoneHref}`}
+                className="inline-flex items-center gap-2 text-white/75 transition hover:text-white"
+              >
+                <Phone className="h-4 w-4 text-[#54d7c8]" />
                 {contactInfo.phone}
               </a>
             </div>
           </div>
           <a
-            href="#contact"
+            href={`mailto:${contactInfo.email}?subject=Carte%20NFC%20avis%20Google`}
             className="gws-button-primary inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full px-6 text-sm font-black"
             data-cta="nfc-contact"
           >

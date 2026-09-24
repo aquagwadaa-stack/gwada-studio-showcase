@@ -23,7 +23,7 @@ export function SiteNav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigation principale">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Navigation principale">
           {links.map((link) => (
             <a
               key={link.href}

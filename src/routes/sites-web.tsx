@@ -5,9 +5,7 @@ import {
   Check,
   CreditCard,
   Globe2,
-  MessageSquareText,
   ShoppingBag,
-  Smartphone,
 } from "lucide-react";
 
 export const Route = createFileRoute("/sites-web")({

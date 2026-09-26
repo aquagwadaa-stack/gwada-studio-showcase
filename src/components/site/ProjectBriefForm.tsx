@@ -21,6 +21,7 @@ const needs = [
   "Encaisser un acompte ou un paiement",
   "Présenter un catalogue ou prendre des commandes",
   "Créer un espace client ou une administration",
+  "Mettre en place une carte NFC pour les avis Google",
   "Refondre un site existant",
   "Je ne sais pas encore",
 ];

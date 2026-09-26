@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -10,6 +10,7 @@ const links = [
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0d1715]/90 text-[#f7f7ef] backdrop-blur-xl">
@@ -22,17 +23,22 @@ export function SiteNav() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigation principale">
-          {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              activeProps={{ className: "text-white" }}
-              inactiveProps={{ className: "text-white/55" }}
-              className="text-sm font-semibold transition hover:text-white"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const active = pathname.startsWith(link.to);
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`relative py-2 text-sm font-semibold transition hover:text-white ${active ? "text-white" : "text-white/55"}`}
+              >
+                {link.label}
+                <span
+                  className={`absolute inset-x-1 -bottom-0.5 h-0.5 origin-center rounded-full bg-[#54d7c8] transition-transform ${active ? "scale-x-100" : "scale-x-0"}`}
+                  aria-hidden="true"
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <Link
@@ -64,16 +70,23 @@ export function SiteNav() {
             >
               Accueil
             </Link>
-            {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className="border-b border-white/10 py-4 text-lg font-black"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const active = pathname.startsWith(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center justify-between border-b border-white/10 py-4 text-lg font-black ${active ? "text-white" : "text-white/72"}`}
+                >
+                  {link.label}
+                  <span
+                    className={`h-2 w-2 rounded-full bg-[#54d7c8] transition-opacity ${active ? "opacity-100" : "opacity-0"}`}
+                    aria-hidden="true"
+                  />
+                </Link>
+              );
+            })}
             <Link
               to="/contact"
               onClick={() => setOpen(false)}

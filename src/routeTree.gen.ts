@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitesWebRouteImport } from './routes/sites-web'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
@@ -21,6 +22,11 @@ import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 const SitesWebRoute = SitesWebRouteImport.update({
   id: '/sites-web',
   path: '/sites-web',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OutilsMetierRoute = OutilsMetierRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/cartes-nfc': typeof CartesNfcRoute
   '/contact': typeof ContactRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/cartes-nfc': typeof CartesNfcRoute
   '/contact': typeof ContactRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/cartes-nfc': typeof CartesNfcRoute
   '/contact': typeof ContactRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/cartes-nfc'
     | '/contact'
     | '/outils-metier'
+    | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
     | '/admin/nfc'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/cartes-nfc'
     | '/contact'
     | '/outils-metier'
+    | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
     | '/admin/nfc'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/cartes-nfc'
     | '/contact'
     | '/outils-metier'
+    | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
     | '/admin/nfc'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   CartesNfcRoute: typeof CartesNfcRoute
   ContactRoute: typeof ContactRoute
   OutilsMetierRoute: typeof OutilsMetierRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SitesWebRoute: typeof SitesWebRoute
   ACodeRoute: typeof ACodeRoute
   AdminNfcRoute: typeof AdminNfcRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/sites-web'
       fullPath: '/sites-web'
       preLoaderRoute: typeof SitesWebRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/outils-metier': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartesNfcRoute: CartesNfcRoute,
   ContactRoute: ContactRoute,
   OutilsMetierRoute: OutilsMetierRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SitesWebRoute: SitesWebRoute,
   ACodeRoute: ACodeRoute,
   AdminNfcRoute: AdminNfcRoute,

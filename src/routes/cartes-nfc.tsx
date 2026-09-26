@@ -14,6 +14,7 @@ import {
 import { contactInfo } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/cartes-nfc")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Cartes NFC pour avis Google — Gwada Web Studio" },

@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/outils-metier")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Outils métier & automatisations — Gwada Web Studio" },

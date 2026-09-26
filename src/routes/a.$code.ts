@@ -25,6 +25,7 @@ font-weight:800;font-size:14px;padding:12px 22px;border-radius:999px}
   );
 
 export const Route = createFileRoute("/a/$code")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       GET: async ({ params }) => {

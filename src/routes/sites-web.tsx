@@ -12,9 +12,10 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/sites-web")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Sites web sur mesure — Gwada Web Studio" },
+      { title: "Création de sites web sur mesure en Guadeloupe — Gwada Web Studio" },
       {
         name: "description",
         content:

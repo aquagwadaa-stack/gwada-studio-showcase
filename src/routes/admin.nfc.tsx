@@ -16,6 +16,7 @@ import {
 } from "@/lib/nfc";
 
 export const Route = createFileRoute("/admin/nfc")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

@@ -10,9 +10,10 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Gwada Web Studio — Sites web, outils métier & cartes NFC" },
+      { title: "Gwada Web Studio — Création de sites & outils web en Guadeloupe" },
       {
         name: "description",
         content:
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Gwada Web Studio — Sites web, outils métier & cartes NFC",
+        content: "Gwada Web Studio — Création de sites & outils web en Guadeloupe",
       },
       {
         property: "og:description",

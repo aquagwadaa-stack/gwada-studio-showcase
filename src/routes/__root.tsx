@@ -68,11 +68,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<Record<string, never>>()({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gwada Web Studio — Sites web, outils métier & cartes NFC" },
+      { title: "Gwada Web Studio" },
       {
         name: "description",
         content:
@@ -81,7 +82,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       { name: "author", content: "Gwada Web Studio" },
       {
         property: "og:title",
-        content: "Gwada Web Studio — Sites web, outils métier & cartes NFC",
+        content: "Gwada Web Studio",
       },
       {
         property: "og:description",
@@ -97,7 +98,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Gwada Web Studio — Sites web, outils métier & cartes NFC",
+        content: "Gwada Web Studio",
       },
       {
         name: "twitter:description",

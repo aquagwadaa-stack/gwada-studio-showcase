@@ -15,6 +15,7 @@ function json(body: unknown, status = 200) {
 }
 
 export const Route = createFileRoute("/api/places/search")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

@@ -4,6 +4,7 @@ import { ProjectBriefForm } from "@/components/site/ProjectBriefForm";
 import { contactInfo } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Contact — Gwada Web Studio" },

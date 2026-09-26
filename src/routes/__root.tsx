@@ -81,6 +81,10 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       },
       { name: "author", content: "Gwada Web Studio" },
       {
+        name: "google-site-verification",
+        content: "bVbSteteGtqk-AbcGeJ-rIW1xQJzeorw829bxNwjyCk",
+      },
+      {
         property: "og:title",
         content: "Gwada Web Studio",
       },

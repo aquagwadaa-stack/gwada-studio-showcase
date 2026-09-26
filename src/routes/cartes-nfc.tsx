@@ -203,13 +203,13 @@ function CartesNfcPage() {
                   ))}
                 </div>
 
-                <a
-                  href={`mailto:${contactInfo.email}?subject=${encodeURIComponent(`Carte NFC ${offer.name}`)}`}
+                <Link
+                  to="/contact"
                   className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#101a18] px-5 text-sm font-black text-white transition hover:-translate-y-0.5"
                 >
                   Me contacter pour la {offer.name.toLowerCase()}
                   <ArrowRight className="h-4 w-4" />
-                </a>
+                </Link>
               </article>
             ))}
           </div>
@@ -307,11 +307,7 @@ function ProductShowcase() {
       <div className="absolute -right-4 bottom-8 h-36 w-36 rounded-full bg-[#ff7c6c]/15 blur-3xl" />
 
       <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white p-2 shadow-[0_30px_80px_rgba(0,0,0,.28)] sm:p-3">
-        <img
-          src="/carte-nfc-google-avis.webp"
-          alt="Carte NFC Gwada Web Studio pour laisser un avis Google"
-          className="block h-auto w-full rounded-[1.55rem]"
-        />
+        <NfcCardVisual />
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-2">
@@ -333,8 +329,155 @@ function ProductShowcase() {
       </div>
 
       <figcaption className="mt-3 text-center text-xs font-semibold text-white/38">
-        Visuel réel de la carte standard · emplacement QR configuré pour votre commerce
+        Reproduction fidèle de la carte standard · emplacement QR configuré pour votre commerce
       </figcaption>
     </figure>
+  );
+}
+
+function NfcCardVisual() {
+  return (
+    <svg
+      viewBox="0 0 1582 994"
+      role="img"
+      aria-label="Carte NFC Gwada Web Studio pour laisser un avis Google"
+      className="block h-auto w-full rounded-[1.55rem]"
+    >
+      <defs>
+        <linearGradient id="card-blue" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#1458e5" />
+          <stop offset="50%" stopColor="#2169f2" />
+          <stop offset="100%" stopColor="#2a72ef" />
+        </linearGradient>
+        <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="150%">
+          <feDropShadow dx="0" dy="16" stdDeviation="18" floodColor="#000000" floodOpacity="0.16" />
+        </filter>
+      </defs>
+
+      <rect x="28" y="24" width="1526" height="920" rx="70" fill="#ffffff" filter="url(#card-shadow)" />
+      <path
+        d="M28 94 Q28 24 98 24 H1484 Q1554 24 1554 94 V438
+           C1310 508 1115 490 905 458
+           C630 417 352 401 28 505 Z"
+        fill="url(#card-blue)"
+      />
+      <path
+        d="M28 503 C358 397 642 414 916 459 C1137 496 1330 511 1554 444 V469
+           C1328 537 1134 521 907 485 C634 442 353 427 28 529 Z"
+        fill="#d9eafe"
+        opacity="0.95"
+      />
+      <path
+        d="M28 528 C355 425 639 441 908 486 C1134 523 1329 540 1554 473
+           V874 Q1554 944 1484 944 H98 Q28 944 28 874 Z"
+        fill="#ffffff"
+      />
+
+      <g transform="translate(680 70) scale(12.2)">
+        <circle cx="9" cy="9" r="8.2" fill="#ffffff" />
+        <path fill="#4285F4" d="M17.64 9.205c0-.638-.057-1.252-.164-1.841H9v3.482h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.909c1.703-1.568 2.683-3.879 2.683-6.615z" />
+        <path fill="#34A853" d="M9 18c2.43 0 4.468-.806 5.957-2.18l-2.909-2.258c-.806.54-1.835.859-3.048.859-2.344 0-4.328-1.585-5.037-3.714H.956v2.332A9 9 0 0 0 9 18z" />
+        <path fill="#FBBC05" d="M3.963 10.707A5.41 5.41 0 0 1 3.681 9c0-.592.102-1.168.282-1.707V4.961H.956A9 9 0 0 0 0 9c0 1.453.348 2.828.956 4.039l3.007-2.332z" />
+        <path fill="#EA4335" d="M9 3.579c1.321 0 2.507.454 3.441 1.345l2.582-2.582C13.463.891 11.426 0 9 0A9 9 0 0 0 .956 4.961l3.007 2.332C4.672 5.164 6.656 3.579 9 3.579z" />
+      </g>
+
+      <text
+        x="791"
+        y="352"
+        textAnchor="middle"
+        fill="#ffffff"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="54"
+        fontWeight="800"
+        letterSpacing="-1"
+      >
+        LAISSEZ-NOUS
+        <tspan fontWeight="400"> VOTRE AVIS !</tspan>
+      </text>
+
+      <text
+        x="390"
+        y="575"
+        textAnchor="middle"
+        fill="#050505"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="40"
+      >
+        <tspan fontWeight="900">COLLEZ</tspan>
+        <tspan fontWeight="500"> VOTRE TÉLÉPHONE</tspan>
+      </text>
+
+      <g transform="translate(180 610)" fill="none" stroke="#050505" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="175" cy="142" r="126" />
+        <path d="M132 88c31 25 31 83 0 108" />
+        <path d="M165 68c52 42 52 116 0 158" />
+        <path d="M198 49c72 58 72 151 0 209" />
+        <rect x="255" y="20" width="105" height="185" rx="24" fill="#ffffff" />
+        <rect x="282" y="12" width="50" height="8" rx="4" fill="#050505" stroke="none" />
+        <text
+          x="307"
+          y="116"
+          textAnchor="middle"
+          fill="#050505"
+          stroke="none"
+          fontFamily="Inter, Arial, sans-serif"
+          fontSize="31"
+          fontWeight="900"
+        >
+          NFC
+        </text>
+        <path d="M359 83c30 5 41 24 44 49 4 33 10 57 36 76 20 15 36 29 49 49" />
+        <path d="M352 107c20 5 25 20 27 39" />
+        <path d="M385 213l79 52 38 83 45-24-29-101-66-66" />
+      </g>
+
+      <line x1="938" y1="548" x2="938" y2="831" stroke="#bfd4ee" strokeWidth="4" />
+
+      <text
+        x="1198"
+        y="566"
+        textAnchor="middle"
+        fill="#050505"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="35"
+        fontWeight="700"
+      >
+        OU
+      </text>
+      <text
+        x="1198"
+        y="609"
+        textAnchor="middle"
+        fill="#050505"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="35"
+        fontWeight="900"
+      >
+        SCANNEZ-MOI
+      </text>
+
+      <rect x="1095" y="635" width="210" height="210" rx="28" fill="#ffffff" stroke="#e4e4e4" strokeWidth="5" filter="url(#card-shadow)" />
+
+      <text
+        x="1164"
+        y="907"
+        fill="#171717"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="24"
+        fontWeight="400"
+      >
+        propulsé par
+      </text>
+      <text
+        x="1321"
+        y="907"
+        fill="#171717"
+        fontFamily="Inter, Arial, sans-serif"
+        fontSize="24"
+        fontWeight="800"
+      >
+        gwadawebstudio.fr
+      </text>
+    </svg>
   );
 }

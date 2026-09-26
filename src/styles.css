@@ -131,13 +131,75 @@ details summary::-webkit-details-marker {
   animation: gws-float 6s 1.2s ease-in-out infinite;
 }
 
+
+.gws-scroll-tighten {
+  --gws-space-from: 5.5rem;
+  --gws-space-to: 4.5rem;
+  padding-block: var(--gws-space-from);
+}
+
+.gws-scroll-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@supports (animation-timeline: view()) {
+  .gws-scroll-tighten {
+    animation: gws-space-tighten linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 38%;
+  }
+
+  .gws-scroll-reveal {
+    animation: gws-content-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+}
+
+@keyframes gws-space-tighten {
+  from {
+    padding-block: var(--gws-space-from);
+  }
+  to {
+    padding-block: var(--gws-space-to);
+  }
+}
+
+@keyframes gws-content-rise {
+  from {
+    opacity: 0.88;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .gws-scroll-tighten {
+    --gws-space-from: 6.5rem;
+    --gws-space-to: 5.25rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .gws-float,
-  .gws-float-delayed {
+  .gws-float-delayed,
+  .gws-scroll-tighten,
+  .gws-scroll-reveal {
     animation: none;
+  }
+  .gws-scroll-tighten {
+    padding-block: var(--gws-space-to);
+  }
+  .gws-scroll-reveal {
+    opacity: 1;
+    transform: none;
   }
   * {
     transition-duration: 0.01ms !important;

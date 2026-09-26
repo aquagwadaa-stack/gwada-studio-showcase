@@ -29,13 +29,12 @@ export function SiteNav() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative py-2 text-sm font-semibold transition hover:text-white ${active ? "text-white" : "text-white/55"}`}
+                className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition ${active ? "bg-white/[0.08] text-white" : "text-white/55 hover:bg-white/[0.04] hover:text-white"}`}
               >
+                {active && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#54d7c8]" aria-hidden="true" />
+                )}
                 {link.label}
-                <span
-                  className={`absolute inset-x-1 -bottom-0.5 h-0.5 origin-center rounded-full bg-[#54d7c8] transition-transform ${active ? "scale-x-100" : "scale-x-0"}`}
-                  aria-hidden="true"
-                />
               </Link>
             );
           })}
@@ -77,13 +76,12 @@ export function SiteNav() {
                   key={link.to}
                   to={link.to}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between border-b border-white/10 py-4 text-lg font-black ${active ? "text-white" : "text-white/72"}`}
+                  className={`my-1 flex items-center justify-between rounded-xl px-3 py-3.5 text-lg font-black transition ${active ? "bg-white/[0.07] text-white" : "text-white/72 hover:bg-white/[0.035] hover:text-white"}`}
                 >
                   {link.label}
-                  <span
-                    className={`h-2 w-2 rounded-full bg-[#54d7c8] transition-opacity ${active ? "opacity-100" : "opacity-0"}`}
-                    aria-hidden="true"
-                  />
+                  {active && (
+                    <span className="h-2 w-2 rounded-full bg-[#54d7c8]" aria-hidden="true" />
+                  )}
                 </Link>
               );
             })}

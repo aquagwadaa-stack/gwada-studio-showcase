@@ -69,9 +69,9 @@ function HomePage() {
   return (
     <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
       <Hero />
+      <WhyGws />
       <Offers />
       <NfcPreview />
-      <WhyGws />
       <FinalCta />
     </div>
   );

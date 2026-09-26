@@ -159,6 +159,8 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isolated = pathname.startsWith("/admin") || pathname.startsWith("/a/");
 
+  usePageScrollMotion(pathname, isolated);
+
   if (isolated) {
     return <Outlet />;
   }
@@ -172,4 +174,124 @@ function RootComponent() {
       <SiteFooter />
     </div>
   );
+}
+
+function usePageScrollMotion(pathname: string, isolated: boolean) {
+  useEffect(() => {
+    if (isolated) return;
+
+    type MotionItem = {
+      section: HTMLElement;
+      target: HTMLElement;
+      baseTop: number;
+      baseBottom: number;
+    };
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let items: MotionItem[] = [];
+    let frame = 0;
+    let resizeTimer = 0;
+
+    const clearStyles = () => {
+      items.forEach(({ section, target }) => {
+        section.style.paddingTop = "";
+        section.style.paddingBottom = "";
+        section.style.willChange = "";
+        target.style.transform = "";
+        target.style.opacity = "";
+        target.style.willChange = "";
+      });
+      items = [];
+    };
+
+    const update = () => {
+      frame = 0;
+
+      if (reduceMotion.matches) {
+        items.forEach(({ target }) => {
+          target.style.transform = "none";
+          target.style.opacity = "1";
+        });
+        return;
+      }
+
+      const viewportHeight = window.innerHeight;
+      const mobile = window.innerWidth < 640;
+      const maxTighten = mobile ? 24 : 38;
+      const maxRise = mobile ? 28 : 44;
+
+      items.forEach(({ section, target, baseTop, baseBottom }) => {
+        const rect = section.getBoundingClientRect();
+        const start = viewportHeight * 0.98;
+        const end = viewportHeight * 0.42;
+        const raw = (start - rect.top) / Math.max(1, start - end);
+        const progress = Math.min(1, Math.max(0, raw));
+
+        section.style.paddingTop = `${Math.max(16, baseTop - maxTighten * progress)}px`;
+        section.style.paddingBottom = `${Math.max(16, baseBottom - maxTighten * 0.75 * progress)}px`;
+
+        const translate = maxRise * (1 - progress);
+        const scale = 0.985 + 0.015 * progress;
+        target.style.transform = `translate3d(0, ${translate}px, 0) scale(${scale})`;
+        target.style.opacity = `${0.72 + 0.28 * progress}`;
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    const prepare = () => {
+      clearStyles();
+
+      const sections = Array.from(
+        document.querySelectorAll<HTMLElement>("main > div > section"),
+      );
+
+      items = sections.slice(1).map((section) => {
+        const target =
+          section.querySelector<HTMLElement>(':scope > div[class*="mx-auto"]') ??
+          section.querySelector<HTMLElement>(":scope > div") ??
+          section;
+
+        const styles = window.getComputedStyle(section);
+
+        section.style.willChange = "padding-top, padding-bottom";
+        target.style.willChange = "transform, opacity";
+
+        return {
+          section,
+          target,
+          baseTop: Number.parseFloat(styles.paddingTop) || 0,
+          baseBottom: Number.parseFloat(styles.paddingBottom) || 0,
+        };
+      });
+
+      update();
+    };
+
+    const prepareFrame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(prepare);
+    });
+
+    const handleResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(prepare, 120);
+    };
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", handleResize);
+    reduceMotion.addEventListener("change", prepare);
+
+    return () => {
+      window.cancelAnimationFrame(prepareFrame);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", handleResize);
+      reduceMotion.removeEventListener("change", prepare);
+      clearStyles();
+    };
+  }, [pathname, isolated]);
 }

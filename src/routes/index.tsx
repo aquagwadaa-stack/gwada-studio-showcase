@@ -4,9 +4,7 @@ import {
   Check,
   Globe2,
   LayoutDashboard,
-  QrCode,
   Sparkles,
-  Smartphone,
   Wifi,
   Workflow,
 } from "lucide-react";
@@ -86,8 +84,8 @@ function Hero() {
       <div className="absolute -left-48 top-10 -z-10 h-[28rem] w-[28rem] rounded-full bg-[#54d7c8]/15 blur-[110px]" />
       <div className="absolute -right-40 bottom-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-[#5b7cfa]/15 blur-[120px]" />
 
-      <div className="mx-auto grid min-h-[calc(100svh-72px)] max-w-[1380px] items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.04fr_.96fr] lg:px-12 lg:py-20">
-        <div className="max-w-3xl">
+      <div className="mx-auto flex min-h-[72svh] max-w-[1380px] items-center px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+        <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white/65 sm:text-xs">
             <Sparkles className="h-3.5 w-3.5 text-[#54d7c8]" />
             Solutions digitales · Guadeloupe
@@ -100,8 +98,8 @@ function Hero() {
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/65 sm:text-xl">
-            Je crée des solutions simples et sur mesure pour aider les entreprises à être mieux
-            présentées, mieux organisées et plus faciles à contacter.
+            Des solutions simples et sur mesure pour aider les entreprises à être mieux présentées,
+            mieux organisées et plus faciles à contacter.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -119,70 +117,8 @@ function Hero() {
             </Link>
           </div>
         </div>
-
-        <HeroOverview />
       </div>
     </section>
-  );
-}
-
-function HeroOverview() {
-  const cards = [
-    { icon: Globe2, label: "Site web", text: "Présenter & convertir", accent: "#54d7c8" },
-    {
-      icon: Workflow,
-      label: "Outil métier",
-      text: "Simplifier & automatiser",
-      accent: "#5b7cfa",
-    },
-    { icon: Wifi, label: "Carte NFC", text: "Obtenir plus d’avis", accent: "#ff7c6c" },
-  ];
-
-  return (
-    <div className="relative mx-auto w-full max-w-[590px] lg:ml-auto">
-      <div className="rounded-[2.1rem] border border-white/12 bg-[#101f1c]/95 p-4 shadow-[0_35px_90px_rgba(0,0,0,.32)] sm:p-6">
-        <div className="flex items-center justify-between border-b border-white/10 px-1 pb-5">
-          <div>
-            <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/35">
-              Gwada Web Studio
-            </div>
-            <div className="mt-1 text-xl font-black">De quoi avez-vous besoin ?</div>
-          </div>
-          <Smartphone className="h-5 w-5 text-[#54d7c8]" />
-        </div>
-
-        <div className="mt-4 space-y-3">
-          {cards.map((card) => (
-            <div
-              key={card.label}
-              className="grid grid-cols-[48px_1fr_auto] items-center gap-4 rounded-2xl border border-white/8 bg-white/[0.035] p-4"
-            >
-              <span
-                className="grid h-12 w-12 place-items-center rounded-2xl text-[#0d1715]"
-                style={{ backgroundColor: card.accent }}
-              >
-                <card.icon className="h-5 w-5" />
-              </span>
-              <div>
-                <div className="text-sm font-black">{card.label}</div>
-                <div className="mt-1 text-xs text-white/45">{card.text}</div>
-              </div>
-              <ArrowRight className="h-4 w-4 text-white/25" />
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-4 rounded-2xl bg-[#f7f7ef] p-5 text-[#101a18]">
-          <div className="text-[10px] font-black uppercase tracking-[0.15em] text-[#697671]">
-            Le principe
-          </div>
-          <p className="mt-2 text-sm font-bold leading-relaxed">
-            Pas de solution générique : on part de votre activité, puis on construit uniquement ce
-            qui vous est réellement utile.
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -286,39 +222,18 @@ function NfcPreview() {
           </Link>
         </div>
 
-        <div className="mx-auto w-full max-w-[590px]">
-          <div className="rotate-[-1.5deg] rounded-[2rem] border border-[#cbd4cf] bg-white p-4 shadow-[0_26px_70px_rgba(16,26,24,.14)] sm:p-6">
-            <div className="rounded-[1.55rem] bg-[#101a18] p-6 text-white sm:p-8">
-              <div className="flex items-start justify-between gap-5">
-                <div>
-                  <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-                    Votre commerce
-                  </div>
-                  <div className="mt-4 font-display text-3xl font-black leading-[0.96] tracking-[-0.04em] sm:text-4xl">
-                    VOTRE AVIS EST IMPORTANT !
-                  </div>
-                </div>
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/15">
-                  <Wifi className="h-5 w-5 text-[#54d7c8]" />
-                </span>
-              </div>
-
-              <div className="mt-8 flex items-end justify-between gap-6">
-                <div>
-                  <div className="flex gap-1 text-[#f2cb5d]">
-                    {"★★★★★"}
-                  </div>
-                  <p className="mt-3 max-w-xs text-sm font-semibold leading-relaxed text-white/55">
-                    Approchez votre téléphone ou utilisez le QR code.
-                  </p>
-                </div>
-                <span className="grid h-24 w-24 shrink-0 place-items-center rounded-xl bg-white text-[#101a18] sm:h-28 sm:w-28">
-                  <QrCode className="h-16 w-16 sm:h-20 sm:w-20" strokeWidth={1.4} />
-                </span>
-              </div>
-            </div>
+        <figure className="mx-auto w-full max-w-[650px] lg:ml-auto">
+          <div className="overflow-hidden rounded-[2rem] border border-[#cbd4cf] bg-white p-2 shadow-[0_26px_70px_rgba(16,26,24,.14)] sm:p-3">
+            <img
+              src="/carte-nfc-google-avis.webp"
+              alt="Carte NFC Gwada Web Studio pour laisser un avis Google"
+              className="block h-auto w-full rounded-[1.55rem]"
+            />
           </div>
-        </div>
+          <figcaption className="mt-3 text-center text-xs font-semibold text-[#6b7773]">
+            Exemple réel de la carte standard · emplacement QR configuré pour votre commerce
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

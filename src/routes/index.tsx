@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -69,6 +70,8 @@ const offers = [
 ] as const;
 
 function HomePage() {
+  useHomeScrollMotion();
+
   return (
     <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
       <Hero />
@@ -77,6 +80,58 @@ function HomePage() {
       <FinalCta />
     </div>
   );
+}
+
+function useHomeScrollMotion() {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>(".gws-scroll-tighten"));
+    if (!sections.length) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const viewportHeight = window.innerHeight;
+      const maxTighten = window.innerWidth < 640 ? 16 : 20;
+      const maxRise = window.innerWidth < 640 ? 12 : 18;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const start = viewportHeight * 0.96;
+        const end = viewportHeight * 0.48;
+        const rawProgress = (start - rect.top) / Math.max(1, start - end);
+        const progress = prefersReducedMotion.matches
+          ? 1
+          : Math.min(1, Math.max(0, rawProgress));
+
+        section.style.setProperty("--gws-tighten-offset", `${maxTighten * progress}px`);
+
+        const reveal = section.querySelector<HTMLElement>(".gws-scroll-reveal");
+        if (reveal) {
+          reveal.style.setProperty("--gws-rise-offset", `${maxRise * (1 - progress)}px`);
+          reveal.style.setProperty("--gws-reveal-opacity", `${0.9 + 0.1 * progress}`);
+        }
+      });
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    prefersReducedMotion.addEventListener("change", requestUpdate);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      prefersReducedMotion.removeEventListener("change", requestUpdate);
+    };
+  }, []);
 }
 
 function Hero() {

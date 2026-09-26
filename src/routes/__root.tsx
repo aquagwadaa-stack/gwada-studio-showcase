@@ -72,7 +72,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gwada Web Studio — Sites web qui génèrent des demandes" },
+      { title: "Gwada Web Studio — Sites web, outils métier & cartes NFC" },
       {
         name: "description",
         content:
@@ -81,12 +81,12 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       { name: "author", content: "Gwada Web Studio" },
       {
         property: "og:title",
-        content: "Gwada Web Studio — Sites web qui génèrent des demandes",
+        content: "Gwada Web Studio — Sites web, outils métier & cartes NFC",
       },
       {
         property: "og:description",
         content:
-          "Transformez vos visites en demandes claires grâce à un site pensé autour de votre activité.",
+          "Sites web, outils métier et cartes NFC conçus sur mesure pour les entreprises en Guadeloupe.",
       },
       { property: "og:type", content: "website" },
       {
@@ -97,12 +97,12 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Gwada Web Studio — Sites web qui génèrent des demandes",
+        content: "Gwada Web Studio — Sites web, outils métier & cartes NFC",
       },
       {
         name: "twitter:description",
         content:
-          "Transformez vos visites en demandes claires grâce à un site pensé autour de votre activité.",
+          "Sites web, outils métier et cartes NFC conçus sur mesure pour les entreprises en Guadeloupe.",
       },
       {
         name: "twitter:image",

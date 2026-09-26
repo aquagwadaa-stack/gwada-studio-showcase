@@ -262,44 +262,20 @@ function CartesNfcPage() {
 
 function ProductMockup() {
   return (
-    <div className="relative mx-auto w-full max-w-[610px] lg:ml-auto">
+    <figure className="relative mx-auto w-full max-w-[650px] lg:ml-auto">
       <div className="absolute -left-4 top-12 h-32 w-32 rounded-full bg-[#54d7c8]/15 blur-3xl" />
       <div className="absolute -right-4 bottom-8 h-36 w-36 rounded-full bg-[#ff7c6c]/15 blur-3xl" />
 
-      <div className="relative rotate-[-1.5deg] rounded-[2rem] border border-white/12 bg-white/[0.04] p-4 shadow-[0_30px_80px_rgba(0,0,0,.28)] sm:p-6">
-        <div className="rounded-[1.6rem] bg-[#f7f7ef] p-6 text-[#101a18] sm:p-8">
-          <div className="flex items-start justify-between gap-5">
-            <div>
-              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#687570]">
-                Votre commerce
-              </div>
-              <div className="mt-4 max-w-sm font-display text-3xl font-black leading-[0.95] tracking-[-0.04em] sm:text-4xl">
-                VOTRE AVIS EST IMPORTANT !
-              </div>
-            </div>
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#101a18] text-[#54d7c8]">
-              <Wifi className="h-5 w-5" />
-            </span>
-          </div>
-
-          <div className="mt-8 grid gap-5 sm:grid-cols-[1fr_auto] sm:items-end">
-            <div>
-              <div className="flex gap-1 text-[#d6a91f]" aria-label="5 étoiles">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-current" />
-                ))}
-              </div>
-              <p className="mt-4 max-w-xs text-sm font-semibold leading-relaxed text-[#5e6a66]">
-                Approchez votre téléphone ou scannez le QR code pour laisser votre avis.
-              </p>
-            </div>
-
-            <div className="grid h-28 w-28 place-items-center rounded-2xl bg-[#101a18] text-white shadow-xl sm:h-32 sm:w-32">
-              <QrCode className="h-20 w-20 sm:h-24 sm:w-24" strokeWidth={1.4} />
-            </div>
-          </div>
-        </div>
+      <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white p-2 shadow-[0_30px_80px_rgba(0,0,0,.28)] sm:p-3">
+        <img
+          src="/carte-nfc-google-avis.webp"
+          alt="Carte NFC Gwada Web Studio pour laisser un avis Google"
+          className="block h-auto w-full rounded-[1.55rem]"
+        />
       </div>
-    </div>
+      <figcaption className="mt-3 text-center text-xs font-semibold text-white/40">
+        Visuel réel de la carte standard · le QR est associé à votre fiche Google
+      </figcaption>
+    </figure>
   );
 }

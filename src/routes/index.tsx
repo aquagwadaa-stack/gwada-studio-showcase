@@ -1,14 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  CalendarDays,
   Check,
-  CreditCard,
-  FileText,
   Globe2,
   LayoutDashboard,
   QrCode,
-  ShoppingBag,
   Sparkles,
   Smartphone,
   Wifi,

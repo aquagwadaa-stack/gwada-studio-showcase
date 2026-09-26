@@ -6,7 +6,6 @@ import {
   Palette,
   Phone,
   QrCode,
-  ShieldCheck,
   Smartphone,
   Star,
   Wifi,
@@ -110,27 +109,39 @@ function CartesNfcPage() {
 
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {[
-              ["01", Smartphone, "Approchez", "Le client approche son téléphone de la carte."],
-              ["02", QrCode, "Ou scannez", "Le QR code offre une deuxième façon d’ouvrir le lien."],
-              ["03", Star, "Laissez l’avis", "La page Google s’ouvre directement pour écrire l’avis."],
-            ].map(([number, Icon, title, text]) => {
-              const StepIcon = Icon as typeof Smartphone;
-              return (
-                <article
-                  key={number as string}
-                  className="rounded-[1.8rem] border border-[#d6ddd9] bg-white p-6 sm:p-7"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-black text-[#77827e]">{number}</span>
-                    <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#101a18] text-[#54d7c8]">
-                      <StepIcon className="h-5 w-5" />
-                    </span>
-                  </div>
-                  <h3 className="mt-8 text-2xl font-black">{title as string}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#66716d]">{text as string}</p>
-                </article>
-              );
-            })}
+              {
+                number: "01",
+                icon: Smartphone,
+                title: "Approchez",
+                text: "Le client approche son téléphone de la carte.",
+              },
+              {
+                number: "02",
+                icon: QrCode,
+                title: "Ou scannez",
+                text: "Le QR code offre une deuxième façon d’ouvrir le lien.",
+              },
+              {
+                number: "03",
+                icon: Star,
+                title: "Laissez l’avis",
+                text: "La page Google s’ouvre directement pour écrire l’avis.",
+              },
+            ].map((step) => (
+              <article
+                key={step.number}
+                className="rounded-[1.8rem] border border-[#d6ddd9] bg-white p-6 sm:p-7"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black text-[#77827e]">{step.number}</span>
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#101a18] text-[#54d7c8]">
+                    <step.icon className="h-5 w-5" />
+                  </span>
+                </div>
+                <h3 className="mt-8 text-2xl font-black">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#66716d]">{step.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -70,8 +69,6 @@ const offers = [
 ] as const;
 
 function HomePage() {
-  useHomeScrollMotion();
-
   return (
     <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
       <Hero />
@@ -80,58 +77,6 @@ function HomePage() {
       <FinalCta />
     </div>
   );
-}
-
-function useHomeScrollMotion() {
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>(".gws-scroll-tighten"));
-    if (!sections.length) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const viewportHeight = window.innerHeight;
-      const maxTighten = window.innerWidth < 640 ? 16 : 20;
-      const maxRise = window.innerWidth < 640 ? 12 : 18;
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        const start = viewportHeight * 0.96;
-        const end = viewportHeight * 0.48;
-        const rawProgress = (start - rect.top) / Math.max(1, start - end);
-        const progress = prefersReducedMotion.matches
-          ? 1
-          : Math.min(1, Math.max(0, rawProgress));
-
-        section.style.setProperty("--gws-tighten-offset", `${maxTighten * progress}px`);
-
-        const reveal = section.querySelector<HTMLElement>(".gws-scroll-reveal");
-        if (reveal) {
-          reveal.style.setProperty("--gws-rise-offset", `${maxRise * (1 - progress)}px`);
-          reveal.style.setProperty("--gws-reveal-opacity", `${0.9 + 0.1 * progress}`);
-        }
-      });
-    };
-
-    const requestUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    prefersReducedMotion.addEventListener("change", requestUpdate);
-
-    return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      prefersReducedMotion.removeEventListener("change", requestUpdate);
-    };
-  }, []);
 }
 
 function Hero() {
@@ -199,8 +144,8 @@ function WhyGws() {
   ];
 
   return (
-    <section className="gws-scroll-tighten px-5 sm:px-8 lg:px-12">
-      <div className="gws-scroll-reveal mx-auto max-w-[1380px]">
+    <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
+      <div className="mx-auto max-w-[1380px]">
         <div className="grid gap-3 md:grid-cols-3">
           {points.map((point) => (
             <article
@@ -222,8 +167,8 @@ function WhyGws() {
 
 function Offers() {
   return (
-    <section id="solutions" className="gws-scroll-tighten px-5 sm:px-8 lg:px-12">
-      <div className="gws-scroll-reveal mx-auto max-w-[1380px]">
+    <section id="solutions" className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
+      <div className="mx-auto max-w-[1380px]">
         <div className="max-w-3xl">
           <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
             Trois grandes solutions
@@ -302,7 +247,7 @@ function Offers() {
 function FinalCta() {
   return (
     <section className="px-5 pb-20 pt-3 sm:px-8 sm:pb-24 lg:px-12">
-      <div className="gws-scroll-reveal mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d1715] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+      <div className="mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d1715] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <div className="text-xs font-black uppercase tracking-[0.16em] opacity-60">
             Vous avez une idée ?

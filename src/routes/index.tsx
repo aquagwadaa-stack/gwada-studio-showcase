@@ -38,30 +38,33 @@ const offers = [
     number: "01",
     eyebrow: "Votre présence en ligne",
     title: "Sites web",
-    text: "Du site vitrine simple au parcours complet avec réservation, paiement, catalogue ou prise de contact.",
-    bullets: ["Site vitrine", "Réservation", "Paiement", "Catalogue"],
+    text: "Du site vitrine clair au parcours complet avec réservation, paiement, catalogue ou prise de contact.",
+    bullets: ["Vitrine", "Réservation", "Paiement"],
     href: "/sites-web",
     accent: "#54d7c8",
+    note: "Pensé autour de votre activité",
   },
   {
     icon: LayoutDashboard,
     number: "02",
     eyebrow: "Votre quotidien",
     title: "Outils métier",
-    text: "Des interfaces et automatisations pour gérer plus facilement vos demandes, clients, documents et contenus.",
-    bullets: ["Administration", "Formulaires", "Espaces clients", "Automatisations"],
+    text: "Des interfaces et automatisations pour mieux gérer vos demandes, clients, documents et tâches répétitives.",
+    bullets: ["Administration", "Automatisations", "Espaces clients"],
     href: "/outils-metier",
     accent: "#5b7cfa",
+    note: "Construit selon votre fonctionnement",
   },
   {
     icon: Wifi,
     number: "03",
     eyebrow: "Vos avis Google",
     title: "Cartes NFC",
-    text: "Une carte physique à poser dans votre commerce pour permettre à vos clients de laisser un avis en quelques secondes.",
-    bullets: ["NFC + QR", "Dès 29,90 €", "Sans abonnement", "Configuration incluse"],
+    text: "Facilitez les avis Google en quelques secondes : NFC ou QR code, puis la page d’avis s’ouvre directement.",
+    bullets: ["NFC + QR", "Standard 29,90 €", "Personnalisée 39,90 €"],
     href: "/cartes-nfc",
     accent: "#ff7c6c",
+    note: "Sans abonnement",
   },
 ] as const;
 
@@ -71,7 +74,6 @@ function HomePage() {
       <Hero />
       <WhyGws />
       <Offers />
-      <NfcPreview />
       <FinalCta />
     </div>
   );
@@ -122,123 +124,6 @@ function Hero() {
   );
 }
 
-function Offers() {
-  return (
-    <section id="solutions" className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-      <div className="mx-auto max-w-[1380px]">
-        <div className="max-w-3xl">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-            Trois grandes solutions
-          </div>
-          <h2 className="mt-4 font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
-            Allez directement vers
-            <span className="block text-[#f2cb5d]">ce qui vous intéresse.</span>
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
-            Chaque univers a maintenant sa propre page. Vous pouvez comprendre l’essentiel ici puis
-            entrer dans le détail uniquement si le service vous concerne.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
-          {offers.map((offer) => (
-            <Link
-              key={offer.title}
-              to={offer.href}
-              className="group relative flex min-h-[390px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-[#13211e] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25 sm:p-8"
-            >
-              <span className="absolute right-6 top-4 font-display text-6xl font-black text-white/[0.035]">
-                {offer.number}
-              </span>
-
-              <span
-                className="grid h-12 w-12 place-items-center rounded-2xl text-[#0d1715]"
-                style={{ backgroundColor: offer.accent }}
-              >
-                <offer.icon className="h-5 w-5" />
-              </span>
-
-              <div className="mt-9 text-[10px] font-black uppercase tracking-[0.16em] text-white/40">
-                {offer.eyebrow}
-              </div>
-              <h3 className="mt-2 text-3xl font-black tracking-[-0.04em]">{offer.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/55">{offer.text}</p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {offer.bullets.map((bullet) => (
-                  <span
-                    key={bullet}
-                    className="rounded-full border border-white/10 px-3 py-1.5 text-[10px] font-bold text-white/55"
-                  >
-                    {bullet}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-auto flex items-center gap-2 pt-8 text-sm font-black" style={{ color: offer.accent }}>
-                Découvrir <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function NfcPreview() {
-  return (
-    <section className="bg-[#f7f7ef] px-5 py-20 text-[#101a18] sm:px-8 sm:py-24 lg:px-12">
-      <div className="mx-auto grid max-w-[1380px] gap-12 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#101a18] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white">
-            <Wifi className="h-3.5 w-3.5 text-[#54d7c8]" />
-            Nouveau · Cartes NFC
-          </div>
-          <h2 className="mt-6 max-w-2xl font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
-            Facilitez les avis Google en quelques secondes.
-          </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#5d6965] sm:text-lg">
-            Une carte posée sur votre comptoir. Le client approche son téléphone ou scanne le QR
-            code, et votre page d’avis Google s’ouvre directement.
-          </p>
-
-          <div className="mt-7 flex flex-wrap gap-2">
-            {["Standard 29,90 €", "Personnalisée 39,90 €", "Sans abonnement"].map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-[#d1d9d4] bg-white px-4 py-2 text-xs font-black"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-
-          <Link
-            to="/cartes-nfc"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-black text-[#167f74]"
-          >
-            Voir les cartes NFC <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <figure className="mx-auto w-full max-w-[650px] lg:ml-auto">
-          <div className="overflow-hidden rounded-[2rem] border border-[#cbd4cf] bg-white p-2 shadow-[0_26px_70px_rgba(16,26,24,.14)] sm:p-3">
-            <img
-              src="/carte-nfc-google-avis.webp"
-              alt="Carte NFC Gwada Web Studio pour laisser un avis Google"
-              className="block h-auto w-full rounded-[1.55rem]"
-            />
-          </div>
-          <figcaption className="mt-3 text-center text-xs font-semibold text-[#6b7773]">
-            Exemple réel de la carte standard · emplacement QR configuré pour votre commerce
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
 function WhyGws() {
   const points = [
     {
@@ -259,17 +144,99 @@ function WhyGws() {
   ];
 
   return (
-    <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
-      <div className="mx-auto max-w-[1380px]">
-        <div className="grid gap-4 md:grid-cols-3">
+    <section className="gws-scroll-tighten px-5 sm:px-8 lg:px-12">
+      <div className="gws-scroll-reveal mx-auto max-w-[1380px]">
+        <div className="grid gap-3 md:grid-cols-3">
           {points.map((point) => (
-            <article key={point.title} className="rounded-[1.6rem] border border-white/10 bg-white/[0.025] p-6 sm:p-7">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#54d7c8] text-[#0d1715]">
-                <point.icon className="h-5 w-5" />
+            <article
+              key={point.title}
+              className="rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-5 sm:p-6"
+            >
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#54d7c8] text-[#0d1715]">
+                <point.icon className="h-4.5 w-4.5" />
               </span>
-              <h3 className="mt-7 text-xl font-black">{point.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/50">{point.text}</p>
+              <h3 className="mt-6 text-lg font-black">{point.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/50">{point.text}</p>
             </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Offers() {
+  return (
+    <section id="solutions" className="gws-scroll-tighten px-5 sm:px-8 lg:px-12">
+      <div className="gws-scroll-reveal mx-auto max-w-[1380px]">
+        <div className="max-w-3xl">
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
+            Trois grandes solutions
+          </div>
+          <h2 className="mt-4 font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
+            Allez directement vers
+            <span className="block text-[#f2cb5d]">ce qui vous intéresse.</span>
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
+            Choisissez le besoin qui correspond à votre activité. Chaque bloc mène vers une page
+            dédiée, avec des exemples beaucoup plus concrets.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {offers.map((offer) => (
+            <Link
+              key={offer.title}
+              to={offer.href}
+              className="group relative flex min-h-[285px] flex-col overflow-hidden rounded-[1.65rem] border border-white/10 bg-[#13211e] p-5 transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-[#162823] hover:shadow-[0_22px_60px_rgba(0,0,0,.2)] sm:p-6"
+            >
+              <span
+                className="absolute inset-x-0 top-0 h-1 opacity-80 transition-opacity group-hover:opacity-100"
+                style={{ backgroundColor: offer.accent }}
+              />
+
+              <div className="flex items-center justify-between gap-4">
+                <span
+                  className="grid h-11 w-11 place-items-center rounded-xl text-[#0d1715]"
+                  style={{ backgroundColor: offer.accent }}
+                >
+                  <offer.icon className="h-5 w-5" />
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <span className="font-display text-sm font-black text-white/20">
+                    {offer.number}
+                  </span>
+                  <span className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.035] transition group-hover:border-white/25 group-hover:bg-white/[0.08]">
+                    <ArrowRight className="h-4 w-4 text-white/45 transition group-hover:translate-x-0.5 group-hover:text-white" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-6 text-[10px] font-black uppercase tracking-[0.16em] text-white/38">
+                {offer.eyebrow}
+              </div>
+              <h3 className="mt-2 text-2xl font-black tracking-[-0.04em]">{offer.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/55">{offer.text}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {offer.bullets.map((bullet) => (
+                  <span
+                    key={bullet}
+                    className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 text-[10px] font-bold text-white/55"
+                  >
+                    {bullet}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto flex items-center justify-between gap-4 pt-5">
+                <span className="text-[11px] font-bold text-white/35">{offer.note}</span>
+                <span className="text-xs font-black" style={{ color: offer.accent }}>
+                  Découvrir
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -279,8 +246,8 @@ function WhyGws() {
 
 function FinalCta() {
   return (
-    <section className="px-5 pb-24 pt-6 sm:px-8 sm:pb-28 lg:px-12">
-      <div className="mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d1715] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+    <section className="px-5 pb-20 pt-3 sm:px-8 sm:pb-24 lg:px-12">
+      <div className="gws-scroll-reveal mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d1715] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <div className="text-xs font-black uppercase tracking-[0.16em] opacity-60">
             Vous avez une idée ?

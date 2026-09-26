@@ -9,11 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitesWebRouteImport } from './routes/sites-web'
+import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
 import { Route as ACodeRouteImport } from './routes/a.$code'
 import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 
+const SitesWebRoute = SitesWebRouteImport.update({
+  id: '/sites-web',
+  path: '/sites-web',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutilsMetierRoute = OutilsMetierRouteImport.update({
+  id: '/outils-metier',
+  path: '/outils-metier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartesNfcRoute = CartesNfcRouteImport.update({
+  id: '/cartes-nfc',
+  path: '/cartes-nfc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +61,20 @@ const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cartes-nfc': typeof CartesNfcRoute
+  '/contact': typeof ContactRoute
+  '/outils-metier': typeof OutilsMetierRoute
+  '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cartes-nfc': typeof CartesNfcRoute
+  '/contact': typeof ContactRoute
+  '/outils-metier': typeof OutilsMetierRoute
+  '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
@@ -50,20 +82,53 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cartes-nfc': typeof CartesNfcRoute
+  '/contact': typeof ContactRoute
+  '/outils-metier': typeof OutilsMetierRoute
+  '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
+  fullPaths:
+    | '/'
+    | '/cartes-nfc'
+    | '/contact'
+    | '/outils-metier'
+    | '/sites-web'
+    | '/a/$code'
+    | '/admin/nfc'
+    | '/api/places/search'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
-  id: '__root__' | '/' | '/a/$code' | '/admin/nfc' | '/api/places/search'
+  to:
+    | '/'
+    | '/cartes-nfc'
+    | '/contact'
+    | '/outils-metier'
+    | '/sites-web'
+    | '/a/$code'
+    | '/admin/nfc'
+    | '/api/places/search'
+  id:
+    | '__root__'
+    | '/'
+    | '/cartes-nfc'
+    | '/contact'
+    | '/outils-metier'
+    | '/sites-web'
+    | '/a/$code'
+    | '/admin/nfc'
+    | '/api/places/search'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartesNfcRoute: typeof CartesNfcRoute
+  ContactRoute: typeof ContactRoute
+  OutilsMetierRoute: typeof OutilsMetierRoute
+  SitesWebRoute: typeof SitesWebRoute
   ACodeRoute: typeof ACodeRoute
   AdminNfcRoute: typeof AdminNfcRoute
   ApiPlacesSearchRoute: typeof ApiPlacesSearchRoute
@@ -71,6 +136,34 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sites-web': {
+      id: '/sites-web'
+      path: '/sites-web'
+      fullPath: '/sites-web'
+      preLoaderRoute: typeof SitesWebRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outils-metier': {
+      id: '/outils-metier'
+      path: '/outils-metier'
+      fullPath: '/outils-metier'
+      preLoaderRoute: typeof OutilsMetierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cartes-nfc': {
+      id: '/cartes-nfc'
+      path: '/cartes-nfc'
+      fullPath: '/cartes-nfc'
+      preLoaderRoute: typeof CartesNfcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +197,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartesNfcRoute: CartesNfcRoute,
+  ContactRoute: ContactRoute,
+  OutilsMetierRoute: OutilsMetierRoute,
+  SitesWebRoute: SitesWebRoute,
   ACodeRoute: ACodeRoute,
   AdminNfcRoute: AdminNfcRoute,
   ApiPlacesSearchRoute: ApiPlacesSearchRoute,

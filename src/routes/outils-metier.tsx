@@ -476,9 +476,9 @@ function ToolDemoScreen({ mode }: { mode: DemoMode }) {
         </div>
         <div className="mt-4 space-y-2">
           {[
-            ["Kafé Céramik", "Réservation", "Nouveau"],
+            ["Atelier Horizon", "Réservation", "Nouveau"],
             ["Villa Caraïbes", "Demande de devis", "À traiter"],
-            ["Studio Horizon", "Modification", "En cours"],
+            ["Studio Créatif", "Modification", "En cours"],
           ].map(([name, type, status], index) => (
             <div
               key={name}

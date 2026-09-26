@@ -185,6 +185,7 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
       target: HTMLElement;
       baseTop: number;
       baseBottom: number;
+      index: number;
     };
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -220,8 +221,20 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
       const maxTighten = mobile ? 24 : 38;
       const maxRise = mobile ? 28 : 44;
 
-      items.forEach(({ section, target, baseTop, baseBottom }) => {
+      items.forEach(({ section, target, baseTop, baseBottom, index }) => {
         const rect = section.getBoundingClientRect();
+
+        if (index === 0) {
+          const distance = Math.min(Math.max(section.offsetHeight * 0.42, 240), 460);
+          const progress = Math.min(1, Math.max(0, -rect.top / distance));
+          const lift = (mobile ? 16 : 24) * progress;
+          const scale = 1 - 0.012 * progress;
+
+          target.style.transform = `translate3d(0, -${lift}px, 0) scale(${scale})`;
+          target.style.opacity = `${1 - 0.12 * progress}`;
+          return;
+        }
+
         const start = viewportHeight * 0.98;
         const end = viewportHeight * 0.42;
         const raw = (start - rect.top) / Math.max(1, start - end);
@@ -249,7 +262,7 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
         document.querySelectorAll<HTMLElement>("main > div > section"),
       );
 
-      items = sections.slice(1).map((section) => {
+      items = sections.map((section, index) => {
         const target =
           section.querySelector<HTMLElement>(':scope > div[class*="mx-auto"]') ??
           section.querySelector<HTMLElement>(":scope > div") ??
@@ -257,7 +270,9 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
 
         const styles = window.getComputedStyle(section);
 
-        section.style.willChange = "padding-top, padding-bottom";
+        if (index > 0) {
+          section.style.willChange = "padding-top, padding-bottom";
+        }
         target.style.willChange = "transform, opacity";
 
         return {
@@ -265,6 +280,7 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
           target,
           baseTop: Number.parseFloat(styles.paddingTop) || 0,
           baseBottom: Number.parseFloat(styles.paddingBottom) || 0,
+          index,
         };
       });
 

@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ArrowRight,
   Check,
   Globe2,
   LayoutDashboard,
+  Quote,
   Sparkles,
+  Star,
   Wifi,
   Workflow,
 } from "lucide-react";
@@ -74,6 +77,7 @@ function HomePage() {
     <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
       <Hero />
       <WhyGws />
+      <CustomerReviews />
       <Offers />
       <FinalCta />
     </div>
@@ -161,6 +165,112 @@ function WhyGws() {
             </article>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+
+const customerReviews = [
+  {
+    name: "Jean-Jacques Aubry",
+    initial: "J",
+    accent: "#54d7c8",
+    text:
+      "J’ai confié la création de mon site professionnel à Gwada Web Studio et le résultat est tout à fait conforme à ce que j’attendais. Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité. Je suis très satisfait du travail réalisé et du sérieux dont il a fait preuve.",
+  },
+  {
+    name: "Appart Courbaril",
+    initial: "A",
+    accent: "#8b5cf6",
+    text:
+      "J’ai fait appel à Gwada Web Studio pour la création du site internet de mon appartement, et je suis vraiment très contente du résultat ! Il a été à l’écoute de mes attentes, très professionnel et a su parfaitement s’adapter à mon activité et à ses spécificités. Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat. Un grand merci pour son travail et son sérieux, je recommande sans hésiter !",
+  },
+] as const;
+
+function CustomerReviews() {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <section className="border-y border-white/8 bg-[#101d1a] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+      <div className="mx-auto max-w-[1380px]">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
+              Ils nous ont fait confiance
+            </div>
+            <h2 className="mt-3 font-display text-3xl font-black tracking-[-0.04em] sm:text-4xl">
+              Des retours clients concrets.
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1 text-[#f2cb5d]" aria-label="5 étoiles sur 5">
+              {Array.from({ length: 5 }, (_, index) => (
+                <Star key={index} className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
+              ))}
+            </div>
+            <span className="text-sm font-black text-white">5/5</span>
+            <span className="text-xs font-semibold text-white/35">2 avis</span>
+          </div>
+        </div>
+
+        <div className="-mx-5 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0">
+          {customerReviews.map((review, index) => {
+            const isExpanded = expanded === index;
+            return (
+              <article
+                key={review.name}
+                className="min-w-[86vw] snap-center rounded-[1.7rem] border border-white/10 bg-[#13211e] p-5 sm:min-w-0 sm:p-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-base font-black text-[#0d1715]"
+                      style={{ backgroundColor: review.accent }}
+                    >
+                      {review.initial}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-black sm:text-base">{review.name}</div>
+                      <div className="mt-1 flex gap-0.5 text-[#f2cb5d]">
+                        {Array.from({ length: 5 }, (_, starIndex) => (
+                          <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <Quote className="h-8 w-8 shrink-0 text-white/10" strokeWidth={1.6} />
+                </div>
+
+                <p
+                  className={`mt-5 text-sm leading-relaxed text-white/62 ${isExpanded ? "" : "line-clamp-4"}`}
+                >
+                  {review.text}
+                </p>
+
+                <div className="mt-5 flex items-center justify-between gap-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/28">
+                    Avis client
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(isExpanded ? null : index)}
+                    className="text-xs font-black text-[#54d7c8] transition hover:text-white"
+                    aria-expanded={isExpanded}
+                  >
+                    {isExpanded ? "Réduire" : "Lire l’avis"}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <p className="mt-3 text-center text-[11px] font-semibold text-white/30 sm:hidden">
+          Faites glisser pour voir le deuxième avis
+        </p>
       </div>
     </section>
   );

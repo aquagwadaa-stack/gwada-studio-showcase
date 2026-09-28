@@ -176,6 +176,8 @@ const customerReviews = [
     name: "Jean-Jacques Aubry",
     initial: "J",
     accent: "#54d7c8",
+    siteUrl: "https://docaubry.fr/",
+    siteLabel: "docaubry.fr",
     text:
       "J’ai confié la création de mon site professionnel à Gwada Web Studio et le résultat est tout à fait conforme à ce que j’attendais. Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité. Je suis très satisfait du travail réalisé et du sérieux dont il a fait preuve.",
   },
@@ -183,6 +185,8 @@ const customerReviews = [
     name: "Appart Courbaril",
     initial: "A",
     accent: "#8b5cf6",
+    siteUrl: "https://crystalbeachcourbaril.fr/",
+    siteLabel: "crystalbeachcourbaril.fr",
     text:
       "J’ai fait appel à Gwada Web Studio pour la création du site internet de mon appartement, et je suis vraiment très contente du résultat ! Il a été à l’écoute de mes attentes, très professionnel et a su parfaitement s’adapter à mon activité et à ses spécificités. Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat. Un grand merci pour son travail et son sérieux, je recommande sans hésiter !",
   },
@@ -250,10 +254,18 @@ function CustomerReviews() {
                   {review.text}
                 </p>
 
-                <div className="mt-5 flex items-center justify-between gap-4">
-                  <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/28">
-                    Avis client
-                  </span>
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                  <a
+                    href={review.siteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 text-[11px] font-black text-white/65 transition hover:border-white/25 hover:bg-white/[0.07] hover:text-white"
+                    aria-label={`Voir le site ${review.siteLabel}`}
+                  >
+                    Voir le site
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+
                   <button
                     type="button"
                     onClick={() => setExpanded(isExpanded ? null : index)}

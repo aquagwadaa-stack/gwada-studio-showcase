@@ -48,6 +48,8 @@ export function SiteFooter() {
             ))}
           </div>
 
+          <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#54d7c8]/25 bg-[#54d7c8]/10 px-5 py-3 text-xs font-extrabold text-[#54d7c8] transition hover:bg-[#54d7c8] hover:text-[#0d1715]">Votre projet mérite mieux qu’un site ordinaire. Parlons-en <ArrowUp className="h-3.5 w-3.5 rotate-45" /></Link>
+
           <p className="mt-6 text-xs text-white/30">
             © {new Date().getFullYear()} Gwada Web Studio · Louis
           </p>

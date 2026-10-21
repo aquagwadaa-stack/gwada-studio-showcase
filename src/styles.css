@@ -155,3 +155,64 @@ details summary::-webkit-details-marker {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Gwada Web Studio — Accueil signature */
+.gws-hero-device {
+  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  transform-origin: center;
+  transition: transform 700ms cubic-bezier(.2,.75,.2,1), box-shadow 500ms ease;
+}
+.gws-hero-device:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateX(0deg) translateY(-5px);
+  box-shadow: 0 55px 125px rgba(0,0,0,.48);
+}
+.gws-display-orbit {
+  box-shadow: 0 0 110px rgba(84,215,200,.035);
+}
+.gws-marquee {
+  animation: gws-marquee 32s linear infinite;
+}
+@keyframes gws-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.gws-project-card {
+  transition: transform 350ms cubic-bezier(.2,.75,.2,1), box-shadow 350ms ease, border-color 350ms ease;
+}
+.gws-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 75px rgba(25,49,40,.13);
+  border-color: rgba(45,117,93,.28);
+}
+.gws-project-card > div > div:first-child > div {
+  transition: transform 600ms cubic-bezier(.2,.75,.2,1);
+}
+.gws-project-card:hover > div > div:first-child > div {
+  transform: scale(1.025);
+}
+.gws-hover-card {
+  transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease;
+}
+.gws-hover-card:hover {
+  border-color: rgba(84,215,200,.32);
+  background-color: #214137;
+}
+.gws-final-cta {
+  box-shadow: 0 35px 85px rgba(84,215,200,.09);
+}
+@media (max-width: 1023px) {
+  .gws-hero-device {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gws-hero-device,
+  .gws-hero-device:hover,
+  .gws-project-card:hover {
+    transform: none;
+  }
+  .gws-marquee {
+    animation: none;
+  }
+}

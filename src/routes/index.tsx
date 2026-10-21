@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -141,7 +141,7 @@ function HomePage() {
   );
 }
 
-function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
     <span className={"inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.19em] " + (light ? "text-[#60716b]" : "text-[#54d7c8]")}>
       <span className={"h-1.5 w-1.5 rounded-full " + (light ? "bg-[#168577]" : "bg-[#54d7c8]")} aria-hidden="true" />

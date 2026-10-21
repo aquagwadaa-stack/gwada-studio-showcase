@@ -16,7 +16,7 @@ export function SiteNav() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0d1715]/90 text-[#f7f7ef] backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1380px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
         <Link to="/" className="flex items-center gap-3" aria-label="Gwada Web Studio — Accueil">
-          <BrandMark />
+          <img src="/logo-gws.svg" alt="" width={200} height={95} className="h-10 w-auto shrink-0 object-contain sm:h-11" />
           <span className="font-display text-sm font-black uppercase tracking-[0.08em] sm:text-base">
             Gwada Web Studio
           </span>
@@ -99,13 +99,5 @@ export function SiteNav() {
         </div>
       )}
     </header>
-  );
-}
-
-function BrandMark() {
-  return (
-    <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-[#54d7c8] font-display text-xl font-black lowercase tracking-[-0.08em] text-[#0d1715] shadow-[0_5px_18px_rgba(84,215,200,.15)]" aria-hidden="true">
-      g<span className="absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#0d1715]" />
-    </span>
   );
 }

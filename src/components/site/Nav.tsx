@@ -22,7 +22,8 @@ export function SiteNav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigation principale">
+        <nav className="hidden items-center gap-4 lg:flex" aria-label="Navigation principale">
+          <a href="/#realisations" className="rounded-full px-3 py-2 text-sm font-semibold text-white/55 transition hover:bg-white/[0.04] hover:text-white">Réalisations</a>
           {links.map((link) => {
             const active = pathname.startsWith(link.to);
             return (
@@ -45,7 +46,7 @@ export function SiteNav() {
           className="hidden items-center gap-2 rounded-full bg-[#f7f7ef] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-[#0d1715] transition hover:bg-[#54d7c8] sm:inline-flex"
           data-cta="nav-contact"
         >
-          Me contacter <ArrowUpRight className="h-3.5 w-3.5" />
+          Demander un devis <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
 
         <button
@@ -69,6 +70,7 @@ export function SiteNav() {
             >
               Accueil
             </Link>
+            <a href="/#realisations" onClick={() => setOpen(false)} className="border-b border-white/10 py-4 text-lg font-black text-[#54d7c8]">Mes réalisations</a>
             {links.map((link) => {
               const active = pathname.startsWith(link.to);
               return (
@@ -102,11 +104,8 @@ export function SiteNav() {
 
 function BrandMark() {
   return (
-    <span
-      className="relative grid h-8 w-8 place-items-center rounded-full border-[6px] border-[#f7f7ef]"
-      aria-hidden="true"
-    >
-      <span className="absolute right-[-6px] top-[-6px] h-3 w-3 rounded-full bg-[#54d7c8]" />
+    <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-[#54d7c8] font-display text-xl font-black lowercase tracking-[-0.08em] text-[#0d1715] shadow-[0_5px_18px_rgba(84,215,200,.15)]" aria-hidden="true">
+      g<span className="absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#0d1715]" />
     </span>
   );
 }

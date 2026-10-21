@@ -308,7 +308,7 @@ function ProductShowcase() {
       <div className="absolute -right-4 bottom-8 h-36 w-36 rounded-full bg-[#ff7c6c]/15 blur-3xl" />
 
       <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white p-2 shadow-[0_30px_80px_rgba(0,0,0,.28)] sm:p-3">
-        <img src="/carte-nfc-google-avis.webp" alt="Véritable visuel de la carte NFC Gwada Web Studio pour avis Google, avec zone réservée au QR code personnalisé" width={1582} height={994} loading="eager" decoding="async" className="block h-auto w-full rounded-[1.55rem]" />
+        <img src="/carte-nfc-google-avis.webp" alt="Véritable visuel de la carte NFC Gwada Web Studio pour avis Google, avec zone réservée au QR code personnalisé" width={1582} height={994} loading="eager" decoding="async" fetchPriority="high" className="block h-auto w-full rounded-[1.55rem]" />
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-2">

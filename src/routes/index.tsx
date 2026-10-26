@@ -111,6 +111,13 @@ const services = [
 
 const testimonials = [
   {
+    name: "Kafe Ceramik",
+    role: "Site de réservation · Saint-François",
+    initial: "K",
+    text:
+      "Nous avons décidé de faire confiance à Louis de Gwada Web Studio pour la création du site internet de notre Café Céramique, et nous n’avons pas été déçus une seule seconde !\n\nLouis a été ultra réactif, très professionnel et toujours force de proposition. Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. Louis est un jeune professionnel sérieux, talentueux et très impliqué, qui mérite vraiment d’être connu !\n\nMerci encore Louis pour ton travail et ton accompagnement.",
+  },
+  {
     name: "Jean-Jacques Aubry",
     role: "Site professionnel · docaubry.fr",
     initial: "J",
@@ -508,23 +515,25 @@ function Reviews() {
               <span className="block text-[#6e8177]">ma meilleure vitrine.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-2 text-[#d7a54f]" aria-label="Deux témoignages clients notés cinq étoiles">
+          <div className="flex items-center gap-2 text-[#d7a54f]" aria-label={`${testimonials.length} témoignages clients notés cinq étoiles`}>
             {Array.from({ length: 5 }, (_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-            <span className="ml-2 text-xs font-bold text-[#6e8177]">2 témoignages clients</span>
+            <span className="ml-2 text-xs font-bold text-[#6e8177]">{testimonials.length} témoignages clients</span>
           </div>
         </div>
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {testimonials.map((review, i) => {
             const isExpanded = expanded === i;
             return (
               <article key={review.name} className="relative flex flex-col rounded-[1.75rem] border border-[#e0e3dc] bg-white p-7 shadow-[0_14px_44px_rgba(26,52,40,.04)] sm:p-9">
-                <Quote className="h-10 w-10 text-[#79beaa]/60" strokeWidth={1.5} />
-                <p className={"mt-7 text-base leading-[1.9] text-[#455a51] " + (isExpanded ? "" : "line-clamp-5")}>“{review.text}”</p>
+                <div className="flex items-center justify-between gap-4">
+                  <Quote className="h-10 w-10 text-[#79beaa]/60" strokeWidth={1.5} />
+                  <div className="flex gap-0.5 text-[#d7a54f]" role="img" aria-label="5 étoiles sur 5">{Array.from({length:5},(_,n)=><Star key={n} className="h-3.5 w-3.5 fill-current" aria-hidden="true" />)}</div>
+                </div>
+                <p className={"mt-7 whitespace-pre-line text-base leading-[1.9] text-[#455a51] " + (isExpanded ? "" : "line-clamp-5")}>“{review.text}”</p>
                 <button onClick={() => setExpanded(isExpanded ? null : i)} aria-expanded={isExpanded} className="mt-3 w-fit text-xs font-extrabold text-[#237566] hover:underline">{isExpanded ? "Réduire l’avis" : "Lire l’avis complet"}</button>
                 <div className="mt-auto flex items-center gap-4 border-t border-[#e6ebe4] pt-7">
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#cce8de] text-lg font-black text-[#255d4f]">{review.initial}</span>
-                  <div><div className="text-sm font-extrabold">{review.name}</div><div className="mt-1 text-xs text-[#83938a]">{review.role}</div></div>
-                  <div className="ml-auto hidden gap-0.5 text-[#d7a54f] sm:flex">{Array.from({length:5},(_,n)=><Star key={n} className="h-3.5 w-3.5 fill-current" />)}</div>
+                  <div className="min-w-0"><div className="text-sm font-extrabold">{review.name}</div><div className="mt-1 break-words text-xs text-[#83938a]">{review.role}</div></div>
                 </div>
               </article>
             );

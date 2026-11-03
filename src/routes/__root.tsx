@@ -13,7 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
-import { contactInfo } from "../lib/contact-info";
+import { contactInfo, socialLinks } from "../lib/contact-info";
+import { WhatsAppFloat } from "../components/site/WhatsApp";
 
 function NotFoundComponent() {
   return (
@@ -138,10 +139,21 @@ function RootShell({ children }: { children: ReactNode }) {
     "@type": "ProfessionalService",
     name: contactInfo.brand,
     description:
-      "Conception de sites, outils web utiles et cartes NFC pour avis Google en Guadeloupe.",
+      "Conception de sites, outils web utiles et cartes NFC pour avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
+    url: "https://gwadawebstudio.fr",
+    logo: "https://gwadawebstudio.fr/logo-gws.svg",
     email: contactInfo.email,
     telephone: contactInfo.phoneHref,
-    areaServed: ["Guadeloupe", "France"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Saint-François",
+      postalCode: "97118",
+      addressRegion: "Guadeloupe",
+      addressCountry: "GP",
+    },
+    priceRange: "À partir de 550 €",
+    areaServed: ["Guadeloupe", "Martinique", "France"],
+    sameAs: socialLinks.map((link) => link.href),
   };
 
   return (
@@ -178,6 +190,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <WhatsAppFloat />
     </div>
   );
 }

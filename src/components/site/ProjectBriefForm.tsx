@@ -50,7 +50,7 @@ const emptyBrief: Brief = {
 
 function buildMessage(brief: Brief) {
   return [
-    "Bonjour Louis,",
+    "Bonjour,",
     "",
     `Je m'appelle ${brief.name}.`,
     `Mon activité / entreprise : ${brief.business}.`,

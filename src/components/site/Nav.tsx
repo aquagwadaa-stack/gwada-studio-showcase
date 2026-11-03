@@ -42,11 +42,11 @@ export function SiteNav() {
         </nav>
 
         <Link
-          to="/contact"
+          to="/demo-gratuite"
           className="hidden items-center gap-2 rounded-full bg-[#f7f7ef] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-[#0d1715] transition hover:bg-[#54d7c8] sm:inline-flex"
-          data-cta="nav-contact"
+          data-cta="nav-demo"
         >
-          Demander un devis <ArrowUpRight className="h-3.5 w-3.5" />
+          Démo gratuite <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
 
         <button
@@ -90,10 +90,17 @@ export function SiteNav() {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#54d7c8] px-5 text-sm font-black text-[#0d1715]"
-              data-cta="nav-mobile-contact"
+              className="my-1 rounded-xl px-3 py-3.5 text-lg font-black text-white/72 transition hover:bg-white/[0.035] hover:text-white"
             >
-              Me contacter <ArrowUpRight className="h-4 w-4" />
+              Contact
+            </Link>
+            <Link
+              to="/demo-gratuite"
+              onClick={() => setOpen(false)}
+              className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#54d7c8] px-5 text-sm font-black text-[#0d1715]"
+              data-cta="nav-mobile-demo"
+            >
+              Ma démo gratuite <ArrowUpRight className="h-4 w-4" />
             </Link>
           </nav>
         </div>

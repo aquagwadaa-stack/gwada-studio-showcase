@@ -109,12 +109,15 @@ function SitesWebPage() {
               est toujours le même : permettre à vos visiteurs de comprendre rapidement votre offre
               et de passer à l’action.
             </p>
+            <p className="mt-4 text-sm font-bold text-white/80">
+              Sites vitrines à partir de 550 €. Démonstration gratuite, sans engagement.
+            </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/contact"
+                to="/demo-gratuite"
                 className="gws-button-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
               >
-                Parler de mon site <ArrowRight className="h-4 w-4" />
+                Recevoir ma démo gratuite <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#possibilites"
@@ -247,10 +250,10 @@ function SitesWebPage() {
             </h2>
           </div>
           <Link
-            to="/contact"
+            to="/demo-gratuite"
             className="inline-flex min-h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0d1715] px-7 text-sm font-black text-white"
           >
-            Me contacter <ArrowRight className="h-4 w-4" />
+            Voir ma démo gratuite <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>

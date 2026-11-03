@@ -1,12 +1,29 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUp, Mail, Phone } from "lucide-react";
-import { contactInfo } from "@/lib/contact-info";
+import { contactInfo, socialLinks } from "@/lib/contact-info";
 
 const footerLinks = [
+  { to: "/demo-gratuite", label: "Démo gratuite" },
   { to: "/sites-web", label: "Sites web" },
   { to: "/outils-metier", label: "Outils métier" },
   { to: "/cartes-nfc", label: "Cartes NFC" },
   { to: "/contact", label: "Contact" },
+] as const;
+
+const zoneLinks = [
+  { to: "/creation-site-internet-guadeloupe", label: "Site internet en Guadeloupe" },
+  { to: "/creation-site-internet-martinique", label: "Site internet en Martinique" },
+  { to: "/site-internet-restaurant", label: "Restaurants et traiteurs" },
+  { to: "/site-internet-artisan", label: "Artisans" },
+  { to: "/site-internet-location-saisonniere", label: "Gîtes et locations" },
+  { to: "/site-internet-salon-institut", label: "Salons et instituts" },
+  { to: "/site-internet-commerce-antillais", label: "Commerces antillais en métropole" },
+  { to: "/site-commandes-noel", label: "Commandes de Noël" },
+] as const;
+
+const legalLinks = [
+  { to: "/mentions-legales", label: "Mentions légales" },
+  { to: "/confidentialite", label: "Confidentialité" },
 ] as const;
 
 export function SiteFooter() {
@@ -48,10 +65,41 @@ export function SiteFooter() {
             ))}
           </div>
 
-          <Link to="/contact" className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#54d7c8]/25 bg-[#54d7c8]/10 px-5 py-3 text-xs font-extrabold text-[#54d7c8] transition hover:bg-[#54d7c8] hover:text-[#0d1715]">Votre projet mérite mieux qu’un site ordinaire. Parlons-en <ArrowUp className="h-3.5 w-3.5 rotate-45" /></Link>
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            {zoneLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-xs font-semibold text-white/35 transition hover:text-white/75"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-          <p className="mt-6 text-xs text-white/30">
-            © {new Date().getFullYear()} Gwada Web Studio · Louis
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-white/35 transition hover:text-white/75"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <Link to="/demo-gratuite" className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#54d7c8]/25 bg-[#54d7c8]/10 px-5 py-3 text-xs font-extrabold text-[#54d7c8] transition hover:bg-[#54d7c8] hover:text-[#0d1715]">Voyez votre site avant de payer <ArrowUp className="h-3.5 w-3.5 rotate-45" /></Link>
+
+          <p className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/30">
+            <span>© {new Date().getFullYear()} Gwada Web Studio</span>
+            {legalLinks.map((link) => (
+              <Link key={link.to} to={link.to} className="transition hover:text-white/70">
+                {link.label}
+              </Link>
+            ))}
           </p>
         </div>
 

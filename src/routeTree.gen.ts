@@ -11,8 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitesWebRouteImport } from './routes/sites-web'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SiteInternetSalonInstitutRouteImport } from './routes/site-internet-salon-institut'
+import { Route as SiteInternetRestaurantRouteImport } from './routes/site-internet-restaurant'
+import { Route as SiteInternetLocationSaisonniereRouteImport } from './routes/site-internet-location-saisonniere'
+import { Route as SiteInternetCommerceAntillaisRouteImport } from './routes/site-internet-commerce-antillais'
+import { Route as SiteInternetArtisanRouteImport } from './routes/site-internet-artisan'
+import { Route as SiteCommandesNoelRouteImport } from './routes/site-commandes-noel'
 import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as DemoGratuiteRouteImport } from './routes/demo-gratuite'
+import { Route as CreationSiteInternetMartiniqueRouteImport } from './routes/creation-site-internet-martinique'
+import { Route as CreationSiteInternetGuadeloupeRouteImport } from './routes/creation-site-internet-guadeloupe'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
@@ -29,14 +40,74 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteInternetSalonInstitutRoute =
+  SiteInternetSalonInstitutRouteImport.update({
+    id: '/site-internet-salon-institut',
+    path: '/site-internet-salon-institut',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteInternetRestaurantRoute = SiteInternetRestaurantRouteImport.update({
+  id: '/site-internet-restaurant',
+  path: '/site-internet-restaurant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteInternetLocationSaisonniereRoute =
+  SiteInternetLocationSaisonniereRouteImport.update({
+    id: '/site-internet-location-saisonniere',
+    path: '/site-internet-location-saisonniere',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteInternetCommerceAntillaisRoute =
+  SiteInternetCommerceAntillaisRouteImport.update({
+    id: '/site-internet-commerce-antillais',
+    path: '/site-internet-commerce-antillais',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteInternetArtisanRoute = SiteInternetArtisanRouteImport.update({
+  id: '/site-internet-artisan',
+  path: '/site-internet-artisan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteCommandesNoelRoute = SiteCommandesNoelRouteImport.update({
+  id: '/site-commandes-noel',
+  path: '/site-commandes-noel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OutilsMetierRoute = OutilsMetierRouteImport.update({
   id: '/outils-metier',
   path: '/outils-metier',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoGratuiteRoute = DemoGratuiteRouteImport.update({
+  id: '/demo-gratuite',
+  path: '/demo-gratuite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationSiteInternetMartiniqueRoute =
+  CreationSiteInternetMartiniqueRouteImport.update({
+    id: '/creation-site-internet-martinique',
+    path: '/creation-site-internet-martinique',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CreationSiteInternetGuadeloupeRoute =
+  CreationSiteInternetGuadeloupeRouteImport.update({
+    id: '/creation-site-internet-guadeloupe',
+    path: '/creation-site-internet-guadeloupe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartesNfcRoute = CartesNfcRouteImport.update({
@@ -68,8 +139,19 @@ const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
+  '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
+  '/demo-gratuite': typeof DemoGratuiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/site-commandes-noel': typeof SiteCommandesNoelRoute
+  '/site-internet-artisan': typeof SiteInternetArtisanRoute
+  '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
+  '/site-internet-location-saisonniere': typeof SiteInternetLocationSaisonniereRoute
+  '/site-internet-restaurant': typeof SiteInternetRestaurantRoute
+  '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
@@ -79,8 +161,19 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
+  '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
+  '/demo-gratuite': typeof DemoGratuiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/site-commandes-noel': typeof SiteCommandesNoelRoute
+  '/site-internet-artisan': typeof SiteInternetArtisanRoute
+  '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
+  '/site-internet-location-saisonniere': typeof SiteInternetLocationSaisonniereRoute
+  '/site-internet-restaurant': typeof SiteInternetRestaurantRoute
+  '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
@@ -91,8 +184,19 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
+  '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
+  '/demo-gratuite': typeof DemoGratuiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/site-commandes-noel': typeof SiteCommandesNoelRoute
+  '/site-internet-artisan': typeof SiteInternetArtisanRoute
+  '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
+  '/site-internet-location-saisonniere': typeof SiteInternetLocationSaisonniereRoute
+  '/site-internet-restaurant': typeof SiteInternetRestaurantRoute
+  '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
@@ -104,8 +208,19 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cartes-nfc'
+    | '/confidentialite'
     | '/contact'
+    | '/creation-site-internet-guadeloupe'
+    | '/creation-site-internet-martinique'
+    | '/demo-gratuite'
+    | '/mentions-legales'
     | '/outils-metier'
+    | '/site-commandes-noel'
+    | '/site-internet-artisan'
+    | '/site-internet-commerce-antillais'
+    | '/site-internet-location-saisonniere'
+    | '/site-internet-restaurant'
+    | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
@@ -115,8 +230,19 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cartes-nfc'
+    | '/confidentialite'
     | '/contact'
+    | '/creation-site-internet-guadeloupe'
+    | '/creation-site-internet-martinique'
+    | '/demo-gratuite'
+    | '/mentions-legales'
     | '/outils-metier'
+    | '/site-commandes-noel'
+    | '/site-internet-artisan'
+    | '/site-internet-commerce-antillais'
+    | '/site-internet-location-saisonniere'
+    | '/site-internet-restaurant'
+    | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
@@ -126,8 +252,19 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/cartes-nfc'
+    | '/confidentialite'
     | '/contact'
+    | '/creation-site-internet-guadeloupe'
+    | '/creation-site-internet-martinique'
+    | '/demo-gratuite'
+    | '/mentions-legales'
     | '/outils-metier'
+    | '/site-commandes-noel'
+    | '/site-internet-artisan'
+    | '/site-internet-commerce-antillais'
+    | '/site-internet-location-saisonniere'
+    | '/site-internet-restaurant'
+    | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
@@ -138,8 +275,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartesNfcRoute: typeof CartesNfcRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
+  CreationSiteInternetGuadeloupeRoute: typeof CreationSiteInternetGuadeloupeRoute
+  CreationSiteInternetMartiniqueRoute: typeof CreationSiteInternetMartiniqueRoute
+  DemoGratuiteRoute: typeof DemoGratuiteRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   OutilsMetierRoute: typeof OutilsMetierRoute
+  SiteCommandesNoelRoute: typeof SiteCommandesNoelRoute
+  SiteInternetArtisanRoute: typeof SiteInternetArtisanRoute
+  SiteInternetCommerceAntillaisRoute: typeof SiteInternetCommerceAntillaisRoute
+  SiteInternetLocationSaisonniereRoute: typeof SiteInternetLocationSaisonniereRoute
+  SiteInternetRestaurantRoute: typeof SiteInternetRestaurantRoute
+  SiteInternetSalonInstitutRoute: typeof SiteInternetSalonInstitutRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SitesWebRoute: typeof SitesWebRoute
   ACodeRoute: typeof ACodeRoute
@@ -163,6 +311,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/site-internet-salon-institut': {
+      id: '/site-internet-salon-institut'
+      path: '/site-internet-salon-institut'
+      fullPath: '/site-internet-salon-institut'
+      preLoaderRoute: typeof SiteInternetSalonInstitutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-restaurant': {
+      id: '/site-internet-restaurant'
+      path: '/site-internet-restaurant'
+      fullPath: '/site-internet-restaurant'
+      preLoaderRoute: typeof SiteInternetRestaurantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-location-saisonniere': {
+      id: '/site-internet-location-saisonniere'
+      path: '/site-internet-location-saisonniere'
+      fullPath: '/site-internet-location-saisonniere'
+      preLoaderRoute: typeof SiteInternetLocationSaisonniereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-commerce-antillais': {
+      id: '/site-internet-commerce-antillais'
+      path: '/site-internet-commerce-antillais'
+      fullPath: '/site-internet-commerce-antillais'
+      preLoaderRoute: typeof SiteInternetCommerceAntillaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-artisan': {
+      id: '/site-internet-artisan'
+      path: '/site-internet-artisan'
+      fullPath: '/site-internet-artisan'
+      preLoaderRoute: typeof SiteInternetArtisanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-commandes-noel': {
+      id: '/site-commandes-noel'
+      path: '/site-commandes-noel'
+      fullPath: '/site-commandes-noel'
+      preLoaderRoute: typeof SiteCommandesNoelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/outils-metier': {
       id: '/outils-metier'
       path: '/outils-metier'
@@ -170,11 +360,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OutilsMetierRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-gratuite': {
+      id: '/demo-gratuite'
+      path: '/demo-gratuite'
+      fullPath: '/demo-gratuite'
+      preLoaderRoute: typeof DemoGratuiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creation-site-internet-martinique': {
+      id: '/creation-site-internet-martinique'
+      path: '/creation-site-internet-martinique'
+      fullPath: '/creation-site-internet-martinique'
+      preLoaderRoute: typeof CreationSiteInternetMartiniqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creation-site-internet-guadeloupe': {
+      id: '/creation-site-internet-guadeloupe'
+      path: '/creation-site-internet-guadeloupe'
+      fullPath: '/creation-site-internet-guadeloupe'
+      preLoaderRoute: typeof CreationSiteInternetGuadeloupeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cartes-nfc': {
@@ -218,8 +443,19 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartesNfcRoute: CartesNfcRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
+  CreationSiteInternetGuadeloupeRoute: CreationSiteInternetGuadeloupeRoute,
+  CreationSiteInternetMartiniqueRoute: CreationSiteInternetMartiniqueRoute,
+  DemoGratuiteRoute: DemoGratuiteRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   OutilsMetierRoute: OutilsMetierRoute,
+  SiteCommandesNoelRoute: SiteCommandesNoelRoute,
+  SiteInternetArtisanRoute: SiteInternetArtisanRoute,
+  SiteInternetCommerceAntillaisRoute: SiteInternetCommerceAntillaisRoute,
+  SiteInternetLocationSaisonniereRoute: SiteInternetLocationSaisonniereRoute,
+  SiteInternetRestaurantRoute: SiteInternetRestaurantRoute,
+  SiteInternetSalonInstitutRoute: SiteInternetSalonInstitutRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SitesWebRoute: SitesWebRoute,
   ACodeRoute: ACodeRoute,

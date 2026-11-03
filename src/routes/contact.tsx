@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { ProjectBriefForm } from "@/components/site/ProjectBriefForm";
-import { contactInfo } from "@/lib/contact-info";
+import { WhatsAppIcon } from "@/components/site/WhatsApp";
+import { contactInfo, whatsappLink } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/contact")({
   staticData: { sitemap: true },
@@ -38,6 +39,24 @@ function ContactPage() {
             </p>
 
             <div className="mt-9 space-y-3">
+              <Link
+                to="/demo-gratuite"
+                className="flex items-center gap-3 rounded-2xl border border-[#54d7c8]/35 bg-[#54d7c8]/10 px-5 py-4 text-sm font-bold text-[#b9f7e9] transition hover:border-[#54d7c8]"
+                data-cta="contact-demo"
+              >
+                <Sparkles className="h-4 w-4 text-[#54d7c8]" />
+                Voir votre site avant de payer : démo gratuite
+              </Link>
+              <a
+                href={whatsappLink("Bonjour, ")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold text-white/70 transition hover:border-white/25 hover:text-white"
+                data-cta="contact-whatsapp"
+              >
+                <WhatsAppIcon className="h-4 w-4 text-[#54d7c8]" />
+                WhatsApp : {contactInfo.phone}
+              </a>
               <a
                 href={`mailto:${contactInfo.email}`}
                 className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold text-white/70 transition hover:border-white/25 hover:text-white"
@@ -54,7 +73,7 @@ function ContactPage() {
               </a>
               <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold text-white/55">
                 <MapPin className="h-4 w-4 text-[#54d7c8]" />
-                Basé en Guadeloupe · projets à distance possibles
+                Basé en Guadeloupe · Martinique et France à distance
               </div>
             </div>
           </div>

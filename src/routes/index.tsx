@@ -23,11 +23,11 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Gwada Web Studio — Des sites web qui donnent envie de vous choisir" },
+      { title: "Création de site internet en Guadeloupe, démo gratuite — Gwada Web Studio" },
       {
         name: "description",
         content:
-          "Création de sites web sur mesure en Guadeloupe. Découvrez nos réalisations, sites de réservation, outils métier et solutions NFC. Parlons de votre projet.",
+          "Création de sites web sur mesure en Guadeloupe, en Martinique et en France. Voyez votre site avant de payer : démonstration gratuite, sans engagement.",
       },
       {
         property: "og:title",
@@ -188,17 +188,18 @@ function Hero() {
           </h1>
 
           <p className="mt-9 max-w-[590px] text-base leading-[1.85] text-white/65 sm:text-lg">
-            Une première impression peut tout changer. Je crée des sites web sur mesure qui
-            mettent votre activité en valeur et donnent envie à vos visiteurs de passer à l’action.
+            Une première impression peut tout changer. Je crée des sites web sur mesure, et vous
+            voyez le vôtre avant de payer : je vous prépare une démonstration gratuite à vos
+            couleurs, sans engagement.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
-              to="/contact"
+              to="/demo-gratuite"
               className="gws-button-primary group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 text-sm font-black"
-              data-cta="home-hero-project"
+              data-cta="home-hero-demo"
             >
-              Parlons de votre projet
+              Recevoir ma démo gratuite
               <ArrowUpRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
             <a
@@ -212,9 +213,9 @@ function Hero() {
           </div>
 
           <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-white/10 pt-7 text-xs font-medium text-white/55">
-            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Design sur mesure</span>
-            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Adapté au mobile</span>
-            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Contact direct</span>
+            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Démo gratuite</span>
+            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Sans engagement</span>
+            <span className="flex items-center gap-2"><CircleCheck className="h-4 w-4 text-[#54d7c8]" /> Sites dès 550 €</span>
           </div>
         </div>
 
@@ -587,15 +588,15 @@ function FinalCta() {
               Et si votre prochain client
               <span className="block text-[#287667]">tombait sous le charme ?</span>
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-[1.85] text-[#245c51]">Parlez-moi de votre projet. Je vous aiderai à imaginer un site qui vous ressemble et qui donne envie de vous choisir.</p>
+            <p className="mt-6 max-w-xl text-base leading-[1.85] text-[#245c51]">Je vous prépare gratuitement une démonstration à vos couleurs. Vous voyez votre site avant de payer, et vous décidez ensuite.</p>
           </div>
-          <Link to="/contact" className="group inline-flex min-h-16 shrink-0 items-center justify-center gap-4 self-start rounded-full bg-[#102b23] px-8 text-sm font-extrabold text-white shadow-[0_20px_45px_rgba(10,48,37,.15)] transition hover:-translate-y-1 hover:bg-[#18483a] lg:self-end" data-cta="home-final-project">
-            Demander mon devis <ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <Link to="/demo-gratuite" className="group inline-flex min-h-16 shrink-0 items-center justify-center gap-4 self-start rounded-full bg-[#102b23] px-8 text-sm font-extrabold text-white shadow-[0_20px_45px_rgba(10,48,37,.15)] transition hover:-translate-y-1 hover:bg-[#18483a] lg:self-end" data-cta="home-final-demo">
+            Recevoir ma démo gratuite <ArrowUpRight className="h-5 w-5 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
       </div>
       <div className="mx-auto mt-6 flex max-w-[1380px] flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[11px] font-bold text-white/35">
-        <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[#54d7c8]" /> Premier échange sans engagement</span>
+        <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[#54d7c8]" /> Démonstration sans engagement</span>
         <span className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-[#54d7c8]" /> Un projet adapté à votre activité</span>
         <Link to="/contact" className="flex items-center gap-1 hover:text-white">Une question ? Contactez-moi <ChevronRight className="h-3 w-3" /></Link>
       </div>

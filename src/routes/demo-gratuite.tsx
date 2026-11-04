@@ -94,7 +94,7 @@ const faq = [
   {
     question: "Vous travaillez aussi en dehors de la Guadeloupe ?",
     answer:
-      "Oui. Je suis basé à Saint-François et je travaille à distance avec la Martinique et toute la France, par WhatsApp, téléphone ou visio.",
+      "Oui. Je suis basé aux Abymes et je travaille à distance avec la Martinique et toute la France, par WhatsApp, téléphone ou visio.",
   },
   {
     question: "Et si j’ai déjà un site ?",
@@ -126,6 +126,7 @@ function DemoPage() {
                 "Aucun paiement demandé",
                 "Un seul interlocuteur, du début à la fin",
                 "Sites à partir de 550 € si vous décidez de continuer",
+                "Chaque site comprend un espace pour le gérer vous-même",
                 "Guadeloupe, Martinique et toute la France",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-2.5">

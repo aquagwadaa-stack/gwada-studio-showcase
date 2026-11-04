@@ -55,7 +55,7 @@ export const landingPages = {
     headline: "Votre site internet,",
     accent: "créé en Guadeloupe.",
     intro:
-      "Je suis basé à Saint-François, et je crée des sites pour les commerces, artisans, hébergements et professionnels de toute la Guadeloupe. Vous voyez une démonstration à vos couleurs avant de décider.",
+      "Je suis basé aux Abymes, et je crée des sites pour les commerces, artisans, hébergements et professionnels de toute la Guadeloupe. Vous voyez une démonstration à vos couleurs avant de décider.",
     pointsTitle: "Ce qui change avec un studio sur place",
     points: [
       {
@@ -80,7 +80,7 @@ export const landingPages = {
       {
         question: "Travaillez-vous dans toute la Guadeloupe ?",
         answer:
-          "Oui. Je suis à Saint-François et je travaille avec toute la Guadeloupe, sur place ou à distance.",
+          "Oui. Je suis aux Abymes et je travaille avec toute la Guadeloupe, sur place ou à distance.",
       },
       demoFaq,
       priceFaq,

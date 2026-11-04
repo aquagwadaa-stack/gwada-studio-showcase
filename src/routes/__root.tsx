@@ -146,8 +146,7 @@ function RootShell({ children }: { children: ReactNode }) {
     telephone: contactInfo.phoneHref,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Saint-François",
-      postalCode: "97118",
+      addressLocality: "Les Abymes",
       addressRegion: "Guadeloupe",
       addressCountry: "GP",
     },

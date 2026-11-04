@@ -14,6 +14,7 @@ export type LandingPage = {
   pointsTitle: string;
   points: { title: string; text: string }[];
   reference: LandingReference;
+  example?: { label: string; href: string };
   faq: FaqItem[];
 };
 
@@ -381,6 +382,7 @@ export const landingPages = {
       },
     ],
     reference: kafeCeramik,
+    example: { label: "Voir un exemple de page de commandes", href: "/exemple-commandes-noel" },
     faq: [
       {
         question: "Est-ce que ce sera prêt à temps ?",

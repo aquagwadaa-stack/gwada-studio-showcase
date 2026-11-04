@@ -33,6 +33,15 @@ export function SeoLanding({ page }: { page: LandingPage }) {
               Voyez votre site avant de payer : démonstration gratuite, sans engagement. Sites à
               partir de 550 €.
             </p>
+            {page.example && (
+              <a
+                href={page.example.href}
+                data-cta="landing-exemple"
+                className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full border border-[#54d7c8]/50 px-5 text-sm font-bold text-[#54d7c8] transition hover:border-[#54d7c8]"
+              >
+                {page.example.label} <ArrowRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
           <DemoRequestForm defaultSource={page.source} />
         </div>

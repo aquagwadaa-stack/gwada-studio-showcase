@@ -175,7 +175,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isolated = pathname.startsWith("/admin") || pathname.startsWith("/a/");
+  const isolated =
+    pathname.startsWith("/admin") || pathname.startsWith("/a/") || pathname.startsWith("/exemple-");
 
   usePageScrollMotion(pathname, isolated);
 
@@ -277,9 +278,7 @@ function usePageScrollMotion(pathname: string, isolated: boolean) {
     const prepare = () => {
       clearStyles();
 
-      const sections = Array.from(
-        document.querySelectorAll<HTMLElement>("main > div > section"),
-      );
+      const sections = Array.from(document.querySelectorAll<HTMLElement>("main > div > section"));
 
       items = sections.map((section, index) => {
         const target =

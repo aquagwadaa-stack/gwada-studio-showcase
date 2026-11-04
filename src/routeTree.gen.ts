@@ -19,6 +19,7 @@ import { Route as SiteInternetArtisanRouteImport } from './routes/site-internet-
 import { Route as SiteCommandesNoelRouteImport } from './routes/site-commandes-noel'
 import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as ExempleCommandesNoelRouteImport } from './routes/exemple-commandes-noel'
 import { Route as DemoGratuiteRouteImport } from './routes/demo-gratuite'
 import { Route as CreationSiteInternetMartiniqueRouteImport } from './routes/creation-site-internet-martinique'
 import { Route as CreationSiteInternetGuadeloupeRouteImport } from './routes/creation-site-internet-guadeloupe'
@@ -83,6 +84,11 @@ const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   path: '/mentions-legales',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExempleCommandesNoelRoute = ExempleCommandesNoelRouteImport.update({
+  id: '/exemple-commandes-noel',
+  path: '/exemple-commandes-noel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoGratuiteRoute = DemoGratuiteRouteImport.update({
   id: '/demo-gratuite',
   path: '/demo-gratuite',
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
+  '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
+  '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
+  '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
@@ -213,6 +222,7 @@ export interface FileRouteTypes {
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
+    | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
     | '/site-commandes-noel'
@@ -235,6 +245,7 @@ export interface FileRouteTypes {
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
+    | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
     | '/site-commandes-noel'
@@ -257,6 +268,7 @@ export interface FileRouteTypes {
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
+    | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
     | '/site-commandes-noel'
@@ -280,6 +292,7 @@ export interface RootRouteChildren {
   CreationSiteInternetGuadeloupeRoute: typeof CreationSiteInternetGuadeloupeRoute
   CreationSiteInternetMartiniqueRoute: typeof CreationSiteInternetMartiniqueRoute
   DemoGratuiteRoute: typeof DemoGratuiteRoute
+  ExempleCommandesNoelRoute: typeof ExempleCommandesNoelRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   OutilsMetierRoute: typeof OutilsMetierRoute
   SiteCommandesNoelRoute: typeof SiteCommandesNoelRoute
@@ -367,6 +380,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MentionsLegalesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/exemple-commandes-noel': {
+      id: '/exemple-commandes-noel'
+      path: '/exemple-commandes-noel'
+      fullPath: '/exemple-commandes-noel'
+      preLoaderRoute: typeof ExempleCommandesNoelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo-gratuite': {
       id: '/demo-gratuite'
       path: '/demo-gratuite'
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreationSiteInternetGuadeloupeRoute: CreationSiteInternetGuadeloupeRoute,
   CreationSiteInternetMartiniqueRoute: CreationSiteInternetMartiniqueRoute,
   DemoGratuiteRoute: DemoGratuiteRoute,
+  ExempleCommandesNoelRoute: ExempleCommandesNoelRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   OutilsMetierRoute: OutilsMetierRoute,
   SiteCommandesNoelRoute: SiteCommandesNoelRoute,

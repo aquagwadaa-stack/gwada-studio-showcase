@@ -54,12 +54,12 @@ const projects = [
     theme: "beach",
   },
   {
-    title: "Dr Aubry",
-    type: "Cabinet médical",
+    title: "Cabinet médical",
+    type: "Santé",
     description: "Une présence professionnelle, claire et accessible pour les patients.",
     tags: ["Site professionnel", "Contenus administrables"],
     url: "https://docaubry.fr/",
-    domain: "docaubry.fr",
+    domain: "Site client",
     theme: "medical",
   },
   {
@@ -115,11 +115,11 @@ const testimonials = [
     role: "Site de réservation · Saint-François",
     initial: "K",
     text:
-      "Nous avons décidé de faire confiance à Louis de Gwada Web Studio pour la création du site internet de notre Café Céramique, et nous n’avons pas été déçus une seule seconde !\n\nLouis a été ultra réactif, très professionnel et toujours force de proposition. Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. Louis est un jeune professionnel sérieux, talentueux et très impliqué, qui mérite vraiment d’être connu !\n\nMerci encore Louis pour ton travail et ton accompagnement.",
+      "[…] Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. […]",
   },
   {
-    name: "Jean-Jacques Aubry",
-    role: "Site professionnel · docaubry.fr",
+    name: "J.-J. A.",
+    role: "Site professionnel · Cabinet médical",
     initial: "J",
     text:
       "J’ai confié la création de mon site professionnel à Gwada Web Studio et le résultat est tout à fait conforme à ce que j’attendais. Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité. Je suis très satisfait du travail réalisé et du sérieux dont il a fait preuve.",
@@ -387,7 +387,7 @@ function ProjectIllustration({ theme }: { theme: (typeof projects)[number]["them
         <div className="absolute -right-14 top-[-80px] h-72 w-72 rounded-full border-[40px] border-white/20" />
         <div className="absolute -left-20 bottom-[-100px] h-80 w-80 rounded-full bg-[#779da7]/40" />
         <div className="relative mx-auto h-full max-w-[540px] overflow-hidden rounded-[1rem] border border-white/80 bg-white shadow-[0_25px_80px_rgba(37,77,89,.18)]">
-          <div className="flex h-14 items-center justify-between border-b border-[#e3eaed] px-5"><span className="font-display text-sm font-black text-[#2b505d]">Dr Aubry <span className="font-normal text-[#81a4af]">| Médecine générale</span></span><span className="h-8 w-20 rounded-full bg-[#4c8699]" /></div>
+          <div className="flex h-14 items-center justify-between border-b border-[#e3eaed] px-5"><span className="font-display text-sm font-black text-[#2b505d]">Cabinet médical <span className="font-normal text-[#81a4af]">| Médecine générale</span></span><span className="h-8 w-20 rounded-full bg-[#4c8699]" /></div>
           <div className="grid h-[calc(100%-3.5rem)] grid-cols-[1.15fr_.85fr]">
             <div className="flex flex-col justify-center px-5 sm:px-7">
               <span className="text-[8px] font-bold uppercase tracking-[.15em] text-[#68a6a4]">Informations & accompagnement</span>

@@ -2,11 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { ProjectBriefForm } from "@/components/site/ProjectBriefForm";
 import { WhatsAppIcon } from "@/components/site/WhatsApp";
+import { rise } from "@/components/site/Motion";
 import { contactInfo, whatsappLink } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/contact")({
   staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/contact" }],
     meta: [
       { title: "Contact — Gwada Web Studio" },
       {
@@ -26,16 +28,19 @@ function ContactPage() {
         <div className="absolute inset-x-0 bottom-0 h-[36rem] bg-[radial-gradient(circle_at_30%_100%,rgba(84,215,200,.14),transparent_62%)]" />
         <div className="relative mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
-            <h1 className="max-w-2xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
+            <h1 className="gws-rise max-w-2xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
               Dites-moi ce que vous aimeriez améliorer.
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+            <p
+              {...rise(1)}
+              className="gws-rise mt-5 max-w-xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+            >
               Pas besoin d’avoir déjà défini la solution technique. Expliquez simplement votre
               activité, votre problème ou votre idée : je vous répondrai avec une première
               orientation.
             </p>
 
-            <div className="mt-9 space-y-3">
+            <div {...rise(2)} className="gws-rise mt-9 space-y-3">
               <Link
                 to="/demo-gratuite"
                 className="flex items-center gap-3 rounded-2xl border border-[#54d7c8]/35 bg-[#54d7c8]/10 px-5 py-4 text-sm font-bold text-[#b9f7e9] transition hover:border-[#54d7c8]"

@@ -1,16 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
 import { contactInfo, socialLinks } from "@/lib/contact-info";
-
-const serviceLinks = [
-  { to: "/sites-web", label: "Sites internet" },
-  { to: "/outils-metier", label: "Applications et outils" },
-  { to: "/cartes-nfc", label: "Cartes d’avis Google" },
-  { to: "/ce-qui-est-inclus", label: "Ce qui est inclus" },
-] as const;
+import { services } from "@/lib/services";
 
 const studioLinks = [
   { to: "/realisations", label: "Réalisations" },
+  { to: "/ce-qui-est-inclus", label: "Ce qui est inclus" },
   { to: "/demo-gratuite", label: "Démo gratuite" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -79,7 +74,7 @@ export function SiteFooter() {
           <div>
             <FooterTitle>Services</FooterTitle>
             <ul className="mt-3 grid gap-2">
-              {serviceLinks.map((link) => (
+              {services.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className={linkClass}>
                     {link.label}

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
 import { realisations } from "@/lib/realisations";
 
@@ -27,12 +28,15 @@ function RealisationsPage() {
       <section className="relative overflow-hidden border-b border-white/10 px-5 pb-12 pt-14 sm:px-8 sm:pb-16 sm:pt-20 lg:px-12">
         <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
         <div className="relative mx-auto max-w-[1280px]">
-          <h1 className="max-w-3xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+          <h1 className="gws-rise max-w-3xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
             Mes réalisations
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
-            Trois sites pour des clients, et une application à moi. Tout est en ligne : cliquez sur
-            une page pour ouvrir le vrai site.
+          <p
+            {...rise(1)}
+            className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+          >
+            Trois sites pour des clients, et une application à moi. Tout est en ligne : passez sur
+            une page pour la voir défiler, cliquez pour ouvrir le vrai site.
           </p>
         </div>
       </section>
@@ -42,6 +46,7 @@ function RealisationsPage() {
           {realisations.map((item, index) => (
             <article
               key={item.slug}
+              {...reveal()}
               className={`grid items-center gap-7 lg:gap-14 ${index % 2 ? "lg:grid-cols-[.75fr_1.25fr]" : "lg:grid-cols-[1.25fr_.75fr]"}`}
             >
               <a
@@ -54,6 +59,7 @@ function RealisationsPage() {
               >
                 <BrowserFrame
                   image={item.image}
+                  pageLongue={item.pageLongue}
                   alt={item.alt}
                   address={item.address}
                   sizes="(min-width: 1024px) 760px, 100vw"
@@ -107,7 +113,10 @@ function RealisationsPage() {
       </section>
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+        >
           <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Et si le prochain, c’était le vôtre ?
           </h2>

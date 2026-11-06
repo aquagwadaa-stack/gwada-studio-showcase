@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, CircleCheck, X } from "lucide-react";
 import { DemoRequestForm } from "@/components/site/DemoRequestForm";
 import { FaqSection } from "@/components/site/FaqSection";
+import { reveal, rise } from "@/components/site/Motion";
 import { RealisationCard } from "@/components/site/SitePreview";
 import { realisationsClients } from "@/lib/realisations";
 
@@ -87,17 +88,26 @@ function DemoPage() {
         <div className="absolute inset-x-0 bottom-0 h-[32rem] bg-[radial-gradient(circle_at_25%_100%,rgba(84,215,200,.13),transparent_62%)]" />
         <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-start lg:gap-14">
           <div className="lg:pt-8">
-            <p className="text-sm font-bold text-[#54d7c8]">
+            <p className="gws-rise text-sm font-bold text-[#54d7c8]">
               Démonstration gratuite, sans engagement
             </p>
-            <h1 className="mt-3 font-display text-[clamp(2.4rem,4.8vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.045em]">
+            <h1
+              {...rise(1)}
+              className="gws-rise mt-3 font-display text-[clamp(2.4rem,4.8vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.045em]"
+            >
               Voyez votre site <span className="block">avant de payer.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+            <p
+              {...rise(2)}
+              className="gws-rise mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg"
+            >
               Je prépare gratuitement une démonstration à vos couleurs. Vous la regardez sur votre
               téléphone, et vous décidez ensuite. Si elle ne vous plaît pas, on en reste là.
             </p>
-            <ul className="mt-7 grid gap-2.5 text-sm font-semibold text-white/72">
+            <ul
+              {...rise(3)}
+              className="gws-rise mt-7 grid gap-2.5 text-sm font-semibold text-white/72"
+            >
               {[
                 "Aucun paiement demandé",
                 "Un seul interlocuteur, du début à la fin",
@@ -117,12 +127,15 @@ function DemoPage() {
 
       <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+          <h2
+            {...reveal()}
+            className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+          >
             Trois étapes, et c’est vous qui décidez.
           </h2>
           <ol className="mt-10 grid gap-4 md:grid-cols-3">
             {steps.map((step, index) => (
-              <li key={step.title} className="rounded-3xl bg-white p-6 sm:p-7">
+              <li key={step.title} {...reveal(index)} className="rounded-3xl bg-white p-6 sm:p-7">
                 <div className="grid h-10 w-10 place-items-center rounded-full bg-[#102b23] text-sm font-black text-white">
                   {index + 1}
                 </div>
@@ -136,7 +149,10 @@ function DemoPage() {
 
       <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-4 md:grid-cols-2">
-          <div className="rounded-3xl border border-[#54d7c8]/25 bg-[#54d7c8]/[0.06] p-6 sm:p-8">
+          <div
+            {...reveal()}
+            className="rounded-3xl border border-[#54d7c8]/25 bg-[#54d7c8]/[0.06] p-6 sm:p-8"
+          >
             <h2 className="text-xl font-black tracking-[-0.02em]">Ce que vous recevez</h2>
             <ul className="mt-5 grid gap-3 text-sm text-white/72">
               {included.map((item) => (
@@ -146,7 +162,10 @@ function DemoPage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <div
+            {...reveal(1)}
+            className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
+          >
             <h2 className="text-xl font-black tracking-[-0.02em]">Ce que ce n’est pas</h2>
             <ul className="mt-5 grid gap-3 text-sm text-white/72">
               {excluded.map((item) => (
@@ -161,12 +180,20 @@ function DemoPage() {
 
       <section className="bg-[#102019] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+          <h2
+            {...reveal()}
+            className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+          >
             Des sites déjà en ligne.
           </h2>
           <div className="mt-9 grid gap-x-6 gap-y-10 md:grid-cols-3">
-            {realisationsClients.map((item) => (
-              <RealisationCard key={item.slug} item={item} sizes="(min-width: 768px) 33vw, 100vw" />
+            {realisationsClients.map((item, index) => (
+              <RealisationCard
+                key={item.slug}
+                item={item}
+                index={index}
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
             ))}
           </div>
           <Link
@@ -182,7 +209,10 @@ function DemoPage() {
       <FaqSection items={faq} />
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+        >
           <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Le plus simple, c’est de voir le résultat.
           </h2>

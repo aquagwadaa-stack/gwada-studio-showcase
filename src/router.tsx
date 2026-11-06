@@ -6,6 +6,7 @@ export const getRouter = () => {
     routeTree,
     context: {},
     scrollRestoration: true,
+    defaultViewTransition: true,
     defaultPreloadStaleTime: 0,
   });
 

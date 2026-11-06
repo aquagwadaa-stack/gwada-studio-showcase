@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AutomatisationIaRouteImport } from './routes/automatisation-ia'
 import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
 import { Route as CeQuiEstInclusRouteImport } from './routes/ce-qui-est-inclus'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
@@ -21,6 +22,7 @@ import { Route as ExempleCommandesNoelRouteImport } from './routes/exemple-comma
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
 import { Route as RealisationsRouteImport } from './routes/realisations'
+import { Route as ReferencementGoogleIaRouteImport } from './routes/referencement-google-ia'
 import { Route as SiteCommandesNoelRouteImport } from './routes/site-commandes-noel'
 import { Route as SiteInternetArtisanRouteImport } from './routes/site-internet-artisan'
 import { Route as SiteInternetCommerceAntillaisRouteImport } from './routes/site-internet-commerce-antillais'
@@ -36,6 +38,11 @@ import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutomatisationIaRoute = AutomatisationIaRouteImport.update({
+  id: '/automatisation-ia',
+  path: '/automatisation-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartesNfcRoute = CartesNfcRouteImport.update({
@@ -93,6 +100,11 @@ const OutilsMetierRoute = OutilsMetierRouteImport.update({
 const RealisationsRoute = RealisationsRouteImport.update({
   id: '/realisations',
   path: '/realisations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencementGoogleIaRoute = ReferencementGoogleIaRouteImport.update({
+  id: '/referencement-google-ia',
+  path: '/referencement-google-ia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteCommandesNoelRoute = SiteCommandesNoelRouteImport.update({
@@ -156,6 +168,7 @@ const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/automatisation-ia': typeof AutomatisationIaRoute
   '/cartes-nfc': typeof CartesNfcRoute
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -167,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/realisations': typeof RealisationsRoute
+  '/referencement-google-ia': typeof ReferencementGoogleIaRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -181,6 +195,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/automatisation-ia': typeof AutomatisationIaRoute
   '/cartes-nfc': typeof CartesNfcRoute
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -192,6 +207,7 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/realisations': typeof RealisationsRoute
+  '/referencement-google-ia': typeof ReferencementGoogleIaRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -207,6 +223,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/automatisation-ia': typeof AutomatisationIaRoute
   '/cartes-nfc': typeof CartesNfcRoute
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
@@ -218,6 +235,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
   '/realisations': typeof RealisationsRoute
+  '/referencement-google-ia': typeof ReferencementGoogleIaRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -234,6 +252,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/automatisation-ia'
     | '/cartes-nfc'
     | '/ce-qui-est-inclus'
     | '/confidentialite'
@@ -245,6 +264,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/outils-metier'
     | '/realisations'
+    | '/referencement-google-ia'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -259,6 +279,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/automatisation-ia'
     | '/cartes-nfc'
     | '/ce-qui-est-inclus'
     | '/confidentialite'
@@ -270,6 +291,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/outils-metier'
     | '/realisations'
+    | '/referencement-google-ia'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -284,6 +306,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/automatisation-ia'
     | '/cartes-nfc'
     | '/ce-qui-est-inclus'
     | '/confidentialite'
@@ -295,6 +318,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/outils-metier'
     | '/realisations'
+    | '/referencement-google-ia'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -310,6 +334,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutomatisationIaRoute: typeof AutomatisationIaRoute
   CartesNfcRoute: typeof CartesNfcRoute
   CeQuiEstInclusRoute: typeof CeQuiEstInclusRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
@@ -321,6 +346,7 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   OutilsMetierRoute: typeof OutilsMetierRoute
   RealisationsRoute: typeof RealisationsRoute
+  ReferencementGoogleIaRoute: typeof ReferencementGoogleIaRoute
   SiteCommandesNoelRoute: typeof SiteCommandesNoelRoute
   SiteInternetArtisanRoute: typeof SiteInternetArtisanRoute
   SiteInternetCommerceAntillaisRoute: typeof SiteInternetCommerceAntillaisRoute
@@ -341,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/automatisation-ia': {
+      id: '/automatisation-ia'
+      path: '/automatisation-ia'
+      fullPath: '/automatisation-ia'
+      preLoaderRoute: typeof AutomatisationIaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cartes-nfc': {
@@ -418,6 +451,13 @@ declare module '@tanstack/react-router' {
       path: '/realisations'
       fullPath: '/realisations'
       preLoaderRoute: typeof RealisationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referencement-google-ia': {
+      id: '/referencement-google-ia'
+      path: '/referencement-google-ia'
+      fullPath: '/referencement-google-ia'
+      preLoaderRoute: typeof ReferencementGoogleIaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/site-commandes-noel': {
@@ -502,6 +542,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutomatisationIaRoute: AutomatisationIaRoute,
   CartesNfcRoute: CartesNfcRoute,
   CeQuiEstInclusRoute: CeQuiEstInclusRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
@@ -513,6 +554,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   OutilsMetierRoute: OutilsMetierRoute,
   RealisationsRoute: RealisationsRoute,
+  ReferencementGoogleIaRoute: ReferencementGoogleIaRoute,
   SiteCommandesNoelRoute: SiteCommandesNoelRoute,
   SiteInternetArtisanRoute: SiteInternetArtisanRoute,
   SiteInternetCommerceAntillaisRoute: SiteInternetCommerceAntillaisRoute,

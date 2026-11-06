@@ -1,0 +1,31 @@
+# Gwada Web Studio
+
+> Studio web indépendant basé aux Abymes, en Guadeloupe. Création de sites internet, d'applications, d'outils sur mesure, d'automatisations et de cartes d'avis Google, pour les entreprises de Guadeloupe, de Martinique et de toute la France. Avant de payer, le client voit le résultat : une démonstration gratuite à ses couleurs, sans engagement.
+
+Sites à partir de 550 €, avec un espace pour les gérer soi-même. Applications, outils et automatisations sur devis. Cartes d'avis Google à partir de 29,90 €, sans abonnement.
+
+## Services
+
+- [Sites internet](https://gwadawebstudio.fr/sites-web) : site vitrine, réservation, paiement et acompte, catalogue et commandes.
+- [Applications et outils](https://gwadawebstudio.fr/outils-metier) : application web, espace client, gestion, tableaux de bord.
+- [Automatisation et IA](https://gwadawebstudio.fr/automatisation-ia) : réponses et relances automatiques, tri des demandes, documents préparés, assistant IA.
+- [Référencement Google et IA](https://gwadawebstudio.fr/referencement-google-ia) : SEO pour Google et AEO pour les assistants IA.
+- [Cartes d'avis Google](https://gwadawebstudio.fr/cartes-nfc) : carte NFC et QR code qui ouvrent directement la page d'avis.
+
+## Pour en savoir plus
+
+- [Démonstration gratuite](https://gwadawebstudio.fr/demo-gratuite) : voir son site avant de payer.
+- [Ce qui est inclus](https://gwadawebstudio.fr/ce-qui-est-inclus) : le contenu d'une prestation, ce qui n'est pas inclus et le paiement.
+- [Réalisations](https://gwadawebstudio.fr/realisations) : Kafé Céramik, Crystal Beach Courbaril, un cabinet médical et l'application Mémo Révision.
+- [Contact](https://gwadawebstudio.fr/contact) : WhatsApp et téléphone au 07 45 47 65 34, gwada.web.studio@gmail.com.
+
+## Par activité
+
+- [Site internet en Guadeloupe](https://gwadawebstudio.fr/creation-site-internet-guadeloupe)
+- [Site internet en Martinique](https://gwadawebstudio.fr/creation-site-internet-martinique)
+- [Restaurants et traiteurs](https://gwadawebstudio.fr/site-internet-restaurant)
+- [Artisans](https://gwadawebstudio.fr/site-internet-artisan)
+- [Gîtes et locations](https://gwadawebstudio.fr/site-internet-location-saisonniere)
+- [Salons et instituts](https://gwadawebstudio.fr/site-internet-salon-institut)
+- [Commerces antillais en métropole](https://gwadawebstudio.fr/site-internet-commerce-antillais)
+- [Commandes de Noël](https://gwadawebstudio.fr/site-commandes-noel)

@@ -1,24 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-const services = [
-  {
-    to: "/sites-web",
-    label: "Sites internet",
-    text: "Vitrine, réservation, paiement, catalogue",
-  },
-  {
-    to: "/outils-metier",
-    label: "Applications et outils",
-    text: "Sur mesure, pour votre façon de travailler",
-  },
-  {
-    to: "/cartes-nfc",
-    label: "Cartes d’avis Google",
-    text: "Vos clients arrivent directement sur votre page d’avis",
-  },
-] as const;
+import { services } from "@/lib/services";
 
 const links = [
   { to: "/realisations", label: "Réalisations" },
@@ -55,14 +38,14 @@ export function SiteNav() {
   }, [servicesOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0d1715]/90 text-[#f7f7ef] backdrop-blur-xl">
+    <header className="gws-entete sticky top-0 z-50 border-b border-white/10 text-[#f7f7ef] backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-[1376px] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
         <Link to="/" className="flex items-center gap-3" aria-label="Gwada Web Studio, accueil">
           <img
-            src="/logo-gws.svg"
+            src="/logo-gws.webp"
             alt=""
-            width={200}
-            height={95}
+            width={320}
+            height={159}
             decoding="async"
             className="h-9 w-auto shrink-0 object-contain sm:h-10"
           />
@@ -89,7 +72,7 @@ export function SiteNav() {
             {servicesOpen && (
               <div
                 id="menu-services"
-                className="absolute left-0 top-full mt-2 w-[320px] rounded-2xl border border-white/12 bg-[#13211e] p-2 shadow-[0_24px_60px_rgba(0,0,0,.45)]"
+                className="gws-menu absolute left-0 top-full mt-2 w-[340px] rounded-2xl border border-white/12 bg-[#13211e] p-2 shadow-[0_24px_60px_rgba(0,0,0,.45)]"
               >
                 {services.map((service) => (
                   <Link
@@ -99,7 +82,7 @@ export function SiteNav() {
                     className="block rounded-xl px-3.5 py-2.5 transition hover:bg-white/[0.06]"
                   >
                     <span className="block text-sm font-extrabold">{service.label}</span>
-                    <span className="mt-0.5 block text-[13px] text-white/60">{service.text}</span>
+                    <span className="mt-0.5 block text-[13px] text-white/60">{service.short}</span>
                   </Link>
                 ))}
               </div>

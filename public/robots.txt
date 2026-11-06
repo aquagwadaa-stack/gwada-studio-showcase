@@ -1,4 +1,7 @@
+# Moteurs de recherche et assistants IA : tout le site public est ouvert.
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /a/
 
 Sitemap: https://gwadawebstudio.fr/sitemap.xml

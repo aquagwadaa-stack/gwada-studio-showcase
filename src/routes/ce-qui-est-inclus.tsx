@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Minus } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
-import { etapesInclus, horsInclus } from "@/lib/prestation";
+import { reveal, rise } from "@/components/site/Motion";
+import { echeances, etapesInclus, horsInclus } from "@/lib/prestation";
 
 const title = "Ce qui est inclus dans une prestation — Gwada Web Studio";
 const description =
@@ -36,7 +37,7 @@ const questions = [
   {
     question: "Quand est-ce que je paie ?",
     answer:
-      "Rien pour la démonstration. On démarre une fois le devis signé, et les échéances de paiement sont écrites dans le devis.",
+      "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
   },
   {
     question: "Le nom de domaine et l’hébergement sont-ils compris ?",
@@ -61,14 +62,17 @@ function InclusPage() {
       <section className="relative overflow-hidden border-b border-white/10 px-5 pb-12 pt-14 sm:px-8 sm:pb-16 sm:pt-20 lg:px-12">
         <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
         <div className="relative mx-auto max-w-[1280px]">
-          <h1 className="max-w-3xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+          <h1 className="gws-rise max-w-3xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
             Ce qui est inclus dans chaque prestation
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+          <p
+            {...rise(1)}
+            className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+          >
             Vous savez ce que vous avez pour votre argent avant de signer, de la démonstration
             jusqu’au suivi après la mise en ligne.
           </p>
-          <dl className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+          <dl {...rise(2)} className="gws-rise mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
             {tarifs.map((tarif) => (
               <div
                 key={tarif.label}
@@ -87,6 +91,7 @@ function InclusPage() {
           {etapesInclus.map((etape, index) => (
             <li
               key={etape.title}
+              {...reveal()}
               className="grid gap-5 border-t border-[#152820]/15 pt-6 lg:grid-cols-[280px_1fr] lg:gap-10"
             >
               <div className="flex items-center gap-3 lg:items-start">
@@ -98,8 +103,8 @@ function InclusPage() {
                 </h2>
               </div>
               <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
-                {etape.items.map((item) => (
-                  <li key={item.title} className="flex gap-3">
+                {etape.items.map((item, position) => (
+                  <li key={item.title} {...reveal(position % 2)} className="flex gap-3">
                     <Check
                       className="mt-1 h-4 w-4 shrink-0 text-[#1c6358]"
                       strokeWidth={3}
@@ -119,7 +124,7 @@ function InclusPage() {
 
       <section className="px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
-          <div>
+          <div {...reveal()}>
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Ce qui n’est pas inclus
             </h2>
@@ -128,8 +133,8 @@ function InclusPage() {
             </p>
           </div>
           <ul className="grid gap-5">
-            {horsInclus.map((item) => (
-              <li key={item.title} className="flex gap-3">
+            {horsInclus.map((item, index) => (
+              <li key={item.title} {...reveal(index)} className="flex gap-3">
                 <Minus
                   className="mt-1 h-4 w-4 shrink-0 text-[#ffae96]"
                   strokeWidth={3}
@@ -145,10 +150,40 @@ function InclusPage() {
         </div>
       </section>
 
+      <section className="bg-[#102019] px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+          <div {...reveal()}>
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+              Comment se passe le paiement
+            </h2>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/62 sm:text-base">
+              Rien à payer pour la démonstration. On démarre une fois le devis signé, et le paiement
+              se fait habituellement en trois fois.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-[2fr_2fr_1fr] md:gap-1.5">
+            {echeances.map((echeance, index) => (
+              <div key={echeance.title} {...reveal(index)}>
+                <div
+                  className={`flex h-12 items-center rounded-lg px-4 font-display text-lg font-extrabold text-[#0d1715] ${index === 2 ? "bg-[#ffae96]" : index === 1 ? "bg-[#f2cb5d]" : "bg-[#54d7c8]"}`}
+                >
+                  {echeance.part} %
+                </div>
+                <h3 className="mt-3 text-base font-extrabold">{echeance.title}</h3>
+                <p className="mt-0.5 pr-3 text-sm leading-relaxed text-white/60">{echeance.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <FaqSection items={questions} />
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+        >
           <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Le plus simple, c’est de voir le résultat.
           </h2>

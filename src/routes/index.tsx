@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, Quote, Star } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
 import { InclusApercu } from "@/components/site/Inclus";
+import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame, RealisationCard } from "@/components/site/SitePreview";
 import { realisations } from "@/lib/realisations";
+import { services } from "@/lib/services";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/" }],
     meta: [
       { title: "Création de site internet en Guadeloupe, démo gratuite — Gwada Web Studio" },
       {
@@ -29,46 +32,6 @@ export const Route = createFileRoute("/")({
   }),
   component: HomePage,
 });
-
-const services = [
-  {
-    title: "Sites internet",
-    price: "À partir de 550 €",
-    text: "Un site à votre image pour présenter votre activité et recevoir des réservations, des paiements ou des commandes.",
-    points: [
-      "Site vitrine",
-      "Réservation en ligne",
-      "Paiement et acompte",
-      "Catalogue et commandes",
-    ],
-    to: "/sites-web",
-    link: "Voir les sites internet",
-    accent: "#54d7c8",
-  },
-  {
-    title: "Applications et outils",
-    price: "Sur devis",
-    text: "Une application ou un outil fait pour votre façon de travailler, quand un logiciel tout prêt ne suffit pas.",
-    points: [
-      "Application web",
-      "Espace client",
-      "Gestion et tableaux de bord",
-      "Tâches automatisées",
-    ],
-    to: "/outils-metier",
-    link: "Voir les applications",
-    accent: "#a3a8ff",
-  },
-  {
-    title: "Cartes d’avis Google",
-    price: "À partir de 29,90 €",
-    text: "Vos clients approchent leur téléphone de la carte et arrivent directement sur votre page d’avis.",
-    points: ["Carte NFC et QR code", "Configuration incluse", "Sans abonnement", "Garantie 1 an"],
-    to: "/cartes-nfc",
-    link: "Voir les cartes",
-    accent: "#ffae96",
-  },
-] as const;
 
 const metiers = [
   { to: "/site-internet-restaurant", label: "Restaurants et traiteurs" },
@@ -123,6 +86,11 @@ const questions = [
       "Oui. Chaque site comprend un espace pour le gérer vous-même, plus ou moins complet selon le projet, et je vous montre comment l’utiliser.",
   },
   {
+    question: "Quand est-ce que je paie ?",
+    answer:
+      "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
+  },
+  {
     question: "Le nom de domaine et l’hébergement sont-ils compris ?",
     answer:
       "Ce sont des services externes. Ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis.",
@@ -131,6 +99,11 @@ const questions = [
     question: "Combien de temps faut-il ?",
     answer:
       "Cela dépend du projet et du moment où vous me confiez vos textes et vos photos. Le délai est écrit dans le devis.",
+  },
+  {
+    question: "Mon site sera-t-il visible sur Google et les IA ?",
+    answer:
+      "Chaque site comprend les bases pour Google et pour les IA comme ChatGPT. Personne ne peut garantir une place, mais votre site sera clair et facile à comprendre pour eux.",
   },
   {
     question: "Vous travaillez en dehors de la Guadeloupe ?",
@@ -175,23 +148,34 @@ function HomePage() {
   );
 }
 
+const titreAccueil = "Des sites et des applications sur mesure, que vous voyez avant de payer.";
+
 function Hero() {
   return (
     <section className="relative isolate overflow-hidden border-b border-white/10">
       <div className="gws-grid pointer-events-none absolute inset-0 -z-20 opacity-45" />
-      <div className="pointer-events-none absolute right-[-14rem] top-[-6rem] -z-10 h-[34rem] w-[34rem] rounded-full bg-[#54d7c8]/10 blur-[120px]" />
+      <div className="gws-aurore pointer-events-none absolute right-[-14rem] top-[-6rem] -z-10 h-[34rem] w-[34rem] rounded-full bg-[#54d7c8]/10 blur-[120px]" />
 
       <div className="mx-auto grid max-w-[1376px] items-center gap-12 px-5 pb-14 pt-12 sm:px-8 sm:pt-16 lg:grid-cols-[1fr_1.02fr] lg:gap-10 lg:px-12 lg:pb-20 lg:pt-16">
         <div>
           <h1 className="max-w-[640px] font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.042em]">
-            Des sites et des applications sur mesure, que vous voyez avant de payer.
+            {titreAccueil.split(" ").map((mot, index) => (
+              <Fragment key={index}>
+                <span className="gws-mot">
+                  <span {...rise(index)}>{mot}</span>
+                </span>{" "}
+              </Fragment>
+            ))}
           </h1>
-          <p className="mt-5 max-w-[560px] text-base leading-relaxed text-white/68 sm:text-[17px]">
+          <p
+            {...rise(6)}
+            className="gws-rise mt-5 max-w-[560px] text-base leading-relaxed text-white/68 sm:text-[17px]"
+          >
             Je crée votre site internet, votre application ou votre outil de gestion, pour les
             entreprises de Guadeloupe, de Martinique et de France. Je vous prépare d’abord une
             démonstration gratuite à vos couleurs, sans engagement.
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div {...rise(7)} className="gws-rise mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               to="/demo-gratuite"
               className="gws-button-primary group inline-flex min-h-13 items-center justify-center gap-2.5 rounded-full px-7 text-sm font-black"
@@ -209,7 +193,10 @@ function Hero() {
               <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
             </a>
           </div>
-          <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-[13px] font-semibold text-white/60">
+          <ul
+            {...rise(8)}
+            className="gws-rise mt-7 flex flex-wrap gap-x-6 gap-y-2 text-[13px] font-semibold text-white/60"
+          >
             {["Démo gratuite, sans engagement", "Sites à partir de 550 €", "Basé aux Abymes"].map(
               (item) => (
                 <li key={item} className="flex items-center gap-2">
@@ -227,31 +214,38 @@ function Hero() {
 
         <a
           href="#realisations"
+          data-fan
           className="relative mx-auto block aspect-[10/8] w-full max-w-[640px] lg:max-w-none"
           aria-label="Voir mes réalisations"
         >
-          <BrowserFrame
-            image={realisations[1].image}
-            alt={realisations[1].alt}
-            address={realisations[1].address}
-            sizes="(min-width: 1024px) 400px, 62vw"
-            className="gws-fan-left absolute left-0 top-[7%] w-[64%]"
-          />
-          <BrowserFrame
-            image={realisations[2].image}
-            alt={realisations[2].alt}
-            address={realisations[2].address}
-            sizes="(min-width: 1024px) 400px, 62vw"
-            className="gws-fan-right absolute right-0 top-0 w-[62%]"
-          />
-          <BrowserFrame
-            image={realisations[0].image}
-            alt={realisations[0].alt}
-            address={realisations[0].address}
-            sizes="(min-width: 1024px) 480px, 76vw"
-            priority
-            className="gws-fan-front absolute bottom-0 left-[12%] w-[76%]"
-          />
+          <div className="gws-plan gws-plan-gauche left-0 top-[7%] w-[64%]">
+            <BrowserFrame
+              image={realisations[1].image}
+              alt={realisations[1].alt}
+              address={realisations[1].address}
+              sizes="(min-width: 1024px) 400px, 62vw"
+              className="gws-fan-left"
+            />
+          </div>
+          <div className="gws-plan gws-plan-droite right-0 top-0 w-[62%]">
+            <BrowserFrame
+              image={realisations[2].image}
+              alt={realisations[2].alt}
+              address={realisations[2].address}
+              sizes="(min-width: 1024px) 400px, 62vw"
+              className="gws-fan-right"
+            />
+          </div>
+          <div className="gws-plan gws-plan-devant bottom-0 left-[12%] w-[76%]">
+            <BrowserFrame
+              image={realisations[0].image}
+              alt={realisations[0].alt}
+              address={realisations[0].address}
+              sizes="(min-width: 1024px) 480px, 76vw"
+              priority
+              className="gws-fan-front"
+            />
+          </div>
         </a>
       </div>
     </section>
@@ -262,20 +256,25 @@ function Services() {
   return (
     <section id="services" className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <h2 className="max-w-2xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+        <h2
+          {...reveal()}
+          className="max-w-2xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+        >
           Ce que je peux faire pour vous
         </h2>
 
-        <div className="mt-9 grid divide-y divide-white/10 overflow-hidden rounded-3xl border border-white/10 bg-[#13211e] lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-          {services.map((service) => (
+        <div className="mt-9 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 lg:grid-cols-6">
+          {services.map((service, index) => (
             <Link
-              key={service.title}
+              key={service.to}
               to={service.to}
-              className="group flex flex-col p-6 transition-colors hover:bg-white/[0.03] sm:p-8"
+              {...reveal(index < 3 ? index : index - 3)}
+              data-spot
+              className={`gws-spot group flex flex-col bg-[#13211e] p-6 sm:p-8 ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"}`}
               data-cta={`home-service-${service.to.slice(1)}`}
             >
               <h3 className="font-display text-2xl font-extrabold tracking-[-0.035em]">
-                {service.title}
+                {service.label}
               </h3>
               <p className="mt-1 text-sm font-bold" style={{ color: service.accent }}>
                 {service.price}
@@ -301,7 +300,10 @@ function Services() {
           ))}
         </div>
 
-        <div className="mt-7 flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5">
+        <div
+          {...reveal()}
+          className="mt-7 flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5"
+        >
           <p className="shrink-0 text-sm font-bold text-white/60">Une page pour votre métier :</p>
           <ul className="flex flex-wrap gap-2">
             {metiers.map((metier) => (
@@ -325,17 +327,21 @@ function Portfolio() {
   return (
     <section id="realisations" className="bg-[#102019] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <div
+          {...reveal()}
+          className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-10"
+        >
           <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             De vrais projets, en ligne
           </h2>
           <p className="max-w-md text-[15px] leading-relaxed text-white/62">
-            Ce ne sont pas des maquettes : ce sont les vraies pages. Cliquez pour ouvrir le site.
+            Ce ne sont pas des maquettes : ce sont les vraies pages. Passez dessus pour les voir
+            défiler, cliquez pour ouvrir le site.
           </p>
         </div>
         <div className="mt-9 grid gap-x-8 gap-y-11 md:grid-cols-2">
-          {realisations.map((item) => (
-            <RealisationCard key={item.slug} item={item} />
+          {realisations.map((item, index) => (
+            <RealisationCard key={item.slug} item={item} index={index % 2} />
           ))}
         </div>
       </div>
@@ -347,16 +353,18 @@ function Process() {
   return (
     <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
-          Comment ça se passe
-        </h2>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/62 sm:text-base">
-          Pas besoin de connaître le web ni d’avoir un cahier des charges. On commence par une
-          démonstration.
-        </p>
+        <div {...reveal()}>
+          <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+            Comment ça se passe
+          </h2>
+          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/62 sm:text-base">
+            Pas besoin de connaître le web ni d’avoir un cahier des charges. On commence par une
+            démonstration.
+          </p>
+        </div>
         <ol className="mt-9 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
           {etapes.map((etape, index) => (
-            <li key={etape.title} className="flex gap-4">
+            <li key={etape.title} {...reveal(index % 3)} className="flex gap-4">
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#54d7c8] text-sm font-black text-[#0d1715]">
                 {index + 1}
               </span>
@@ -379,7 +387,7 @@ function Reviews() {
   return (
     <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div {...reveal()} className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Ce que disent mes clients
           </h2>
@@ -401,6 +409,7 @@ function Reviews() {
             return (
               <article
                 key={review.name}
+                {...reveal(i)}
                 className="flex h-full flex-col rounded-3xl bg-white p-6 sm:p-7"
               >
                 <Quote className="h-6 w-6 text-[#2a8f7c]" strokeWidth={1.75} aria-hidden="true" />
@@ -432,7 +441,10 @@ function Reviews() {
 function FinalCta() {
   return (
     <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+      <div
+        {...reveal("zoom")}
+        className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+      >
         <div className="max-w-2xl">
           <h2 className="font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Le plus simple, c’est de voir le résultat.

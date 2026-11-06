@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import type { Realisation } from "@/lib/realisations";
+import { reveal } from "@/components/site/Motion";
+import type { PageLongue, Realisation } from "@/lib/realisations";
 
 type BrowserFrameProps = {
   image: string;
@@ -7,6 +8,8 @@ type BrowserFrameProps = {
   address: string;
   sizes: string;
   priority?: boolean;
+  /** Capture plus haute : la vraie page défile dans le cadre. */
+  pageLongue?: PageLongue;
   className?: string;
 };
 
@@ -16,6 +19,7 @@ export function BrowserFrame({
   address,
   sizes,
   priority = false,
+  pageLongue,
   className = "",
 }: BrowserFrameProps) {
   return (
@@ -33,31 +37,50 @@ export function BrowserFrame({
         </span>
         <span className="w-[32px] shrink-0" aria-hidden="true" />
       </div>
-      <img
-        src={`${image}-800.webp`}
-        srcSet={`${image}-800.webp 800w, ${image}-1400.webp 1400w`}
-        sizes={sizes}
-        width={1400}
-        height={875}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        decoding="async"
-        className="block aspect-[8/5] w-full object-cover object-top"
-      />
+      {pageLongue ? (
+        <div className="gws-vue aspect-[8/5] overflow-hidden">
+          <img
+            src={`${pageLongue.image}-800.webp`}
+            srcSet={`${pageLongue.image}-800.webp 800w, ${pageLongue.image}-1400.webp 1400w`}
+            sizes={sizes}
+            width={1400}
+            height={pageLongue.hauteur}
+            alt={alt}
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            decoding="async"
+            className="gws-page block h-auto w-full"
+          />
+        </div>
+      ) : (
+        <img
+          src={`${image}-800.webp`}
+          srcSet={`${image}-800.webp 800w, ${image}-1400.webp 1400w`}
+          sizes={sizes}
+          width={1400}
+          height={875}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          className="block aspect-[8/5] w-full object-cover object-top"
+        />
+      )}
     </div>
   );
 }
 
 export function RealisationCard({
   item,
+  index = 0,
   sizes = "(min-width: 1024px) 620px, 100vw",
 }: {
   item: Realisation;
+  index?: number;
   sizes?: string;
 }) {
   return (
-    <article>
+    <article {...reveal(index)}>
       <a
         href={item.url}
         target="_blank"
@@ -66,7 +89,13 @@ export function RealisationCard({
         aria-label={`Ouvrir ${item.name} dans un nouvel onglet`}
         data-cta={`realisation-${item.slug}`}
       >
-        <BrowserFrame image={item.image} alt={item.alt} address={item.address} sizes={sizes} />
+        <BrowserFrame
+          image={item.image}
+          pageLongue={item.pageLongue}
+          alt={item.alt}
+          address={item.address}
+          sizes={sizes}
+        />
       </a>
       <div className="mt-4 flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -77,7 +106,7 @@ export function RealisationCard({
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-1 pt-1 text-sm font-bold underline decoration-1 underline-offset-4 transition hover:opacity-70"
+          className="gws-lien inline-flex shrink-0 items-center gap-1 pt-1 text-sm font-bold"
           data-cta={`realisation-lien-${item.slug}`}
         >
           {item.own ? "Voir l’application" : "Voir le site"}

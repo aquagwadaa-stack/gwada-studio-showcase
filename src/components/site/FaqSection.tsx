@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import { reveal } from "@/components/site/Motion";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -26,13 +27,17 @@ export function FaqSection({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="mx-auto max-w-[860px]">
-        <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+        <h2
+          {...reveal()}
+          className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+        >
           {title}
         </h2>
         <div className="mt-8 grid gap-3">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <details
               key={item.question}
+              {...reveal(index % 4)}
               className="group rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-bold">

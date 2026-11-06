@@ -16,12 +16,14 @@ import {
   Workflow,
 } from "lucide-react";
 import { InclusApercu } from "@/components/site/Inclus";
+import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
 import { memoRevision } from "@/lib/realisations";
 
 export const Route = createFileRoute("/outils-metier")({
   staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/outils-metier" }],
     meta: [
       { title: "Applications et outils sur mesure en Guadeloupe — Gwada Web Studio" },
       {
@@ -117,18 +119,21 @@ function OutilsMetierPage() {
         <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
         <div className="relative mx-auto max-w-[1280px]">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+            <h1 className="gws-rise font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
               Une application ou un outil, fait pour votre façon de travailler.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+            <p
+              {...rise(1)}
+              className="gws-rise mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+            >
               Quand un logiciel tout prêt ne suffit pas, je crée ce qu’il vous faut : une
               application, un espace client, la gestion de vos demandes ou des tâches qui se font
               toutes seules.
             </p>
-            <p className="mt-4 text-sm font-bold text-white/85">
+            <p {...rise(2)} className="gws-rise mt-4 text-sm font-bold text-white/85">
               Sur devis. Démonstration gratuite, sans engagement.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div {...rise(3)} className="gws-rise mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/contact"
                 className="gws-button-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
@@ -149,7 +154,7 @@ function OutilsMetierPage() {
 
       <section id="outils" className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <div className="max-w-2xl">
+          <div {...reveal()} className="max-w-2xl">
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Ce qu’on peut construire ensemble
             </h2>
@@ -159,9 +164,10 @@ function OutilsMetierPage() {
           </div>
 
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((item) => (
+            {tools.map((item, index) => (
               <article
                 key={item.title}
+                {...reveal(index % 3)}
                 className="rounded-3xl border border-white/10 bg-[#13211e] p-6"
               >
                 <span
@@ -185,6 +191,7 @@ function OutilsMetierPage() {
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] items-center gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-14">
           <a
+            {...reveal("zoom")}
             href={memoRevision.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -194,12 +201,13 @@ function OutilsMetierPage() {
           >
             <BrowserFrame
               image={memoRevision.image}
+              pageLongue={memoRevision.pageLongue}
               alt={memoRevision.alt}
               address={memoRevision.address}
               sizes="(min-width: 1024px) 700px, 100vw"
             />
           </a>
-          <div>
+          <div {...reveal(1)}>
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Un exemple en ligne : {memoRevision.name}
             </h2>
@@ -210,7 +218,11 @@ function OutilsMetierPage() {
             <ul className="mt-4 grid gap-1.5 text-sm font-semibold text-white/82">
               {memoRevision.features.map((feature) => (
                 <li key={feature} className="flex items-center gap-2.5">
-                  <Check className="h-3.5 w-3.5 shrink-0 text-[#54d7c8]" strokeWidth={3} aria-hidden="true" />
+                  <Check
+                    className="h-3.5 w-3.5 shrink-0 text-[#54d7c8]"
+                    strokeWidth={3}
+                    aria-hidden="true"
+                  />
                   {feature}
                 </li>
               ))}
@@ -231,7 +243,10 @@ function OutilsMetierPage() {
       <InclusApercu />
 
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+        >
           <h2 className="max-w-3xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Dites-moi simplement ce qui vous fait perdre du temps aujourd’hui.
           </h2>
@@ -256,12 +271,13 @@ function InteractiveToolDemo() {
     <section className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-16 text-[#101a18] sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+          <div {...reveal()} className="lg:sticky lg:top-28">
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               À quoi ça ressemble concrètement ?
             </h2>
             <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#5f6b67] sm:text-base">
-              Choisissez un exemple pour voir comment une fonction peut s’intégrer à votre quotidien.
+              Choisissez un exemple pour voir comment une fonction peut s’intégrer à votre
+              quotidien.
             </p>
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
@@ -283,9 +299,7 @@ function InteractiveToolDemo() {
                     </span>
                     <span>
                       <span className="block text-sm font-black">{mode.label}</span>
-                      <span className="mt-0.5 block text-[11px] text-[#6b7773]">
-                        {mode.title}
-                      </span>
+                      <span className="mt-0.5 block text-[11px] text-[#6b7773]">{mode.title}</span>
                     </span>
                     <ArrowRight
                       className={`h-4 w-4 transition ${selected ? "text-[#101a18]" : "-translate-x-1 text-[#9aa49f]"}`}
@@ -319,9 +333,7 @@ function InteractiveToolDemo() {
                     <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#76827d]">
                       Exemple · {active.label}
                     </div>
-                    <h3 className="mt-2 text-2xl font-black tracking-[-0.035em]">
-                      {active.title}
-                    </h3>
+                    <h3 className="mt-2 text-2xl font-black tracking-[-0.035em]">{active.title}</h3>
                     <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#65716d]">
                       {active.text}
                     </p>
@@ -341,6 +353,12 @@ function InteractiveToolDemo() {
             </p>
           </div>
         </div>
+        <p {...reveal()} className="mt-10 text-[15px] font-semibold text-[#3f524a]">
+          Vous voulez surtout automatiser des tâches ?{" "}
+          <Link to="/automatisation-ia" className="gws-lien font-extrabold text-[#1c6358]">
+            Voir l’automatisation et l’IA
+          </Link>
+        </p>
       </div>
     </section>
   );
@@ -358,7 +376,10 @@ function ToolDemoScreen({ mode }: { mode: DemoMode }) {
     return (
       <div className="space-y-3">
         {steps.map(([number, title, text, color], index) => (
-          <div key={number} className="relative flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+          <div
+            key={number}
+            className="relative flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm"
+          >
             <span
               className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-black"
               style={{ backgroundColor: color }}

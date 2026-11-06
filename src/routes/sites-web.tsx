@@ -11,12 +11,14 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { InclusApercu } from "@/components/site/Inclus";
+import { reveal, rise } from "@/components/site/Motion";
 import { RealisationCard } from "@/components/site/SitePreview";
 import { realisationsClients } from "@/lib/realisations";
 
 export const Route = createFileRoute("/sites-web")({
   staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/sites-web" }],
     meta: [
       { title: "Création de sites internet sur mesure en Guadeloupe — Gwada Web Studio" },
       {
@@ -100,18 +102,21 @@ function SitesWebPage() {
         <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
         <div className="relative mx-auto max-w-[1280px]">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+            <h1 className="gws-rise font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
               Un site internet à votre image, et qui sert vraiment à quelque chose.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+            <p
+              {...rise(1)}
+              className="gws-rise mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+            >
               Il peut rester très simple ou faire beaucoup plus. L’objectif reste le même : que vos
               visiteurs comprennent vite votre offre et passent à l’action.
             </p>
-            <p className="mt-4 text-sm font-bold text-white/85">
+            <p {...rise(2)} className="gws-rise mt-4 text-sm font-bold text-white/85">
               Sites à partir de 550 €, espace de gestion inclus. Démonstration gratuite, sans
               engagement.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div {...rise(3)} className="gws-rise mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/demo-gratuite"
                 className="gws-button-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
@@ -132,7 +137,7 @@ function SitesWebPage() {
 
       <section id="possibilites" className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <div className="max-w-2xl">
+          <div {...reveal()} className="max-w-2xl">
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Le bon site n’a pas besoin de toutes les fonctions
             </h2>
@@ -143,9 +148,10 @@ function SitesWebPage() {
           </div>
 
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {possibilities.map((item) => (
+            {possibilities.map((item, index) => (
               <article
                 key={item.title}
+                {...reveal(index)}
                 className="rounded-3xl border border-white/10 bg-[#13211e] p-6"
               >
                 <span
@@ -168,12 +174,20 @@ function SitesWebPage() {
 
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+          <h2
+            {...reveal()}
+            className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+          >
             Des sites déjà en ligne
           </h2>
           <div className="mt-9 grid gap-x-6 gap-y-10 md:grid-cols-3">
-            {realisationsClients.map((item) => (
-              <RealisationCard key={item.slug} item={item} sizes="(min-width: 768px) 33vw, 100vw" />
+            {realisationsClients.map((item, index) => (
+              <RealisationCard
+                key={item.slug}
+                item={item}
+                index={index}
+                sizes="(min-width: 768px) 33vw, 100vw"
+              />
             ))}
           </div>
         </div>
@@ -182,7 +196,10 @@ function SitesWebPage() {
       <InclusApercu />
 
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+        >
           <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Vous avez déjà un site, ou vous partez de zéro ?
           </h2>
@@ -207,7 +224,7 @@ function InteractiveWebsiteDemo() {
     <section className="border-y border-white/10 bg-[#101d1a] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-start">
-          <div className="lg:sticky lg:top-28">
+          <div {...reveal()} className="lg:sticky lg:top-28">
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Le site change selon ce que vous voulez lui faire faire
             </h2>

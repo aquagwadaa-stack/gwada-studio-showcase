@@ -11,11 +11,13 @@ import {
   Star,
   Wifi,
 } from "lucide-react";
+import { reveal, rise } from "@/components/site/Motion";
 import { contactInfo } from "@/lib/contact-info";
 
 export const Route = createFileRoute("/cartes-nfc")({
   staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/cartes-nfc" }],
     meta: [
       { title: "Cartes NFC pour avis Google — Gwada Web Studio" },
       {
@@ -72,17 +74,20 @@ function CartesNfcPage() {
               Cartes NFC pour avis Google
             </div>
 
-            <h1 className="mt-6 font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
+            <h1 className="gws-rise mt-6 font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
               Plus simple de demander un avis.
               <span className="block">Plus simple d’en laisser un.</span>
             </h1>
 
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/60">
+            <p
+              {...rise(1)}
+              className="gws-rise mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
+            >
               Une carte posée sur votre comptoir suffit : vos clients approchent leur téléphone ou
               scannent le QR code et arrivent directement sur votre page d’avis Google.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-2">
+            <div {...rise(2)} className="gws-rise mt-7 flex flex-wrap gap-2">
               {[
                 ["NFC + QR", Wifi],
                 ["Dès 29,90 €", Star],
@@ -102,7 +107,7 @@ function CartesNfcPage() {
               })}
             </div>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div {...rise(3)} className="gws-rise mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#offres"
                 className="gws-button-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
@@ -127,7 +132,7 @@ function CartesNfcPage() {
         className="bg-[#f7f7ef] px-5 py-16 text-[#101a18] sm:px-8 sm:py-20 lg:px-12"
       >
         <div className="mx-auto max-w-[1280px]">
-          <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <div {...reveal()} className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
               <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
                 Même fonctionnement. Le design fait la différence.
@@ -141,9 +146,10 @@ function CartesNfcPage() {
           </div>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {offers.map((offer) => (
+            {offers.map((offer, index) => (
               <article
                 key={offer.name}
+                {...reveal(index)}
                 className={`relative flex flex-col overflow-hidden rounded-[2rem] border p-6 shadow-[0_18px_50px_rgba(27,46,40,.07)] sm:p-8 ${offer.name === "Personnalisée" ? "border-[#efb8b2] bg-[#fff9f7]" : "border-[#d2dad5] bg-white"}`}
               >
                 <div
@@ -228,7 +234,7 @@ function CartesNfcPage() {
 
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
-          <div>
+          <div {...reveal()}>
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Retirer les étapes inutiles entre le client et votre page d’avis.
             </h2>
@@ -243,11 +249,12 @@ function CartesNfcPage() {
               [Smartphone, "Approchez", "Le téléphone détecte la carte NFC."],
               [QrCode, "Ou scannez", "Le QR code reste disponible en alternative."],
               [Star, "Laissez l’avis", "La page Google s’ouvre directement."],
-            ].map(([Icon, title, text]) => {
+            ].map(([Icon, title, text], index) => {
               const StepIcon = Icon as typeof Smartphone;
               return (
                 <article
                   key={title as string}
+                  {...reveal(index)}
                   className="rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-5"
                 >
                   <StepIcon className="h-5 w-5 text-[#54d7c8]" aria-hidden="true" />
@@ -261,7 +268,10 @@ function CartesNfcPage() {
       </section>
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1280px] gap-8 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div
+          {...reveal("zoom")}
+          className="mx-auto grid max-w-[1280px] gap-8 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center"
+        >
           <div>
             <h2 className="max-w-3xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Vérifions ensemble votre fiche Google et la version qui vous convient.

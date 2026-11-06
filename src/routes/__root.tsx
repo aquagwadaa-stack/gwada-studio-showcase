@@ -15,6 +15,7 @@ import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
 import { contactInfo, socialLinks } from "../lib/contact-info";
 import { WhatsAppFloat } from "../components/site/WhatsApp";
+import { scriptAnimations, useSiteMotion } from "../components/site/Motion";
 
 function NotFoundComponent() {
   return (
@@ -133,31 +134,84 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
   errorComponent: ErrorComponent,
 });
 
+function offre(name: string, chemin: string, prixDepart?: number) {
+  return {
+    "@type": "Offer",
+    url: `https://gwadawebstudio.fr${chemin}`,
+    itemOffered: { "@type": "Service", name },
+    ...(prixDepart
+      ? {
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            minPrice: prixDepart,
+            priceCurrency: "EUR",
+          },
+        }
+      : {}),
+  };
+}
+
 function RootShell({ children }: { children: ReactNode }) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: contactInfo.brand,
-    description:
-      "Création de sites internet, d’applications, d’outils sur mesure et de cartes d’avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
-    url: "https://gwadawebstudio.fr",
-    logo: "https://gwadawebstudio.fr/logo-gws.svg",
-    email: contactInfo.email,
-    telephone: contactInfo.phoneHref,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Les Abymes",
-      addressRegion: "Guadeloupe",
-      addressCountry: "GP",
-    },
-    priceRange: "À partir de 550 €",
-    areaServed: ["Guadeloupe", "Martinique", "France"],
-    sameAs: socialLinks.map((link) => link.href),
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://gwadawebstudio.fr/#studio",
+        name: contactInfo.brand,
+        description:
+          "Création de sites internet, d’applications, d’outils sur mesure, d’automatisations et de cartes d’avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
+        url: "https://gwadawebstudio.fr",
+        logo: "https://gwadawebstudio.fr/logo-gws.png",
+        email: contactInfo.email,
+        telephone: contactInfo.phoneHref,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Les Abymes",
+          addressRegion: "Guadeloupe",
+          addressCountry: "GP",
+        },
+        priceRange: "À partir de 550 €",
+        areaServed: ["Guadeloupe", "Martinique", "France"],
+        sameAs: socialLinks.map((link) => link.href),
+        knowsAbout: [
+          "Création de site internet",
+          "Application web",
+          "Automatisation",
+          "Intelligence artificielle",
+          "Référencement naturel (SEO)",
+          "Optimisation pour les moteurs de réponse (AEO)",
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Services de Gwada Web Studio",
+          itemListElement: [
+            offre("Création de site internet", "/sites-web", 550),
+            offre("Applications et outils sur mesure", "/outils-metier"),
+            offre("Automatisation et IA", "/automatisation-ia"),
+            offre("Référencement Google et IA (SEO, AEO)", "/referencement-google-ia"),
+            offre("Cartes d’avis Google", "/cartes-nfc", 29.9),
+          ],
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gwadawebstudio.fr/#site",
+        url: "https://gwadawebstudio.fr",
+        name: contactInfo.brand,
+        inLanguage: "fr",
+        publisher: { "@id": "https://gwadawebstudio.fr/#studio" },
+      },
+    ],
   };
 
   return (
-    <html lang="fr" id="top">
+    <html lang="fr" id="top" className="gws-anim" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: scriptAnimations }} />
+        <noscript>
+          <style>{`.gws-anim [data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <HeadContent />
         <script
           type="application/ld+json"
@@ -173,6 +227,7 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
+  useSiteMotion();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isolated =
     pathname.startsWith("/admin") || pathname.startsWith("/a/") || pathname.startsWith("/exemple-");

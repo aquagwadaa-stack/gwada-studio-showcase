@@ -35,8 +35,8 @@ export const etapesInclus: { title: string; items: LigneInclus[] }[] = [
         text: "Il est inclus sur chaque site, plus ou moins complet selon le projet. Vous modifiez vos contenus sans toucher au code.",
       },
       {
-        title: "Les bases pour Google",
-        text: "Titres, descriptions et structure du site sont soignés pour que Google comprenne votre activité.",
+        title: "Les bases pour Google et les IA",
+        text: "Titres, descriptions et structure du site sont soignés pour que Google et les assistants IA comprennent votre activité.",
       },
       {
         title: "Deux séries de corrections",
@@ -100,13 +100,20 @@ export const horsInclus: LigneInclus[] = [
   },
 ];
 
+/** Échéancier habituel d'un devis. */
+export const echeances = [
+  { part: 40, title: "À la commande", text: "Une fois le devis signé." },
+  { part: 40, title: "À la validation", text: "Quand vous avez validé le fonctionnement." },
+  { part: 20, title: "À la mise en ligne", text: "Quand votre site est publié." },
+];
+
 /** Version courte, reprise sur l'accueil et les pages de services. */
 export const inclusEssentiel = [
   "Une démonstration gratuite, avant toute décision",
   "Un devis clair, avec le prix et le délai",
   "Un résultat à votre image, pensé pour le téléphone",
   "Un espace pour tout gérer vous-même",
-  "Les bases pour être trouvé sur Google",
+  "Les bases pour Google et les IA",
   "Deux séries de corrections incluses",
   "La mise en ligne et une prise en main",
   "Le même interlocuteur, et les bugs corrigés après la mise en ligne",

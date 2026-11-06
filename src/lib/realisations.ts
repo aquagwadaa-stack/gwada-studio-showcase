@@ -1,3 +1,5 @@
+export type PageLongue = { image: string; hauteur: number };
+
 export type Realisation = {
   slug: string;
   name: string;
@@ -9,6 +11,8 @@ export type Realisation = {
   address: string;
   /** Chemin de l'image, sans la largeur ni l'extension. */
   image: string;
+  /** Capture plus haute de la vraie page, pour la faire défiler dans son cadre. */
+  pageLongue?: PageLongue;
   alt: string;
   /** Projet du studio, et non d'un client. */
   own?: boolean;
@@ -27,6 +31,7 @@ export const realisations: Realisation[] = [
     url: "https://kafeceramik.fr/",
     address: "kafeceramik.fr",
     image: "/realisations/kafe-ceramik",
+    pageLongue: { image: "/realisations/kafe-ceramik-long", hauteur: 2507 },
     alt: "Page d’accueil du site Kafé Céramik",
     quote: {
       text: "Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.",
@@ -43,6 +48,7 @@ export const realisations: Realisation[] = [
     url: "https://crystalbeachcourbaril.fr/",
     address: "crystalbeachcourbaril.fr",
     image: "/realisations/crystal-beach",
+    pageLongue: { image: "/realisations/crystal-beach-long", hauteur: 2494 },
     alt: "Page d’accueil du site Crystal Beach Courbaril",
     quote: {
       text: "Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat.",
@@ -59,6 +65,7 @@ export const realisations: Realisation[] = [
     url: "https://memo-revision.fr/",
     address: "memo-revision.fr",
     image: "/realisations/memo-revision",
+    pageLongue: { image: "/realisations/memo-revision-long", hauteur: 2494 },
     alt: "Page d’accueil de l’application Mémo Révision",
     own: true,
   },

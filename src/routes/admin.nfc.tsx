@@ -1,19 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Session } from "@supabase/supabase-js";
 import QRCode from "qrcode";
 import JSZip from "jszip";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 
+import { AdminAcces, AdminOnglets } from "@/components/site/AdminAcces";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  isValidHttpUrl,
-  shortUrlFor,
-  statusLabel,
-  statusOf,
-  type NfcCard,
-} from "@/lib/nfc";
+import { isValidHttpUrl, shortUrlFor, statusLabel, statusOf, type NfcCard } from "@/lib/nfc";
 
 export const Route = createFileRoute("/admin/nfc")({
   staticData: { sitemap: false },
@@ -45,101 +39,14 @@ function download(filename: string, href: string) {
   a.remove();
 }
 
-/* ---------------------------------- Auth ---------------------------------- */
-
-function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<"in" | "up">("in");
-  const [busy, setBusy] = useState(false);
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    try {
-      if (mode === "in") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin/nfc` },
-        });
-        if (error) throw error;
-        toast.success("Compte créé. Vérifiez votre boîte mail pour confirmer.");
-      }
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Connexion impossible");
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div className="grid min-h-svh place-items-center bg-[#0d1715] px-5 text-[#f7f7ef]">
-      <form onSubmit={submit} className="w-full max-w-sm space-y-4">
-        <div className="text-xs font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-          Gwada Web Studio
-        </div>
-        <h1 className="text-2xl font-black">Admin cartes NFC</h1>
-        <input
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-xl bg-white/5 px-4 py-3 text-base outline-none ring-1 ring-white/10 focus:ring-[#54d7c8]"
-        />
-        <input
-          type="password"
-          required
-          autoComplete="current-password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl bg-white/5 px-4 py-3 text-base outline-none ring-1 ring-white/10 focus:ring-[#54d7c8]"
-        />
-        <button
-          disabled={busy}
-          className="w-full rounded-xl bg-[#54d7c8] py-3 font-black text-[#0d1715] disabled:opacity-60"
-        >
-          {busy ? "…" : mode === "in" ? "Se connecter" : "Créer le compte"}
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode(mode === "in" ? "up" : "in")}
-          className="w-full text-sm text-white/50 underline"
-        >
-          {mode === "in" ? "Première utilisation : créer le compte" : "J’ai déjà un compte"}
-        </button>
-      </form>
-      <Toaster />
-    </div>
-  );
-}
-
 /* ---------------------------------- Page ---------------------------------- */
 
 function AdminNfcPage() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setReady(true);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => sub.subscription.unsubscribe();
-  }, []);
-
-  if (!ready) {
-    return <div className="min-h-svh bg-[#0d1715]" />;
-  }
-  if (!session) return <LoginScreen />;
-  return <AdminDashboard />;
+  return (
+    <AdminAcces titre="Admin cartes NFC">
+      <AdminDashboard />
+    </AdminAcces>
+  );
 }
 
 function AdminDashboard() {
@@ -200,6 +107,7 @@ function AdminDashboard() {
             Déconnexion
           </button>
         </div>
+        <AdminOnglets />
         <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[11px] font-bold">
           <div className="rounded-lg bg-white/5 py-2">
             Libres<div className="text-base font-black">{counts.libre}</div>
@@ -628,8 +536,6 @@ function PlaceSearch({
   );
 }
 
-
-
 /* ----------------------------------- QR ----------------------------------- */
 
 function QrBlock({ code }: { code: string }) {
@@ -664,7 +570,10 @@ function QrBlock({ code }: { code: string }) {
         <button
           onClick={async () => {
             const svg = await qrSvg(short);
-            download(`${code}.svg`, URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" })));
+            download(
+              `${code}.svg`,
+              URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" })),
+            );
           }}
           className="rounded-lg bg-white/10 py-2"
         >
@@ -702,10 +611,7 @@ function AllQrs({ cards }: { cards: NfcCard[] }) {
         zip.file(`${c.code}.png`, dataUrl.split(",")[1]!, { base64: true });
         zip.file(`${c.code}.svg`, await qrSvg(url));
       }
-      zip.file(
-        "urls.txt",
-        cards.map((c) => `${c.code} -> ${shortUrlFor(c.code)}`).join("\n"),
-      );
+      zip.file("urls.txt", cards.map((c) => `${c.code} -> ${shortUrlFor(c.code)}`).join("\n"));
       const blob = await zip.generateAsync({ type: "blob" });
       download("gwada-qr-codes.zip", URL.createObjectURL(blob));
       toast.success("Export ZIP prêt");

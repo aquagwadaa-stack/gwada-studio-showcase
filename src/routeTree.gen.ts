@@ -32,6 +32,7 @@ import { Route as SiteInternetSalonInstitutRouteImport } from './routes/site-int
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitesWebRouteImport } from './routes/sites-web'
 import { Route as ACodeRouteImport } from './routes/a.$code'
+import { Route as AdminDemandesRouteImport } from './routes/admin.demandes'
 import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
 import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 
@@ -155,6 +156,11 @@ const ACodeRoute = ACodeRouteImport.update({
   path: '/a/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDemandesRoute = AdminDemandesRouteImport.update({
+  id: '/admin/demandes',
+  path: '/admin/demandes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminNfcRoute = AdminNfcRouteImport.update({
   id: '/admin/nfc',
   path: '/admin/nfc',
@@ -190,6 +196,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
+  '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
 }
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
+  '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
 }
@@ -245,6 +253,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
   '/a/$code': typeof ACodeRoute
+  '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
   '/api/places/search': typeof ApiPlacesSearchRoute
 }
@@ -274,6 +283,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
+    | '/admin/demandes'
     | '/admin/nfc'
     | '/api/places/search'
   fileRoutesByTo: FileRoutesByTo
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
+    | '/admin/demandes'
     | '/admin/nfc'
     | '/api/places/search'
   id:
@@ -328,6 +339,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sites-web'
     | '/a/$code'
+    | '/admin/demandes'
     | '/admin/nfc'
     | '/api/places/search'
   fileRoutesById: FileRoutesById
@@ -356,6 +368,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SitesWebRoute: typeof SitesWebRoute
   ACodeRoute: typeof ACodeRoute
+  AdminDemandesRoute: typeof AdminDemandesRoute
   AdminNfcRoute: typeof AdminNfcRoute
   ApiPlacesSearchRoute: typeof ApiPlacesSearchRoute
 }
@@ -523,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ACodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/demandes': {
+      id: '/admin/demandes'
+      path: '/admin/demandes'
+      fullPath: '/admin/demandes'
+      preLoaderRoute: typeof AdminDemandesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/nfc': {
       id: '/admin/nfc'
       path: '/admin/nfc'
@@ -564,6 +584,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SitesWebRoute: SitesWebRoute,
   ACodeRoute: ACodeRoute,
+  AdminDemandesRoute: AdminDemandesRoute,
   AdminNfcRoute: AdminNfcRoute,
   ApiPlacesSearchRoute: ApiPlacesSearchRoute,
 }

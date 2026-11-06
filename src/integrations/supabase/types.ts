@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      demandes: {
+        Row: {
+          details: Json
+          email: string | null
+          entreprise: string
+          formulaire: string
+          id: string
+          recue_le: string
+          source: string | null
+          telephone: string | null
+          traitee: boolean
+        }
+        Insert: {
+          details?: Json
+          email?: string | null
+          entreprise: string
+          formulaire: string
+          id?: string
+          recue_le?: string
+          source?: string | null
+          telephone?: string | null
+          traitee?: boolean
+        }
+        Update: {
+          details?: Json
+          email?: string | null
+          entreprise?: string
+          formulaire?: string
+          id?: string
+          recue_le?: string
+          source?: string | null
+          telephone?: string | null
+          traitee?: boolean
+        }
+        Relationships: []
+      }
       nfc_cards: {
         Row: {
           active: boolean

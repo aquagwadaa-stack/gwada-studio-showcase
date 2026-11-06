@@ -12,8 +12,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
 import { contactInfo } from "@/lib/contact-info";
-
-const formEndpoint = `https://formsubmit.co/ajax/${contactInfo.email}`;
+import { envoyerDemande } from "@/lib/demandes";
 
 const needs = [
   "Obtenir plus de demandes",
@@ -109,43 +108,42 @@ export function ProjectBriefForm() {
     event.preventDefault();
     setStatus("submitting");
 
-    const formData = new FormData();
-    formData.append("Prénom", brief.name);
-    formData.append("Entreprise / activité", brief.business);
-    formData.append("email", brief.email);
-    formData.append("Téléphone", brief.phone || "Non renseigné");
-    formData.append("Besoin principal", brief.need);
-    formData.append("Site ou réseau actuel", brief.website || "Non renseigné");
-    formData.append("Détails du projet", brief.details || "Non renseigné");
-    formData.append("_subject", `Nouvelle demande — ${brief.business} — Gwada Web Studio`);
-    formData.append("_template", "table");
-    formData.append("_honey", honeypot);
-
-    try {
-      const response = await fetch(formEndpoint, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
-      const result = (await response.json().catch(() => null)) as {
-        success?: boolean;
-      } | null;
-
-      if (!response.ok || result?.success === false) {
-        throw new Error("Form submission failed");
-      }
-
+    // Un robot a rempli le champ caché : on ne garde rien, sans le lui dire.
+    if (honeypot) {
       setStatus("success");
-      trackLeadIntent("submitted", brief.need);
-      window.dispatchEvent(
-        new CustomEvent("gws:lead", {
-          detail: { need: brief.need, source: "contact_form" },
-        }),
-      );
-    } catch {
+      return;
+    }
+
+    const envoyee = await envoyerDemande({
+      formulaire: "contact",
+      source: "contact",
+      entreprise: brief.business,
+      telephone: brief.phone,
+      email: brief.email,
+      sujet: `Nouvelle demande — ${brief.business} — Gwada Web Studio`,
+      details: {
+        Prénom: brief.name,
+        "Entreprise / activité": brief.business,
+        "E-mail": brief.email,
+        Téléphone: brief.phone || "Non renseigné",
+        "Besoin principal": brief.need,
+        "Site ou réseau actuel": brief.website || "Non renseigné",
+        "Détails du projet": brief.details || "Non renseigné",
+      },
+    }).catch(() => false);
+
+    if (!envoyee) {
       setStatus("error");
       trackLeadIntent("error", brief.need);
+      return;
     }
+    setStatus("success");
+    trackLeadIntent("submitted", brief.need);
+    window.dispatchEvent(
+      new CustomEvent("gws:lead", {
+        detail: { need: brief.need, source: "contact_form" },
+      }),
+    );
   };
 
   const copyRequest = async () => {
@@ -368,8 +366,7 @@ export function ProjectBriefForm() {
 
       <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/42">
         <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-        Vos informations sont transmises par e-mail et utilisées uniquement pour répondre à votre
-        demande.
+        Vos informations sont utilisées uniquement pour répondre à votre demande.
       </p>
 
       {status === "error" && (

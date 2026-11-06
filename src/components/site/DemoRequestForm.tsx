@@ -1,10 +1,9 @@
 import { AlertCircle, ArrowRight, CircleCheck, LoaderCircle, ShieldCheck } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { contactInfo, whatsappLink } from "@/lib/contact-info";
+import { whatsappLink } from "@/lib/contact-info";
 import { WhatsAppIcon } from "@/components/site/WhatsApp";
-
-const formEndpoint = `https://formsubmit.co/ajax/${contactInfo.email}`;
+import { envoyerDemande } from "@/lib/demandes";
 
 type DemoRequest = {
   business: string;
@@ -59,32 +58,37 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
     event.preventDefault();
     setStatus("submitting");
 
-    const formData = new FormData();
-    formData.append("Commerce", request.business);
-    formData.append("Activité et ville", request.activity);
-    formData.append("WhatsApp ou téléphone", request.phone);
-    formData.append("Site ou réseau", request.link || "Non renseigné");
-    if (request.email) formData.append("email", request.email);
-    formData.append("Source", source);
-    formData.append("_subject", `Démo gratuite — ${request.business} — ${source}`);
-    formData.append("_template", "table");
-    formData.append("_honey", honeypot);
-
-    try {
-      const response = await fetch(formEndpoint, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
-      });
-      const result = (await response.json().catch(() => null)) as { success?: boolean } | null;
-      if (!response.ok || result?.success === false) throw new Error("Form submission failed");
+    // Un robot a rempli le champ caché : on ne garde rien, sans le lui dire.
+    if (honeypot) {
       setStatus("success");
-      window.dispatchEvent(
-        new CustomEvent("gws:lead", { detail: { need: "demo_gratuite", source } }),
-      );
-    } catch {
-      setStatus("error");
+      return;
     }
+
+    const envoyee = await envoyerDemande({
+      formulaire: "demo",
+      source,
+      entreprise: request.business,
+      telephone: request.phone,
+      email: request.email,
+      sujet: `Démo gratuite — ${request.business} — ${source}`,
+      details: {
+        Commerce: request.business,
+        "Activité et ville": request.activity,
+        "WhatsApp ou téléphone": request.phone,
+        "Site ou réseau": request.link || "Non renseigné",
+        "E-mail": request.email || "Non renseigné",
+        Source: source,
+      },
+    }).catch(() => false);
+
+    if (!envoyee) {
+      setStatus("error");
+      return;
+    }
+    setStatus("success");
+    window.dispatchEvent(
+      new CustomEvent("gws:lead", { detail: { need: "demo_gratuite", source } }),
+    );
   };
 
   if (status === "success") {

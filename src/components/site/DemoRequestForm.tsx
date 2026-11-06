@@ -70,7 +70,7 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
       entreprise: request.business,
       telephone: request.phone,
       email: request.email,
-      sujet: `Démo gratuite — ${request.business} — ${source}`,
+      sujet: `Nouvelle demande de démo — ${request.business} — Gwada Web Studio`,
       details: {
         Commerce: request.business,
         "Activité et ville": request.activity,

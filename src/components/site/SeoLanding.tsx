@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { DemoRequestForm } from "@/components/site/DemoRequestForm";
 import { FaqSection } from "@/components/site/FaqSection";
+import { BrowserFrame } from "@/components/site/SitePreview";
 import type { LandingPage } from "@/lib/landing-pages";
 
 const steps = [
@@ -20,11 +21,9 @@ export function SeoLanding({ page }: { page: LandingPage }) {
         <div className="gws-grid pointer-events-none absolute inset-0 opacity-40" />
         <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-start lg:gap-14">
           <div className="lg:pt-8">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-              {page.eyebrow}
-            </div>
-            <h1 className="mt-5 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-extrabold leading-[1.04] tracking-[-0.05em]">
-              {page.headline} <span className="block text-[#54d7c8]">{page.accent}</span>
+            <p className="text-sm font-bold text-[#54d7c8]">{page.eyebrow}</p>
+            <h1 className="mt-3 font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
+              {page.headline} <span className="block">{page.accent}</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
               {page.intro}
@@ -49,7 +48,7 @@ export function SeoLanding({ page }: { page: LandingPage }) {
 
       <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="max-w-3xl font-display text-[clamp(2rem,3.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             {page.pointsTitle}
           </h2>
           <div className="mt-9 grid gap-4 md:grid-cols-2">
@@ -66,7 +65,7 @@ export function SeoLanding({ page }: { page: LandingPage }) {
       <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-[clamp(2rem,3.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Comment ça se passe
             </h2>
             <ol className="mt-8 grid gap-5">
@@ -83,21 +82,28 @@ export function SeoLanding({ page }: { page: LandingPage }) {
               ))}
             </ol>
           </div>
-          <a
-            href={page.reference.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group self-start rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition hover:border-[#54d7c8]/45"
-          >
-            <div className="text-xs font-black uppercase tracking-[0.16em] text-white/45">
+          <div className="self-start">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Un site déjà en ligne
-            </div>
-            <h3 className="mt-3 text-2xl font-black tracking-[-0.03em]">{page.reference.name}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-white/60">{page.reference.kind}</p>
-            <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[#54d7c8]">
-              {page.reference.domain} <ExternalLink className="h-3.5 w-3.5" />
-            </span>
-          </a>
+            </h2>
+            <a
+              href={page.reference.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 block rounded-2xl"
+              aria-label={`Ouvrir ${page.reference.name} dans un nouvel onglet`}
+              data-cta="landing-reference"
+            >
+              <BrowserFrame
+                image={page.reference.image}
+                alt={`Page d’accueil du site ${page.reference.name}`}
+                address={page.reference.domain}
+                sizes="(min-width: 1024px) 600px, 100vw"
+              />
+            </a>
+            <h3 className="mt-4 text-lg font-black tracking-[-0.02em]">{page.reference.name}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/60">{page.reference.kind}</p>
+          </div>
         </div>
       </section>
 
@@ -105,7 +111,7 @@ export function SeoLanding({ page }: { page: LandingPage }) {
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Le plus simple, c’est de voir le résultat.
           </h2>
           <Link

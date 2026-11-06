@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, CircleCheck, ExternalLink, Quote, X } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Check, CircleCheck, X } from "lucide-react";
 import { DemoRequestForm } from "@/components/site/DemoRequestForm";
 import { FaqSection } from "@/components/site/FaqSection";
+import { RealisationCard } from "@/components/site/SitePreview";
+import { realisationsClients } from "@/lib/realisations";
 
 const title = "Démo gratuite de votre site internet — Gwada Web Studio";
 const description =
@@ -49,32 +51,6 @@ const excluded = [
   "Pas le site final : tout peut encore être modifié",
 ];
 
-const references = [
-  {
-    name: "Crystal Beach Courbaril",
-    kind: "Location saisonnière, réservation directe",
-    url: "https://crystalbeachcourbaril.fr/",
-    domain: "crystalbeachcourbaril.fr",
-  },
-  {
-    name: "Kafé Céramik",
-    kind: "Café-atelier, réservations en ligne",
-    url: "https://kafeceramik.fr/",
-    domain: "kafeceramik.fr",
-  },
-];
-
-const quotes = [
-  {
-    text: "Le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.",
-    author: "Kafe Ceramik, Saint-François",
-  },
-  {
-    text: "Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat.",
-    author: "Appart Courbaril",
-  },
-];
-
 const faq = [
   {
     question: "La démonstration est-elle vraiment gratuite ?",
@@ -111,11 +87,11 @@ function DemoPage() {
         <div className="absolute inset-x-0 bottom-0 h-[32rem] bg-[radial-gradient(circle_at_25%_100%,rgba(84,215,200,.13),transparent_62%)]" />
         <div className="relative mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-start lg:gap-14">
           <div className="lg:pt-8">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-              Démonstration gratuite · Sans engagement
-            </div>
-            <h1 className="mt-5 font-display text-[clamp(2.6rem,5.6vw,5rem)] font-extrabold leading-[1.02] tracking-[-0.055em]">
-              Voyez votre site <span className="block text-[#54d7c8]">avant de payer.</span>
+            <p className="text-sm font-bold text-[#54d7c8]">
+              Démonstration gratuite, sans engagement
+            </p>
+            <h1 className="mt-3 font-display text-[clamp(2.4rem,4.8vw,4.25rem)] font-extrabold leading-[1.04] tracking-[-0.045em]">
+              Voyez votre site <span className="block">avant de payer.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
               Je prépare gratuitement une démonstration à vos couleurs. Vous la regardez sur votre
@@ -141,7 +117,7 @@ function DemoPage() {
 
       <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="max-w-3xl font-display text-[clamp(2rem,3.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Trois étapes, et c’est vous qui décidez.
           </h2>
           <ol className="mt-10 grid gap-4 md:grid-cols-3">
@@ -185,39 +161,21 @@ function DemoPage() {
 
       <section className="bg-[#102019] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="max-w-3xl font-display text-[clamp(2rem,3.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Des sites déjà en ligne.
           </h2>
-          <div className="mt-9 grid gap-4 md:grid-cols-2">
-            {references.map((reference) => (
-              <a
-                key={reference.name}
-                href={reference.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-[#54d7c8]/45"
-              >
-                <h3 className="text-lg font-black tracking-[-0.02em]">{reference.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/55">{reference.kind}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[#54d7c8]">
-                  {reference.domain} <ExternalLink className="h-3.5 w-3.5" />
-                </span>
-              </a>
+          <div className="mt-9 grid gap-x-6 gap-y-10 md:grid-cols-3">
+            {realisationsClients.map((item) => (
+              <RealisationCard key={item.slug} item={item} sizes="(min-width: 768px) 33vw, 100vw" />
             ))}
           </div>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {quotes.map((quote) => (
-              <figure key={quote.author} className="rounded-3xl bg-[#f5f3eb] p-6 text-[#152820]">
-                <Quote className="h-5 w-5 text-[#287667]" />
-                <blockquote className="mt-3 text-base font-semibold leading-relaxed">
-                  {quote.text}
-                </blockquote>
-                <figcaption className="mt-3 text-xs font-bold text-[#4a5d56]">
-                  {quote.author}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <Link
+            to="/realisations"
+            className="mt-9 inline-flex items-center gap-2 text-sm font-extrabold text-[#54d7c8] transition hover:gap-3"
+            data-cta="demo-realisations"
+          >
+            Voir toutes mes réalisations <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
@@ -225,7 +183,7 @@ function DemoPage() {
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#0d271f] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
             Le plus simple, c’est de voir le résultat.
           </h2>
           <a

@@ -1,6 +1,12 @@
 import type { FaqItem } from "@/components/site/FaqSection";
 
-export type LandingReference = { name: string; kind: string; url: string; domain: string };
+export type LandingReference = {
+  name: string;
+  kind: string;
+  url: string;
+  domain: string;
+  image: string;
+};
 
 export type LandingPage = {
   path: string;
@@ -23,6 +29,7 @@ const crystalBeach: LandingReference = {
   kind: "Un appartement de vacances à Saint-François, avec réservation directe.",
   url: "https://crystalbeachcourbaril.fr/",
   domain: "crystalbeachcourbaril.fr",
+  image: "/realisations/crystal-beach",
 };
 
 const kafeCeramik: LandingReference = {
@@ -30,6 +37,7 @@ const kafeCeramik: LandingReference = {
   kind: "Un café-atelier à Saint-François, avec réservation des ateliers en ligne.",
   url: "https://kafeceramik.fr/",
   domain: "kafeceramik.fr",
+  image: "/realisations/kafe-ceramik",
 };
 
 const demoFaq: FaqItem = {
@@ -51,7 +59,7 @@ export const landingPages = {
     title: "Création de site internet en Guadeloupe, démo gratuite — Gwada Web Studio",
     description:
       "Site vitrine, réservation, paiement : je crée votre site internet en Guadeloupe. Démonstration gratuite à vos couleurs, vous voyez le résultat avant de payer.",
-    eyebrow: "Création de site internet · Guadeloupe",
+    eyebrow: "Création de site internet en Guadeloupe",
     headline: "Votre site internet,",
     accent: "créé en Guadeloupe.",
     intro:
@@ -92,7 +100,7 @@ export const landingPages = {
     title: "Création de site internet en Martinique, démo gratuite — Gwada Web Studio",
     description:
       "Un site internet pour votre activité en Martinique, créé à distance depuis la Guadeloupe. Démonstration gratuite à vos couleurs, sans engagement.",
-    eyebrow: "Création de site internet · Martinique",
+    eyebrow: "Création de site internet en Martinique",
     headline: "Un site à votre image,",
     accent: "pour votre activité en Martinique.",
     intro:

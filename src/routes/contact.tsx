@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Parlez de votre projet à Gwada Web Studio : site web, outil métier, automatisation ou carte NFC.",
+          "Parlez de votre projet à Gwada Web Studio : site internet, application, outil sur mesure ou carte d’avis Google.",
       },
     ],
   }),
@@ -22,17 +22,14 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   return (
     <div className="bg-[#0d1715] text-[#f7f7ef]">
-      <section className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
+      <section className="relative overflow-hidden px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
         <div className="absolute inset-x-0 bottom-0 h-[36rem] bg-[radial-gradient(circle_at_30%_100%,rgba(84,215,200,.14),transparent_62%)]" />
-        <div className="relative mx-auto grid max-w-[1380px] gap-12 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
+        <div className="relative mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-              Contact
-            </div>
-            <h1 className="mt-5 max-w-2xl font-display text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl">
+            <h1 className="max-w-2xl font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
               Dites-moi ce que vous aimeriez améliorer.
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/58">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/68 sm:text-[17px]">
               Pas besoin d’avoir déjà défini la solution technique. Expliquez simplement votre
               activité, votre problème ou votre idée : je vous répondrai avec une première
               orientation.
@@ -73,7 +70,7 @@ function ContactPage() {
               </a>
               <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold text-white/55">
                 <MapPin className="h-4 w-4 text-[#54d7c8]" />
-                Basé en Guadeloupe · Martinique et France à distance
+                Basé aux Abymes, en Guadeloupe. Martinique et France à distance
               </div>
             </div>
           </div>

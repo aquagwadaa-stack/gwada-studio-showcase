@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Bell,
   Check,
   CircleCheck,
@@ -14,16 +15,19 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
+import { InclusApercu } from "@/components/site/Inclus";
+import { BrowserFrame } from "@/components/site/SitePreview";
+import { memoRevision } from "@/lib/realisations";
 
 export const Route = createFileRoute("/outils-metier")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Outils métier & automatisations — Gwada Web Studio" },
+      { title: "Applications et outils sur mesure en Guadeloupe — Gwada Web Studio" },
       {
         name: "description",
         content:
-          "Espaces d’administration, formulaires, automatisations, tableaux de bord et espaces clients conçus sur mesure pour votre activité.",
+          "Applications web, espaces clients, gestion, tableaux de bord et automatisations, créés sur mesure pour votre activité, en Guadeloupe et à distance.",
       },
     ],
   }),
@@ -109,31 +113,32 @@ type DemoMode = (typeof demoModes)[number];
 function OutilsMetierPage() {
   return (
     <div className="bg-[#0d1715] text-[#f7f7ef]">
-      <section className="relative overflow-hidden border-b border-white/10 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-        <div className="gws-grid absolute inset-0 opacity-20" />
-        <div className="relative mx-auto max-w-[1380px]">
-          <div className="max-w-4xl">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#5b7cfa]">
-              Outils métier
-            </div>
-            <h1 className="mt-5 font-display text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl">
-              Votre site peut aussi
-              <span className="block text-[#5b7cfa]">vous faire gagner du temps.</span>
+      <section className="relative overflow-hidden border-b border-white/10 px-5 pb-14 pt-14 sm:px-8 sm:pb-20 sm:pt-20 lg:px-12">
+        <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
+        <div className="relative mx-auto max-w-[1280px]">
+          <div className="max-w-3xl">
+            <h1 className="font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+              Une application ou un outil, fait pour votre façon de travailler.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/60">
-              Derrière la partie visible par vos clients, des outils peuvent simplifier votre
-              quotidien : administration, formulaires, automatisations ou espaces privés.
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+              Quand un logiciel tout prêt ne suffit pas, je crée ce qu’il vous faut : une
+              application, un espace client, la gestion de vos demandes ou des tâches qui se font
+              toutes seules.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <p className="mt-4 text-sm font-bold text-white/85">
+              Sur devis. Démonstration gratuite, sans engagement.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/contact"
-                className="gws-button-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
+                className="gws-button-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
+                data-cta="outils-contact"
               >
-                Expliquer mon besoin <ArrowRight className="h-4 w-4" />
+                Expliquer mon besoin <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <a
                 href="#outils"
-                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/20 px-7 text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/[0.05]"
+                className="inline-flex min-h-13 items-center justify-center rounded-full border border-white/20 px-7 text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/[0.05]"
               >
                 Voir les possibilités
               </a>
@@ -142,32 +147,33 @@ function OutilsMetierPage() {
         </div>
       </section>
 
-      <section id="outils" className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-        <div className="mx-auto max-w-[1380px]">
-          <div className="max-w-3xl">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Ce qu’on peut construire
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-6xl">
-              Les fonctions utiles restent
-              <span className="block text-[#54d7c8]">invisibles jusqu’au moment où elles servent.</span>
+      <section id="outils" className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+              Ce qu’on peut construire ensemble
             </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-white/62 sm:text-base">
+              L’outil peut être très simple, puis évoluer seulement si votre activité en a besoin.
+            </p>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((item) => (
               <article
                 key={item.title}
-                className="min-h-[245px] rounded-[1.7rem] border border-white/10 bg-[#13211e] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/20 sm:p-7"
+                className="rounded-3xl border border-white/10 bg-[#13211e] p-6"
               >
                 <span
-                  className="grid h-11 w-11 place-items-center rounded-2xl text-[#0d1715]"
+                  className="grid h-10 w-10 place-items-center rounded-xl text-[#0d1715]"
                   style={{ backgroundColor: item.accent }}
                 >
-                  <item.icon className="h-5 w-5" />
+                  <item.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-7 text-xl font-black">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/52">{item.text}</p>
+                <h3 className="mt-5 font-display text-xl font-extrabold tracking-[-0.03em]">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">{item.text}</p>
               </article>
             ))}
           </div>
@@ -176,55 +182,65 @@ function OutilsMetierPage() {
 
       <InteractiveToolDemo />
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1380px] gap-10 lg:grid-cols-[.9fr_1.1fr]">
+      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto grid max-w-[1280px] items-center gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-14">
+          <a
+            href={memoRevision.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block rounded-2xl"
+            aria-label={`Ouvrir ${memoRevision.name} dans un nouvel onglet`}
+            data-cta="outils-memo-revision"
+          >
+            <BrowserFrame
+              image={memoRevision.image}
+              alt={memoRevision.alt}
+              address={memoRevision.address}
+              sizes="(min-width: 1024px) 700px, 100vw"
+            />
+          </a>
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Pas besoin d’un logiciel énorme
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
-              On construit seulement ce qui vous manque.
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+              Un exemple en ligne : {memoRevision.name}
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/55">
-              L’outil peut être très simple : une vue interne, un formulaire mieux pensé ou une
-              automatisation ciblée. Il évolue seulement si votre activité en a besoin.
+            <p className="mt-3 text-[15px] leading-relaxed text-white/68 sm:text-base">
+              {memoRevision.summary} C’est mon application : je la conçois et je la fais évoluer
+              moi-même.
             </p>
-          </div>
-
-          <div className="space-y-3">
-            {[
-              "Adapté à votre façon de travailler",
-              "Utilisable sur téléphone si nécessaire",
-              "Peut être relié à votre site public",
-              "Peut évoluer avec votre activité",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold"
-              >
-                <Check className="h-4 w-4 text-[#5b7cfa]" />
-                {item}
-              </div>
-            ))}
+            <ul className="mt-4 grid gap-1.5 text-sm font-semibold text-white/82">
+              {memoRevision.features.map((feature) => (
+                <li key={feature} className="flex items-center gap-2.5">
+                  <Check className="h-3.5 w-3.5 shrink-0 text-[#54d7c8]" strokeWidth={3} aria-hidden="true" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={memoRevision.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-5 text-sm font-bold transition hover:border-white/45 hover:bg-white/[0.06]"
+              data-cta="outils-memo-revision-lien"
+            >
+              Voir l’application <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="px-5 pb-24 sm:px-8 sm:pb-28 lg:px-12">
-        <div className="mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#5b7cfa] p-7 text-white sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] text-white/60">
-              Votre quotidien
-            </div>
-            <h2 className="mt-3 max-w-3xl font-display text-3xl font-black tracking-[-0.045em] sm:text-5xl">
-              Dites-moi simplement ce qui vous fait perdre du temps aujourd’hui.
-            </h2>
-          </div>
+      <InclusApercu />
+
+      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+          <h2 className="max-w-3xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+            Dites-moi simplement ce qui vous fait perdre du temps aujourd’hui.
+          </h2>
           <Link
             to="/contact"
-            className="inline-flex min-h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0d1715] px-7 text-sm font-black text-white"
+            className="inline-flex min-h-13 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0d1715] px-7 text-sm font-extrabold text-white"
+            data-cta="outils-final"
           >
-            Me contacter <ArrowRight className="h-4 w-4" />
+            Me contacter <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -237,18 +253,14 @@ function InteractiveToolDemo() {
   const active = demoModes.find((mode) => mode.id === activeId) ?? demoModes[0];
 
   return (
-    <section className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-20 text-[#101a18] sm:px-8 sm:py-24 lg:px-12">
-      <div className="mx-auto max-w-[1380px]">
+    <section className="border-y border-[#d8dfdb] bg-[#f7f7ef] px-5 py-16 text-[#101a18] sm:px-8 sm:py-20 lg:px-12">
+      <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#66736e]">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               À quoi ça ressemble concrètement ?
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
-              Pas seulement un site.
-              <span className="block text-[#516fe0]">Un outil qui travaille avec vous.</span>
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#5f6b67]">
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#5f6b67] sm:text-base">
               Choisissez un exemple pour voir comment une fonction peut s’intégrer à votre quotidien.
             </p>
 
@@ -325,7 +337,7 @@ function InteractiveToolDemo() {
             </div>
 
             <p className="mt-4 text-center text-xs font-semibold text-[#78837f]">
-              Exemple illustratif — l’outil final est construit autour de votre propre organisation.
+              Exemple illustratif : l’outil final est construit autour de votre organisation.
             </p>
           </div>
         </div>

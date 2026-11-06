@@ -65,16 +65,16 @@ function CartesNfcPage() {
       <section className="relative overflow-hidden border-b border-white/10 px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="gws-grid absolute inset-0 opacity-20" />
 
-        <div className="relative mx-auto grid max-w-[1380px] gap-12 lg:grid-cols-[.88fr_1.12fr] lg:items-center">
+        <div className="relative mx-auto grid max-w-[1280px] gap-12 lg:grid-cols-[.88fr_1.12fr] lg:items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white/70">
               <Wifi className="h-3.5 w-3.5 text-[#54d7c8]" />
               Cartes NFC pour avis Google
             </div>
 
-            <h1 className="mt-6 font-display text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl">
+            <h1 className="mt-6 font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">
               Plus simple de demander un avis.
-              <span className="block text-[#ff7c6c]">Plus simple d’en laisser un.</span>
+              <span className="block">Plus simple d’en laisser un.</span>
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/60">
@@ -122,16 +122,15 @@ function CartesNfcPage() {
         </div>
       </section>
 
-      <section id="offres" className="bg-[#f7f7ef] px-5 py-20 text-[#101a18] sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto max-w-[1380px]">
-          <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:items-end">
+      <section
+        id="offres"
+        className="bg-[#f7f7ef] px-5 py-16 text-[#101a18] sm:px-8 sm:py-20 lg:px-12"
+      >
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-[#65716d]">
-                Deux versions
-              </div>
-              <h2 className="mt-4 font-display text-4xl font-black leading-[0.98] tracking-[-0.05em] sm:text-6xl">
-                Même fonctionnement.
-                <span className="block text-[#ef6f61]">Le design fait la différence.</span>
+              <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+                Même fonctionnement. Le design fait la différence.
               </h2>
             </div>
 
@@ -217,8 +216,8 @@ function CartesNfcPage() {
 
           <div className="mt-5 flex flex-col gap-3 rounded-[1.4rem] border border-[#d6ddd9] bg-white/65 px-5 py-4 text-sm text-[#5f6b67] sm:flex-row sm:items-center sm:justify-between">
             <span>
-              <strong className="text-[#101a18]">Dans les deux cas :</strong> la carte est configurée
-              pour votre fiche Google avant utilisation.
+              <strong className="text-[#101a18]">Dans les deux cas :</strong> la carte est
+              configurée pour votre fiche Google avant utilisation.
             </span>
             <span className="shrink-0 text-xs font-black uppercase tracking-wider text-[#167f74]">
               Aucun abonnement
@@ -227,16 +226,13 @@ function CartesNfcPage() {
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1380px] gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Pourquoi c’est utile ?
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Retirer les étapes inutiles entre le client et votre page d’avis.
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/55">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/62">
               Plus besoin de chercher votre établissement sur Google ou de retrouver un lien :
               l’accès à la page d’avis est déjà prêt sur la carte.
             </p>
@@ -244,22 +240,19 @@ function CartesNfcPage() {
 
           <div className="grid gap-3 sm:grid-cols-3">
             {[
-              ["01", Smartphone, "Approchez", "Le téléphone détecte la carte NFC."],
-              ["02", QrCode, "Ou scannez", "Le QR code reste disponible en alternative."],
-              ["03", Star, "Laissez l’avis", "La page Google s’ouvre directement."],
-            ].map(([number, Icon, title, text]) => {
+              [Smartphone, "Approchez", "Le téléphone détecte la carte NFC."],
+              [QrCode, "Ou scannez", "Le QR code reste disponible en alternative."],
+              [Star, "Laissez l’avis", "La page Google s’ouvre directement."],
+            ].map(([Icon, title, text]) => {
               const StepIcon = Icon as typeof Smartphone;
               return (
                 <article
-                  key={number as string}
+                  key={title as string}
                   className="rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-5"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-black text-white/25">{number as string}</span>
-                    <StepIcon className="h-4.5 w-4.5 text-[#54d7c8]" />
-                  </div>
-                  <h3 className="mt-6 text-lg font-black">{title as string}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/48">{text as string}</p>
+                  <StepIcon className="h-5 w-5 text-[#54d7c8]" aria-hidden="true" />
+                  <h3 className="mt-4 text-lg font-black">{title as string}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">{text as string}</p>
                 </article>
               );
             })}
@@ -267,13 +260,10 @@ function CartesNfcPage() {
         </div>
       </section>
 
-      <section className="px-5 pb-24 sm:px-8 sm:pb-28 lg:px-12">
-        <div className="mx-auto grid max-w-[1380px] gap-8 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+      <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
+        <div className="mx-auto grid max-w-[1280px] gap-8 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] opacity-60">
-              Une question avant de choisir ?
-            </div>
-            <h2 className="mt-3 max-w-3xl font-display text-3xl font-black tracking-[-0.045em] sm:text-5xl">
+            <h2 className="max-w-3xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
               Vérifions ensemble votre fiche Google et la version qui vous convient.
             </h2>
 
@@ -308,7 +298,16 @@ function ProductShowcase() {
       <div className="absolute -right-4 bottom-8 h-36 w-36 rounded-full bg-[#ff7c6c]/15 blur-3xl" />
 
       <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white p-2 shadow-[0_30px_80px_rgba(0,0,0,.28)] sm:p-3">
-        <img src="/carte-nfc-google-avis.webp" alt="Véritable visuel de la carte NFC Gwada Web Studio pour avis Google, avec zone réservée au QR code personnalisé" width={1582} height={994} loading="eager" decoding="async" fetchPriority="high" className="block h-auto w-full rounded-[1.55rem]" />
+        <img
+          src="/carte-nfc-google-avis.webp"
+          alt="Véritable visuel de la carte NFC Gwada Web Studio pour avis Google, avec zone réservée au QR code personnalisé"
+          width={1582}
+          height={994}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          className="block h-auto w-full rounded-[1.55rem]"
+        />
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-2">

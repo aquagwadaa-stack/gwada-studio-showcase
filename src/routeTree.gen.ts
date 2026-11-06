@@ -9,36 +9,117 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitesWebRouteImport } from './routes/sites-web'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SiteInternetSalonInstitutRouteImport } from './routes/site-internet-salon-institut'
-import { Route as SiteInternetRestaurantRouteImport } from './routes/site-internet-restaurant'
-import { Route as SiteInternetLocationSaisonniereRouteImport } from './routes/site-internet-location-saisonniere'
-import { Route as SiteInternetCommerceAntillaisRouteImport } from './routes/site-internet-commerce-antillais'
-import { Route as SiteInternetArtisanRouteImport } from './routes/site-internet-artisan'
-import { Route as SiteCommandesNoelRouteImport } from './routes/site-commandes-noel'
-import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as ExempleCommandesNoelRouteImport } from './routes/exemple-commandes-noel'
-import { Route as DemoGratuiteRouteImport } from './routes/demo-gratuite'
-import { Route as CreationSiteInternetMartiniqueRouteImport } from './routes/creation-site-internet-martinique'
-import { Route as CreationSiteInternetGuadeloupeRouteImport } from './routes/creation-site-internet-guadeloupe'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
-import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
+import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
+import { Route as CeQuiEstInclusRouteImport } from './routes/ce-qui-est-inclus'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CreationSiteInternetGuadeloupeRouteImport } from './routes/creation-site-internet-guadeloupe'
+import { Route as CreationSiteInternetMartiniqueRouteImport } from './routes/creation-site-internet-martinique'
+import { Route as DemoGratuiteRouteImport } from './routes/demo-gratuite'
+import { Route as ExempleCommandesNoelRouteImport } from './routes/exemple-commandes-noel'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as OutilsMetierRouteImport } from './routes/outils-metier'
+import { Route as RealisationsRouteImport } from './routes/realisations'
+import { Route as SiteCommandesNoelRouteImport } from './routes/site-commandes-noel'
+import { Route as SiteInternetArtisanRouteImport } from './routes/site-internet-artisan'
+import { Route as SiteInternetCommerceAntillaisRouteImport } from './routes/site-internet-commerce-antillais'
+import { Route as SiteInternetLocationSaisonniereRouteImport } from './routes/site-internet-location-saisonniere'
+import { Route as SiteInternetRestaurantRouteImport } from './routes/site-internet-restaurant'
+import { Route as SiteInternetSalonInstitutRouteImport } from './routes/site-internet-salon-institut'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitesWebRouteImport } from './routes/sites-web'
 import { Route as ACodeRouteImport } from './routes/a.$code'
+import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
 import { Route as ApiPlacesSearchRouteImport } from './routes/api/places/search'
 
-const SitesWebRoute = SitesWebRouteImport.update({
-  id: '/sites-web',
-  path: '/sites-web',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const CartesNfcRoute = CartesNfcRouteImport.update({
+  id: '/cartes-nfc',
+  path: '/cartes-nfc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CeQuiEstInclusRoute = CeQuiEstInclusRouteImport.update({
+  id: '/ce-qui-est-inclus',
+  path: '/ce-qui-est-inclus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationSiteInternetGuadeloupeRoute =
+  CreationSiteInternetGuadeloupeRouteImport.update({
+    id: '/creation-site-internet-guadeloupe',
+    path: '/creation-site-internet-guadeloupe',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CreationSiteInternetMartiniqueRoute =
+  CreationSiteInternetMartiniqueRouteImport.update({
+    id: '/creation-site-internet-martinique',
+    path: '/creation-site-internet-martinique',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DemoGratuiteRoute = DemoGratuiteRouteImport.update({
+  id: '/demo-gratuite',
+  path: '/demo-gratuite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExempleCommandesNoelRoute = ExempleCommandesNoelRouteImport.update({
+  id: '/exemple-commandes-noel',
+  path: '/exemple-commandes-noel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutilsMetierRoute = OutilsMetierRouteImport.update({
+  id: '/outils-metier',
+  path: '/outils-metier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealisationsRoute = RealisationsRouteImport.update({
+  id: '/realisations',
+  path: '/realisations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteCommandesNoelRoute = SiteCommandesNoelRouteImport.update({
+  id: '/site-commandes-noel',
+  path: '/site-commandes-noel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteInternetArtisanRoute = SiteInternetArtisanRouteImport.update({
+  id: '/site-internet-artisan',
+  path: '/site-internet-artisan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteInternetCommerceAntillaisRoute =
+  SiteInternetCommerceAntillaisRouteImport.update({
+    id: '/site-internet-commerce-antillais',
+    path: '/site-internet-commerce-antillais',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteInternetLocationSaisonniereRoute =
+  SiteInternetLocationSaisonniereRouteImport.update({
+    id: '/site-internet-location-saisonniere',
+    path: '/site-internet-location-saisonniere',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SiteInternetRestaurantRoute = SiteInternetRestaurantRouteImport.update({
+  id: '/site-internet-restaurant',
+  path: '/site-internet-restaurant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteInternetSalonInstitutRoute =
@@ -47,93 +128,24 @@ const SiteInternetSalonInstitutRoute =
     path: '/site-internet-salon-institut',
     getParentRoute: () => rootRouteImport,
   } as any)
-const SiteInternetRestaurantRoute = SiteInternetRestaurantRouteImport.update({
-  id: '/site-internet-restaurant',
-  path: '/site-internet-restaurant',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SiteInternetLocationSaisonniereRoute =
-  SiteInternetLocationSaisonniereRouteImport.update({
-    id: '/site-internet-location-saisonniere',
-    path: '/site-internet-location-saisonniere',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const SiteInternetCommerceAntillaisRoute =
-  SiteInternetCommerceAntillaisRouteImport.update({
-    id: '/site-internet-commerce-antillais',
-    path: '/site-internet-commerce-antillais',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const SiteInternetArtisanRoute = SiteInternetArtisanRouteImport.update({
-  id: '/site-internet-artisan',
-  path: '/site-internet-artisan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SiteCommandesNoelRoute = SiteCommandesNoelRouteImport.update({
-  id: '/site-commandes-noel',
-  path: '/site-commandes-noel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OutilsMetierRoute = OutilsMetierRouteImport.update({
-  id: '/outils-metier',
-  path: '/outils-metier',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExempleCommandesNoelRoute = ExempleCommandesNoelRouteImport.update({
-  id: '/exemple-commandes-noel',
-  path: '/exemple-commandes-noel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoGratuiteRoute = DemoGratuiteRouteImport.update({
-  id: '/demo-gratuite',
-  path: '/demo-gratuite',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreationSiteInternetMartiniqueRoute =
-  CreationSiteInternetMartiniqueRouteImport.update({
-    id: '/creation-site-internet-martinique',
-    path: '/creation-site-internet-martinique',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CreationSiteInternetGuadeloupeRoute =
-  CreationSiteInternetGuadeloupeRouteImport.update({
-    id: '/creation-site-internet-guadeloupe',
-    path: '/creation-site-internet-guadeloupe',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
-  id: '/confidentialite',
-  path: '/confidentialite',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CartesNfcRoute = CartesNfcRouteImport.update({
-  id: '/cartes-nfc',
-  path: '/cartes-nfc',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminNfcRoute = AdminNfcRouteImport.update({
-  id: '/admin/nfc',
-  path: '/admin/nfc',
+const SitesWebRoute = SitesWebRouteImport.update({
+  id: '/sites-web',
+  path: '/sites-web',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ACodeRoute = ACodeRouteImport.update({
   id: '/a/$code',
   path: '/a/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNfcRoute = AdminNfcRouteImport.update({
+  id: '/admin/nfc',
+  path: '/admin/nfc',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
@@ -145,6 +157,7 @@ const ApiPlacesSearchRoute = ApiPlacesSearchRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
@@ -153,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/realisations': typeof RealisationsRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -168,6 +182,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
@@ -176,6 +191,7 @@ export interface FileRoutesByTo {
   '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/realisations': typeof RealisationsRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -192,6 +208,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cartes-nfc': typeof CartesNfcRoute
+  '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
@@ -200,6 +217,7 @@ export interface FileRoutesById {
   '/exemple-commandes-noel': typeof ExempleCommandesNoelRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/outils-metier': typeof OutilsMetierRoute
+  '/realisations': typeof RealisationsRoute
   '/site-commandes-noel': typeof SiteCommandesNoelRoute
   '/site-internet-artisan': typeof SiteInternetArtisanRoute
   '/site-internet-commerce-antillais': typeof SiteInternetCommerceAntillaisRoute
@@ -217,6 +235,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cartes-nfc'
+    | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
     | '/creation-site-internet-guadeloupe'
@@ -225,6 +244,7 @@ export interface FileRouteTypes {
     | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
+    | '/realisations'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -240,6 +260,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cartes-nfc'
+    | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
     | '/creation-site-internet-guadeloupe'
@@ -248,6 +269,7 @@ export interface FileRouteTypes {
     | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
+    | '/realisations'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -263,6 +285,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/cartes-nfc'
+    | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
     | '/creation-site-internet-guadeloupe'
@@ -271,6 +294,7 @@ export interface FileRouteTypes {
     | '/exemple-commandes-noel'
     | '/mentions-legales'
     | '/outils-metier'
+    | '/realisations'
     | '/site-commandes-noel'
     | '/site-internet-artisan'
     | '/site-internet-commerce-antillais'
@@ -287,6 +311,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartesNfcRoute: typeof CartesNfcRoute
+  CeQuiEstInclusRoute: typeof CeQuiEstInclusRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
   CreationSiteInternetGuadeloupeRoute: typeof CreationSiteInternetGuadeloupeRoute
@@ -295,6 +320,7 @@ export interface RootRouteChildren {
   ExempleCommandesNoelRoute: typeof ExempleCommandesNoelRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   OutilsMetierRoute: typeof OutilsMetierRoute
+  RealisationsRoute: typeof RealisationsRoute
   SiteCommandesNoelRoute: typeof SiteCommandesNoelRoute
   SiteInternetArtisanRoute: typeof SiteInternetArtisanRoute
   SiteInternetCommerceAntillaisRoute: typeof SiteInternetCommerceAntillaisRoute
@@ -310,116 +336,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sites-web': {
-      id: '/sites-web'
-      path: '/sites-web'
-      fullPath: '/sites-web'
-      preLoaderRoute: typeof SitesWebRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-internet-salon-institut': {
-      id: '/site-internet-salon-institut'
-      path: '/site-internet-salon-institut'
-      fullPath: '/site-internet-salon-institut'
-      preLoaderRoute: typeof SiteInternetSalonInstitutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-internet-restaurant': {
-      id: '/site-internet-restaurant'
-      path: '/site-internet-restaurant'
-      fullPath: '/site-internet-restaurant'
-      preLoaderRoute: typeof SiteInternetRestaurantRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-internet-location-saisonniere': {
-      id: '/site-internet-location-saisonniere'
-      path: '/site-internet-location-saisonniere'
-      fullPath: '/site-internet-location-saisonniere'
-      preLoaderRoute: typeof SiteInternetLocationSaisonniereRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-internet-commerce-antillais': {
-      id: '/site-internet-commerce-antillais'
-      path: '/site-internet-commerce-antillais'
-      fullPath: '/site-internet-commerce-antillais'
-      preLoaderRoute: typeof SiteInternetCommerceAntillaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-internet-artisan': {
-      id: '/site-internet-artisan'
-      path: '/site-internet-artisan'
-      fullPath: '/site-internet-artisan'
-      preLoaderRoute: typeof SiteInternetArtisanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/site-commandes-noel': {
-      id: '/site-commandes-noel'
-      path: '/site-commandes-noel'
-      fullPath: '/site-commandes-noel'
-      preLoaderRoute: typeof SiteCommandesNoelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/outils-metier': {
-      id: '/outils-metier'
-      path: '/outils-metier'
-      fullPath: '/outils-metier'
-      preLoaderRoute: typeof OutilsMetierRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/exemple-commandes-noel': {
-      id: '/exemple-commandes-noel'
-      path: '/exemple-commandes-noel'
-      fullPath: '/exemple-commandes-noel'
-      preLoaderRoute: typeof ExempleCommandesNoelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo-gratuite': {
-      id: '/demo-gratuite'
-      path: '/demo-gratuite'
-      fullPath: '/demo-gratuite'
-      preLoaderRoute: typeof DemoGratuiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/creation-site-internet-martinique': {
-      id: '/creation-site-internet-martinique'
-      path: '/creation-site-internet-martinique'
-      fullPath: '/creation-site-internet-martinique'
-      preLoaderRoute: typeof CreationSiteInternetMartiniqueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/creation-site-internet-guadeloupe': {
-      id: '/creation-site-internet-guadeloupe'
-      path: '/creation-site-internet-guadeloupe'
-      fullPath: '/creation-site-internet-guadeloupe'
-      preLoaderRoute: typeof CreationSiteInternetGuadeloupeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confidentialite': {
-      id: '/confidentialite'
-      path: '/confidentialite'
-      fullPath: '/confidentialite'
-      preLoaderRoute: typeof ConfidentialiteRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cartes-nfc': {
@@ -429,18 +350,130 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartesNfcRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/ce-qui-est-inclus': {
+      id: '/ce-qui-est-inclus'
+      path: '/ce-qui-est-inclus'
+      fullPath: '/ce-qui-est-inclus'
+      preLoaderRoute: typeof CeQuiEstInclusRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/nfc': {
-      id: '/admin/nfc'
-      path: '/admin/nfc'
-      fullPath: '/admin/nfc'
-      preLoaderRoute: typeof AdminNfcRouteImport
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creation-site-internet-guadeloupe': {
+      id: '/creation-site-internet-guadeloupe'
+      path: '/creation-site-internet-guadeloupe'
+      fullPath: '/creation-site-internet-guadeloupe'
+      preLoaderRoute: typeof CreationSiteInternetGuadeloupeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creation-site-internet-martinique': {
+      id: '/creation-site-internet-martinique'
+      path: '/creation-site-internet-martinique'
+      fullPath: '/creation-site-internet-martinique'
+      preLoaderRoute: typeof CreationSiteInternetMartiniqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-gratuite': {
+      id: '/demo-gratuite'
+      path: '/demo-gratuite'
+      fullPath: '/demo-gratuite'
+      preLoaderRoute: typeof DemoGratuiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exemple-commandes-noel': {
+      id: '/exemple-commandes-noel'
+      path: '/exemple-commandes-noel'
+      fullPath: '/exemple-commandes-noel'
+      preLoaderRoute: typeof ExempleCommandesNoelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outils-metier': {
+      id: '/outils-metier'
+      path: '/outils-metier'
+      fullPath: '/outils-metier'
+      preLoaderRoute: typeof OutilsMetierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realisations': {
+      id: '/realisations'
+      path: '/realisations'
+      fullPath: '/realisations'
+      preLoaderRoute: typeof RealisationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-commandes-noel': {
+      id: '/site-commandes-noel'
+      path: '/site-commandes-noel'
+      fullPath: '/site-commandes-noel'
+      preLoaderRoute: typeof SiteCommandesNoelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-artisan': {
+      id: '/site-internet-artisan'
+      path: '/site-internet-artisan'
+      fullPath: '/site-internet-artisan'
+      preLoaderRoute: typeof SiteInternetArtisanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-commerce-antillais': {
+      id: '/site-internet-commerce-antillais'
+      path: '/site-internet-commerce-antillais'
+      fullPath: '/site-internet-commerce-antillais'
+      preLoaderRoute: typeof SiteInternetCommerceAntillaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-location-saisonniere': {
+      id: '/site-internet-location-saisonniere'
+      path: '/site-internet-location-saisonniere'
+      fullPath: '/site-internet-location-saisonniere'
+      preLoaderRoute: typeof SiteInternetLocationSaisonniereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-restaurant': {
+      id: '/site-internet-restaurant'
+      path: '/site-internet-restaurant'
+      fullPath: '/site-internet-restaurant'
+      preLoaderRoute: typeof SiteInternetRestaurantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-internet-salon-institut': {
+      id: '/site-internet-salon-institut'
+      path: '/site-internet-salon-institut'
+      fullPath: '/site-internet-salon-institut'
+      preLoaderRoute: typeof SiteInternetSalonInstitutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sites-web': {
+      id: '/sites-web'
+      path: '/sites-web'
+      fullPath: '/sites-web'
+      preLoaderRoute: typeof SitesWebRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/a/$code': {
@@ -448,6 +481,13 @@ declare module '@tanstack/react-router' {
       path: '/a/$code'
       fullPath: '/a/$code'
       preLoaderRoute: typeof ACodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/nfc': {
+      id: '/admin/nfc'
+      path: '/admin/nfc'
+      fullPath: '/admin/nfc'
+      preLoaderRoute: typeof AdminNfcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/places/search': {
@@ -463,6 +503,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartesNfcRoute: CartesNfcRoute,
+  CeQuiEstInclusRoute: CeQuiEstInclusRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
   CreationSiteInternetGuadeloupeRoute: CreationSiteInternetGuadeloupeRoute,
@@ -471,6 +512,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExempleCommandesNoelRoute: ExempleCommandesNoelRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   OutilsMetierRoute: OutilsMetierRoute,
+  RealisationsRoute: RealisationsRoute,
   SiteCommandesNoelRoute: SiteCommandesNoelRoute,
   SiteInternetArtisanRoute: SiteInternetArtisanRoute,
   SiteInternetCommerceAntillaisRoute: SiteInternetCommerceAntillaisRoute,

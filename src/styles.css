@@ -124,32 +124,10 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
-@keyframes gws-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-}
-
-.gws-float {
-  animation: gws-float 5s ease-in-out infinite;
-}
-
-.gws-float-delayed {
-  animation: gws-float 6s 1.2s ease-in-out infinite;
-}
-
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .gws-float,
-  .gws-float-delayed {
-    animation: none;
   }
   * {
     transition-duration: 0.01ms !important;
@@ -157,63 +135,58 @@ details summary::-webkit-details-marker {
 }
 
 
-/* Gwada Web Studio — Accueil signature */
-.gws-hero-device {
-  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
-  transform-origin: center;
-  transition: transform 700ms cubic-bezier(.2,.75,.2,1), box-shadow 500ms ease;
+/* Aperçus des vraies pages */
+.gws-frame {
+  box-shadow: 0 18px 50px rgba(8, 24, 20, 0.22);
+  transition:
+    transform 260ms ease,
+    box-shadow 260ms ease;
 }
-.gws-hero-device:hover {
-  transform: perspective(1200px) rotateY(0deg) rotateX(0deg) translateY(-5px);
-  box-shadow: 0 55px 125px rgba(0,0,0,.48);
+a:hover > .gws-frame,
+a:focus-visible > .gws-frame {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 64px rgba(8, 24, 20, 0.3);
 }
-.gws-display-orbit {
-  box-shadow: 0 0 110px rgba(84,215,200,.035);
+
+/* Accueil : les vraies pages s'ouvrent en éventail au chargement */
+.gws-fan-left {
+  transform: rotate(-5deg);
+  animation: gws-fan-left 900ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
-.gws-marquee {
-  animation: gws-marquee 32s linear infinite;
+.gws-fan-right {
+  transform: rotate(4deg);
+  animation: gws-fan-right 900ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
-@keyframes gws-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.gws-fan-front {
+  animation: gws-fan-front 700ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
-.gws-project-card {
-  transition: transform 350ms cubic-bezier(.2,.75,.2,1), box-shadow 350ms ease, border-color 350ms ease;
+@keyframes gws-fan-left {
+  from {
+    opacity: 0;
+    transform: translate(14%, 12%) rotate(0deg);
+  }
 }
-.gws-project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 75px rgba(25,49,40,.13);
-  border-color: rgba(45,117,93,.28);
+@keyframes gws-fan-right {
+  from {
+    opacity: 0;
+    transform: translate(-14%, 12%) rotate(0deg);
+  }
 }
-.gws-project-card > div > div:first-child > div {
-  transition: transform 600ms cubic-bezier(.2,.75,.2,1);
-}
-.gws-project-card:hover > div > div:first-child > div {
-  transform: scale(1.025);
-}
-.gws-hover-card {
-  transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease;
-}
-.gws-hover-card:hover {
-  border-color: rgba(84,215,200,.32);
-  background-color: #214137;
-}
-.gws-final-cta {
-  box-shadow: 0 35px 85px rgba(84,215,200,.09);
-}
-@media (max-width: 1023px) {
-  .gws-hero-device {
-    transform: none;
+@keyframes gws-fan-front {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gws-hero-device,
-  .gws-hero-device:hover,
-  .gws-project-card:hover {
-    transform: none;
-  }
-  .gws-marquee {
+  .gws-fan-left,
+  .gws-fan-right,
+  .gws-fan-front {
     animation: none;
+  }
+  a:hover > .gws-frame,
+  a:focus-visible > .gws-frame {
+    transform: none;
   }
 }
 

@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       {
         name: "description",
         content:
-          "Sites web, outils métier et cartes NFC pour avis Google. Réservation, paiement, catalogue et solutions sur mesure depuis la Guadeloupe.",
+          "Sites internet, applications, outils sur mesure et cartes d’avis Google, créés en Guadeloupe. Réservation, paiement, catalogue et espace de gestion.",
       },
       { name: "author", content: "Gwada Web Studio" },
       {
@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       {
         property: "og:description",
         content:
-          "Sites web, outils métier et cartes NFC conçus sur mesure pour les entreprises en Guadeloupe.",
+          "Sites internet, applications et outils sur mesure pour les entreprises de Guadeloupe, de Martinique et de France.",
       },
       { property: "og:type", content: "website" },
       {
@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
       {
         name: "twitter:description",
         content:
-          "Sites web, outils métier et cartes NFC conçus sur mesure pour les entreprises en Guadeloupe.",
+          "Sites internet, applications et outils sur mesure pour les entreprises de Guadeloupe, de Martinique et de France.",
       },
       {
         name: "twitter:image",
@@ -139,7 +139,7 @@ function RootShell({ children }: { children: ReactNode }) {
     "@type": "ProfessionalService",
     name: contactInfo.brand,
     description:
-      "Conception de sites, outils web utiles et cartes NFC pour avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
+      "Création de sites internet, d’applications, d’outils sur mesure et de cartes d’avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
     url: "https://gwadawebstudio.fr",
     logo: "https://gwadawebstudio.fr/logo-gws.svg",
     email: contactInfo.email,
@@ -177,8 +177,6 @@ function RootComponent() {
   const isolated =
     pathname.startsWith("/admin") || pathname.startsWith("/a/") || pathname.startsWith("/exemple-");
 
-  usePageScrollMotion(pathname, isolated);
-
   if (isolated) {
     return <Outlet />;
   }
@@ -193,138 +191,4 @@ function RootComponent() {
       <WhatsAppFloat />
     </div>
   );
-}
-
-function usePageScrollMotion(pathname: string, isolated: boolean) {
-  useEffect(() => {
-    if (isolated) return;
-
-    type MotionItem = {
-      section: HTMLElement;
-      target: HTMLElement;
-      baseTop: number;
-      baseBottom: number;
-      index: number;
-    };
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let items: MotionItem[] = [];
-    let frame = 0;
-    let resizeTimer = 0;
-
-    const clearStyles = () => {
-      items.forEach(({ section, target }) => {
-        section.style.paddingTop = "";
-        section.style.paddingBottom = "";
-        section.style.willChange = "";
-        target.style.transform = "";
-        target.style.opacity = "";
-        target.style.willChange = "";
-      });
-      items = [];
-    };
-
-    const update = () => {
-      frame = 0;
-
-      if (reduceMotion.matches) {
-        items.forEach(({ target }) => {
-          target.style.transform = "none";
-          target.style.opacity = "1";
-        });
-        return;
-      }
-
-      const viewportHeight = window.innerHeight;
-      const mobile = window.innerWidth < 640;
-      const maxTighten = mobile ? 24 : 38;
-      const maxRise = mobile ? 28 : 44;
-
-      items.forEach(({ section, target, baseTop, baseBottom, index }) => {
-        const rect = section.getBoundingClientRect();
-
-        if (index === 0) {
-          const distance = Math.min(Math.max(section.offsetHeight * 0.42, 240), 460);
-          const progress = Math.min(1, Math.max(0, -rect.top / distance));
-          const lift = (mobile ? 16 : 24) * progress;
-          const scale = 1 - 0.012 * progress;
-
-          target.style.transform = `translate3d(0, -${lift}px, 0) scale(${scale})`;
-          target.style.opacity = `${1 - 0.12 * progress}`;
-          return;
-        }
-
-        const start = viewportHeight * 0.98;
-        const end = viewportHeight * 0.42;
-        const raw = (start - rect.top) / Math.max(1, start - end);
-        const progress = Math.min(1, Math.max(0, raw));
-
-        section.style.paddingTop = `${Math.max(16, baseTop - maxTighten * progress)}px`;
-        section.style.paddingBottom = `${Math.max(16, baseBottom - maxTighten * 0.75 * progress)}px`;
-
-        const translate = maxRise * (1 - progress);
-        const scale = 0.985 + 0.015 * progress;
-        target.style.transform = `translate3d(0, ${translate}px, 0) scale(${scale})`;
-        target.style.opacity = `${0.72 + 0.28 * progress}`;
-      });
-    };
-
-    const scheduleUpdate = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    };
-
-    const prepare = () => {
-      clearStyles();
-
-      const sections = Array.from(document.querySelectorAll<HTMLElement>("main > div > section"));
-
-      items = sections.map((section, index) => {
-        const target =
-          section.querySelector<HTMLElement>(':scope > div[class*="mx-auto"]') ??
-          section.querySelector<HTMLElement>(":scope > div") ??
-          section;
-
-        const styles = window.getComputedStyle(section);
-
-        if (index > 0) {
-          section.style.willChange = "padding-top, padding-bottom";
-        }
-        target.style.willChange = "transform, opacity";
-
-        return {
-          section,
-          target,
-          baseTop: Number.parseFloat(styles.paddingTop) || 0,
-          baseBottom: Number.parseFloat(styles.paddingBottom) || 0,
-          index,
-        };
-      });
-
-      update();
-    };
-
-    const prepareFrame = window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(prepare);
-    });
-
-    const handleResize = () => {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(prepare, 120);
-    };
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", handleResize);
-    reduceMotion.addEventListener("change", prepare);
-
-    return () => {
-      window.cancelAnimationFrame(prepareFrame);
-      if (frame) window.cancelAnimationFrame(frame);
-      window.clearTimeout(resizeTimer);
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", handleResize);
-      reduceMotion.removeEventListener("change", prepare);
-      clearStyles();
-    };
-  }, [pathname, isolated]);
 }

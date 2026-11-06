@@ -10,16 +10,19 @@ import {
   Search,
   ShoppingBag,
 } from "lucide-react";
+import { InclusApercu } from "@/components/site/Inclus";
+import { RealisationCard } from "@/components/site/SitePreview";
+import { realisationsClients } from "@/lib/realisations";
 
 export const Route = createFileRoute("/sites-web")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Création de sites web sur mesure en Guadeloupe — Gwada Web Studio" },
+      { title: "Création de sites internet sur mesure en Guadeloupe — Gwada Web Studio" },
       {
         name: "description",
         content:
-          "Sites vitrine, réservation, paiement, catalogue et prise de contact : des sites web conçus autour de votre activité en Guadeloupe.",
+          "Site vitrine, réservation, paiement, catalogue : des sites internet conçus autour de votre activité, à partir de 550 €, avec un espace de gestion inclus.",
       },
     ],
   }),
@@ -93,35 +96,32 @@ type DemoMode = (typeof demoModes)[number];
 function SitesWebPage() {
   return (
     <div className="bg-[#0d1715] text-[#f7f7ef]">
-      <section className="relative overflow-hidden border-b border-white/10 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-        <div className="gws-grid absolute inset-0 opacity-20" />
-        <div className="relative mx-auto max-w-[1380px]">
-          <div className="max-w-4xl">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#54d7c8]">
-              Sites web
-            </div>
-            <h1 className="mt-5 font-display text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-7xl">
-              Un site qui présente bien votre activité.
-              <span className="block text-[#54d7c8]">Et qui sert vraiment à quelque chose.</span>
+      <section className="relative overflow-hidden border-b border-white/10 px-5 pb-14 pt-14 sm:px-8 sm:pb-20 sm:pt-20 lg:px-12">
+        <div className="gws-grid pointer-events-none absolute inset-0 opacity-30" />
+        <div className="relative mx-auto max-w-[1280px]">
+          <div className="max-w-3xl">
+            <h1 className="font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.05em]">
+              Un site internet à votre image, et qui sert vraiment à quelque chose.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/60">
-              Le site peut rester très simple ou intégrer des fonctions plus avancées. L’objectif
-              est toujours le même : permettre à vos visiteurs de comprendre rapidement votre offre
-              et de passer à l’action.
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]">
+              Il peut rester très simple ou faire beaucoup plus. L’objectif reste le même : que vos
+              visiteurs comprennent vite votre offre et passent à l’action.
             </p>
-            <p className="mt-4 text-sm font-bold text-white/80">
-              Sites vitrines à partir de 550 €. Démonstration gratuite, sans engagement.
+            <p className="mt-4 text-sm font-bold text-white/85">
+              Sites à partir de 550 €, espace de gestion inclus. Démonstration gratuite, sans
+              engagement.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/demo-gratuite"
-                className="gws-button-primary inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
+                className="gws-button-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-sm font-black"
+                data-cta="sites-web-demo"
               >
-                Recevoir ma démo gratuite <ArrowRight className="h-4 w-4" />
+                Recevoir ma démo gratuite <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <a
                 href="#possibilites"
-                className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/20 px-7 text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/[0.05]"
+                className="inline-flex min-h-13 items-center justify-center rounded-full border border-white/20 px-7 text-sm font-bold text-white transition hover:border-white/40 hover:bg-white/[0.05]"
               >
                 Voir les possibilités
               </a>
@@ -130,35 +130,34 @@ function SitesWebPage() {
         </div>
       </section>
 
-      <section id="possibilites" className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-        <div className="mx-auto max-w-[1380px]">
-          <div className="max-w-3xl">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Selon votre activité
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-6xl">
-              Le bon site n’a pas besoin
-              <span className="block text-[#f2cb5d]">d’avoir toutes les fonctions.</span>
+      <section id="possibilites" className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+              Le bon site n’a pas besoin de toutes les fonctions
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-white/55 sm:text-lg">
-              On choisit uniquement ce qui facilite réellement le parcours de vos clients.
+            <p className="mt-3 text-[15px] leading-relaxed text-white/62 sm:text-base">
+              On garde ce qui aide vraiment vos clients. Vous pouvez commencer simple, puis ajouter
+              de la réservation, un paiement ou un espace client quand votre activité en a besoin.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {possibilities.map((item) => (
               <article
                 key={item.title}
-                className="rounded-[1.8rem] border border-white/10 bg-[#13211e] p-6 transition hover:border-white/20 sm:p-8"
+                className="rounded-3xl border border-white/10 bg-[#13211e] p-6"
               >
                 <span
-                  className="grid h-12 w-12 place-items-center rounded-2xl text-[#0d1715]"
+                  className="grid h-10 w-10 place-items-center rounded-xl text-[#0d1715]"
                   style={{ backgroundColor: item.accent }}
                 >
-                  <item.icon className="h-5 w-5" />
+                  <item.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-8 text-2xl font-black tracking-[-0.035em]">{item.title}</h3>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/52">{item.text}</p>
+                <h3 className="mt-5 font-display text-xl font-extrabold tracking-[-0.03em]">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">{item.text}</p>
               </article>
             ))}
           </div>
@@ -167,93 +166,32 @@ function SitesWebPage() {
 
       <InteractiveWebsiteDemo />
 
-      <section className="bg-[#f7f7ef] px-5 py-20 text-[#101a18] sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1380px] gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
-          <div>
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-[#65716d]">
-              Le parcours
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
-              Le visiteur doit toujours savoir quoi faire ensuite.
-            </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#5d6965]">
-              Un joli site qui ne mène nulle part ne suffit pas. Chaque page doit conduire
-              naturellement vers une demande, une réservation, un paiement ou un contact.
-            </p>
-          </div>
-
-          <div className="rounded-[2rem] bg-[#101a18] p-5 text-white sm:p-7">
-            {[
-              ["01", "Comprendre", "Votre offre est claire dès les premières secondes."],
-              ["02", "Choisir", "Le client trouve rapidement le service ou produit qui lui correspond."],
-              ["03", "Agir", "Il peut réserver, demander, payer ou vous contacter sans friction."],
-            ].map(([number, title, text]) => (
-              <div
-                key={number}
-                className="grid grid-cols-[42px_1fr] gap-4 border-b border-white/10 py-5 first:pt-0 last:border-0 last:pb-0"
-              >
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#54d7c8] text-xs font-black text-[#101a18]">
-                  {number}
-                </span>
-                <div>
-                  <div className="font-black">{title}</div>
-                  <p className="mt-1 text-sm leading-relaxed text-white/50">{text}</p>
-                </div>
-              </div>
+      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto max-w-[1280px]">
+          <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+            Des sites déjà en ligne
+          </h2>
+          <div className="mt-9 grid gap-x-6 gap-y-10 md:grid-cols-3">
+            {realisationsClients.map((item) => (
+              <RealisationCard key={item.slug} item={item} sizes="(min-width: 768px) 33vw, 100vw" />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8 sm:py-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1380px] gap-10 lg:grid-cols-2">
-          <div>
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Toujours sur mesure
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
-              Vous pouvez commencer simple.
-            </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/55">
-              Un site peut être une vitrine claire aujourd’hui puis évoluer plus tard avec de la
-              réservation, un espace client ou une administration si votre activité en a besoin.
-            </p>
-          </div>
+      <InclusApercu />
 
-          <div className="space-y-3">
-            {[
-              "Design adapté à votre identité",
-              "Pensé ordinateur et mobile",
-              "Structure claire pour vos visiteurs",
-              "Fonctions ajoutées uniquement si elles sont utiles",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 text-sm font-bold"
-              >
-                <Check className="h-4 w-4 text-[#54d7c8]" />
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 pb-24 sm:px-8 sm:pb-28 lg:px-12">
-        <div className="mx-auto flex max-w-[1380px] flex-col gap-7 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] opacity-60">
-              Votre projet
-            </div>
-            <h2 className="mt-3 max-w-3xl font-display text-3xl font-black tracking-[-0.045em] sm:text-5xl">
-              Vous avez déjà un site ou vous partez de zéro ?
-            </h2>
-          </div>
+      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between">
+          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,3.2vw,2.8rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+            Vous avez déjà un site, ou vous partez de zéro ?
+          </h2>
           <Link
             to="/demo-gratuite"
-            className="inline-flex min-h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0d1715] px-7 text-sm font-black text-white"
+            className="inline-flex min-h-13 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0d1715] px-7 text-sm font-extrabold text-white"
+            data-cta="sites-web-final"
           >
-            Voir ma démo gratuite <ArrowRight className="h-4 w-4" />
+            Recevoir ma démo gratuite <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -266,19 +204,15 @@ function InteractiveWebsiteDemo() {
   const active = demoModes.find((mode) => mode.id === activeId) ?? demoModes[0];
 
   return (
-    <section className="border-y border-white/10 bg-[#101d1a] px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
-      <div className="mx-auto max-w-[1380px]">
+    <section className="border-y border-white/10 bg-[#101d1a] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+      <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
-            <div className="text-xs font-black uppercase tracking-[0.18em] text-white/40">
-              Visualisez la différence
-            </div>
-            <h2 className="mt-4 font-display text-4xl font-black tracking-[-0.05em] sm:text-5xl">
-              Le site change selon
-              <span className="block text-[#54d7c8]">ce que vous voulez lui faire faire.</span>
+            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+              Le site change selon ce que vous voulez lui faire faire
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/52">
-              Cliquez sur un besoin pour voir un exemple simplifié du parcours correspondant.
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/62 sm:text-base">
+              Cliquez sur un besoin pour voir un exemple simplifié.
             </p>
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
@@ -348,8 +282,8 @@ function InteractiveWebsiteDemo() {
               </div>
             </div>
 
-            <p className="mt-4 text-center text-xs font-semibold text-white/32">
-              Démonstration illustrative — le design final est adapté à votre activité et à votre identité.
+            <p className="mt-4 text-center text-xs font-semibold text-white/50">
+              Exemple illustratif : le résultat final est adapté à votre activité et à votre image.
             </p>
           </div>
         </div>

@@ -26,7 +26,7 @@ export function FaqSection({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="mx-auto max-w-[860px]">
-        <h2 className="font-display text-[clamp(2rem,3.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-[-0.045em]">
+        <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
           {title}
         </h2>
         <div className="mt-8 grid gap-3">

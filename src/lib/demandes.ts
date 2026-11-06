@@ -5,7 +5,7 @@ const cleBase = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefi
  * Clé Web3Forms du studio, pour recevoir chaque demande par e-mail.
  * Elle n'est pas secrète : elle sert seulement d'adresse d'envoi.
  */
-const cleEmail = "";
+const cleEmail = "e82807aa-9944-438f-817f-a27c74ac7357";
 
 /** Au-delà, le visiteur a mieux à faire qu'attendre : on lui propose WhatsApp ou l'e-mail. */
 const DELAI = 8000;

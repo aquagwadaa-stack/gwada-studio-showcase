@@ -76,6 +76,33 @@ export function SeoLanding({ page }: { page: LandingPage }) {
         </div>
       </section>
 
+      {page.details && (
+        <section className="border-b border-white/10 px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+          <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-3 lg:gap-12">
+            {page.details.map((detail, index) => (
+              <div key={detail.title} {...reveal(index)}>
+                <h2 className="font-display text-[clamp(1.5rem,2.3vw,2rem)] font-extrabold leading-[1.12] tracking-[-0.035em]">
+                  {detail.title}
+                </h2>
+                {detail.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="mt-4 text-[15px] leading-relaxed text-white/65">
+                    {paragraph}
+                  </p>
+                ))}
+                {detail.link && (
+                  <a
+                    href={detail.link.href}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#54d7c8]"
+                  >
+                    {detail.link.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-2">
           <div {...reveal()}>

@@ -1,4 +1,12 @@
 import type { FaqItem } from "@/components/site/FaqSection";
+import {
+  questionDelai,
+  questionDomaine,
+  questionModifier,
+  questionPaiement,
+  questionVisibilite,
+} from "@/lib/prestation";
+import { pageHead } from "@/lib/seo";
 
 export type LandingReference = {
   name: string;
@@ -8,17 +16,31 @@ export type LandingReference = {
   image: string;
 };
 
+/** Bloc de texte de fond, pour les pages qui visent une recherche précise. */
+export type LandingDetail = {
+  title: string;
+  paragraphs: string[];
+  link?: { label: string; href: string };
+};
+
 export type LandingPage = {
   path: string;
   source: string;
   title: string;
   description: string;
+  /** Nom de la page dans le fil d'Ariane. */
+  nom: string;
+  /** Service décrit par la page, pour Google et les IA. */
+  service: string;
+  /** Zones visées, si la page ne couvre pas toutes les zones du studio. */
+  zones?: string[];
   eyebrow: string;
   headline: string;
   accent: string;
   intro: string;
   pointsTitle: string;
   points: { title: string; text: string }[];
+  details?: LandingDetail[];
   reference: LandingReference;
   example?: { label: string; href: string };
   faq: FaqItem[];
@@ -56,9 +78,12 @@ export const landingPages = {
   guadeloupe: {
     path: "/creation-site-internet-guadeloupe",
     source: "seo-guadeloupe",
-    title: "Création de site internet en Guadeloupe, démo gratuite — Gwada Web Studio",
+    title: "Création de site internet en Guadeloupe dès 550 €",
     description:
-      "Site vitrine, réservation, paiement : je crée votre site internet en Guadeloupe. Démonstration gratuite à vos couleurs, vous voyez le résultat avant de payer.",
+      "Démonstration gratuite à vos couleurs : voyez votre site avant de payer. Site vitrine, réservation, paiement, créé aux Abymes pour toute la Guadeloupe.",
+    nom: "Site internet en Guadeloupe",
+    service: "Création de site internet en Guadeloupe",
+    zones: ["Guadeloupe"],
     eyebrow: "Création de site internet en Guadeloupe",
     headline: "Votre site internet,",
     accent: "créé en Guadeloupe.",
@@ -83,6 +108,32 @@ export const landingPages = {
         text: "Si votre activité en a besoin, le site peut prendre des réservations, encaisser un acompte ou recevoir des commandes.",
       },
     ],
+    details: [
+      {
+        title: "Quel site pour votre activité ?",
+        paragraphs: [
+          "Un site vitrine suffit souvent pour présenter votre activité et être contacté. Si vous recevez des clients sur rendez-vous, des voyageurs ou des commandes, le site peut aussi prendre des réservations, encaisser un paiement ou un acompte, et présenter un catalogue.",
+          "Il peut commencer simple, puis évoluer avec vous. Dans tous les cas, il est pensé pour le téléphone et il comprend un espace pour le gérer vous-même.",
+        ],
+        link: { label: "Voir les sites internet", href: "/sites-web" },
+      },
+      {
+        title: "Combien coûte un site internet en Guadeloupe ?",
+        paragraphs: [
+          "Un site commence à 550 € pour le plus simple, avec son espace de gestion. Le prix dépend ensuite de ce qu’il doit faire : réservation, paiement, catalogue. Après la démonstration, vous recevez un devis clair, avec le prix et le délai.",
+          "Le nom de domaine, l’hébergement et les services externes sont à part : ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis. Le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
+        ],
+        link: { label: "Voir ce qui est inclus", href: "/ce-qui-est-inclus" },
+      },
+      {
+        title: "Partout en Guadeloupe, depuis Les Abymes",
+        paragraphs: [
+          "Je suis basé aux Abymes, à côté de Pointe-à-Pitre, et je travaille avec toute la Guadeloupe, de Baie-Mahault à Basse-Terre, en passant par Le Gosier, Sainte-Anne, Saint-François ou Le Moule. On peut se voir sur place, ou tout faire sur WhatsApp, par téléphone ou en visio.",
+          "Mes sites sont déjà en ligne : Kafé Céramik et Crystal Beach Courbaril à Saint-François, ou encore un cabinet médical.",
+        ],
+        link: { label: "Voir mes réalisations", href: "/realisations" },
+      },
+    ],
     reference: kafeCeramik,
     faq: [
       {
@@ -92,14 +143,22 @@ export const landingPages = {
       },
       demoFaq,
       priceFaq,
+      questionModifier,
+      questionPaiement,
+      questionDomaine,
+      questionDelai,
+      questionVisibilite,
     ],
   },
   martinique: {
     path: "/creation-site-internet-martinique",
     source: "seo-martinique",
-    title: "Création de site internet en Martinique, démo gratuite — Gwada Web Studio",
+    title: "Création de site internet en Martinique dès 550 €",
     description:
       "Un site internet pour votre activité en Martinique, créé à distance depuis la Guadeloupe. Démonstration gratuite à vos couleurs, sans engagement.",
+    nom: "Site internet en Martinique",
+    service: "Création de site internet en Martinique",
+    zones: ["Martinique"],
     eyebrow: "Création de site internet en Martinique",
     headline: "Un site à votre image,",
     accent: "pour votre activité en Martinique.",
@@ -138,9 +197,11 @@ export const landingPages = {
   restaurant: {
     path: "/site-internet-restaurant",
     source: "seo-restaurant",
-    title: "Site internet pour restaurant et traiteur, démo gratuite — Gwada Web Studio",
+    title: "Site internet pour restaurant et traiteur, démo gratuite",
     description:
-      "Votre carte, vos horaires, vos réservations ou commandes en direct, sur un site à votre image. Démonstration gratuite pour votre restaurant ou votre activité de traiteur.",
+      "Votre carte, vos horaires, vos réservations ou commandes en direct, sur un site à votre image. Démo gratuite pour votre restaurant ou votre activité de traiteur.",
+    nom: "Restaurants et traiteurs",
+    service: "Site internet pour restaurant et traiteur",
     eyebrow: "Restaurants, traiteurs, pâtisseries",
     headline: "Un site qui donne faim,",
     accent: "et envie de réserver.",
@@ -184,9 +245,11 @@ export const landingPages = {
   artisan: {
     path: "/site-internet-artisan",
     source: "seo-artisan",
-    title: "Site internet pour artisan, demandes de devis, démo gratuite — Gwada Web Studio",
+    title: "Site internet pour artisan, demandes de devis, démo gratuite",
     description:
-      "Électriciens, climatisation, rénovation, jardins : un site pour montrer vos réalisations et recevoir des demandes de devis. Démonstration gratuite, sans engagement.",
+      "Électriciens, climatisation, rénovation, jardins : un site pour montrer vos réalisations et recevoir des demandes de devis. Démo gratuite, sans engagement.",
+    nom: "Artisans",
+    service: "Site internet pour artisan",
     eyebrow: "Artisans et entreprises de services",
     headline: "Vos chantiers parlent pour vous.",
     accent: "Votre site aussi.",
@@ -230,9 +293,11 @@ export const landingPages = {
   locationSaisonniere: {
     path: "/site-internet-location-saisonniere",
     source: "seo-location",
-    title: "Site de réservation directe pour gîte et location, démo gratuite — Gwada Web Studio",
+    title: "Site de réservation pour gîte et location, démo gratuite",
     description:
-      "Un site à votre nom pour votre gîte, votre chambre d’hôtes ou votre location saisonnière, avec réservation directe, en plus d’Airbnb et de Booking. Démonstration gratuite.",
+      "Un site à votre nom pour votre gîte ou votre location saisonnière, avec réservation directe, en plus d’Airbnb et de Booking. Démonstration gratuite.",
+    nom: "Gîtes et locations",
+    service: "Site de réservation directe pour gîte et location saisonnière",
     eyebrow: "Gîtes, locations, chambres d’hôtes",
     headline: "Votre location mérite",
     accent: "son propre site.",
@@ -276,9 +341,11 @@ export const landingPages = {
   beaute: {
     path: "/site-internet-salon-institut",
     source: "seo-beaute",
-    title: "Site internet pour salon de coiffure et institut, démo gratuite — Gwada Web Studio",
+    title: "Site pour salon de coiffure et institut, démo gratuite",
     description:
       "Vos prestations, vos tarifs, vos réalisations et vos rendez-vous en ligne, sur un site à votre image. Démonstration gratuite pour votre salon ou votre institut.",
+    nom: "Salons et instituts",
+    service: "Site internet pour salon de coiffure et institut",
     eyebrow: "Coiffure, onglerie, institut, bien-être",
     headline: "Votre talent se voit.",
     accent: "Votre site doit le montrer.",
@@ -321,9 +388,12 @@ export const landingPages = {
   antillais: {
     path: "/site-internet-commerce-antillais",
     source: "seo-antillais",
-    title: "Site internet pour commerce antillais en métropole, démo gratuite — Gwada Web Studio",
+    title: "Site pour commerce antillais en métropole, démo gratuite",
     description:
       "Restaurant créole, traiteur antillais, épicerie, salon, association : un site créé depuis la Guadeloupe, qui garde le goût des Antilles. Démonstration gratuite.",
+    nom: "Commerces antillais en métropole",
+    service: "Site internet pour commerce antillais en métropole",
+    zones: ["France"],
     eyebrow: "Commerces antillais en métropole",
     headline: "Un site qui a le goût des Antilles,",
     accent: "où que vous soyez.",
@@ -362,9 +432,11 @@ export const landingPages = {
   noel: {
     path: "/site-commandes-noel",
     source: "seo-noel",
-    title: "Site de commandes de Noël pour traiteur et pâtissier, démo gratuite — Gwada Web Studio",
+    title: "Site de commandes de Noël pour traiteur et pâtissier",
     description:
-      "Traiteurs, pâtissiers, restaurateurs, fleuristes : une page à votre image pour présenter vos menus de fêtes et recevoir les commandes de Noël. Démonstration gratuite.",
+      "Traiteurs, pâtissiers, restaurateurs, fleuristes : une page à votre image pour vos menus de fêtes et vos commandes de Noël. Démonstration gratuite.",
+    nom: "Commandes de Noël",
+    service: "Site de commandes de Noël pour traiteur et pâtissier",
     eyebrow: "Traiteurs, pâtissiers, restaurateurs, fleuristes",
     headline: "Vos commandes de Noël,",
     accent: "au même endroit.",
@@ -409,13 +481,11 @@ export const landingPages = {
 } satisfies Record<string, LandingPage>;
 
 export function landingHead(page: LandingPage) {
-  return {
-    meta: [
-      { title: page.title },
-      { name: "description", content: page.description },
-      { property: "og:title", content: page.title },
-      { property: "og:description", content: page.description },
-    ],
-    links: [{ rel: "canonical", href: `https://gwadawebstudio.fr${page.path}` }],
-  };
+  return pageHead({
+    path: page.path,
+    title: page.title,
+    description: page.description,
+    nom: page.nom,
+    service: { name: page.service, zones: page.zones, prixDepart: 550 },
+  });
 }

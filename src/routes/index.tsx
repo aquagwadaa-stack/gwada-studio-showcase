@@ -5,31 +5,32 @@ import { FaqSection } from "@/components/site/FaqSection";
 import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame, RealisationCard } from "@/components/site/SitePreview";
+import {
+  questionDelai,
+  questionDomaine,
+  questionModifier,
+  questionPaiement,
+  questionPrix,
+  questionVisibilite,
+} from "@/lib/prestation";
 import { realisations } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 import { services } from "@/lib/services";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/" }],
-    meta: [
-      { title: "Création de site internet en Guadeloupe, démo gratuite — Gwada Web Studio" },
-      {
-        name: "description",
-        content:
-          "Sites internet, applications et outils sur mesure en Guadeloupe, en Martinique et en France. Voyez le résultat avant de payer : démonstration gratuite, sans engagement.",
-      },
-      {
-        property: "og:title",
-        content: "Gwada Web Studio — Des sites et des applications que vous voyez avant de payer",
-      },
-      {
-        property: "og:description",
-        content:
+  head: () =>
+    pageHead({
+      path: "/",
+      title: "Gwada Web Studio : sites internet et applications en Guadeloupe",
+      description:
+        "Sites internet, applications et outils sur mesure en Guadeloupe, en Martinique et en France. Voyez le résultat avant de payer : démo gratuite, sans engagement.",
+      partage: {
+        title: "Gwada Web Studio — Des sites et des applications que vous voyez avant de payer",
+        description:
           "Sites internet, applications et outils sur mesure, créés en Guadeloupe. Démonstration gratuite à vos couleurs, sans engagement.",
       },
-    ],
-  }),
+    }),
   component: HomePage,
 });
 
@@ -70,41 +71,17 @@ const etapes = [
 ];
 
 const questions = [
-  {
-    question: "Combien coûte un site ?",
-    answer:
-      "Un site commence à 550 € pour le plus simple, avec son espace de gestion. Le prix dépend ensuite de ce qu’il doit faire : réservation, paiement, catalogue. Après la démonstration, vous recevez un devis clair.",
-  },
+  questionPrix,
   {
     question: "La démonstration est-elle vraiment gratuite ?",
     answer:
       "Oui. Elle ne vous engage à rien. Si vous ne souhaitez pas continuer, vous ne me devez rien.",
   },
-  {
-    question: "Pourrai-je modifier mon site moi-même ?",
-    answer:
-      "Oui. Chaque site comprend un espace pour le gérer vous-même, plus ou moins complet selon le projet, et je vous montre comment l’utiliser.",
-  },
-  {
-    question: "Quand est-ce que je paie ?",
-    answer:
-      "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
-  },
-  {
-    question: "Le nom de domaine et l’hébergement sont-ils compris ?",
-    answer:
-      "Ce sont des services externes. Ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis.",
-  },
-  {
-    question: "Combien de temps faut-il ?",
-    answer:
-      "Cela dépend du projet et du moment où vous me confiez vos textes et vos photos. Le délai est écrit dans le devis.",
-  },
-  {
-    question: "Mon site sera-t-il visible sur Google et les IA ?",
-    answer:
-      "Chaque site comprend les bases pour Google et pour les IA comme ChatGPT. Personne ne peut garantir une place, mais votre site sera clair et facile à comprendre pour eux.",
-  },
+  questionModifier,
+  questionPaiement,
+  questionDomaine,
+  questionDelai,
+  questionVisibilite,
   {
     question: "Vous travaillez en dehors de la Guadeloupe ?",
     answer:
@@ -158,7 +135,10 @@ function Hero() {
 
       <div className="mx-auto grid max-w-[1376px] items-center gap-12 px-5 pb-14 pt-12 sm:px-8 sm:pt-16 lg:grid-cols-[1fr_1.02fr] lg:gap-10 lg:px-12 lg:pb-20 lg:pt-16">
         <div>
-          <h1 className="max-w-[640px] font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.042em]">
+          <p className="gws-rise text-sm font-bold text-[#54d7c8]">
+            Création de sites internet en Guadeloupe
+          </p>
+          <h1 className="mt-3 max-w-[640px] font-display text-[clamp(2.25rem,4.3vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.042em]">
             {titreAccueil.split(" ").map((mot, index) => (
               <Fragment key={index}>
                 <span className="gws-mot">

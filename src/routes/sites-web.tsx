@@ -10,24 +10,32 @@ import {
   Search,
   ShoppingBag,
 } from "lucide-react";
+import { FaqSection } from "@/components/site/FaqSection";
 import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
 import { RealisationCard } from "@/components/site/SitePreview";
+import {
+  questionDelai,
+  questionDomaine,
+  questionModifier,
+  questionPaiement,
+  questionPrix,
+  questionVisibilite,
+} from "@/lib/prestation";
 import { realisationsClients } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/sites-web")({
   staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/sites-web" }],
-    meta: [
-      { title: "Création de sites internet sur mesure en Guadeloupe — Gwada Web Studio" },
-      {
-        name: "description",
-        content:
-          "Site vitrine, réservation, paiement, catalogue : des sites internet conçus autour de votre activité, à partir de 550 €, avec un espace de gestion inclus.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      path: "/sites-web",
+      title: "Site vitrine et site de réservation sur mesure, dès 550 €",
+      description:
+        "Site vitrine, réservation, paiement, catalogue : des sites internet conçus autour de votre activité, à partir de 550 €, avec un espace de gestion inclus.",
+      nom: "Sites internet",
+      service: { name: "Création de site internet", prixDepart: 550 },
+    }),
   component: SitesWebPage,
 });
 
@@ -195,7 +203,19 @@ function SitesWebPage() {
 
       <InclusApercu />
 
-      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
+      <FaqSection
+        items={[
+          questionPrix,
+          questionModifier,
+          questionPaiement,
+          questionDomaine,
+          questionDelai,
+          questionVisibilite,
+        ]}
+        title="Vos questions sur votre site"
+      />
+
+      <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:px-12">
         <div
           {...reveal("zoom")}
           className="mx-auto flex max-w-[1280px] flex-col gap-6 rounded-[2rem] bg-[#54d7c8] p-7 text-[#101a18] sm:p-10 lg:flex-row lg:items-center lg:justify-between"

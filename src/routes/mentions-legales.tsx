@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LegalPage, LegalSection } from "@/components/site/LegalPage";
 import { contactInfo } from "@/lib/contact-info";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/mentions-legales")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title: "Mentions légales — Gwada Web Studio" },
-      { name: "description", content: "Mentions légales du site gwadawebstudio.fr." },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/mentions-legales" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/mentions-legales",
+      title: "Mentions légales — Gwada Web Studio",
+      description: "Mentions légales du site gwadawebstudio.fr.",
+    }),
   component: LegalNoticePage,
 });
 

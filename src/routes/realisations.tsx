@@ -3,22 +3,21 @@ import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
 import { realisations } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 
-const title = "Réalisations : sites internet et applications en ligne — Gwada Web Studio";
+const title = "Réalisations : sites et applications — Gwada Web Studio";
 const description =
   "Découvrez de vrais projets en ligne : Kafé Céramik, Crystal Beach Courbaril, un cabinet médical et l’application Mémo Révision.";
 
 export const Route = createFileRoute("/realisations")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/realisations" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/realisations",
+      title,
+      description,
+      nom: "Réalisations",
+    }),
   component: RealisationsPage,
 });
 

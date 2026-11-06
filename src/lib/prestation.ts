@@ -118,3 +118,40 @@ export const inclusEssentiel = [
   "La mise en ligne et une prise en main",
   "Le même interlocuteur, et les bugs corrigés après la mise en ligne",
 ];
+
+/** Questions reprises mot pour mot sur l'accueil et les pages de services. */
+export const questionPrix = {
+  question: "Combien coûte un site ?",
+  answer:
+    "Un site commence à 550 € pour le plus simple, avec son espace de gestion. Le prix dépend ensuite de ce qu’il doit faire : réservation, paiement, catalogue. Après la démonstration, vous recevez un devis clair.",
+};
+
+export const questionModifier = {
+  question: "Pourrai-je modifier mon site moi-même ?",
+  answer:
+    "Oui. Chaque site comprend un espace pour le gérer vous-même, plus ou moins complet selon le projet, et je vous montre comment l’utiliser.",
+};
+
+export const questionPaiement = {
+  question: "Quand est-ce que je paie ?",
+  answer:
+    "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
+};
+
+export const questionDomaine = {
+  question: "Le nom de domaine et l’hébergement sont-ils compris ?",
+  answer:
+    "Ce sont des services externes. Ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis.",
+};
+
+export const questionDelai = {
+  question: "Combien de temps faut-il ?",
+  answer:
+    "Cela dépend du projet et du moment où vous me confiez vos textes et vos photos. Le délai est écrit dans le devis.",
+};
+
+export const questionVisibilite = {
+  question: "Mon site sera-t-il visible sur Google et les IA ?",
+  answer:
+    "Chaque site comprend les bases pour Google et pour les IA comme ChatGPT. Personne ne peut garantir une place, mais votre site sera clair et facile à comprendre pour eux.",
+};

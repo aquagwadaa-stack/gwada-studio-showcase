@@ -5,6 +5,7 @@ import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
 import { RealisationCard } from "@/components/site/SitePreview";
 import { realisationsClients } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 
 const title = "Démo gratuite de votre site internet — Gwada Web Studio";
 const description =
@@ -12,15 +13,13 @@ const description =
 
 export const Route = createFileRoute("/demo-gratuite")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/demo-gratuite" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/demo-gratuite",
+      title,
+      description,
+      nom: "Démo gratuite",
+    }),
   component: DemoPage,
 });
 

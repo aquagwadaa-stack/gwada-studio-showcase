@@ -19,20 +19,19 @@ import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
 import { memoRevision } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/outils-metier")({
   staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/outils-metier" }],
-    meta: [
-      { title: "Applications et outils sur mesure en Guadeloupe — Gwada Web Studio" },
-      {
-        name: "description",
-        content:
-          "Applications web, espaces clients, gestion, tableaux de bord et automatisations, créés sur mesure pour votre activité, en Guadeloupe et à distance.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      path: "/outils-metier",
+      title: "Applications web et outils sur mesure en Guadeloupe",
+      description:
+        "Applications web, espaces clients, gestion, tableaux de bord et automatisations, créés sur mesure pour votre activité, en Guadeloupe et à distance.",
+      nom: "Applications et outils",
+      service: { name: "Applications et outils sur mesure" },
+    }),
   component: OutilsMetierPage,
 });
 

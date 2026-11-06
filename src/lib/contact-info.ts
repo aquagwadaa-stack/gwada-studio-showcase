@@ -11,7 +11,7 @@ export const contactInfo = {
 
 export const socialLinks = [
   { name: "Instagram", href: "https://www.instagram.com/gwada_web_studio/" },
-  { name: "Facebook", href: "https://www.facebook.com/gwada.web.studio" },
+  { name: "Facebook", href: "https://www.facebook.com/GwadaWebStudio" },
   { name: "TikTok", href: "https://www.tiktok.com/@gwada.web.studio" },
 ] as const;
 

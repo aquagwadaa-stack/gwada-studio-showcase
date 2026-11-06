@@ -11,22 +11,22 @@ import {
 import { ApercuRecherche } from "@/components/site/ApercuService";
 import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
+import { pageHead } from "@/lib/seo";
 
-const title = "Référencement SEO et AEO : être trouvé sur Google et par les IA — Gwada Web Studio";
+const title = "Référencement Google et IA en Guadeloupe (SEO, AEO)";
 const description =
-  "Je prépare votre site pour Google et pour les IA comme ChatGPT : SEO, AEO, fiche Google et structure claire. Les bases sont incluses dans chaque site, sans promesse de position.";
+  "Je prépare votre site pour Google et pour les IA comme ChatGPT : SEO, AEO, fiche Google. Les bases sont incluses dans chaque site, sans promesse de position.";
 
 export const Route = createFileRoute("/referencement-google-ia")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/referencement-google-ia" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/referencement-google-ia",
+      title,
+      description,
+      nom: "Référencement Google et IA",
+      service: { name: "Référencement Google et IA (SEO, AEO)" },
+    }),
   component: ReferencementPage,
 });
 

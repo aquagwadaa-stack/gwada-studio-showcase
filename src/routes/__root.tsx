@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
 import { contactInfo, socialLinks } from "../lib/contact-info";
+import { IMAGE_PARTAGE, SITE_URL } from "../lib/seo";
 import { WhatsAppFloat } from "../components/site/WhatsApp";
 import { scriptAnimations, useSiteMotion } from "../components/site/Motion";
 
@@ -96,10 +97,14 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
           "Sites internet, applications et outils sur mesure pour les entreprises de Guadeloupe, de Martinique et de France.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: contactInfo.brand },
+      { property: "og:locale", content: "fr_FR" },
+      { property: "og:image", content: IMAGE_PARTAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       {
-        property: "og:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp",
+        property: "og:image:alt",
+        content: "Gwada Web Studio : voyez votre site avant de payer",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
@@ -111,11 +116,7 @@ export const Route = createRootRouteWithContext<Record<string, never>>()({
         content:
           "Sites internet, applications et outils sur mesure pour les entreprises de Guadeloupe, de Martinique et de France.",
       },
-      {
-        name: "twitter:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/Q8gH7ktalcbKpZgJJcez7FQcXo13/social-images/social-1783128129523-ChatGPT_Image_2_mai_2026,_00_45_51.webp",
-      },
+      { name: "twitter:image", content: IMAGE_PARTAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -161,8 +162,9 @@ function RootShell({ children }: { children: ReactNode }) {
         name: contactInfo.brand,
         description:
           "Création de sites internet, d’applications, d’outils sur mesure, d’automatisations et de cartes d’avis Google, en Guadeloupe, en Martinique et à distance dans toute la France.",
-        url: "https://gwadawebstudio.fr",
-        logo: "https://gwadawebstudio.fr/logo-gws.png",
+        url: `${SITE_URL}/`,
+        logo: `${SITE_URL}/logo-gws.png`,
+        image: IMAGE_PARTAGE,
         email: contactInfo.email,
         telephone: contactInfo.phoneHref,
         address: {
@@ -170,6 +172,14 @@ function RootShell({ children }: { children: ReactNode }) {
           addressLocality: "Les Abymes",
           addressRegion: "Guadeloupe",
           addressCountry: "GP",
+        },
+        // Mêmes horaires et même fiche que sur Google.
+        hasMap: "https://www.google.com/maps?cid=2356035340124512315",
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "08:00",
+          closes: "21:00",
         },
         priceRange: "À partir de 550 €",
         areaServed: ["Guadeloupe", "Martinique", "France"],
@@ -197,7 +207,7 @@ function RootShell({ children }: { children: ReactNode }) {
       {
         "@type": "WebSite",
         "@id": "https://gwadawebstudio.fr/#site",
-        url: "https://gwadawebstudio.fr",
+        url: `${SITE_URL}/`,
         name: contactInfo.brand,
         inLanguage: "fr",
         publisher: { "@id": "https://gwadawebstudio.fr/#studio" },

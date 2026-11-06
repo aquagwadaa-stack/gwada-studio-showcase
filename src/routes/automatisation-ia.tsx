@@ -14,22 +14,22 @@ import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
 import { memoRevision } from "@/lib/realisations";
+import { pageHead } from "@/lib/seo";
 
-const title = "Automatisation et IA pour votre entreprise, en Guadeloupe — Gwada Web Studio";
+const title = "Automatisation et IA pour les entreprises en Guadeloupe";
 const description =
   "Réponses automatiques, relances, tri des demandes, documents, assistant IA sur votre site : je mets en place ce qui vous fait gagner du temps, sur devis.";
 
 export const Route = createFileRoute("/automatisation-ia")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/automatisation-ia" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/automatisation-ia",
+      title,
+      description,
+      nom: "Automatisation et IA",
+      service: { name: "Automatisation et IA pour les entreprises" },
+    }),
   component: AutomatisationPage,
 });
 

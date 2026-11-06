@@ -1,19 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage, LegalSection } from "@/components/site/LegalPage";
 import { contactInfo } from "@/lib/contact-info";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/confidentialite")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title: "Confidentialité — Gwada Web Studio" },
-      {
-        name: "description",
-        content: "Comment Gwada Web Studio utilise et protège vos données personnelles.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/confidentialite" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/confidentialite",
+      title: "Confidentialité — Gwada Web Studio",
+      description: "Comment Gwada Web Studio utilise et protège vos données personnelles.",
+    }),
   component: PrivacyPage,
 });
 

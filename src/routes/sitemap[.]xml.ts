@@ -2,8 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getRouterInstance } from "@tanstack/react-start";
 import { sitemapStaticPaths, sitemapXML, type SitemapEntry } from "@/lib/sitemap";
 
-
 const BASE_URL = "https://gwadawebstudio.fr";
+
+// À changer quand le contenu des pages change vraiment : Google s'en sert pour revenir les lire.
+const DERNIERE_MISE_A_JOUR = "2026-11-06";
 
 export const Route = createFileRoute("/sitemap.xml")({
   staticData: { sitemap: false },
@@ -17,7 +19,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           });
         }
         const router = await getRouterInstance();
-        const entries: SitemapEntry[] = sitemapStaticPaths(router).map((path) => ({ path }));
+        const entries: SitemapEntry[] = sitemapStaticPaths(router).map((path) => ({
+          path,
+          lastmod: DERNIERE_MISE_A_JOUR,
+        }));
         // Add queries for dynamic pages selected for SEO, using sitemapPathForLocation.
         if (entries.length === 0) {
           return new Response(

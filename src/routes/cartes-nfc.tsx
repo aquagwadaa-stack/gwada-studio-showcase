@@ -11,22 +11,40 @@ import {
   Star,
   Wifi,
 } from "lucide-react";
+import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
 import { contactInfo } from "@/lib/contact-info";
+import { pageHead, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/cartes-nfc")({
   staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/cartes-nfc" }],
-    meta: [
-      { title: "Cartes NFC pour avis Google — Gwada Web Studio" },
-      {
-        name: "description",
-        content:
-          "Cartes NFC + QR pour faciliter les avis Google : version standard à 29,90 € ou personnalisée à 39,90 €, sans abonnement.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      path: "/cartes-nfc",
+      title: "Carte NFC pour avis Google dès 29,90 €, sans abonnement",
+      description:
+        "Cartes NFC + QR pour faciliter les avis Google : version standard à 29,90 € ou personnalisée à 39,90 €. Configuration incluse, garantie 1 an, sans abonnement.",
+      nom: "Cartes d’avis Google",
+      donnees: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "Carte NFC pour avis Google",
+          description:
+            "Carte NFC avec QR code qui ouvre directement la page d’avis Google de votre établissement. Configuration incluse, garantie 1 an, sans abonnement.",
+          image: `${SITE_URL}/carte-nfc-google-avis.webp`,
+          brand: { "@type": "Brand", name: "Gwada Web Studio" },
+          offers: {
+            "@type": "AggregateOffer",
+            url: `${SITE_URL}/cartes-nfc`,
+            priceCurrency: "EUR",
+            lowPrice: "29.90",
+            highPrice: "39.90",
+            offerCount: 2,
+          },
+        },
+      ],
+    }),
   component: CartesNfcPage,
 });
 
@@ -60,6 +78,32 @@ const offers = [
     ],
   },
 ] as const;
+
+const questions = [
+  {
+    question: "Comment fonctionne une carte NFC pour les avis Google ?",
+    answer:
+      "Votre client approche son téléphone de la carte, ou scanne le QR code, et votre page d’avis Google s’ouvre directement. Il n’a plus à chercher votre établissement ni à retrouver un lien.",
+  },
+  {
+    question: "Combien coûte une carte d’avis Google ?",
+    answer:
+      "La version Standard coûte 29,90 €. La version Personnalisée, avec votre logo et vos couleurs, coûte 39,90 €. C’est un paiement unique, sans abonnement.",
+  },
+  {
+    question: "La carte est-elle déjà configurée ?",
+    answer:
+      "Oui. La programmation et la configuration sont incluses : la carte est configurée pour votre fiche Google avant utilisation.",
+  },
+  {
+    question: "Et si le téléphone de mon client ne détecte pas la carte ?",
+    answer: "Le QR code reste disponible en alternative : il suffit de le scanner.",
+  },
+  {
+    question: "Y a-t-il une garantie ?",
+    answer: "Oui. Les deux versions sont garanties 1 an.",
+  },
+];
 
 function CartesNfcPage() {
   return (
@@ -266,6 +310,8 @@ function CartesNfcPage() {
           </div>
         </div>
       </section>
+
+      <FaqSection items={questions} title="Vos questions sur les cartes" />
 
       <section className="px-5 pb-20 sm:px-8 sm:pb-24 lg:px-12">
         <div

@@ -4,20 +4,18 @@ import { ProjectBriefForm } from "@/components/site/ProjectBriefForm";
 import { WhatsAppIcon } from "@/components/site/WhatsApp";
 import { rise } from "@/components/site/Motion";
 import { contactInfo, whatsappLink } from "@/lib/contact-info";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/contact" }],
-    meta: [
-      { title: "Contact — Gwada Web Studio" },
-      {
-        name: "description",
-        content:
-          "Parlez de votre projet à Gwada Web Studio : site internet, application, outil sur mesure ou carte d’avis Google.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      path: "/contact",
+      title: "Contact — Gwada Web Studio, Les Abymes, Guadeloupe",
+      description:
+        "Parlez de votre projet à Gwada Web Studio, aux Abymes : site internet, application, outil sur mesure ou carte d’avis Google. WhatsApp, téléphone ou e-mail.",
+      nom: "Contact",
+    }),
   component: ContactPage,
 });
 

@@ -3,6 +3,7 @@ import { ArrowRight, Check, Minus } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
 import { echeances, etapesInclus, horsInclus } from "@/lib/prestation";
+import { pageHead } from "@/lib/seo";
 
 const title = "Ce qui est inclus dans une prestation — Gwada Web Studio";
 const description =
@@ -10,15 +11,13 @@ const description =
 
 export const Route = createFileRoute("/ce-qui-est-inclus")({
   staticData: { sitemap: true },
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-    links: [{ rel: "canonical", href: "https://gwadawebstudio.fr/ce-qui-est-inclus" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/ce-qui-est-inclus",
+      title,
+      description,
+      nom: "Ce qui est inclus",
+    }),
   component: InclusPage,
 });
 

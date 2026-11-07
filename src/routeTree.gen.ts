@@ -15,6 +15,7 @@ import { Route as CartesNfcRouteImport } from './routes/cartes-nfc'
 import { Route as CeQuiEstInclusRouteImport } from './routes/ce-qui-est-inclus'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CoqRouteImport } from './routes/coq'
 import { Route as CreationSiteInternetGuadeloupeRouteImport } from './routes/creation-site-internet-guadeloupe'
 import { Route as CreationSiteInternetMartiniqueRouteImport } from './routes/creation-site-internet-martinique'
 import { Route as DemoGratuiteRouteImport } from './routes/demo-gratuite'
@@ -64,6 +65,11 @@ const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoqRoute = CoqRouteImport.update({
+  id: '/coq',
+  path: '/coq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreationSiteInternetGuadeloupeRoute =
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/coq': typeof CoqRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
@@ -207,6 +214,7 @@ export interface FileRoutesByTo {
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/coq': typeof CoqRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
@@ -236,6 +244,7 @@ export interface FileRoutesById {
   '/ce-qui-est-inclus': typeof CeQuiEstInclusRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/coq': typeof CoqRoute
   '/creation-site-internet-guadeloupe': typeof CreationSiteInternetGuadeloupeRoute
   '/creation-site-internet-martinique': typeof CreationSiteInternetMartiniqueRoute
   '/demo-gratuite': typeof DemoGratuiteRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
     | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
+    | '/coq'
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
+    | '/coq'
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/ce-qui-est-inclus'
     | '/confidentialite'
     | '/contact'
+    | '/coq'
     | '/creation-site-internet-guadeloupe'
     | '/creation-site-internet-martinique'
     | '/demo-gratuite'
@@ -351,6 +363,7 @@ export interface RootRouteChildren {
   CeQuiEstInclusRoute: typeof CeQuiEstInclusRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
+  CoqRoute: typeof CoqRoute
   CreationSiteInternetGuadeloupeRoute: typeof CreationSiteInternetGuadeloupeRoute
   CreationSiteInternetMartiniqueRoute: typeof CreationSiteInternetMartiniqueRoute
   DemoGratuiteRoute: typeof DemoGratuiteRoute
@@ -415,6 +428,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coq': {
+      id: '/coq'
+      path: '/coq'
+      fullPath: '/coq'
+      preLoaderRoute: typeof CoqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/creation-site-internet-guadeloupe': {
@@ -567,6 +587,7 @@ const rootRouteChildren: RootRouteChildren = {
   CeQuiEstInclusRoute: CeQuiEstInclusRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
+  CoqRoute: CoqRoute,
   CreationSiteInternetGuadeloupeRoute: CreationSiteInternetGuadeloupeRoute,
   CreationSiteInternetMartiniqueRoute: CreationSiteInternetMartiniqueRoute,
   DemoGratuiteRoute: DemoGratuiteRoute,

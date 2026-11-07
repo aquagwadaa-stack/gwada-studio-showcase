@@ -240,7 +240,10 @@ function RootComponent() {
   useSiteMotion();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isolated =
-    pathname.startsWith("/admin") || pathname.startsWith("/a/") || pathname.startsWith("/exemple-");
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/a/") ||
+    pathname.startsWith("/exemple-") ||
+    pathname === "/coq";
 
   if (isolated) {
     return <Outlet />;

@@ -56,20 +56,6 @@ export const realisations: Realisation[] = [
     },
   },
   {
-    slug: "memo-revision",
-    name: "Mémo Révision",
-    kind: "Application créée par le studio",
-    summary:
-      "Une application pour les étudiants en médecine : ils importent leurs cours, elle en tire des QCM corrigés et des examens blancs.",
-    features: ["Application web", "Comptes et abonnements", "QCM créés depuis les cours"],
-    url: "https://memo-revision.fr/",
-    address: "memo-revision.fr",
-    image: "/realisations/memo-revision",
-    pageLongue: { image: "/realisations/memo-revision-long", hauteur: 2494 },
-    alt: "Page d’accueil de l’application Mémo Révision",
-    own: true,
-  },
-  {
     slug: "cabinet-medical",
     name: "Cabinet médical",
     kind: "Médecine générale à Saint-François",
@@ -88,4 +74,3 @@ export const realisations: Realisation[] = [
 ];
 
 export const realisationsClients = realisations.filter((item) => !item.own);
-export const memoRevision = realisations.find((item) => item.own)!;

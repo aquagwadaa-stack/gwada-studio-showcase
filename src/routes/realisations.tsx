@@ -7,7 +7,7 @@ import { pageHead } from "@/lib/seo";
 
 const title = "Réalisations : sites et applications — Gwada Web Studio";
 const description =
-  "Découvrez de vrais projets en ligne : Kafé Céramik, Crystal Beach Courbaril, un cabinet médical et l’application Mémo Révision.";
+  "Découvrez de vrais projets en ligne : Kafé Céramik, Crystal Beach Courbaril et un cabinet médical.";
 
 export const Route = createFileRoute("/realisations")({
   staticData: { sitemap: true },
@@ -34,8 +34,8 @@ function RealisationsPage() {
             {...rise(1)}
             className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
           >
-            Trois sites pour des clients, et une application à moi. Tout est en ligne : passez sur
-            une page pour la voir défiler, cliquez pour ouvrir le vrai site.
+            Trois sites réalisés pour des clients. Tout est en ligne : passez sur une page pour la
+            voir défiler, cliquez pour ouvrir le vrai site.
           </p>
         </div>
       </section>

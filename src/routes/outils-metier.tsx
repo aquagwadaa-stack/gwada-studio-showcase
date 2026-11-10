@@ -18,8 +18,10 @@ import {
 import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
 import { BrowserFrame } from "@/components/site/SitePreview";
-import { memoRevision } from "@/lib/realisations";
+import { realisationsClients } from "@/lib/realisations";
 import { pageHead } from "@/lib/seo";
+
+const exempleOutil = realisationsClients.find((item) => item.slug === "kafe-ceramik")!;
 
 export const Route = createFileRoute("/outils-metier")({
   staticData: { sitemap: true },
@@ -191,31 +193,31 @@ function OutilsMetierPage() {
         <div className="mx-auto grid max-w-[1280px] items-center gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-14">
           <a
             {...reveal("zoom")}
-            href={memoRevision.url}
+            href={exempleOutil.url}
             target="_blank"
             rel="noopener noreferrer"
             className="block rounded-2xl"
-            aria-label={`Ouvrir ${memoRevision.name} dans un nouvel onglet`}
-            data-cta="outils-memo-revision"
+            aria-label={`Ouvrir ${exempleOutil.name} dans un nouvel onglet`}
+            data-cta="outils-kafe-ceramik"
           >
             <BrowserFrame
-              image={memoRevision.image}
-              pageLongue={memoRevision.pageLongue}
-              alt={memoRevision.alt}
-              address={memoRevision.address}
+              image={exempleOutil.image}
+              pageLongue={exempleOutil.pageLongue}
+              alt={exempleOutil.alt}
+              address={exempleOutil.address}
               sizes="(min-width: 1024px) 700px, 100vw"
             />
           </a>
           <div {...reveal(1)}>
             <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
-              Un exemple en ligne : {memoRevision.name}
+              Un exemple en ligne : {exempleOutil.name}
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-white/68 sm:text-base">
-              {memoRevision.summary} C’est mon application : je la conçois et je la fais évoluer
-              moi-même.
+              Les clients réservent leur venue en ligne. L’équipe dispose d’un espace de gestion
+              adapté au fonctionnement du café-atelier.
             </p>
             <ul className="mt-4 grid gap-1.5 text-sm font-semibold text-white/82">
-              {memoRevision.features.map((feature) => (
+              {exempleOutil.features.map((feature) => (
                 <li key={feature} className="flex items-center gap-2.5">
                   <Check
                     className="h-3.5 w-3.5 shrink-0 text-[#54d7c8]"
@@ -227,13 +229,13 @@ function OutilsMetierPage() {
               ))}
             </ul>
             <a
-              href={memoRevision.url}
+              href={exempleOutil.url}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-5 text-sm font-bold transition hover:border-white/45 hover:bg-white/[0.06]"
-              data-cta="outils-memo-revision-lien"
+              data-cta="outils-kafe-ceramik-lien"
             >
-              Voir l’application <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              Voir le site <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>

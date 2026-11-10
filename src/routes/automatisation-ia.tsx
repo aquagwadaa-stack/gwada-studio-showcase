@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  ArrowUpRight,
   BellRing,
   Bot,
   FileCheck,
@@ -12,8 +11,6 @@ import {
 import { ApercuParcours } from "@/components/site/ApercuService";
 import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
-import { BrowserFrame } from "@/components/site/SitePreview";
-import { memoRevision } from "@/lib/realisations";
 import { pageHead } from "@/lib/seo";
 
 const title = "Automatisation et IA pour les entreprises en Guadeloupe";
@@ -228,46 +225,6 @@ function AutomatisationPage() {
       </section>
 
       <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
-        <div className="mx-auto grid max-w-[1280px] items-center gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-14">
-          <a
-            {...reveal("zoom")}
-            href={memoRevision.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block rounded-2xl"
-            aria-label={`Ouvrir ${memoRevision.name} dans un nouvel onglet`}
-            data-cta="automatisation-memo-revision"
-          >
-            <BrowserFrame
-              image={memoRevision.image}
-              pageLongue={memoRevision.pageLongue}
-              alt={memoRevision.alt}
-              address={memoRevision.address}
-              sizes="(min-width: 1024px) 700px, 100vw"
-            />
-          </a>
-          <div {...reveal(1)}>
-            <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
-              L’IA en vrai : {memoRevision.name}
-            </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-white/68 sm:text-base">
-              C’est mon application. L’IA y transforme les cours des étudiants en médecine en QCM
-              corrigés et en examens blancs.
-            </p>
-            <a
-              href={memoRevision.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-5 text-sm font-bold transition hover:border-white/45 hover:bg-white/[0.06]"
-              data-cta="automatisation-memo-revision-lien"
-            >
-              Voir l’application <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-4 md:grid-cols-3">
           {garanties.map((item, index) => (
             <article

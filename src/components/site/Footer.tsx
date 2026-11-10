@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUp, Mail, MapPin, Phone } from "lucide-react";
 import { contactInfo, socialLinks } from "@/lib/contact-info";
 import { services } from "@/lib/services";
+import { AdvertisingPreferencesButton } from "@/components/site/GoogleAdsConsent";
 
 const studioLinks = [
   { to: "/realisations", label: "Réalisations" },
@@ -131,6 +132,7 @@ export function SiteFooter() {
                 {link.label}
               </Link>
             ))}
+            <AdvertisingPreferencesButton />
           </p>
           <a
             href="#top"

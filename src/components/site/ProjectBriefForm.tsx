@@ -13,6 +13,7 @@ import {
 import { useMemo, useState, type FormEvent } from "react";
 import { contactInfo } from "@/lib/contact-info";
 import { envoyerDemande } from "@/lib/demandes";
+import { trackSuccessfulLead } from "@/lib/google-ads";
 
 const needs = [
   "Obtenir plus de demandes",
@@ -65,26 +66,6 @@ function buildMessage(brief: Brief) {
     .join("\n");
 }
 
-function trackLeadIntent(action: "submitted" | "error" | "copy", need: string) {
-  const trackedWindow = window as Window & {
-    dataLayer?: Array<Record<string, string>>;
-    gtag?: (command: string, eventName: string, parameters: Record<string, string>) => void;
-  };
-
-  trackedWindow.dataLayer?.push({
-    event: action === "submitted" ? "generate_lead" : "lead_intent",
-    lead_action: action,
-    lead_need: need,
-  });
-
-  if (action === "submitted") {
-    trackedWindow.gtag?.("event", "generate_lead", {
-      method: "contact_form",
-      lead_need: need,
-    });
-  }
-}
-
 export function ProjectBriefForm() {
   const [brief, setBrief] = useState<Brief>(emptyBrief);
   const [honeypot, setHoneypot] = useState("");
@@ -134,11 +115,10 @@ export function ProjectBriefForm() {
 
     if (!envoyee) {
       setStatus("error");
-      trackLeadIntent("error", brief.need);
       return;
     }
     setStatus("success");
-    trackLeadIntent("submitted", brief.need);
+    trackSuccessfulLead({ form: "contact" });
     window.dispatchEvent(
       new CustomEvent("gws:lead", {
         detail: { need: brief.need, source: "contact_form" },
@@ -149,7 +129,6 @@ export function ProjectBriefForm() {
   const copyRequest = async () => {
     await navigator.clipboard.writeText(`${message}\n\nÀ envoyer à ${contactInfo.email}`);
     setCopied(true);
-    trackLeadIntent("copy", brief.need);
   };
 
   const resetForm = () => {

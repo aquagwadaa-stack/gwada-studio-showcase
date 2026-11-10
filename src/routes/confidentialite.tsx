@@ -64,10 +64,30 @@ function PrivacyPage() {
           {contactInfo.email}. Vous pouvez aussi saisir la CNIL (cnil.fr).
         </p>
       </LegalSection>
-      <LegalSection title="Cookies">
+      <LegalSection title="Cookies et mesure des publicités">
         <p>
-          Ce site n’utilise pas de cookies publicitaires. Si cela change, votre accord vous sera
-          demandé avant tout dépôt.
+          Avec votre accord, Google Ads, chargé via Google Tag Manager, mesure les visites issues de
+          nos publicités et les demandes envoyées avec succès. Le suivi publicitaire reste désactivé
+          tant que vous n’avez pas accepté. Refuser ne change pas le fonctionnement des formulaires
+          ni l’accès au site.
+        </p>
+        <p>
+          Pour une demande envoyée, nous transmettons le type de formulaire et un identifiant
+          technique aléatoire. Google reçoit aussi les informations techniques nécessaires à la
+          mesure : page consultée, identifiants publicitaires, adresse IP et informations du
+          navigateur. Nous ne transmettons pas les noms, e-mails, téléphones ni messages saisis dans
+          les formulaires. La personnalisation publicitaire et le partage de ces coordonnées pour
+          les conversions améliorées sont désactivés.
+        </p>
+        <p>
+          Votre choix est conservé pendant six mois dans votre navigateur. Vous pouvez le modifier
+          ou retirer votre accord à tout moment via « Préférences cookies », en bas de chaque page.
+          Le retrait arrête le suivi publicitaire pour les prochaines visites. Google peut traiter
+          les données de mesure hors de l’Union européenne. Pour en savoir plus, consultez la{" "}
+          <a href="https://policies.google.com/privacy" className="underline underline-offset-2">
+            politique de confidentialité de Google
+          </a>
+          .
         </p>
       </LegalSection>
     </LegalPage>

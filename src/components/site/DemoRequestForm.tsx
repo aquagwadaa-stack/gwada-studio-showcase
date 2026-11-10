@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "re
 import { whatsappLink } from "@/lib/contact-info";
 import { WhatsAppIcon } from "@/components/site/WhatsApp";
 import { envoyerDemande } from "@/lib/demandes";
+import { trackSuccessfulLead } from "@/lib/google-ads";
 
 type DemoRequest = {
   business: string;
@@ -86,6 +87,7 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
       return;
     }
     setStatus("success");
+    trackSuccessfulLead({ form: "demo" });
     window.dispatchEvent(
       new CustomEvent("gws:lead", { detail: { need: "demo_gratuite", source } }),
     );

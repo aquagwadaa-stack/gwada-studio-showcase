@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  redirect,
   useRouter,
   useRouterState,
 } from "@tanstack/react-router";
@@ -17,6 +18,8 @@ import { contactInfo, socialLinks } from "../lib/contact-info";
 import { IMAGE_PARTAGE, SITE_URL } from "../lib/seo";
 import { WhatsAppFloat } from "../components/site/WhatsApp";
 import { scriptAnimations, useSiteMotion } from "../components/site/Motion";
+import { GoogleAdsConsent } from "../components/site/GoogleAdsConsent";
+import { hasAdvertisingTrackingLoaded, isAdvertisingExcludedPath } from "../lib/google-ads";
 
 function NotFoundComponent() {
   return (
@@ -72,6 +75,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<Record<string, never>>()({
   staticData: { sitemap: false },
+  beforeLoad: ({ location, preload }) => {
+    if (
+      !preload &&
+      isAdvertisingExcludedPath(location.pathname) &&
+      hasAdvertisingTrackingLoaded()
+    ) {
+      // Unload Google's collectors before rendering an isolated page after SPA navigation.
+      throw redirect({ href: location.href, reloadDocument: true });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -257,6 +270,7 @@ function RootComponent() {
       </main>
       <SiteFooter />
       <WhatsAppFloat />
+      <GoogleAdsConsent />
     </div>
   );
 }

@@ -32,6 +32,7 @@ import { Route as SiteInternetRestaurantRouteImport } from './routes/site-intern
 import { Route as SiteInternetSalonInstitutRouteImport } from './routes/site-internet-salon-institut'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitesWebRouteImport } from './routes/sites-web'
+import { Route as SosTropDeauRouteImport } from './routes/sos-trop-deau'
 import { Route as ACodeRouteImport } from './routes/a.$code'
 import { Route as AdminDemandesRouteImport } from './routes/admin.demandes'
 import { Route as AdminNfcRouteImport } from './routes/admin.nfc'
@@ -157,6 +158,11 @@ const SitesWebRoute = SitesWebRouteImport.update({
   path: '/sites-web',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SosTropDeauRoute = SosTropDeauRouteImport.update({
+  id: '/sos-trop-deau',
+  path: '/sos-trop-deau',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ACodeRoute = ACodeRouteImport.update({
   id: '/a/$code',
   path: '/a/$code',
@@ -202,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
+  '/sos-trop-deau': typeof SosTropDeauRoute
   '/a/$code': typeof ACodeRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -231,6 +238,7 @@ export interface FileRoutesByTo {
   '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
+  '/sos-trop-deau': typeof SosTropDeauRoute
   '/a/$code': typeof ACodeRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -261,6 +269,7 @@ export interface FileRoutesById {
   '/site-internet-salon-institut': typeof SiteInternetSalonInstitutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sites-web': typeof SitesWebRoute
+  '/sos-trop-deau': typeof SosTropDeauRoute
   '/a/$code': typeof ACodeRoute
   '/admin/demandes': typeof AdminDemandesRoute
   '/admin/nfc': typeof AdminNfcRoute
@@ -292,6 +301,7 @@ export interface FileRouteTypes {
     | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
+    | '/sos-trop-deau'
     | '/a/$code'
     | '/admin/demandes'
     | '/admin/nfc'
@@ -321,6 +331,7 @@ export interface FileRouteTypes {
     | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
+    | '/sos-trop-deau'
     | '/a/$code'
     | '/admin/demandes'
     | '/admin/nfc'
@@ -350,6 +361,7 @@ export interface FileRouteTypes {
     | '/site-internet-salon-institut'
     | '/sitemap.xml'
     | '/sites-web'
+    | '/sos-trop-deau'
     | '/a/$code'
     | '/admin/demandes'
     | '/admin/nfc'
@@ -380,6 +392,7 @@ export interface RootRouteChildren {
   SiteInternetSalonInstitutRoute: typeof SiteInternetSalonInstitutRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SitesWebRoute: typeof SitesWebRoute
+  SosTropDeauRoute: typeof SosTropDeauRoute
   ACodeRoute: typeof ACodeRoute
   AdminDemandesRoute: typeof AdminDemandesRoute
   AdminNfcRoute: typeof AdminNfcRoute
@@ -549,6 +562,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitesWebRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sos-trop-deau': {
+      id: '/sos-trop-deau'
+      path: '/sos-trop-deau'
+      fullPath: '/sos-trop-deau'
+      preLoaderRoute: typeof SosTropDeauRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/a/$code': {
       id: '/a/$code'
       path: '/a/$code'
@@ -604,6 +624,7 @@ const rootRouteChildren: RootRouteChildren = {
   SiteInternetSalonInstitutRoute: SiteInternetSalonInstitutRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SitesWebRoute: SitesWebRoute,
+  SosTropDeauRoute: SosTropDeauRoute,
   ACodeRoute: ACodeRoute,
   AdminDemandesRoute: AdminDemandesRoute,
   AdminNfcRoute: AdminNfcRoute,

@@ -256,7 +256,8 @@ function RootComponent() {
     pathname.startsWith("/admin") ||
     pathname.startsWith("/a/") ||
     pathname.startsWith("/exemple-") ||
-    pathname === "/coq";
+    pathname === "/coq" ||
+    pathname === "/sos-trop-deau";
 
   if (isolated) {
     return <Outlet />;

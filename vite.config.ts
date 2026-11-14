@@ -6,9 +6,9 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// Pages gardées dans des fichiers à part : l'admin (lourd et privé), l'aperçu de Noël et le site
-// du coq (hors Google).
-const PAGES_A_PART = ["/admin", "/exemple-commandes-noel", "/coq"];
+// Pages gardées dans des fichiers à part : l'admin (lourd et privé), l'aperçu de Noël et les sites
+// pour rire des vidéos (hors Google).
+const PAGES_A_PART = ["/admin", "/exemple-commandes-noel", "/coq", "/sos-trop-deau"];
 
 export default defineConfig({
   tanstackStart: {

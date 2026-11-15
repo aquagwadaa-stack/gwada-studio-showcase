@@ -217,9 +217,9 @@ function Accueil() {
           </span>
           <h1
             style={display}
-            className="mb-0 mt-5 text-[clamp(4.2rem,21vw,7.5rem)] font-extrabold leading-[0.84] tracking-[-0.015em]"
+            className="mb-0 mt-5 text-[clamp(3.4rem,19.5vw,7.5rem)] font-extrabold leading-[0.84] tracking-[-0.015em]"
           >
-            <span className="block">Trop d’eau&nbsp;?</span>
+            <span className="block whitespace-nowrap">Trop d’eau&nbsp;?</span>{" "}
             <span className="block text-[#ffd60a]">On arrive.</span>
           </h1>
           <p className="mb-0 mt-5 max-w-xl text-[17px] leading-relaxed text-white/85">

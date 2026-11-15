@@ -304,7 +304,7 @@ function Suivi() {
   return (
     <section id="suivi" className="bg-[#0c1b33] text-white">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="grid gap-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-8">
           <div>
             <p
               style={display}
@@ -341,10 +341,10 @@ function Suivi() {
               ))}
               <div
                 id="derniere"
-                className="mt-1 flex items-baseline justify-between gap-4 rounded-2xl bg-[#ffd60a] px-4 py-4 text-[#0c1b33]"
+                className="mt-1 rounded-2xl bg-[#ffd60a] px-4 pb-4 pt-3.5 text-[#0c1b33]"
               >
                 <dt className="text-[15px] font-extrabold">Dernière intervention</dt>
-                <dd style={display} className="m-0 text-[38px] font-extrabold leading-none">
+                <dd style={display} className="m-0 mt-1 text-[68px] font-extrabold leading-[0.86]">
                   Jamais
                 </dd>
               </div>

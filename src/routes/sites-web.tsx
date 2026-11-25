@@ -23,6 +23,7 @@ import {
   questionVisibilite,
 } from "@/lib/prestation";
 import { realisationsClients } from "@/lib/realisations";
+import { offreLocation } from "@/lib/location";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/sites-web")({
@@ -121,8 +122,11 @@ function SitesWebPage() {
               visiteurs comprennent vite votre offre et passent à l’action.
             </p>
             <p {...rise(2)} className="gws-rise mt-4 text-sm font-bold text-white/85">
-              Sites à partir de 550 €, espace de gestion inclus. Démonstration gratuite, sans
-              engagement.
+              Sites à partir de 550 €, espace de gestion inclus, ou en{" "}
+              <Link to="/location-site-internet" className="underline underline-offset-4">
+                location à {offreLocation.parMois} € par mois
+              </Link>
+              . Démonstration gratuite, sans engagement.
             </p>
             <div {...rise(3)} className="gws-rise mt-7 flex flex-col gap-3 sm:flex-row">
               <Link

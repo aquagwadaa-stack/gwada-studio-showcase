@@ -24,6 +24,7 @@ const needs = [
   "Créer un espace client ou une administration",
   "Mettre en place une carte NFC pour les avis Google",
   "Refondre un site existant",
+  "Louer un site plutôt que l’acheter",
   "Je ne sais pas encore",
 ];
 

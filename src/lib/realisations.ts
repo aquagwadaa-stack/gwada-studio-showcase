@@ -16,8 +16,6 @@ export type Realisation = {
   alt: string;
   /** Projet du studio, et non d'un client. */
   own?: boolean;
-  /** Site réalisé pour un proche (pas un client) : à dire clairement. */
-  proche?: boolean;
   /** Extrait mot pour mot d'un témoignage publié sur l'accueil. */
   quote?: { text: string; author: string };
 };
@@ -37,7 +35,7 @@ export const realisations: Realisation[] = [
     alt: "Page d’accueil du site Kafé Céramik",
     quote: {
       text: "Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.",
-      author: "Kafé Céramik",
+      author: "Kafe Ceramik",
     },
   },
   {
@@ -45,14 +43,17 @@ export const realisations: Realisation[] = [
     name: "Crystal Beach Courbaril",
     kind: "Location de vacances à Saint-François",
     summary:
-      "Un appartement présenté avec ses photos, ses alentours et un guide du séjour, avec les disponibilités et une demande de réservation envoyée directement à la propriétaire.",
-    features: ["Demande de réservation", "Disponibilités", "Guide du séjour"],
-    proche: true,
+      "Un appartement présenté avec ses photos, ses alentours et un guide du séjour, avec les disponibilités et la réservation directe.",
+    features: ["Réservation directe", "Disponibilités", "Guide du séjour"],
     url: "https://crystalbeachcourbaril.fr/",
     address: "crystalbeachcourbaril.fr",
     image: "/realisations/crystal-beach",
     pageLongue: { image: "/realisations/crystal-beach-long", hauteur: 2494 },
     alt: "Page d’accueil du site Crystal Beach Courbaril",
+    quote: {
+      text: "Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat.",
+      author: "Appart Courbaril",
+    },
   },
   {
     slug: "cabinet-medical",
@@ -61,11 +62,14 @@ export const realisations: Realisation[] = [
     summary:
       "Un site clair pour les patients : rendez-vous, horaires, plan d’accès et informations pratiques au même endroit.",
     features: ["Prise de rendez-vous", "Horaires et accès", "Contenus modifiables"],
-    proche: true,
     url: "https://docaubry.fr/",
     address: "Site du cabinet",
     image: "/realisations/cabinet-medical",
     alt: "Partie rendez-vous de la page d’accueil du site du cabinet médical",
+    quote: {
+      text: "Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité.",
+      author: "J.-J. A.",
+    },
   },
 ];
 

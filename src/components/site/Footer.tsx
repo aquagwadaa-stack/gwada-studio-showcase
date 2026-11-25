@@ -6,6 +6,7 @@ import { AdvertisingPreferencesButton } from "@/components/site/GoogleAdsConsent
 
 const studioLinks = [
   { to: "/realisations", label: "Réalisations" },
+  { to: "/location-site-internet", label: "Location de site" },
   { to: "/ce-qui-est-inclus", label: "Ce qui est inclus" },
   { to: "/demo-gratuite", label: "Démo gratuite" },
   { to: "/contact", label: "Contact" },

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Fragment } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Quote } from "lucide-react";
+import { Fragment, useState } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Quote, Star } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
 import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
@@ -13,6 +13,7 @@ import {
   questionPrix,
   questionVisibilite,
 } from "@/lib/prestation";
+import { offreLocation, questionLocation } from "@/lib/location";
 import { realisations } from "@/lib/realisations";
 import { pageHead } from "@/lib/seo";
 import { services } from "@/lib/services";
@@ -79,6 +80,7 @@ const questions = [
   },
   questionModifier,
   questionPaiement,
+  questionLocation,
   questionDomaine,
   questionDelai,
   questionVisibilite,
@@ -89,22 +91,37 @@ const questions = [
   },
 ];
 
-/** Avis publié par Kafé Céramik, seul client payant présenté (les deux autres sites sont faits pour des proches). */
-const avisClient = {
-  name: "Kafé Céramik",
-  role: "Client · site de réservation, Saint-François",
-  text: "[…] Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. […]",
-} as const;
+const testimonials = [
+  {
+    name: "Kafe Ceramik",
+    role: "Site de réservation · Saint-François",
+    initial: "K",
+    text: "[…] Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. […]",
+  },
+  {
+    name: "J.-J. A.",
+    role: "Site professionnel · Cabinet médical",
+    initial: "J",
+    text: "J’ai confié la création de mon site professionnel à Gwada Web Studio et le résultat est tout à fait conforme à ce que j’attendais. Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité. Je suis très satisfait du travail réalisé et du sérieux dont il a fait preuve.",
+  },
+  {
+    name: "Appart Courbaril",
+    role: "Site de location · crystalbeachcourbaril.fr",
+    initial: "A",
+    text: "J’ai fait appel à Gwada Web Studio pour la création du site internet de mon appartement, et je suis vraiment très contente du résultat ! Il a été à l’écoute de mes attentes, très professionnel et a su parfaitement s’adapter à mon activité et à ses spécificités. Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat. Un grand merci pour son travail et son sérieux, je recommande sans hésiter !",
+  },
+] as const;
 
 function HomePage() {
   return (
     <div className="overflow-hidden bg-[#0d1715] text-[#f7f7ef]">
       <Hero />
-      <Services />
       <Portfolio />
-      <InclusApercu />
-      <Process />
       <Reviews />
+      <Services />
+      <BandeLocation />
+      <Process />
+      <InclusApercu />
       <FaqSection items={questions} title="Les questions qu’on me pose" />
       <FinalCta />
     </div>
@@ -163,18 +180,17 @@ function Hero() {
             {...rise(8)}
             className="gws-rise mt-7 flex flex-wrap gap-x-6 gap-y-2 text-[13px] font-semibold text-white/60"
           >
-            {["Démo gratuite, sans engagement", "Sites à partir de 550 €", "Basé aux Abymes"].map(
-              (item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check
-                    className="h-3.5 w-3.5 text-[#54d7c8]"
-                    strokeWidth={3}
-                    aria-hidden="true"
-                  />
-                  {item}
-                </li>
-              ),
-            )}
+            {[
+              "Démo gratuite, sans engagement",
+              "Sites à partir de 550 €",
+              `Ou en location, ${offreLocation.parMois} €/mois`,
+              "Basé aux Abymes",
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <Check className="h-3.5 w-3.5 text-[#54d7c8]" strokeWidth={3} aria-hidden="true" />
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -315,6 +331,35 @@ function Portfolio() {
   );
 }
 
+function BandeLocation() {
+  return (
+    <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:px-12">
+      <div
+        {...reveal()}
+        className="mx-auto flex max-w-[1280px] flex-col gap-5 rounded-3xl border border-[#54d7c8]/40 bg-[#13211e] p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+      >
+        <div>
+          <p className="text-sm font-bold text-[#54d7c8]">Location de site internet</p>
+          <h2 className="mt-1 font-display text-[clamp(1.5rem,2.4vw,2.1rem)] font-extrabold leading-[1.12] tracking-[-0.035em]">
+            Pas envie de tout payer d’un coup ? Louez votre site.
+          </h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-white/68">
+            Le même site sur mesure, pour {offreLocation.signature} € à la signature, puis{" "}
+            {offreLocation.parMois} € par mois. Hébergement, nom de domaine et entretien compris.
+          </p>
+        </div>
+        <Link
+          to="/location-site-internet"
+          className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full border border-white/20 px-6 text-sm font-bold text-white transition hover:border-white/45 hover:bg-white/[0.06]"
+          data-cta="home-location"
+        >
+          Voir la location <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 function Process() {
   return (
     <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
@@ -349,39 +394,56 @@ function Process() {
 }
 
 function Reviews() {
+  const [expanded, setExpanded] = useState<number | null>(null);
   return (
     <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <h2
-          {...reveal()}
-          className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
-        >
-          Ce qu’en dit mon client
-        </h2>
-        <article
-          {...reveal(1)}
-          className="mt-9 grid gap-6 rounded-3xl bg-white p-6 sm:p-9 lg:grid-cols-[auto_1fr] lg:gap-10"
-        >
-          <Quote className="h-8 w-8 text-[#2a8f7c]" strokeWidth={1.75} aria-hidden="true" />
-          <div>
-            <p className="max-w-3xl whitespace-pre-line text-[15px] leading-relaxed text-[#3f524a] sm:text-base">
-              “{avisClient.text}”
-            </p>
-            <div className="mt-5 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
-              <div className="text-sm font-extrabold">{avisClient.name}</div>
-              <div className="text-xs text-[#55665f]">{avisClient.role}</div>
-            </div>
-            <a
-              href="https://kafeceramik.fr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-extrabold text-[#1c6358] hover:underline"
-              data-cta="avis-kafe-site"
-            >
-              Voir le site de Kafé Céramik <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+        <div {...reveal()} className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+          <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+            Ce que disent mes clients
+          </h2>
+          <div
+            className="flex items-center gap-1 text-[#c98f2e]"
+            aria-label={`${testimonials.length} témoignages clients notés cinq étoiles`}
+          >
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star key={i} className="h-4 w-4 fill-current" aria-hidden="true" />
+            ))}
+            <span className="ml-2 text-xs font-bold text-[#55665f]">
+              {testimonials.length} témoignages clients
+            </span>
           </div>
-        </article>
+        </div>
+        <div className="mt-9 grid items-start gap-4 lg:grid-cols-3">
+          {testimonials.map((review, i) => {
+            const isExpanded = expanded === i;
+            return (
+              <article
+                key={review.name}
+                {...reveal(i)}
+                className="flex h-full flex-col rounded-3xl bg-white p-6 sm:p-7"
+              >
+                <Quote className="h-6 w-6 text-[#2a8f7c]" strokeWidth={1.75} aria-hidden="true" />
+                <p
+                  className={`mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[#3f524a] ${isExpanded ? "" : "line-clamp-5"}`}
+                >
+                  “{review.text}”
+                </p>
+                <button
+                  onClick={() => setExpanded(isExpanded ? null : i)}
+                  aria-expanded={isExpanded}
+                  className="mt-2 w-fit text-xs font-extrabold text-[#1c6358] hover:underline"
+                >
+                  {isExpanded ? "Réduire l’avis" : "Lire l’avis complet"}
+                </button>
+                <div className="mt-auto pt-5">
+                  <div className="text-sm font-extrabold">{review.name}</div>
+                  <div className="mt-0.5 break-words text-xs text-[#55665f]">{review.role}</div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { services } from "@/lib/services";
 
 const links = [
   { to: "/realisations", label: "Réalisations" },
+  { to: "/location-site-internet", label: "Location" },
   { to: "/ce-qui-est-inclus", label: "Ce qui est inclus" },
   { to: "/contact", label: "Contact" },
 ] as const;

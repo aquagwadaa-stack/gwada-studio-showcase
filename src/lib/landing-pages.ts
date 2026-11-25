@@ -48,7 +48,7 @@ export type LandingPage = {
 
 const crystalBeach: LandingReference = {
   name: "Crystal Beach Courbaril",
-  kind: "Un appartement de vacances à Saint-François, avec ses disponibilités et un formulaire de demande de réservation envoyé à la propriétaire. Site réalisé pour un proche.",
+  kind: "Un appartement de vacances à Saint-François, avec réservation directe.",
   url: "https://crystalbeachcourbaril.fr/",
   domain: "crystalbeachcourbaril.fr",
   image: "/realisations/crystal-beach",
@@ -129,7 +129,7 @@ export const landingPages = {
         title: "Partout en Guadeloupe, depuis Les Abymes",
         paragraphs: [
           "Je suis basé aux Abymes, à côté de Pointe-à-Pitre, et je travaille avec toute la Guadeloupe, de Baie-Mahault à Basse-Terre, en passant par Le Gosier, Sainte-Anne, Saint-François ou Le Moule. On peut se voir sur place, ou tout faire sur WhatsApp, par téléphone ou en visio.",
-          "Mes sites sont déjà en ligne : Kafé Céramik, un café-atelier client à Saint-François, et deux sites réalisés pour des proches, une location de vacances et un cabinet médical.",
+          "Mes sites sont déjà en ligne : Kafé Céramik et Crystal Beach Courbaril à Saint-François, ou encore un cabinet médical.",
         ],
         link: { label: "Voir mes réalisations", href: "/realisations" },
       },

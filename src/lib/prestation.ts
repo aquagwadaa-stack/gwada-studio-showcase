@@ -1,3 +1,5 @@
+import { offreLocation, prixLocation } from "@/lib/location";
+
 export type LigneInclus = { title: string; text: string };
 
 /** Ce que comprend chaque prestation, de la démonstration au suivi. */
@@ -84,7 +86,7 @@ export const etapesInclus: { title: string; items: LigneInclus[] }[] = [
 export const horsInclus: LigneInclus[] = [
   {
     title: "Nom de domaine, hébergement et services externes",
-    text: "E-mail, SMS, paiement en ligne : facturés au prix réel du fournisseur, sans marge.",
+    text: "E-mail, SMS, paiement en ligne : facturés au prix réel du fournisseur, sans marge. En location, l’hébergement et le nom de domaine sont compris.",
   },
   {
     title: "Les nouvelles fonctions",
@@ -134,14 +136,12 @@ export const questionModifier = {
 
 export const questionPaiement = {
   question: "Quand est-ce que je paie ?",
-  answer:
-    "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
+  answer: `Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne. Vous pouvez aussi louer votre site : ${prixLocation}, avec l’hébergement, le nom de domaine et l’entretien compris.`,
 };
 
 export const questionDomaine = {
   question: "Le nom de domaine et l’hébergement sont-ils compris ?",
-  answer:
-    "Ce sont des services externes. Ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis.",
+  answer: `Pour un site acheté, ce sont des services externes : ils vous sont facturés à leur prix réel, sans marge, et annoncés dans le devis. En location, ils sont compris dans les ${offreLocation.parMois} € par mois.`,
 };
 
 export const questionDelai = {

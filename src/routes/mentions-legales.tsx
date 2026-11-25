@@ -43,8 +43,8 @@ function LegalNoticePage() {
       <LegalSection title="Propriété intellectuelle">
         <p>
           Les textes, visuels et éléments graphiques de ce site appartiennent à Gwada Web Studio ou
-          à leurs auteurs. Toute reproduction demande une autorisation écrite. Les noms et sites
-          présentés dans les réalisations restent la propriété de leurs titulaires.
+          à leurs auteurs. Toute reproduction demande une autorisation écrite. Les noms et sites des
+          clients cités restent leur propriété.
         </p>
       </LegalSection>
       <LegalSection title="Données personnelles">

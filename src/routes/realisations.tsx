@@ -7,7 +7,7 @@ import { pageHead } from "@/lib/seo";
 
 const title = "Réalisations : sites et applications — Gwada Web Studio";
 const description =
-  "De vrais sites en ligne : Kafé Céramik, café-atelier client à Saint-François, et deux sites réalisés pour des proches.";
+  "Découvrez de vrais projets en ligne : Kafé Céramik, Crystal Beach Courbaril et un cabinet médical.";
 
 export const Route = createFileRoute("/realisations")({
   staticData: { sitemap: true },
@@ -34,8 +34,8 @@ function RealisationsPage() {
             {...rise(1)}
             className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
           >
-            Trois sites en ligne : un pour un client, Kafé Céramik, et deux pour des proches. Ce
-            sont les vraies pages : touchez une page ou cliquez dessus pour ouvrir le site.
+            Trois sites réalisés pour des clients. Tout est en ligne : touchez une page ou cliquez
+            dessus pour ouvrir le vrai site.
           </p>
         </div>
       </section>
@@ -66,10 +66,7 @@ function RealisationsPage() {
                 />
               </a>
               <div>
-                <p className="text-sm font-bold text-[#54d7c8]">
-                  {item.kind}
-                  {item.proche ? " · réalisé pour un proche" : ""}
-                </p>
+                <p className="text-sm font-bold text-[#54d7c8]">{item.kind}</p>
                 <h2 className="mt-1 font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-extrabold leading-[1.1] tracking-[-0.04em]">
                   {item.name}
                 </h2>

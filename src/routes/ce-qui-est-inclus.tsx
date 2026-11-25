@@ -2,7 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Minus } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
-import { echeances, etapesInclus, horsInclus } from "@/lib/prestation";
+import {
+  echeances,
+  etapesInclus,
+  horsInclus,
+  questionDomaine,
+  questionPaiement,
+} from "@/lib/prestation";
+import { offreLocation } from "@/lib/location";
 import { pageHead } from "@/lib/seo";
 
 const title = "Ce qui est inclus dans une prestation — Gwada Web Studio";
@@ -24,6 +31,10 @@ export const Route = createFileRoute("/ce-qui-est-inclus")({
 const tarifs = [
   { label: "Sites internet", value: "à partir de 550 €" },
   { label: "Applications et outils", value: "sur devis" },
+  {
+    label: "Location d’un site",
+    value: `${offreLocation.signature} € puis ${offreLocation.parMois} €/mois`,
+  },
   { label: "Cartes d’avis Google", value: "à partir de 29,90 €" },
 ];
 
@@ -33,16 +44,8 @@ const questions = [
     answer:
       "C’est le site le plus simple : il présente votre activité et comprend déjà son espace de gestion. Le devis précise exactement ce qui est prévu pour vous.",
   },
-  {
-    question: "Quand est-ce que je paie ?",
-    answer:
-      "Rien pour la démonstration. Une fois le devis signé, le paiement se fait habituellement en trois fois : 40 % à la commande, 40 % à la validation et 20 % à la mise en ligne.",
-  },
-  {
-    question: "Le nom de domaine et l’hébergement sont-ils compris ?",
-    answer:
-      "Ce sont des services externes. Ils vous sont facturés à leur prix réel, sans marge, et ils sont annoncés dans le devis.",
-  },
+  questionPaiement,
+  questionDomaine,
   {
     question: "Et si je veux ajouter quelque chose après la mise en ligne ?",
     answer:
@@ -71,7 +74,10 @@ function InclusPage() {
             Vous savez ce que vous avez pour votre argent avant de signer, de la démonstration
             jusqu’au suivi après la mise en ligne.
           </p>
-          <dl {...rise(2)} className="gws-rise mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+          <dl
+            {...rise(2)}
+            className="gws-rise mt-8 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {tarifs.map((tarif) => (
               <div
                 key={tarif.label}

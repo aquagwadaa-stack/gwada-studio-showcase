@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/Nav";
 import { SiteFooter } from "../components/site/Footer";
 import { contactInfo, socialLinks } from "../lib/contact-info";
+import { offreLocation } from "../lib/location";
 import { IMAGE_PARTAGE, SITE_URL } from "../lib/seo";
 import { WhatsAppFloat } from "../components/site/WhatsApp";
 import { scriptAnimations, useSiteMotion } from "../components/site/Motion";
@@ -223,6 +224,15 @@ function RootShell({ children }: { children: ReactNode }) {
           name: "Services de Gwada Web Studio",
           itemListElement: [
             offre("Création de site internet", "/sites-web", 550),
+            {
+              ...offre("Location de site internet sur mesure", "/location-site-internet"),
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: offreLocation.parMois,
+                priceCurrency: "EUR",
+                unitCode: "MON",
+              },
+            },
             offre("Applications et outils sur mesure", "/outils-metier"),
             offre("Automatisation et IA", "/automatisation-ia"),
             offre("Référencement Google et IA (SEO, AEO)", "/referencement-google-ia"),

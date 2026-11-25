@@ -42,8 +42,9 @@ export function InclusApercu() {
             {...reveal()}
             className="mt-6 border-t border-[#152820]/15 pt-4 text-sm leading-relaxed text-[#4a5d56]"
           >
-            À part, au prix réel et sans marge : le nom de domaine, l’hébergement et les services
-            externes. Ils sont annoncés dans le devis.
+            Pour un site acheté, le nom de domaine, l’hébergement et les services externes sont à
+            part, au prix réel et sans marge, et annoncés dans le devis. En location, l’hébergement
+            et le nom de domaine sont compris.
           </p>
         </div>
       </div>

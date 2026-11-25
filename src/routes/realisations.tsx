@@ -7,7 +7,7 @@ import { pageHead } from "@/lib/seo";
 
 const title = "Réalisations : sites et applications — Gwada Web Studio";
 const description =
-  "Découvrez de vrais projets en ligne : Kafé Céramik, Crystal Beach Courbaril et un cabinet médical.";
+  "De vrais sites en ligne : Kafé Céramik, café-atelier client à Saint-François, et deux sites réalisés pour des proches.";
 
 export const Route = createFileRoute("/realisations")({
   staticData: { sitemap: true },
@@ -35,7 +35,7 @@ function RealisationsPage() {
             className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
           >
             Trois sites en ligne : un pour un client, Kafé Céramik, et deux pour des proches. Ce
-            sont les vraies pages : touchez ou cliquez une page pour ouvrir le site.
+            sont les vraies pages : touchez une page ou cliquez dessus pour ouvrir le site.
           </p>
         </div>
       </section>

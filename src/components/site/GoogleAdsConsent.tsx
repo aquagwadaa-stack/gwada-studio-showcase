@@ -83,8 +83,8 @@ export function GoogleAdsConsent() {
       </h2>
       <p className="text-[13px] leading-snug text-white/75 sm:mt-2 sm:text-sm sm:leading-relaxed">
         Avec votre accord, Google Ads utilise des cookies pour savoir si nos publicités vous ont
-        amené ici. Refuser ne change rien au site, et vous pourrez changer d’avis en bas de page («
-        Préférences cookies »).{" "}
+        amené ici et à envoyer une demande. Refuser ne change rien au site, et vous pourrez changer
+        d’avis en bas de page (« Préférences cookies »).{" "}
         <Link to="/confidentialite" className="text-[#54d7c8] underline underline-offset-4">
           En savoir plus
         </Link>

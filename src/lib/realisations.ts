@@ -37,7 +37,7 @@ export const realisations: Realisation[] = [
     alt: "Page d’accueil du site Kafé Céramik",
     quote: {
       text: "Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.",
-      author: "Kafe Ceramik",
+      author: "Kafé Céramik",
     },
   },
   {

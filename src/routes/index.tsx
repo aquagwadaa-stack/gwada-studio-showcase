@@ -301,8 +301,8 @@ function Portfolio() {
             De vrais projets, en ligne
           </h2>
           <p className="max-w-md text-[15px] leading-relaxed text-white/62">
-            Ce ne sont pas des maquettes : ce sont les vraies pages. Touchez ou cliquez une page
-            pour ouvrir le site.
+            Ce ne sont pas des maquettes : ce sont les vraies pages. Touchez une page ou cliquez
+            dessus pour ouvrir le site.
           </p>
         </div>
         <div className="mt-9 grid gap-x-8 gap-y-11 md:grid-cols-2">

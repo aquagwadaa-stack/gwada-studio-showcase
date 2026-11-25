@@ -19,8 +19,8 @@ function PrivacyPage() {
     <LegalPage title="Confidentialité" updated="novembre 2026">
       <LegalSection title="Qui est responsable de vos données">
         <p>
-          Gwada Web Studio, entreprise individuelle, 9 Résidence Carriacou, 97118 Saint-François,
-          Guadeloupe. Contact : {contactInfo.email}.
+          Louis Aubry, entrepreneur individuel (EI), nom commercial Gwada Web Studio, 9 Résidence
+          Carriacou, 97118 Saint-François, Guadeloupe. Contact : {contactInfo.email}.
         </p>
       </LegalSection>
       <LegalSection title="Quand vous remplissez un formulaire">

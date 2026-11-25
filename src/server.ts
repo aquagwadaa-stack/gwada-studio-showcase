@@ -43,7 +43,9 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
  * Les fichiers des sous-dossiers (images de /realisations/…) ne sont jamais redirigés.
  */
 export function redirectionPermanente(url: URL): string | null {
-  let chemin = url.pathname;
+  // Plusieurs barres obliques en tête (« //autre-site.com/ ») sont réduites à une seule :
+  // sinon « Location: //autre-site.com » enverrait le visiteur sur un autre domaine.
+  let chemin = url.pathname.replace(/^\/+/, "/");
   if (chemin.length > 1 && chemin.endsWith("/")) chemin = chemin.replace(/\/+$/, "") || "/";
   let lisible = chemin;
   try {
@@ -55,6 +57,7 @@ export function redirectionPermanente(url: URL): string | null {
   if (bas !== "/realisations" && /^\/r[eé]alisations?[^/]*$/.test(bas)) chemin = "/realisations";
   else if (bas !== "/demo-gratuite" && (bas === "/demo" || /^\/demo-gratuite[^/]*$/.test(bas)))
     chemin = "/demo-gratuite";
+  if (!chemin.startsWith("/") || chemin.startsWith("//")) return null;
   return chemin !== url.pathname ? chemin + url.search : null;
 }
 

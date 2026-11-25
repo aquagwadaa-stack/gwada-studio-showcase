@@ -48,7 +48,7 @@ export type LandingPage = {
 
 const crystalBeach: LandingReference = {
   name: "Crystal Beach Courbaril",
-  kind: "Un appartement de vacances à Saint-François, avec ses disponibilités et une demande de réservation directe. Site réalisé pour un proche.",
+  kind: "Un appartement de vacances à Saint-François, avec ses disponibilités et un formulaire de demande de réservation envoyé à la propriétaire. Site réalisé pour un proche.",
   url: "https://crystalbeachcourbaril.fr/",
   domain: "crystalbeachcourbaril.fr",
   image: "/realisations/crystal-beach",

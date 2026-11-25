@@ -10,9 +10,10 @@ import {
   Send,
   ShieldCheck,
 } from "lucide-react";
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+
 import { contactInfo } from "@/lib/contact-info";
-import { envoyerDemande } from "@/lib/demandes";
+import { envoyerDemande, numeroValide } from "@/lib/demandes";
 import { trackSuccessfulLead } from "@/lib/google-ads";
 
 const needs = [
@@ -57,8 +58,8 @@ function buildMessage(brief: Brief) {
     `Mon besoin principal : ${brief.need}.`,
     brief.website ? `Mon site ou réseau actuel : ${brief.website}.` : "",
     brief.details ? `Ce que j'aimerais améliorer : ${brief.details}` : "",
-    `Mon e-mail : ${brief.email}.`,
-    brief.phone ? `Mon téléphone : ${brief.phone}.` : "",
+    `Mon WhatsApp ou téléphone : ${brief.phone}.`,
+    brief.email ? `Mon e-mail : ${brief.email}.` : "",
     "",
     "Je souhaite avoir une première orientation pour mon projet.",
   ]
@@ -71,6 +72,10 @@ export function ProjectBriefForm() {
   const [honeypot, setHoneypot] = useState("");
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [numeroIncomplet, setNumeroIncomplet] = useState(false);
+  // Bouton inactif tant que la page n’est pas prête (un envoi trop tôt se perdait).
+  const [pret, setPret] = useState(false);
+  useEffect(() => setPret(true), []);
 
   const message = useMemo(() => buildMessage(brief), [brief]);
   const mailto = useMemo(
@@ -82,11 +87,16 @@ export function ProjectBriefForm() {
   const update = (field: keyof Brief, value: string) => {
     setBrief((current) => ({ ...current, [field]: value }));
     setCopied(false);
+    if (field === "phone") setNumeroIncomplet(false);
     if (status === "error") setStatus("idle");
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!numeroValide(brief.phone)) {
+      setNumeroIncomplet(true);
+      return;
+    }
     setStatus("submitting");
 
     // Un robot a rempli le champ caché : on ne garde rien, sans le lui dire.
@@ -105,8 +115,8 @@ export function ProjectBriefForm() {
       details: {
         Prénom: brief.name,
         "Entreprise / activité": brief.business,
-        "E-mail": brief.email,
-        Téléphone: brief.phone || "Non renseigné",
+        "E-mail": brief.email || "Non renseigné",
+        Téléphone: brief.phone,
         "Besoin principal": brief.need,
         "Site ou réseau actuel": brief.website || "Non renseigné",
         "Détails du projet": brief.details || "Non renseigné",
@@ -127,8 +137,13 @@ export function ProjectBriefForm() {
   };
 
   const copyRequest = async () => {
-    await navigator.clipboard.writeText(`${message}\n\nÀ envoyer à ${contactInfo.email}`);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(`${message}\n\nÀ envoyer à ${contactInfo.email}`);
+      setCopied(true);
+    } catch {
+      // Copie refusée par le navigateur : l’e-mail et WhatsApp restent disponibles.
+      setCopied(false);
+    }
   };
 
   const resetForm = () => {
@@ -155,8 +170,8 @@ export function ProjectBriefForm() {
             Merci {brief.name}, j’ai bien reçu votre projet.
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-white/55">
-            Je vais regarder votre activité et votre besoin avant de revenir vers vous
-            personnellement.
+            Je regarde votre activité et votre besoin, puis je vous recontacte personnellement, sur
+            WhatsApp ou par téléphone, au {brief.phone}.
           </p>
           <button
             type="button"
@@ -172,6 +187,7 @@ export function ProjectBriefForm() {
 
   return (
     <form
+      method="post"
       onSubmit={handleSubmit}
       className="rounded-[2rem] border border-white/12 bg-[#13211e] p-5 shadow-[0_28px_80px_rgba(0,0,0,.28)] sm:p-7"
       data-testid="project-brief-form"
@@ -245,7 +261,7 @@ export function ProjectBriefForm() {
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <Field label="Votre e-mail" htmlFor="brief-email">
+        <Field label="Votre e-mail" htmlFor="brief-email" optional>
           <input
             id="brief-email"
             name="email"
@@ -254,21 +270,32 @@ export function ProjectBriefForm() {
             onChange={(event) => update("email", event.target.value)}
             placeholder="vous@entreprise.fr"
             autoComplete="email"
-            required
             className="gws-input"
           />
         </Field>
-        <Field label="Votre téléphone" htmlFor="brief-phone" optional>
+        <Field label="Votre WhatsApp ou téléphone" htmlFor="brief-phone">
           <input
             id="brief-phone"
             name="phone"
             type="tel"
             value={brief.phone}
             onChange={(event) => update("phone", event.target.value)}
-            placeholder="Pour être rappelé"
+            placeholder="Pour vous répondre"
             autoComplete="tel"
+            required
+            aria-invalid={numeroIncomplet}
+            aria-describedby={numeroIncomplet ? "brief-phone-erreur" : undefined}
             className="gws-input"
           />
+          {numeroIncomplet && (
+            <span
+              id="brief-phone-erreur"
+              role="alert"
+              className="mt-1.5 block text-xs font-semibold text-[#ff9c8f]"
+            >
+              Ce numéro semble incomplet.
+            </span>
+          )}
         </Field>
       </div>
 
@@ -314,7 +341,7 @@ export function ProjectBriefForm() {
 
       <button
         type="submit"
-        disabled={status === "submitting"}
+        disabled={!pret || status === "submitting"}
         className="gws-button-primary mt-6 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-black uppercase tracking-[0.08em] disabled:cursor-wait disabled:opacity-70"
         data-cta="brief-submit"
       >
@@ -343,7 +370,7 @@ export function ProjectBriefForm() {
         {copied ? "Demande copiée" : "Copier la demande"}
       </button>
 
-      <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/42">
+      <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/60">
         <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         Vos informations sont utilisées uniquement pour répondre à votre demande.
       </p>
@@ -382,7 +409,7 @@ function Field({
       <span className="mb-2 flex items-center justify-between gap-3 text-xs font-bold text-white/72">
         {label}
         {optional && (
-          <span className="text-[9px] font-black uppercase tracking-wider text-white/28">
+          <span className="text-[11px] font-black uppercase tracking-wider text-white/60">
             Facultatif
           </span>
         )}

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Fragment, useState } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Quote, Star } from "lucide-react";
+import { Fragment } from "react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Quote } from "lucide-react";
 import { FaqSection } from "@/components/site/FaqSection";
 import { InclusApercu } from "@/components/site/Inclus";
 import { reveal, rise } from "@/components/site/Motion";
@@ -89,26 +89,12 @@ const questions = [
   },
 ];
 
-const testimonials = [
-  {
-    name: "Kafe Ceramik",
-    role: "Site de réservation · Saint-François",
-    initial: "K",
-    text: "[…] Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. […]",
-  },
-  {
-    name: "J.-J. A.",
-    role: "Site professionnel · Cabinet médical",
-    initial: "J",
-    text: "J’ai confié la création de mon site professionnel à Gwada Web Studio et le résultat est tout à fait conforme à ce que j’attendais. Les échanges ont été simples et efficaces, avec une bonne compréhension des besoins liés à mon activité. Je suis très satisfait du travail réalisé et du sérieux dont il a fait preuve.",
-  },
-  {
-    name: "Appart Courbaril",
-    role: "Site de location · crystalbeachcourbaril.fr",
-    initial: "A",
-    text: "J’ai fait appel à Gwada Web Studio pour la création du site internet de mon appartement, et je suis vraiment très contente du résultat ! Il a été à l’écoute de mes attentes, très professionnel et a su parfaitement s’adapter à mon activité et à ses spécificités. Le site correspond tout à fait à ce que je souhaitais, et je suis ravie du résultat. Un grand merci pour son travail et son sérieux, je recommande sans hésiter !",
-  },
-] as const;
+/** Avis publié par Kafé Céramik, seul client payant présenté (les deux autres sites sont faits pour des proches). */
+const avisClient = {
+  name: "Kafé Céramik",
+  role: "Client · site de réservation, Saint-François",
+  text: "[…] Il nous a trouvé des solutions à chaque étape et le résultat est magnifique : le site correspond parfaitement à ce que nous souhaitions.\n\nLe vrai plus, c’est sa disponibilité. Il est sur place en Guadeloupe, peut intervenir rapidement dès qu’il y a un souci et, surtout, son accompagnement ne s’arrête pas une fois le site livré. Même pour le service après-vente, il reste hyper présent, réactif et efficace.\n\nNous sommes vraiment ravis de lui avoir fait confiance et nous recommandons Gwada Web Studio les yeux fermés. […]",
+} as const;
 
 function HomePage() {
   return (
@@ -315,8 +301,8 @@ function Portfolio() {
             De vrais projets, en ligne
           </h2>
           <p className="max-w-md text-[15px] leading-relaxed text-white/62">
-            Ce ne sont pas des maquettes : ce sont les vraies pages. Passez dessus pour les voir
-            défiler, cliquez pour ouvrir le site.
+            Ce ne sont pas des maquettes : ce sont les vraies pages. Touchez ou cliquez une page
+            pour ouvrir le site.
           </p>
         </div>
         <div className="mt-9 grid gap-x-8 gap-y-11 md:grid-cols-2">
@@ -363,56 +349,39 @@ function Process() {
 }
 
 function Reviews() {
-  const [expanded, setExpanded] = useState<number | null>(null);
   return (
     <section className="bg-[#f5f3eb] px-5 py-16 text-[#152820] sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-[1280px]">
-        <div {...reveal()} className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-          <h2 className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
-            Ce que disent mes clients
-          </h2>
-          <div
-            className="flex items-center gap-1 text-[#c98f2e]"
-            aria-label={`${testimonials.length} témoignages clients notés cinq étoiles`}
-          >
-            {Array.from({ length: 5 }, (_, i) => (
-              <Star key={i} className="h-4 w-4 fill-current" aria-hidden="true" />
-            ))}
-            <span className="ml-2 text-xs font-bold text-[#55665f]">
-              {testimonials.length} témoignages clients
-            </span>
+        <h2
+          {...reveal()}
+          className="font-display text-[clamp(1.9rem,3.2vw,2.9rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+        >
+          Ce qu’en dit mon client
+        </h2>
+        <article
+          {...reveal(1)}
+          className="mt-9 grid gap-6 rounded-3xl bg-white p-6 sm:p-9 lg:grid-cols-[auto_1fr] lg:gap-10"
+        >
+          <Quote className="h-8 w-8 text-[#2a8f7c]" strokeWidth={1.75} aria-hidden="true" />
+          <div>
+            <p className="max-w-3xl whitespace-pre-line text-[15px] leading-relaxed text-[#3f524a] sm:text-base">
+              “{avisClient.text}”
+            </p>
+            <div className="mt-5 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+              <div className="text-sm font-extrabold">{avisClient.name}</div>
+              <div className="text-xs text-[#55665f]">{avisClient.role}</div>
+            </div>
+            <a
+              href="https://kafeceramik.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-extrabold text-[#1c6358] hover:underline"
+              data-cta="avis-kafe-site"
+            >
+              Voir le site de Kafé Céramik <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
-        </div>
-        <div className="mt-9 grid items-start gap-4 lg:grid-cols-3">
-          {testimonials.map((review, i) => {
-            const isExpanded = expanded === i;
-            return (
-              <article
-                key={review.name}
-                {...reveal(i)}
-                className="flex h-full flex-col rounded-3xl bg-white p-6 sm:p-7"
-              >
-                <Quote className="h-6 w-6 text-[#2a8f7c]" strokeWidth={1.75} aria-hidden="true" />
-                <p
-                  className={`mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[#3f524a] ${isExpanded ? "" : "line-clamp-5"}`}
-                >
-                  “{review.text}”
-                </p>
-                <button
-                  onClick={() => setExpanded(isExpanded ? null : i)}
-                  aria-expanded={isExpanded}
-                  className="mt-2 w-fit text-xs font-extrabold text-[#1c6358] hover:underline"
-                >
-                  {isExpanded ? "Réduire l’avis" : "Lire l’avis complet"}
-                </button>
-                <div className="mt-auto pt-5">
-                  <div className="text-sm font-extrabold">{review.name}</div>
-                  <div className="mt-0.5 break-words text-xs text-[#55665f]">{review.role}</div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        </article>
       </div>
     </section>
   );

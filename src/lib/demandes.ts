@@ -71,3 +71,8 @@ export async function envoyerDemande(demande: Demande) {
   const resultats = await Promise.allSettled([enregistrer(demande), prevenirParEmail(demande)]);
   return resultats.some((resultat) => resultat.status === "fulfilled" && resultat.value);
 }
+
+/** Un numéro utilisable compte au moins 9 chiffres (avec ou sans indicatif). */
+export function numeroValide(numero: string) {
+  return numero.replace(/\D/g, "").length >= 9;
+}

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { contactInfo } from "@/lib/contact-info";
 
 type PlaceResult = {
   id: string;
@@ -19,14 +20,6 @@ export const Route = createFileRoute("/api/places/search")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apiKey = process.env["GOOGLE_MAPS_API_KEY"];
-        if (!apiKey) {
-          return json(
-            { error: "missing_key", message: "La recherche Google n'est pas encore configurée." },
-            503,
-          );
-        }
-
         // Authentification : seul un utilisateur connecté peut faire des recherches.
         const authHeader = request.headers.get("Authorization") ?? "";
         const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
@@ -43,6 +36,19 @@ export const Route = createFileRoute("/api/places/search")({
         });
         if (!userRes.ok) {
           return json({ error: "unauthorized", message: "Session expirée." }, 401);
+        }
+        // Réservé au compte du studio : un autre compte connecté n'a pas accès à la recherche.
+        const utilisateur = (await userRes.json().catch(() => null)) as { email?: string } | null;
+        if (utilisateur?.email?.toLowerCase() !== contactInfo.email) {
+          return json({ error: "forbidden", message: "Accès réservé." }, 403);
+        }
+
+        const apiKey = process.env["GOOGLE_MAPS_API_KEY"];
+        if (!apiKey) {
+          return json(
+            { error: "missing_key", message: "La recherche Google n'est pas encore configurée." },
+            503,
+          );
         }
 
         let payload: unknown;

@@ -404,7 +404,7 @@ function ToolDemoScreen({ mode }: { mode: DemoMode }) {
     return (
       <div className="grid gap-4 md:grid-cols-[.9fr_1.1fr]">
         <div className="rounded-2xl bg-[#101a18] p-5 text-white">
-          <div className="text-[10px] font-black uppercase tracking-[0.16em] text-white/35">
+          <div className="text-[11px] font-black uppercase tracking-[0.16em] text-white/60">
             Bonjour Marie
           </div>
           <div className="mt-2 text-xl font-black">Votre projet avance.</div>
@@ -420,7 +420,7 @@ function ToolDemoScreen({ mode }: { mode: DemoMode }) {
                 >
                   {done ? <Check className="h-3.5 w-3.5" /> : <Clock3 className="h-3.5 w-3.5" />}
                 </span>
-                <span className={done ? "text-white" : "text-white/45"}>{label as string}</span>
+                <span className={done ? "text-white" : "text-white/60"}>{label as string}</span>
               </div>
             ))}
           </div>
@@ -534,11 +534,11 @@ function ToolDemoScreen({ mode }: { mode: DemoMode }) {
       </div>
 
       <div className="rounded-2xl bg-[#101a18] p-5 text-white shadow-sm">
-        <div className="text-[10px] font-black uppercase tracking-wider text-white/35">
+        <div className="text-[11px] font-black uppercase tracking-wider text-white/60">
           Aujourd’hui
         </div>
         <div className="mt-4 text-4xl font-black">4</div>
-        <div className="mt-1 text-xs text-white/45">actions à effectuer</div>
+        <div className="mt-1 text-xs text-white/60">actions à effectuer</div>
         <div className="mt-6 h-2 overflow-hidden rounded-full bg-white/10">
           <div className="h-full w-2/3 rounded-full bg-[#5b7cfa]" />
         </div>

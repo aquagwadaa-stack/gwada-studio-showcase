@@ -8,25 +8,15 @@ import { supabase } from "@/integrations/supabase/client";
 function EcranConnexion({ titre }: { titre: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<"in" | "up">("in");
   const [busy, setBusy] = useState(false);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     setBusy(true);
     try {
-      if (mode === "in") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin/nfc` },
-        });
-        if (error) throw error;
-        toast.success("Compte créé. Vérifiez votre boîte mail pour confirmer.");
-      }
+      // Connexion seulement : aucun compte ne se crée depuis le site public.
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Connexion impossible");
     } finally {
@@ -63,14 +53,7 @@ function EcranConnexion({ titre }: { titre: string }) {
           disabled={busy}
           className="w-full rounded-xl bg-[#54d7c8] py-3 font-black text-[#0d1715] disabled:opacity-60"
         >
-          {busy ? "…" : mode === "in" ? "Se connecter" : "Créer le compte"}
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode(mode === "in" ? "up" : "in")}
-          className="w-full text-sm text-white/50 underline"
-        >
-          {mode === "in" ? "Première utilisation : créer le compte" : "J’ai déjà un compte"}
+          {busy ? "…" : "Se connecter"}
         </button>
       </form>
       <Toaster />

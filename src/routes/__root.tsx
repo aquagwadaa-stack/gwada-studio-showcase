@@ -31,16 +31,29 @@ function NotFoundComponent() {
         <h1 className="mt-4 font-display text-5xl font-black tracking-[-0.05em]">
           Cette page n’existe plus.
         </h1>
-        <p className="mt-4 text-white/55">
-          Le nouveau site va droit à l’essentiel. Revenez à l’accueil pour découvrir Gwada Web
-          Studio.
+        <p className="mt-4 text-white/65">
+          L’adresse a peut-être changé. Vous cherchiez sans doute l’une de ces pages :
         </p>
-        <Link
-          to="/"
-          className="mt-7 inline-flex rounded-full bg-[#54d7c8] px-6 py-3 text-sm font-black text-[#0d1715]"
-        >
-          Revenir à l’accueil
-        </Link>
+        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            to="/realisations"
+            className="inline-flex min-h-11 items-center rounded-full bg-[#54d7c8] px-6 text-sm font-black text-[#0d1715]"
+          >
+            Mes réalisations
+          </Link>
+          <Link
+            to="/demo-gratuite"
+            className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-6 text-sm font-bold text-white"
+          >
+            Démo gratuite
+          </Link>
+          <Link
+            to="/"
+            className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-6 text-sm font-bold text-white"
+          >
+            Accueil
+          </Link>
+        </div>
       </div>
     </div>
   );

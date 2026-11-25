@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { whatsappLink } from "@/lib/contact-info";
 import { WhatsAppIcon } from "@/components/site/WhatsApp";
-import { envoyerDemande } from "@/lib/demandes";
+import { envoyerDemande, numeroValide } from "@/lib/demandes";
 import { trackSuccessfulLead } from "@/lib/google-ads";
 
 type DemoRequest = {
@@ -14,7 +14,7 @@ type DemoRequest = {
   email: string;
 };
 
-type SubmitStatus = "idle" | "submitting" | "success" | "error";
+type SubmitStatus = "idle" | "submitting" | "success" | "error" | "phone";
 
 const emptyRequest: DemoRequest = { business: "", activity: "", phone: "", link: "", email: "" };
 
@@ -43,20 +43,28 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
   const [honeypot, setHoneypot] = useState("");
   const [source, setSource] = useState(defaultSource);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  // Tant que la page n’est pas prête, le bouton reste inactif : un envoi trop tôt partait
+  // dans l’adresse de la page et se perdait.
+  const [pret, setPret] = useState(false);
 
   useEffect(() => {
     setSource(readSource(defaultSource));
+    setPret(true);
   }, [defaultSource]);
 
   const whatsappHref = useMemo(() => whatsappLink(buildWhatsAppText(request)), [request]);
 
   const update = (field: keyof DemoRequest, value: string) => {
     setRequest((current) => ({ ...current, [field]: value }));
-    if (status === "error") setStatus("idle");
+    if (status === "error" || status === "phone") setStatus("idle");
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!numeroValide(request.phone)) {
+      setStatus("phone");
+      return;
+    }
     setStatus("submitting");
 
     // Un robot a rempli le champ caché : on ne garde rien, sans le lui dire.
@@ -104,8 +112,9 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
         </span>
         <h2 className="mt-6 text-2xl font-black tracking-[-0.03em]">Merci, c’est bien reçu.</h2>
         <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-white/60">
-          Je regarde votre activité et je reviens vers vous personnellement. Pour aller plus vite,
-          vous pouvez aussi m’envoyer votre logo et quelques photos sur WhatsApp.
+          Je regarde votre activité et je vous recontacte personnellement, sur WhatsApp ou par
+          téléphone, au {request.phone}. Pour aller plus vite, vous pouvez aussi m’envoyer votre
+          logo et quelques photos sur WhatsApp.
         </p>
         <a
           href={whatsappHref}
@@ -123,6 +132,7 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
   return (
     <form
       id="demande"
+      method="post"
       onSubmit={handleSubmit}
       className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-[#13211e] p-5 shadow-[0_28px_80px_rgba(0,0,0,.28)] sm:p-7"
       data-testid="demo-form"
@@ -130,8 +140,8 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
       <h2 className="text-xl font-black tracking-[-0.03em] sm:text-2xl">
         Recevoir ma démo gratuite
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-white/55">
-        Le nom de votre commerce et un numéro suffisent. Je m’occupe du reste.
+      <p className="mt-2 text-sm leading-relaxed text-white/65">
+        Le nom de votre commerce, votre activité et un numéro suffisent. Je m’occupe du reste.
       </p>
 
       <input
@@ -207,6 +217,18 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
         </Field>
       </div>
 
+      {status === "phone" && (
+        <div
+          className="mt-4 flex items-start gap-3 rounded-2xl border border-[#ff7c6c]/30 bg-[#ff7c6c]/10 p-4 text-sm text-white/72"
+          role="alert"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#ff7c6c]" />
+          <span>
+            Ce numéro semble incomplet. Vérifiez-le pour que je puisse vous envoyer la démo.
+          </span>
+        </div>
+      )}
+
       {status === "error" && (
         <div
           className="mt-4 flex items-start gap-3 rounded-2xl border border-[#ff7c6c]/30 bg-[#ff7c6c]/10 p-4 text-sm text-white/72"
@@ -219,7 +241,7 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
 
       <button
         type="submit"
-        disabled={status === "submitting"}
+        disabled={!pret || status === "submitting"}
         className="gws-button-primary mt-5 inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full px-6 text-sm font-black disabled:cursor-wait disabled:opacity-70"
         data-cta="demo-submit"
       >
@@ -244,7 +266,7 @@ export function DemoRequestForm({ defaultSource = "site" }: { defaultSource?: st
         <WhatsAppIcon /> Plutôt sur WhatsApp
       </a>
 
-      <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/45">
+      <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-white/60">
         <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         <span>
           Vos informations servent uniquement à préparer votre démonstration et à vous répondre.{" "}
@@ -278,7 +300,7 @@ function Field({
       <span className="mb-1.5 flex items-center justify-between gap-3 text-xs font-bold text-white/72">
         {label}
         {optional && (
-          <span className="text-[9px] font-black uppercase tracking-wider text-white/35">
+          <span className="text-[11px] font-black uppercase tracking-wider text-white/60">
             Facultatif
           </span>
         )}

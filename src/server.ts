@@ -37,8 +37,33 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   });
 }
 
+/**
+ * Redirections permanentes (301) : barre oblique finale, et adresses mal recopiées dans des
+ * publications (par exemple « /realisationsDemander », lien collé au mot suivant sur Facebook).
+ * Les fichiers des sous-dossiers (images de /realisations/…) ne sont jamais redirigés.
+ */
+export function redirectionPermanente(url: URL): string | null {
+  let chemin = url.pathname;
+  if (chemin.length > 1 && chemin.endsWith("/")) chemin = chemin.replace(/\/+$/, "") || "/";
+  let lisible = chemin;
+  try {
+    lisible = decodeURIComponent(chemin);
+  } catch {
+    // adresse mal encodée : on garde la forme brute
+  }
+  const bas = lisible.toLowerCase();
+  if (bas !== "/realisations" && /^\/r[eé]alisations?[^/]*$/.test(bas)) chemin = "/realisations";
+  else if (bas !== "/demo-gratuite" && (bas === "/demo" || /^\/demo-gratuite[^/]*$/.test(bas)))
+    chemin = "/demo-gratuite";
+  return chemin !== url.pathname ? chemin + url.search : null;
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    if (request.method === "GET" || request.method === "HEAD") {
+      const cible = redirectionPermanente(new URL(request.url));
+      if (cible) return new Response(null, { status: 301, headers: { location: cible } });
+    }
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

@@ -74,7 +74,8 @@ button:not(:disabled) {
   padding: 0.85rem 1rem;
   color: #f7f7ef;
   font: inherit;
-  font-size: 0.875rem;
+  /* 16 px sur téléphone : en dessous, Safari zoome pendant la saisie. */
+  font-size: 1rem;
   line-height: 1.5;
   outline: none;
   transition:
@@ -83,8 +84,14 @@ button:not(:disabled) {
     box-shadow 180ms ease;
 }
 
+@media (min-width: 640px) {
+  .gws-input {
+    font-size: 0.875rem;
+  }
+}
+
 .gws-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .gws-input:hover {

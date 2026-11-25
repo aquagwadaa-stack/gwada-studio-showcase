@@ -34,8 +34,8 @@ function RealisationsPage() {
             {...rise(1)}
             className="gws-rise mt-4 max-w-2xl text-base leading-relaxed text-white/68 sm:text-[17px]"
           >
-            Trois sites réalisés pour des clients. Tout est en ligne : passez sur une page pour la
-            voir défiler, cliquez pour ouvrir le vrai site.
+            Trois sites en ligne : un pour un client, Kafé Céramik, et deux pour des proches. Ce
+            sont les vraies pages : touchez ou cliquez une page pour ouvrir le site.
           </p>
         </div>
       </section>
@@ -66,7 +66,10 @@ function RealisationsPage() {
                 />
               </a>
               <div>
-                <p className="text-sm font-bold text-[#54d7c8]">{item.kind}</p>
+                <p className="text-sm font-bold text-[#54d7c8]">
+                  {item.kind}
+                  {item.proche ? " · réalisé pour un proche" : ""}
+                </p>
                 <h2 className="mt-1 font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-extrabold leading-[1.1] tracking-[-0.04em]">
                   {item.name}
                 </h2>

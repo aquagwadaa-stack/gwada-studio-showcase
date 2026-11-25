@@ -127,27 +127,27 @@ function ApercuPage() {
             Cette page vous plaît ?
           </h2>
           <p className="mb-0 mt-4 max-w-xl text-base leading-relaxed text-white/70">
-            Je la prépare avec vos vrais produits, vos prix et vos photos. La démonstration est
-            gratuite et sans engagement.
+            Je la prépare avec vos vrais produits, vos prix et vos photos. Écrivez-moi : je vous
+            réponds avec le prix et la date de mise en ligne, sans engagement.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a
               href={whatsappLink(
-                `Bonjour, j’ai vu l’aperçu de Noël${nom ? ` pour ${nom}` : ""}. Je veux bien une démonstration.`,
+                `Bonjour, j’ai vu l’aperçu de Noël${nom ? ` pour ${nom}` : ""}. Je voudrais cette page pour mon commerce : quel prix et quel délai ?`,
               )}
               target="_blank"
               rel="noopener noreferrer"
               data-cta="apercu-noel-whatsapp"
               className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#54d7c8] px-7 text-sm font-extrabold text-[#0d1715] transition hover:bg-[#f7f7ef]"
             >
-              <WhatsAppIcon className="h-5 w-5" /> Répondre sur WhatsApp
+              <WhatsAppIcon className="h-5 w-5" /> Je la veux : prix et délai
             </a>
             <a
-              href="/demo-gratuite?src=apercu-noel"
-              data-cta="apercu-noel-demo"
+              href="/realisations?src=apercu-noel"
+              data-cta="apercu-noel-realisations"
               className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-white/25 px-7 text-sm font-bold text-white transition hover:border-white/60"
             >
-              Demander ma démo gratuite <ArrowRight className="h-4 w-4" />
+              Voir mes réalisations <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           <p className="mb-0 mt-8 text-[13px] text-white/50">

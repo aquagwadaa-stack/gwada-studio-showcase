@@ -100,7 +100,10 @@ export function RealisationCard({
       <div className="mt-4 flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h3 className="font-display text-xl font-extrabold tracking-[-0.03em]">{item.name}</h3>
-          <p className="mt-0.5 text-sm opacity-65">{item.kind}</p>
+          <p className="mt-0.5 text-sm opacity-65">
+            {item.kind}
+            {item.proche ? " · réalisé pour un proche" : ""}
+          </p>
         </div>
         <a
           href={item.url}

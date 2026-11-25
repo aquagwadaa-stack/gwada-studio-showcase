@@ -384,7 +384,7 @@ function ProductShowcase() {
         ))}
       </div>
 
-      <figcaption className="mt-3 text-center text-xs font-semibold text-white/38">
+      <figcaption className="mt-3 text-center text-xs font-semibold text-white/60">
         Visuel de la carte standard · QR code personnalisé pour votre établissement
       </figcaption>
     </figure>

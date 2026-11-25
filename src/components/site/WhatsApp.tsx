@@ -1,4 +1,5 @@
 import { useRouterState } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { whatsappLink } from "@/lib/contact-info";
 
 const defaultMessage = "Bonjour, je voudrais une démo gratuite pour mon commerce : ";
@@ -11,7 +12,8 @@ export function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) 
   );
 }
 
-// Ces pages ont déjà un bouton WhatsApp dans le formulaire de démo.
+// Ces pages ont déjà un bouton WhatsApp dans le formulaire de démo : le bouton flottant n’apparaît
+// qu’une fois le formulaire dépassé, pour ne jamais le recouvrir.
 const pagesWithForm = [
   "/demo-gratuite",
   "/creation-site-internet-",
@@ -21,7 +23,25 @@ const pagesWithForm = [
 
 export function WhatsAppFloat() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  if (pagesWithForm.some((path) => pathname.startsWith(path))) return null;
+  const pageAvecFormulaire = pagesWithForm.some((path) => pathname.startsWith(path));
+  const [formulaireDepasse, setFormulaireDepasse] = useState(false);
+
+  useEffect(() => {
+    setFormulaireDepasse(false);
+    if (!pageAvecFormulaire) return;
+    const update = () => {
+      const formulaire = document.getElementById("demande");
+      const bas = formulaire
+        ? formulaire.getBoundingClientRect().bottom
+        : window.innerHeight * 1.5 - window.scrollY;
+      setFormulaireDepasse(bas < 0);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, [pageAvecFormulaire, pathname]);
+
+  if (pageAvecFormulaire && !formulaireDepasse) return null;
 
   return (
     <a
@@ -30,6 +50,7 @@ export function WhatsAppFloat() {
       rel="noopener noreferrer"
       aria-label="Écrire sur WhatsApp"
       data-cta="float-whatsapp"
+      style={{ marginBottom: "var(--gws-consent-h, 0px)" }}
       className="fixed bottom-4 right-4 z-40 inline-flex h-12 items-center gap-2 rounded-full bg-[#54d7c8] px-3.5 text-sm font-black text-[#0d1715] shadow-[0_14px_35px_rgba(0,0,0,.35)] transition hover:-translate-y-0.5 hover:bg-[#f7f7ef] sm:bottom-6 sm:right-6 sm:px-5"
     >
       <WhatsAppIcon className="h-5 w-5" />

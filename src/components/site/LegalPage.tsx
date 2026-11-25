@@ -15,7 +15,7 @@ export function LegalPage({
         <h1 className="font-display text-[clamp(2.2rem,4.4vw,3.6rem)] font-extrabold leading-[1.06] tracking-[-0.045em]">
           {title}
         </h1>
-        <p className="mt-3 text-xs font-bold text-white/40">Mise à jour : {updated}</p>
+        <p className="mt-3 text-xs font-bold text-white/60">Mise à jour : {updated}</p>
         <div className="mt-10 grid gap-9">{children}</div>
       </article>
     </div>

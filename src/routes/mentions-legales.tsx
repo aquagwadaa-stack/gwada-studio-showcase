@@ -19,7 +19,7 @@ function LegalNoticePage() {
     <LegalPage title="Mentions légales" updated="novembre 2026">
       <LegalSection title="Éditeur du site">
         <p>
-          Gwada Web Studio, entreprise individuelle (EI).
+          Louis Aubry, entrepreneur individuel (EI), nom commercial Gwada Web Studio.
           <br />9 Résidence Carriacou, 97118 Saint-François, Guadeloupe.
           <br />
           SIREN 102 386 141 R.C.S. Pointe-à-Pitre.
@@ -30,6 +30,14 @@ function LegalNoticePage() {
           E-mail : {contactInfo.email}
           <br />
           Téléphone : {contactInfo.phone}
+        </p>
+        <p>Directeur de la publication : Louis Aubry.</p>
+      </LegalSection>
+      <LegalSection title="Hébergement">
+        <p>
+          Le site est hébergé par Lovable Labs Incorporated, 1 Lincoln St, Boston, MA 02111,
+          États-Unis (support@lovable.dev). Les demandes envoyées par les formulaires sont
+          enregistrées dans Lovable Cloud, sur l’infrastructure de Supabase.
         </p>
       </LegalSection>
       <LegalSection title="Propriété intellectuelle">

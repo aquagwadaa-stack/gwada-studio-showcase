@@ -271,7 +271,7 @@ function InteractiveWebsiteDemo() {
                     </span>
                     <span>
                       <span className="block text-sm font-black">{mode.label}</span>
-                      <span className="mt-0.5 block text-[11px] text-white/40">{mode.title}</span>
+                      <span className="mt-0.5 block text-[11px] text-white/60">{mode.title}</span>
                     </span>
                     <ArrowRight
                       className={`h-4 w-4 transition ${selected ? "translate-x-0 text-white" : "-translate-x-1 text-white/20"}`}
@@ -290,7 +290,7 @@ function InteractiveWebsiteDemo() {
                   <span className="h-2.5 w-2.5 rounded-full bg-[#f2cb5d]" />
                   <span className="h-2.5 w-2.5 rounded-full bg-[#54d7c8]" />
                 </div>
-                <div className="rounded-full bg-white/[0.06] px-4 py-1.5 text-[10px] font-bold text-white/35">
+                <div className="rounded-full bg-white/[0.06] px-4 py-1.5 text-[11px] font-bold text-white/60">
                   votreentreprise.fr
                 </div>
                 <span className="w-12" />
@@ -350,7 +350,7 @@ function DemoScreen({ mode }: { mode: DemoMode }) {
           </div>
         </div>
         <div className="rounded-2xl bg-[#101a18] p-5 text-white">
-          <div className="text-xs font-black uppercase tracking-wider text-white/35">
+          <div className="text-xs font-black uppercase tracking-wider text-white/60">
             Créneaux disponibles
           </div>
           <div className="mt-4 space-y-2">

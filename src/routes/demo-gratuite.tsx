@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, CircleCheck, X } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, CircleCheck, X } from "lucide-react";
 import { DemoRequestForm } from "@/components/site/DemoRequestForm";
 import { FaqSection } from "@/components/site/FaqSection";
 import { reveal, rise } from "@/components/site/Motion";
@@ -103,6 +103,13 @@ function DemoPage() {
               Je prépare gratuitement une démonstration à vos couleurs. Vous la regardez sur votre
               téléphone, et vous décidez ensuite. Si elle ne vous plaît pas, on en reste là.
             </p>
+            <a
+              href="#demande"
+              className="gws-button-primary mt-6 inline-flex min-h-12 items-center gap-2 rounded-full px-6 text-sm font-black lg:hidden"
+              data-cta="demo-aller-formulaire"
+            >
+              Remplir ma demande en 30 secondes <ArrowDown className="h-4 w-4" aria-hidden="true" />
+            </a>
             <ul
               {...rise(3)}
               className="gws-rise mt-7 grid gap-2.5 text-sm font-semibold text-white/72"

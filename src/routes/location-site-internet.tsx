@@ -60,7 +60,7 @@ export const Route = createFileRoute("/location-site-internet")({
 const chiffres = [
   { label: "À la signature", value: `${offreLocation.signature} €` },
   { label: "Puis chaque mois", value: `${offreLocation.parMois} €` },
-  { label: "Engagement", value: `${offreLocation.engagementMois} mois` },
+  { label: "Engagement", value: "Aucun" },
 ];
 
 const compris = [
@@ -116,7 +116,7 @@ const garanties = [
   },
   {
     title: "Pas de société de financement",
-    text: `Vous signez avec moi, et seulement avec moi. Pas de contrat de 48 mois : ${offreLocation.engagementMois} mois, puis vous êtes libre.`,
+    text: `Vous signez avec moi, et seulement avec moi. Pas de contrat de 48 mois : vous arrêtez quand vous voulez, avec ${offreLocation.preavisMois} mois de préavis.`,
   },
   {
     title: "Et si Gwada Web Studio arrête son activité ?",
@@ -130,8 +130,8 @@ const questions = [
     answer: `Pour avoir un site complet sans sortir une grosse somme d’un coup. Vous payez ${offreLocation.signature} € à la signature, puis ${offreLocation.parMois} € par mois, et l’hébergement, le nom de domaine et l’entretien sont déjà compris.`,
   },
   {
-    question: `Que se passe-t-il au bout de ${offreLocation.engagementMois} mois ?`,
-    answer: `Vous continuez au même prix, sans engagement, et vous pouvez arrêter avec ${offreLocation.preavisMois} mois de préavis. Vous pouvez aussi acheter votre site.`,
+    question: "Puis-je arrêter quand je veux ?",
+    answer: `Oui, la location est sans engagement : vous arrêtez avec ${offreLocation.preavisMois} mois de préavis, et je vous remets vos contenus, vos données et votre nom de domaine. Vous pouvez aussi acheter votre site.`,
   },
   {
     question: "Puis-je acheter mon site plus tard ?",
@@ -150,12 +150,12 @@ const questions = [
   },
   {
     question: "Comment se passe le paiement ?",
-    answer: `${offreLocation.signature} € à la signature, puis ${offreLocation.parMois} € chaque mois dès le mois suivant, y compris pendant la création. L’engagement de ${offreLocation.engagementMois} mois court à partir de la signature. Vous recevez une facture tous les mois.`,
+    answer: `${offreLocation.signature} € à la signature, puis ${offreLocation.parMois} € chaque mois à la même date, y compris pendant la création, par prélèvement automatique ou virement permanent. Sans engagement. Vous recevez une facture tous les mois.`,
   },
   {
     question: "Combien de temps faut-il ?",
     answer:
-      "Le même délai que pour un achat. Il dépend du projet et du moment où vous me confiez vos textes et vos photos, et il est écrit dans le devis.",
+      "En général 1 à 2 semaines après réception de vos textes et de vos photos. Pour un projet plus important, le délai est écrit dans le devis.",
   },
 ];
 
@@ -289,7 +289,7 @@ function LocationPage() {
                 {[
                   "Pas de grosse somme à sortir au départ",
                   "Hébergement, nom de domaine et entretien compris",
-                  `Engagement de ${offreLocation.engagementMois} mois, puis sans engagement`,
+                  `Sans engagement : vous arrêtez avec ${offreLocation.preavisMois} mois de préavis`,
                   "Le site reste à Gwada Web Studio ; vous pouvez l’acheter à tout moment, sur devis",
                 ].map((point) => (
                   <li key={point} className="flex gap-2.5">

@@ -7,7 +7,7 @@ Sites à partir de 550 €, avec un espace pour les gérer soi-même. Applicatio
 ## Services
 
 - [Sites internet](https://gwadawebstudio.fr/sites-web) : site vitrine, réservation, paiement et acompte, catalogue et commandes.
-- [Location de site internet](https://gwadawebstudio.fr/location-site-internet) : le même site sur mesure, loué 99 € à la signature puis 89 € par mois, avec l'hébergement, le nom de domaine (au nom du client) et l'entretien compris ; engagement de 12 mois. Le site reste à Gwada Web Studio et peut être acheté à tout moment, sur devis. Le chèque TIC ne finance pas la location.
+- [Location de site internet](https://gwadawebstudio.fr/location-site-internet) : le même site sur mesure, loué 99 € à la signature puis 89 € par mois, avec l'hébergement, le nom de domaine (au nom du client) et l'entretien compris ; sans engagement (un mois de préavis), paiement chaque mois à la date de la signature. Le site reste à Gwada Web Studio et peut être acheté à tout moment, sur devis. Le chèque TIC ne finance pas la location.
 - [Applications et outils](https://gwadawebstudio.fr/outils-metier) : application web, espace client, gestion, tableaux de bord.
 - [Automatisation et IA](https://gwadawebstudio.fr/automatisation-ia) : réponses et relances automatiques, tri des demandes, documents préparés, assistant IA.
 - [Référencement Google et IA](https://gwadawebstudio.fr/referencement-google-ia) : SEO pour Google et AEO pour les assistants IA.
